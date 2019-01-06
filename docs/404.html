@@ -6,10 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Page not found · GitHub Pages</title>
     <script>
-      var segmentCount = 0;
+      let segmentCount = 0;
 
-      var l = window.location;
-      console.log(`f1:${ l }`);
+      let l = window.location;
       l.replace(
         l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
         l.pathname.split('/').slice(0, 1 + segmentCount).join('/') + '/?p=/' +
@@ -17,7 +16,6 @@
         (l.search ? '&q=' + l.search.slice(1).replace(/&/g, '~and~') : '') +
         l.hash
       );
-      console.log(`f2:${ l }`);
     </script>
   </head>
   <body></body>

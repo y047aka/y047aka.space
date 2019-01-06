@@ -6,6 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>y047aka.me</title>
     <link rel="stylesheet" href="./css/style.css">
+    <script>
+      (function (l) {
+        if (l.search) {
+          var q = {};
+          l.search.slice(1).split('&').forEach(function (v) { // ?p=/fooの分解
+            var a = v.split('='); // 'p=/foo' となっているはずなので=で分割
+            q[a[0]] = a[1]; // {p: '/foo'} 形式に修正
+          });
+          if (q.p !== undefined) {
+            window.history.replaceState(null, null, l.pathname.slice(0, -1) + (q.p || '')); // https://hoge.com/fooへ遷移
+          }
+        }
+      }(window.location))
+    </script>
     <script src="./js/main.js" type="module"></script>
   </head>
   <body></body>
