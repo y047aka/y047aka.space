@@ -1,0 +1,28 @@
+@charset "UTF-8";
+body, header, footer, ul, li {
+  margin: 0;
+  padding: 0;
+  line-height: 1.0;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", YuGothic, "ヒラギノ角ゴ ProN W3", Hiragino Kaku Gothic ProN, Arial, "メイリオ", Meiryo, sans-serif; }
+
+h1, h2, h3, h4, p {
+  margin: 0;
+  padding: 0; }
+
+html {
+  font-size: 62.5%; }
+
+body {
+  font-size: 1.6rem;
+  color: #2d4053; }
+
+header.site-header {
+  padding: 1rem 20%;
+  border-bottom: solid 0.5rem rgba(45, 64, 83, 0.05); }
+  header.site-header nav a {
+    position: relative;
+    left: -1rem;
+    display: inline-block;
+    padding: 1rem;
+    text-decoration: none;
+    color: inherit; }

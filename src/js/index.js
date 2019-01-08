@@ -1,5 +1,5 @@
 import { app } from "hyperapp"
-import { div, h1, h2, hr, ul, li } from "@hyperapp/html"
+import { div, header, nav, h1, h2, ul, li } from "@hyperapp/html"
 import { Link, Route, location } from "@hyperapp/router"
 
 import Home from "./view/Home"
@@ -16,18 +16,13 @@ const actions = {
 
 const view = state => (
   div({}, [
-    ul({}, [
-      li({}, [
-        Link({ to: "/" }, "Home")
-      ]),
-      li({}, [
-        Link({ to: "/about" }, "About")
-      ]),
-      li({}, [
+    header({ class: "site-header" }, [
+      nav({}, [
+        Link({ to: "/" }, "Home"),
+        Link({ to: "/about" }, "About"),
         Link({ to: "/topics" }, "Topics")
       ])
     ]),
-    hr({}),
     Route({ path: "/", render: Home }),
     Route({ path: "/about", render: About }),
     Route({ path: "/topics", render: TopicsView })
