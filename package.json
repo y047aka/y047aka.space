@@ -1,19 +1,20 @@
 {
-  "name": "y047aka.github.io",
+  "name": "y047aka.me",
   "version": "0.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "copy:CNAME": "cp ./src/CNAME ./docs",
-    "copy:nojekyll": "cp ./src/.nojekyll ./docs",
+    "echo:CNAME": "echo 'y047aka.me' > ./docs/CNAME",
+    "echo:nojekyll": "touch ./docs/.nojekyll",
+    "echo": "npm run echo:CNAME echo:nojekyll",
     "copy:html": "cp ./src/index.html ./src/404.html ./docs",
     "copy:md": "cp -r ./src/md ./docs",
-    "copy": "npm-run-all -p copy:CNAME copy:nojekyll copy:html copy:md",
+    "copy": "npm-run-all -p copy:html copy:md",
     "watch:js": "webpack --mode development ./src/js/index.js --output ./docs/js/main.js --watch --display minimal",
     "watch:sass": "node-sass --include-path sass ./src/sass/style.sass ./docs/css/style.css --watch --quiet",
     "watch:server": "browser-sync start --server ./docs --files \"**/*\"",
     "watch": "npm-run-all -p watch:*",
-    "start": "npm-run-all -s copy watch"
+    "start": "npm-run-all -s echo copy watch"
   },
   "author": "y047aka",
   "license": "ISC",
