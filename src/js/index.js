@@ -24,7 +24,7 @@ const actions = {
   location: location.actions,
   refreshCurrentArticle: article => state => ({ currentArticle: article }),
   refresh: (topicId) => async (state, actions) => {
-    const path = `../md/${ topicId }.txt`
+    const path = `../md/${ topicId }.md`
     const response = await axios.get(path).catch((e) => { console.log(e) })
 
     const article = frontMatter(response.data)
