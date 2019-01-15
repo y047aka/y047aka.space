@@ -6,7 +6,7 @@
   "scripts": {
     "echo:CNAME": "echo 'y047aka.me' > ./docs/CNAME",
     "echo:nojekyll": "touch ./docs/.nojekyll",
-    "echo": "npm run echo:CNAME echo:nojekyll",
+    "echo": "npm-run-all -p echo:CNAME echo:nojekyll",
     "copy:html": "cp ./src/index.html ./src/404.html ./docs",
     "copy:md": "cp -r ./src/md ./docs",
     "copy": "npm-run-all -p copy:html copy:md",
