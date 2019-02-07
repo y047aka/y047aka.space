@@ -1,5 +1,5 @@
-import { h2 } from "@hyperapp/html"
+import { h2 } from '@hyperapp/html'
 
 export default () => state => (
-  h2({}, "About")
+  h2({}, 'About')
 )

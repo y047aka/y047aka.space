@@ -98,90 +98,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 
 /***/ }),
 
-/***/ "./node_modules/@hyperapp/router/src/Link.js":
-/*!***************************************************!*\
-  !*** ./node_modules/@hyperapp/router/src/Link.js ***!
-  \***************************************************/
-/*! exports provided: Link */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"Link\", function() { return Link; });\n/* harmony import */ var hyperapp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! hyperapp */ \"./node_modules/hyperapp/src/index.js\");\n\n\nfunction getOrigin(loc) {\n  return loc.protocol + \"//\" + loc.hostname + (loc.port ? \":\" + loc.port : \"\")\n}\n\nfunction isExternal(anchorElement) {\n  // Location.origin and HTMLAnchorElement.origin are not\n  // supported by IE and Safari.\n  return getOrigin(location) !== getOrigin(anchorElement)\n}\n\nfunction Link(props, children) {\n  return function(state, actions) {\n    var to = props.to\n    var location = state.location\n    var onclick = props.onclick\n    delete props.to\n    delete props.location\n\n    props.href = to\n    props.onclick = function(e) {\n      if (onclick) {\n        onclick(e)\n      }\n      if (\n        e.defaultPrevented ||\n        e.button !== 0 ||\n        e.altKey ||\n        e.metaKey ||\n        e.ctrlKey ||\n        e.shiftKey ||\n        props.target === \"_blank\" ||\n        isExternal(e.currentTarget)\n      ) {\n      } else {\n        e.preventDefault()\n\n        if (to !== location.pathname) {\n          history.pushState(location.pathname, \"\", to)\n        }\n      }\n    }\n\n    return Object(hyperapp__WEBPACK_IMPORTED_MODULE_0__[\"h\"])(\"a\", props, children)\n  }\n}\n\n\n//# sourceURL=webpack:///./node_modules/@hyperapp/router/src/Link.js?");
-
-/***/ }),
-
-/***/ "./node_modules/@hyperapp/router/src/Redirect.js":
-/*!*******************************************************!*\
-  !*** ./node_modules/@hyperapp/router/src/Redirect.js ***!
-  \*******************************************************/
-/*! exports provided: Redirect */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"Redirect\", function() { return Redirect; });\nfunction Redirect(props) {\n  return function(state, actions) {\n    var location = state.location\n    history.replaceState(props.from || location.pathname, \"\", props.to)\n  }\n}\n\n\n//# sourceURL=webpack:///./node_modules/@hyperapp/router/src/Redirect.js?");
-
-/***/ }),
-
-/***/ "./node_modules/@hyperapp/router/src/Route.js":
-/*!****************************************************!*\
-  !*** ./node_modules/@hyperapp/router/src/Route.js ***!
-  \****************************************************/
-/*! exports provided: Route */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"Route\", function() { return Route; });\n/* harmony import */ var _parseRoute__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./parseRoute */ \"./node_modules/@hyperapp/router/src/parseRoute.js\");\n\n\nfunction Route(props) {\n  return function(state, actions) {\n    var location = state.location\n    var match = Object(_parseRoute__WEBPACK_IMPORTED_MODULE_0__[\"parseRoute\"])(props.path, location.pathname, {\n      exact: !props.parent\n    })\n\n    return (\n      match &&\n      props.render({\n        match: match,\n        location: location\n      })\n    )\n  }\n}\n\n\n//# sourceURL=webpack:///./node_modules/@hyperapp/router/src/Route.js?");
-
-/***/ }),
-
-/***/ "./node_modules/@hyperapp/router/src/Switch.js":
-/*!*****************************************************!*\
-  !*** ./node_modules/@hyperapp/router/src/Switch.js ***!
-  \*****************************************************/
-/*! exports provided: Switch */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"Switch\", function() { return Switch; });\nfunction Switch(props, children) {\n  return function(state, actions) {\n    var child,\n      i = 0\n    while (\n      !(child = children[i] && children[i](state, actions)) &&\n      i < children.length\n    )\n      i++\n    return child\n  }\n}\n\n\n//# sourceURL=webpack:///./node_modules/@hyperapp/router/src/Switch.js?");
-
-/***/ }),
-
-/***/ "./node_modules/@hyperapp/router/src/index.js":
-/*!****************************************************!*\
-  !*** ./node_modules/@hyperapp/router/src/index.js ***!
-  \****************************************************/
-/*! exports provided: Link, Route, Switch, Redirect, location */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Link__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Link */ \"./node_modules/@hyperapp/router/src/Link.js\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"Link\", function() { return _Link__WEBPACK_IMPORTED_MODULE_0__[\"Link\"]; });\n\n/* harmony import */ var _Route__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Route */ \"./node_modules/@hyperapp/router/src/Route.js\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"Route\", function() { return _Route__WEBPACK_IMPORTED_MODULE_1__[\"Route\"]; });\n\n/* harmony import */ var _Switch__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Switch */ \"./node_modules/@hyperapp/router/src/Switch.js\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"Switch\", function() { return _Switch__WEBPACK_IMPORTED_MODULE_2__[\"Switch\"]; });\n\n/* harmony import */ var _Redirect__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Redirect */ \"./node_modules/@hyperapp/router/src/Redirect.js\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"Redirect\", function() { return _Redirect__WEBPACK_IMPORTED_MODULE_3__[\"Redirect\"]; });\n\n/* harmony import */ var _location__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./location */ \"./node_modules/@hyperapp/router/src/location.js\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"location\", function() { return _location__WEBPACK_IMPORTED_MODULE_4__[\"location\"]; });\n\n\n\n\n\n\n\n\n//# sourceURL=webpack:///./node_modules/@hyperapp/router/src/index.js?");
-
-/***/ }),
-
-/***/ "./node_modules/@hyperapp/router/src/location.js":
-/*!*******************************************************!*\
-  !*** ./node_modules/@hyperapp/router/src/location.js ***!
-  \*******************************************************/
-/*! exports provided: location */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"location\", function() { return location; });\nfunction wrapHistory(keys) {\n  return keys.reduce(function(next, key) {\n    var fn = history[key]\n\n    history[key] = function(data, title, url) {\n      fn.call(this, data, title, url)\n      dispatchEvent(new CustomEvent(\"pushstate\", { detail: data }))\n    }\n\n    return function() {\n      history[key] = fn\n      next && next()\n    }\n  }, null)\n}\n\nvar location = {\n  state: {\n    pathname: window.location.pathname,\n    previous: window.location.pathname\n  },\n  actions: {\n    go: function(pathname) {\n      history.pushState(null, \"\", pathname)\n    },\n    set: function(data) {\n      return data\n    }\n  },\n  subscribe: function(actions) {\n    function handleLocationChange(e) {\n      actions.set({\n        pathname: window.location.pathname,\n        previous: e.detail\n          ? (window.location.previous = e.detail)\n          : window.location.previous\n      })\n    }\n\n    var unwrap = wrapHistory([\"pushState\", \"replaceState\"])\n\n    addEventListener(\"pushstate\", handleLocationChange)\n    addEventListener(\"popstate\", handleLocationChange)\n\n    return function() {\n      removeEventListener(\"pushstate\", handleLocationChange)\n      removeEventListener(\"popstate\", handleLocationChange)\n      unwrap()\n    }\n  }\n}\n\n\n//# sourceURL=webpack:///./node_modules/@hyperapp/router/src/location.js?");
-
-/***/ }),
-
-/***/ "./node_modules/@hyperapp/router/src/parseRoute.js":
-/*!*********************************************************!*\
-  !*** ./node_modules/@hyperapp/router/src/parseRoute.js ***!
-  \*********************************************************/
-/*! exports provided: parseRoute */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"parseRoute\", function() { return parseRoute; });\nfunction createMatch(isExact, path, url, params) {\n  return {\n    isExact: isExact,\n    path: path,\n    url: url,\n    params: params\n  }\n}\n\nfunction trimTrailingSlash(url) {\n  for (var len = url.length; \"/\" === url[--len]; );\n  return url.slice(0, len + 1)\n}\n\nfunction decodeParam(val) {\n  try {\n    return decodeURIComponent(val)\n  } catch (e) {\n    return val\n  }\n}\n\nfunction parseRoute(path, url, options) {\n  if (path === url || !path) {\n    return createMatch(path === url, path, url)\n  }\n\n  var exact = options && options.exact\n  var paths = trimTrailingSlash(path).split(\"/\")\n  var urls = trimTrailingSlash(url).split(\"/\")\n\n  if (paths.length > urls.length || (exact && paths.length < urls.length)) {\n    return\n  }\n\n  for (var i = 0, params = {}, len = paths.length, url = \"\"; i < len; i++) {\n    if (\":\" === paths[i][0]) {\n      params[paths[i].slice(1)] = urls[i] = decodeParam(urls[i])\n    } else if (paths[i] !== urls[i]) {\n      return\n    }\n    url += urls[i] + \"/\"\n  }\n\n  return createMatch(false, path, url.slice(0, -1), params)\n}\n\n\n//# sourceURL=webpack:///./node_modules/@hyperapp/router/src/parseRoute.js?");
-
-/***/ }),
-
 /***/ "./node_modules/hyperapp/src/index.js":
 /*!********************************************!*\
   !*** ./node_modules/hyperapp/src/index.js ***!
@@ -202,43 +118,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var hyperapp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! hyperapp */ \"./node_modules/hyperapp/src/index.js\");\n/* harmony import */ var _hyperapp_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @hyperapp/html */ \"./node_modules/@hyperapp/html/dist/html.js\");\n/* harmony import */ var _hyperapp_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @hyperapp/router */ \"./node_modules/@hyperapp/router/src/index.js\");\n/* harmony import */ var _view_Home__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./view/Home */ \"./src/js/view/Home.js\");\n/* harmony import */ var _view_About__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./view/About */ \"./src/js/view/About.js\");\n/* harmony import */ var _view_TopicsView__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./view/TopicsView */ \"./src/js/view/TopicsView.js\");\n\n\n\n\n\n\n\n\nconst state = {\n  location: _hyperapp_router__WEBPACK_IMPORTED_MODULE_2__[\"location\"].state\n}\n\nconst actions = {\n  location: _hyperapp_router__WEBPACK_IMPORTED_MODULE_2__[\"location\"].actions\n}\n\nconst view = state => (\n  Object(_hyperapp_html__WEBPACK_IMPORTED_MODULE_1__[\"div\"])({}, [\n    Object(_hyperapp_html__WEBPACK_IMPORTED_MODULE_1__[\"header\"])({ class: \"site-header\" }, [\n      Object(_hyperapp_html__WEBPACK_IMPORTED_MODULE_1__[\"nav\"])({}, [\n        Object(_hyperapp_router__WEBPACK_IMPORTED_MODULE_2__[\"Link\"])({ to: \"/\" }, \"Home\"),\n        Object(_hyperapp_router__WEBPACK_IMPORTED_MODULE_2__[\"Link\"])({ to: \"/about\" }, \"About\"),\n        Object(_hyperapp_router__WEBPACK_IMPORTED_MODULE_2__[\"Link\"])({ to: \"/topics\" }, \"Topics\")\n      ])\n    ]),\n    Object(_hyperapp_router__WEBPACK_IMPORTED_MODULE_2__[\"Route\"])({ path: \"/\", render: _view_Home__WEBPACK_IMPORTED_MODULE_3__[\"default\"] }),\n    Object(_hyperapp_router__WEBPACK_IMPORTED_MODULE_2__[\"Route\"])({ path: \"/about\", render: _view_About__WEBPACK_IMPORTED_MODULE_4__[\"default\"] }),\n    Object(_hyperapp_router__WEBPACK_IMPORTED_MODULE_2__[\"Route\"])({ path: \"/topics\", render: _view_TopicsView__WEBPACK_IMPORTED_MODULE_5__[\"default\"] })\n  ])\n)\n\nconst main = Object(hyperapp__WEBPACK_IMPORTED_MODULE_0__[\"app\"])(state, actions, view, document.body)\n\nconst unsubscribe = _hyperapp_router__WEBPACK_IMPORTED_MODULE_2__[\"location\"].subscribe(main.location)\n\n//# sourceURL=webpack:///./src/js/index.js?");
-
-/***/ }),
-
-/***/ "./src/js/view/About.js":
-/*!******************************!*\
-  !*** ./src/js/view/About.js ***!
-  \******************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _hyperapp_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @hyperapp/html */ \"./node_modules/@hyperapp/html/dist/html.js\");\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (() => state => (\n  Object(_hyperapp_html__WEBPACK_IMPORTED_MODULE_0__[\"h2\"])({}, \"About\")\n));\n\n//# sourceURL=webpack:///./src/js/view/About.js?");
-
-/***/ }),
-
-/***/ "./src/js/view/Home.js":
-/*!*****************************!*\
-  !*** ./src/js/view/Home.js ***!
-  \*****************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _hyperapp_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @hyperapp/html */ \"./node_modules/@hyperapp/html/dist/html.js\");\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (() => state => (\n  Object(_hyperapp_html__WEBPACK_IMPORTED_MODULE_0__[\"h2\"])({}, \"Home\")\n));\n\n//# sourceURL=webpack:///./src/js/view/Home.js?");
-
-/***/ }),
-
-/***/ "./src/js/view/TopicsView.js":
-/*!***********************************!*\
-  !*** ./src/js/view/TopicsView.js ***!
-  \***********************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _hyperapp_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @hyperapp/html */ \"./node_modules/@hyperapp/html/dist/html.js\");\n/* harmony import */ var _hyperapp_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @hyperapp/router */ \"./node_modules/@hyperapp/router/src/index.js\");\n\n\n\nconst Topic = ({ match }) => Object(_hyperapp_html__WEBPACK_IMPORTED_MODULE_0__[\"h3\"])({}, match.params.topicId)\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (({ match }) => (\n  Object(_hyperapp_html__WEBPACK_IMPORTED_MODULE_0__[\"div\"])({ key: \"topics\" }, [\n    Object(_hyperapp_html__WEBPACK_IMPORTED_MODULE_0__[\"h2\"])({}, \"Topics\"),\n    Object(_hyperapp_html__WEBPACK_IMPORTED_MODULE_0__[\"ul\"])({}, [\n      Object(_hyperapp_html__WEBPACK_IMPORTED_MODULE_0__[\"li\"])({}, [\n        Object(_hyperapp_router__WEBPACK_IMPORTED_MODULE_1__[\"Link\"])({ to: `${match.url}/components` }, \"Components\")\n      ]),\n      Object(_hyperapp_html__WEBPACK_IMPORTED_MODULE_0__[\"li\"])({}, [\n        Object(_hyperapp_router__WEBPACK_IMPORTED_MODULE_1__[\"Link\"])({ to: `${match.url}/single-state-tree` }, \"Single State Tree\")\n      ]),\n      Object(_hyperapp_html__WEBPACK_IMPORTED_MODULE_0__[\"li\"])({}, [\n        Object(_hyperapp_router__WEBPACK_IMPORTED_MODULE_1__[\"Link\"])({ to: `${match.url}/routing` }, \"Routing\")\n      ])\n    ]),\n    Object(_hyperapp_router__WEBPACK_IMPORTED_MODULE_1__[\"Route\"])({ path: `${match.path}/:topicId`, render: Topic })\n  ])\n));\n\n//# sourceURL=webpack:///./src/js/view/TopicsView.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var hyperapp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! hyperapp */ \"./node_modules/hyperapp/src/index.js\");\n/* harmony import */ var _hyperapp_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @hyperapp/html */ \"./node_modules/@hyperapp/html/dist/html.js\");\n\n\n\n/*\nimport Home from './view/Home'\nimport About from './view/About'\nimport TopicsView from './view/TopicsView'\n*/\n\nconst state = {}\n\nconst actions = {}\n\nconst view = state => (\n  Object(_hyperapp_html__WEBPACK_IMPORTED_MODULE_1__[\"div\"])([\n    Object(_hyperapp_html__WEBPACK_IMPORTED_MODULE_1__[\"header\"])({ class: 'site-header' }, [\n      Object(_hyperapp_html__WEBPACK_IMPORTED_MODULE_1__[\"div\"])({ class: 'icon' }),\n      Object(_hyperapp_html__WEBPACK_IMPORTED_MODULE_1__[\"h1\"])([\n        '戸塚 孝高',\n        Object(_hyperapp_html__WEBPACK_IMPORTED_MODULE_1__[\"span\"])('Yoshitaka Totsuka / y047aka')        \n      ]),\n      Object(_hyperapp_html__WEBPACK_IMPORTED_MODULE_1__[\"p\"])([\n        Object(_hyperapp_html__WEBPACK_IMPORTED_MODULE_1__[\"img\"])({ src: '/images/location.svg' }),\n        'Tokyo, Japan'\n      ])\n    ]),\n    Object(_hyperapp_html__WEBPACK_IMPORTED_MODULE_1__[\"main\"])([\n      Object(_hyperapp_html__WEBPACK_IMPORTED_MODULE_1__[\"h1\"])('I\\'m belong to...'), \n      Object(_hyperapp_html__WEBPACK_IMPORTED_MODULE_1__[\"ul\"])([\n        Object(_hyperapp_html__WEBPACK_IMPORTED_MODULE_1__[\"li\"])([\n          Object(_hyperapp_html__WEBPACK_IMPORTED_MODULE_1__[\"a\"])({ href: 'http://spacemgz-telstar.com/', target: '_blank' }, '宇宙広報団体 TELSTAR')\n        ]),\n        Object(_hyperapp_html__WEBPACK_IMPORTED_MODULE_1__[\"li\"])([\n          Object(_hyperapp_html__WEBPACK_IMPORTED_MODULE_1__[\"a\"])({ href: 'https://sorabatake.jp/', target: '_blank' }, '宙畑')\n        ])\n      ]),\n      Object(_hyperapp_html__WEBPACK_IMPORTED_MODULE_1__[\"h1\"])('Motor Sports Fun!!'), \n      Object(_hyperapp_html__WEBPACK_IMPORTED_MODULE_1__[\"ul\"])([\n        Object(_hyperapp_html__WEBPACK_IMPORTED_MODULE_1__[\"li\"])('Aston Martin Racing (WEC)'),\n        Object(_hyperapp_html__WEBPACK_IMPORTED_MODULE_1__[\"li\"])('Corvette Racing (IMSA)')\n      ])\n    ]),\n    Object(_hyperapp_html__WEBPACK_IMPORTED_MODULE_1__[\"footer\"])({ class: 'site-footer' }, [\n      Object(_hyperapp_html__WEBPACK_IMPORTED_MODULE_1__[\"p\"])({ class: 'copyright', innerHTML: `&copy; 2018-${ new Date().getFullYear() } y047aka` })\n    ])\n  ])\n)\n\nObject(hyperapp__WEBPACK_IMPORTED_MODULE_0__[\"app\"])(state, actions, view, document.body)\n\n//# sourceURL=webpack:///./src/js/index.js?");
 
 /***/ })
 

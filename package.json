@@ -4,10 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "copy:CNAME": "cp ./src/CNAME ./docs",
-    "copy:html": "cp ./src/index.html ./src/404.html ./docs",
-    "copy:md": "cp -r ./src/md ./docs",
-    "copy": "npm-run-all -p copy:CNAME copy:html copy:md",
+    "copy:html": "cp ./src/index.html ./docs",
+    "copy:images": "cp -a ./src/images ./docs",
+    "copy": "npm-run-all -p copy:*",
     "watch:js": "webpack --mode development ./src/js/index.js --output ./docs/js/main.js --watch --display minimal",
     "watch:sass": "node-sass --include-path sass ./src/sass/style.sass ./docs/css/style.css --watch --quiet",
     "watch:server": "browser-sync start --server ./docs --files \"**/*\"",
@@ -18,10 +17,7 @@
   "license": "ISC",
   "dependencies": {
     "@hyperapp/html": "^1.1.1",
-    "@hyperapp/router": "^0.7.1",
-    "axios": "^0.18.0",
-    "hyperapp": "^1.2.9",
-    "marked": "^0.6.0"
+    "hyperapp": "^1.2.9"
   },
   "devDependencies": {
     "browser-sync": "^2.26.3",
