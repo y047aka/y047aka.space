@@ -4,6 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "echo:CNAME": "echo 'y047aka.me' > ./docs/CNAME",
+    "echo:nojekyll": "touch ./docs/.nojekyll",
+    "echo": "npm-run-all -p echo:CNAME echo:nojekyll",
     "copy:html": "cp ./src/index.html ./docs",
     "copy:images": "cp -a ./src/images ./docs",
     "copy": "npm-run-all -p copy:*",
