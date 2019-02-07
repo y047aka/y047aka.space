@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { app } from 'hyperapp'
 import { div, span, header, footer, main, nav, h1, h2, p, a, ul, li, img } from '@hyperapp/html'
 
@@ -11,41 +10,6 @@ import TopicsView from './view/TopicsView'
 const state = {}
 
 const actions = {}
-=======
-import axios from "axios"
-import frontMatter from "front-matter"
-
-// Hyperapp
-import { app } from "hyperapp"
-import { div, header, nav } from "@hyperapp/html"
-import { Link, Route, location } from "@hyperapp/router"
-
-// view
-import Home from "./view/Home"
-import About from "./view/About"
-import TopicsView from "./view/TopicsView"
-import Article from "./view/Article"
-
-const state = {
-  location: location.state,
-  currentArticle: {
-    attributes: {},
-    body: ""
-  }
-}
-
-const actions = {
-  location: location.actions,
-  refreshCurrentArticle: article => state => ({ currentArticle: article }),
-  refresh: (topicId) => async (state, actions) => {
-    const path = `../md/${ topicId }.md`
-    const response = await axios.get(path).catch((e) => { console.log(e) })
-
-    const article = frontMatter(response.data)
-    actions.refreshCurrentArticle(article)
-  }
-}
->>>>>>> 6021fe8c943707f5db03d7c519d2b663ab8f168b
 
 const view = state => (
   div([
@@ -60,7 +24,6 @@ const view = state => (
         'Tokyo, Japan'
       ])
     ]),
-<<<<<<< HEAD
     main([
       h1('I\'m belong to...'), 
       ul([
@@ -80,12 +43,6 @@ const view = state => (
     footer({ class: 'site-footer' }, [
       p({ class: 'copyright', innerHTML: `&copy; 2018-${ new Date().getFullYear() } y047aka` })
     ])
-=======
-    Route({ path: "/", render: Home }),
-    Route({ path: "/about", render: About }),
-    Route({ path: "/topics", render: TopicsView }),
-    Route({ path: "/:topicId", render: Article })
->>>>>>> 6021fe8c943707f5db03d7c519d2b663ab8f168b
   ])
 )
 
