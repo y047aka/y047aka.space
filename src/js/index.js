@@ -1,15 +1,15 @@
-// Libraries
+// libraries
 import axios from "axios"
 
 // Hyperapp
 import { app } from 'hyperapp'
-import { div, span, header, footer, section, main, nav, h1, h2, p, a, ul, li, img } from '@hyperapp/html'
+import { div, main } from '@hyperapp/html'
 
-/*
-import Home from './view/Home'
-import About from './view/About'
-import TopicsView from './view/TopicsView'
-*/
+// views
+import SiteHeader from './view/SiteHeader'
+import SiteFooter from "./view/SiteFooter";
+import Profile from './view/Profile'
+import Calender from './view/Calender'
 
 const state = {
   calender: [{}]
@@ -29,50 +29,12 @@ const view = (state, actions) => (
       actions.setCalender(response.data)
     }
   }, [
-    header({ class: 'site-header' }, [
-      div({ class: 'icon' }),
-      h1([
-        '戸塚 孝高',
-        span('Yoshitaka Totsuka / y047aka')        
-      ]),
-      p([
-        img({ src: '/images/location.svg' }),
-        'Tokyo, Japan'
-      ])
-    ]),
+    SiteHeader(),
     main([
-      section([
-        h1('I\'m belong to...'), 
-        ul([
-          li([
-            a({ href: 'http://spacemgz-telstar.com/', target: '_blank' }, '宇宙広報団体 TELSTAR')
-          ]),
-          li([
-            a({ href: 'https://sorabatake.jp/', target: '_blank' }, '宙畑')
-          ])
-        ]),
-        h1('Motor Sports Fun :)'), 
-        ul([
-          li('Aston Martin Racing (WEC)'),
-          li('Corvette Racing (IMSA)')
-        ]),
-        h1('Links'), 
-        ul([
-          li([
-            a({ href: 'https://twitter.com/y047aka', target: '_blank' }, 'Twitter')
-          ]),
-          li([
-            a({ href: 'https://github.com/y047aka', target: '_blank' }, 'GitHub')
-          ])
-        ])
-      ]),
-      section([
-        state.calender[0].series
-      ])
+      Profile(),
+      Calender()
     ]),
-    footer({ class: 'site-footer' }, [
-      p({ class: 'copyright', innerHTML: `&copy; 2018-${ new Date().getFullYear() } y047aka` })
-    ])
+    SiteFooter()
   ])
 )
 
