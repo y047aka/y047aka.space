@@ -1,5 +1,5 @@
 // libraries
-import axios from "axios"
+import axios from 'axios'
 
 // Hyperapp
 import { app } from 'hyperapp'
@@ -7,12 +7,15 @@ import { div, main } from '@hyperapp/html'
 
 // views
 import SiteHeader from './view/SiteHeader'
-import SiteFooter from "./view/SiteFooter";
+import SiteFooter from './view/SiteFooter';
 import Profile from './view/Profile'
 import Calender from './view/Calender'
 
 const state = {
-  calender: [{}]
+  calender: [
+    { races: [] },
+    { races: [] }
+  ]
 }
 
 const actions = {

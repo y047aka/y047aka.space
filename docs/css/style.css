@@ -66,12 +66,12 @@ header.site-header {
     border-radius: 50%; }
 
 main {
-  border-top: solid 0.5rem rgba(45, 64, 83, 0.05);
-  border-bottom: solid 0.5rem rgba(45, 64, 83, 0.05); }
+  border-top: solid 0.5rem rgba(46, 77, 107, 0.05);
+  border-bottom: solid 0.5rem rgba(46, 77, 107, 0.05); }
   main section {
     padding: 3rem 0 4rem; }
     main section + section {
-      border-top: solid 0.5rem rgba(45, 64, 83, 0.05); }
+      border-top: solid 0.5rem rgba(46, 77, 107, 0.05); }
   main h1 {
     padding: 1rem 0;
     font-size: 2rem; }
@@ -85,6 +85,37 @@ main {
     list-style: square; }
     main ul li {
       line-height: 2.6rem; }
+  main table.heatmap {
+    border-spacing: 0.3rem; }
+    main table.heatmap th {
+      position: relative;
+      height: 1em;
+      font-size: 1.2rem;
+      font-weight: normal; }
+      main table.heatmap th span {
+        position: absolute;
+        top: 0;
+        left: 0; }
+    main table.heatmap td {
+      width: 0.8vw;
+      height: 0.8vw;
+      background: rgba(46, 77, 107, 0.05); }
+    main table.heatmap td:not([data-tooltip=""]) {
+      position: relative;
+      background: #0066cc; }
+      main table.heatmap td:not([data-tooltip=""])::before {
+        position: absolute;
+        top: -4rem;
+        left: 0;
+        display: block;
+        width: 20rem;
+        padding: 0.5rem;
+        content: attr(data-tooltip);
+        background: #0066cc;
+        color: #FFF;
+        border-radius: 0.2rem; }
+      main table.heatmap td:not([data-tooltip=""]):hover::before {
+        display: none; }
 
 footer.site-footer .copyright {
   text-align: right;

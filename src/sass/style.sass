@@ -75,14 +75,14 @@ header.site-header
     border-radius: 50%
 
 main
-  border-top: solid 0.5rem hsla(210, 30%, 25%, 0.05)
-  border-bottom: solid 0.5rem hsla(210, 30%, 25%, 0.05)
+  border-top: solid 0.5rem hsla(210, 40%, 30%, 0.05)
+  border-bottom: solid 0.5rem hsla(210, 40%, 30%, 0.05)
 
   section
     padding: 3rem 0 4rem
 
     & + section
-      border-top: solid 0.5rem hsla(210, 30%, 25%, 0.05)
+      border-top: solid 0.5rem hsla(210, 40%, 30%, 0.05)
 
   h1
     padding: 1rem 0
@@ -101,6 +101,44 @@ main
 
     li
       line-height: 2.6rem
+
+  table.heatmap
+    border-spacing: 0.3rem
+
+    th
+      position: relative
+      height: 1em
+      font-size: 1.2rem
+      font-weight: normal
+
+      span
+        position: absolute
+        top: 0
+        left: 0
+    
+    td
+        width: 0.8vw
+        height: 0.8vw
+        background: hsla(210, 40%, 30%, 0.05)
+
+    td:not([data-tooltip=""])
+      position: relative
+      background: hsl(210, 100%, 40%)
+
+      &::before
+        position: absolute
+        top: -4rem
+        left: 0
+        display: block
+        width: 20rem
+        padding: 0.5rem
+        content: attr(data-tooltip)
+        background: hsl(210, 100%, 40%)
+        color: #FFF
+        border-radius: 0.2rem
+
+      &:hover::before
+        display: none
 
 footer.site-footer
   .copyright
