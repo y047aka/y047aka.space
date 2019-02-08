@@ -21,6 +21,7 @@
   "license": "ISC",
   "dependencies": {
     "@hyperapp/html": "^1.1.1",
+    "axios": "^0.18.0",
     "hyperapp": "^1.2.9"
   },
   "devDependencies": {
