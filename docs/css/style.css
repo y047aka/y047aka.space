@@ -100,10 +100,10 @@ main {
       width: 0.8vw;
       height: 0.8vw;
       background: rgba(46, 77, 107, 0.05); }
-    main table.heatmap td:not([data-tooltip=""]) {
+    main table.heatmap td.raceweek {
       position: relative;
       background: #0066cc; }
-      main table.heatmap td:not([data-tooltip=""]):hover::before {
+      main table.heatmap td.raceweek:hover::before {
         position: absolute;
         top: -4rem;
         left: 0;

@@ -33,7 +33,7 @@ export default () => state =>
         ]),
         tr([
           array.map(d => ([
-            td({ 'data-tooltip': check(d, series) ? '24 Hours of Le Mans' : '' }, '')
+            check(d, series) ? td({ class: 'raceweek', 'data-tooltip': '24 Hours of Le Mans' }, '') : td('')
           ]))
         ])
       ])
