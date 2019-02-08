@@ -11,10 +11,18 @@ const array = (() => {
   return array
 })()
 
+const check = (sunday, series) => {
+  const a = series.races.filter(d => {
+    const difference = sunday - new Date(d.date.replace(/-/g, '/'))
+    return (difference >= 0 && difference < 7*1000*60*60*24)
+  }).length
+  return a
+}
+
 export default () => state =>
   section([
-    state.calender.map(d => [
-      h1(`${ d.seriesName } ${ d.season }`),
+    state.calender.map(series => [
+      h1(`${ series.seriesName } ${ series.season }`),
       table({ class: 'heatmap' }, [
         tr([
           array.map(d => 
@@ -24,9 +32,9 @@ export default () => state =>
           )
         ]),
         tr([
-          array.map(d =>
-            td({ 'data-tooltip': `${ d.toLocaleDateString() }` === '2019/6/16' ? '24 Hours of Le Mans' : '' }, '')
-          )
+          array.map(d => ([
+            td({ 'data-tooltip': check(d, series) ? '24 Hours of Le Mans' : '' }, '')
+          ]))
         ])
       ])
     ])
