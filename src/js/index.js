@@ -34,10 +34,19 @@ const view = state => (
           a({ href: 'https://sorabatake.jp/', target: '_blank' }, '宙畑')
         ])
       ]),
-      h1('Motor Sports Fun!!'), 
+      h1('Motor Sports Fun :)'), 
       ul([
         li('Aston Martin Racing (WEC)'),
         li('Corvette Racing (IMSA)')
+      ]),
+      h1('Links'), 
+      ul([
+        li([
+          a({ href: 'https://twitter.com/y047aka', target: '_blank' }, 'Twitter')
+        ]),
+        li([
+          a({ href: 'https://github.com/y047aka', target: '_blank' }, 'GitHub')
+        ])
       ])
     ]),
     footer({ class: 'site-footer' }, [
