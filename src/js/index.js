@@ -13,23 +13,25 @@ import Calender from './view/Calender'
 
 const state = {
   calender: [
-    { races: [] },
     { races: [] }
   ]
 }
 
 const actions = {
   setCalender: (newObj) => state => ({
-    calender: [newObj]
+    calender: newObj
   })
 }
 
 const view = (state, actions) => (
   div({
     oncreate: async () => {
-      const path = '../data/WEC_2018-19.json'
-      const response = await axios.get(path).catch(e => { console.log(e) })
-      actions.setCalender(response.data)
+      const response_WEC = await axios.get('../data/WEC_2018-19.json').catch(e => { console.log(e) })
+      const response_IMSA = await axios.get('../data/IMSA_2019.json').catch(e => { console.log(e) })
+      actions.setCalender([
+        response_WEC.data,
+        response_IMSA.data
+      ])
     }
   }, [
     SiteHeader(),
