@@ -23,14 +23,14 @@ body {
     body div > header.site-header {
       grid-row: 1;
       grid-column: 2;
-      padding: 8rem 0 3rem; }
+      padding: 4rem 0 3rem; }
     body div > main {
       grid-row: 2;
       grid-column: 2; }
     body div > footer.site-footer {
       grid-row: 3;
       grid-column: 2;
-      padding: 3rem 0 5rem; }
+      padding: 3rem 0; }
 
 header.site-header {
   display: grid;
@@ -77,6 +77,11 @@ main {
     font-size: 2rem; }
   main * + h1 {
     margin-top: 2rem; }
+  main h2 {
+    padding: 1rem 0;
+    font-size: 1.8rem; }
+  main * + h2 {
+    margin-top: 2rem; }
   main a {
     color: #0066cc;
     text-decoration: none; }
@@ -97,8 +102,8 @@ main {
         top: 0;
         left: 0; }
     main table.heatmap td {
-      width: 0.8vw;
-      height: 1.4rem;
+      width: 0.7vw;
+      height: 0.7vw;
       background: rgba(46, 77, 107, 0.05); }
     main table.heatmap td.raceweek {
       position: relative;
