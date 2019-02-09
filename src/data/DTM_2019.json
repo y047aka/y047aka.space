@@ -1,0 +1,17 @@
+{
+    "seriesName": "DTM",
+    "seriesFormalName": "Deutsche Tourenwagen Masters",
+    "season": "2019",
+    "races": [
+      { "date": "2019-04-18", "name": "Lausitzring (ITR-Test)" },
+      { "date": "2019-05-05", "name": "Hockenheim" },
+      { "date": "2019-05-19", "name": "Zolder" },
+      { "date": "2019-06-09", "name": "Misano" },
+      { "date": "2019-07-07", "name": "Norisring" },
+      { "date": "2019-07-21", "name": "Assen" },
+      { "date": "2019-08-11", "name": "Brands Hatch" },
+      { "date": "2019-08-25", "name": "Lausitzring" },
+      { "date": "2019-09-15", "name": "Nürburgring" },
+      { "date": "2019-10-06", "name": "Hockenheim" }
+    ]
+  }
