@@ -1,0 +1,28 @@
+{
+  "seriesName": "F1",
+  "seriesFormalName": "Formula One World Championship",
+  "season": "2019",
+  "races": [
+    { "date": "2019-03-17", "name": "Australian Grand Prix" },
+    { "date": "2019-03-31", "name": "Bahrain Grand Prix" },
+    { "date": "2019-04-14", "name": "Chinese Grand Prix" },
+    { "date": "2019-04-28", "name": "Azerbaijan Grand Prix" },
+    { "date": "2019-05-12", "name": "Spanish Grand Prix" },
+    { "date": "2019-05-26", "name": "Monaco Grand Prix" },
+    { "date": "2019-06-09", "name": "Canadian Grand Prix" },
+    { "date": "2019-06-23", "name": "French Grand Prix" },
+    { "date": "2019-06-30", "name": "Austrian Grand Prix" },
+    { "date": "2019-07-14", "name": "British Grand Prix" },
+    { "date": "2019-07-28", "name": "German Grand Prix" },
+    { "date": "2019-08-04", "name": "Hungarian Grand Prix" },
+    { "date": "2019-09-01", "name": "Belgian Grand Prix" },
+    { "date": "2019-09-08", "name": "Italian Grand Prix" },
+    { "date": "2019-09-22", "name": "Singapore Grand Prix" },
+    { "date": "2019-09-29", "name": "Russian Grand Prix" },
+    { "date": "2019-10-13", "name": "Japanese Grand Prix" },
+    { "date": "2019-10-27", "name": "Mexican Grand Prix" },
+    { "date": "2019-11-03", "name": "United States Grand Prix" },
+    { "date": "2019-11-17", "name": "Brazilian Grand Prix" },
+    { "date": "2019-12-01", "name": "Abu Dhabi Grand Prix" }
+  ]
+}
