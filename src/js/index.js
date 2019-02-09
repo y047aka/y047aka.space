@@ -27,6 +27,7 @@ const view = (state, actions) => (
   div({
     oncreate: async () => {
       const response_F1_2019 = await axios.get('../data/F1_2019.json').catch(e => { console.log(e) })
+      const response_IndyCar_2019 = await axios.get('../data/IndyCar_2019.json').catch(e => { console.log(e) })
       const response_FormulaE_2018 = await axios.get('../data/FormulaE_2018-19.json').catch(e => { console.log(e) })
       const response_WEC_2018 = await axios.get('../data/WEC_2018-19.json').catch(e => { console.log(e) })
       const response_WEC_2019 = await axios.get('../data/WEC_2019-20.json').catch(e => { console.log(e) })
@@ -37,6 +38,7 @@ const view = (state, actions) => (
       const response_AirRace_2019 = await axios.get('../data/AirRace_2019.json').catch(e => { console.log(e) })
       actions.setCalender([
         response_F1_2019.data,
+        response_IndyCar_2019.data,
         response_FormulaE_2018.data,
         response_WEC_2018.data,
         response_IMSA_2019.data,

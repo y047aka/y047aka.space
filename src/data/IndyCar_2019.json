@@ -1,0 +1,24 @@
+{
+  "seriesName": "IndyCar",
+  "seriesFormalName": "IndyCar Series",
+  "season": "2019",
+  "races": [
+    { "date": "2019-03-10", "name": "Firestone Grand Prix of St.　Petersburg" },
+    { "date": "2019-03-24", "name": "IndyCar Classic" },
+    { "date": "2019-04-07", "name": "Honda Indy Grand Prix of Alabama" },
+    { "date": "2019-04-14", "name": "Acura Grand Prix of Long Beach" },
+    { "date": "2019-05-11", "name": "IndyCar Grand Prix" },
+    { "date": "2019-05-26", "name": "103rd Indianapolis 500 Presented by Gainbridge" },
+    { "date": "2019-06-01", "name": "Chevrolet Detroit Grand Prix Presented by Lear Corporation" },
+    { "date": "2019-06-02", "name": "Chevrolet Detroit Grand Prix Presented by Lear Corporation" },
+    { "date": "2019-06-08", "name": "DXC Technology 600" },
+    { "date": "2019-06-23", "name": "REV Group Grand Prix" },
+    { "date": "2019-07-14", "name": "Honda Indy Toronto" },
+    { "date": "2019-07-20", "name": "Iowa 300" },
+    { "date": "2019-07-28", "name": "Honda Indy 200 at Mid-Ohio" },
+    { "date": "2019-08-18", "name": "ABC Supply 500" },
+    { "date": "2019-08-24", "name": "Bommarito Automotive Group 500 Presented by Valvoline" },
+    { "date": "2019-09-01", "name": "Grand Prix of Portland" },
+    { "date": "2019-09-22", "name": "Firestone Grand Prix of Monterey" }
+  ]
+}
