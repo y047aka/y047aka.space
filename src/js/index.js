@@ -26,7 +26,7 @@ const actions = {
 const view = (state, actions) => (
   div({
     oncreate: async () => {
-      const dir = 'https://y047aka.github.io/MotorSportsCalendars/data'
+      const dir = 'https://y047aka.github.io/MotorSportsCalendars'
       const response_F1_2019 = await axios.get(`${ dir }/F1_2019.json`).catch(e => { console.log(e) })
       const response_IndyCar_2019 = await axios.get(`${ dir }/IndyCar_2019.json`).catch(e => { console.log(e) })
       const response_FormulaE_2018 = await axios.get(`${ dir }/FormulaE_2018-19.json`).catch(e => { console.log(e) })
