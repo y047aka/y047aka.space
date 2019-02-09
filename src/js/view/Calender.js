@@ -1,4 +1,4 @@
-import { span, section, table, caption, tr, th, td } from '@hyperapp/html'
+import { span, section, h2, table, tr, th, td } from '@hyperapp/html'
 
 const array = (() => {
   const array = []
@@ -21,9 +21,9 @@ const check = (sunday, series) => {
 
 export default () => state =>
   section([
-    state.calender.map(series =>
+    state.calender.map(series => [
+      h2(`${ series.seriesName } ${ series.season }`),
       table({ class: 'heatmap' }, [
-        caption(`${ series.seriesName } ${ series.season }`),
         tr([
           array.map(d => 
             th([
@@ -37,5 +37,5 @@ export default () => state =>
           ]))
         ])
       ])
-    )
+    ])
   ])
