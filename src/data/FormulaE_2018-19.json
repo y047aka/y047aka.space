@@ -1,0 +1,20 @@
+{
+  "seriesName": "Formula E",
+  "seriesFormalName": "ABB FIA Formula E Championship",
+  "season": "2018-19",
+  "races": [
+    { "date": "2018-12-15", "name": "Ad Diriyah ePrix" },
+    { "date": "2019-01-12", "name": "Marrakesh ePrix" },
+    { "date": "2019-01-26", "name": "Santiago ePrix" },
+    { "date": "2019-02-16", "name": "Mexico City ePrix" },
+    { "date": "2019-03-10", "name": "Hong Kong ePrix" },
+    { "date": "2019-03-23", "name": "Sanya ePrix" },
+    { "date": "2019-04-13", "name": "Rome ePrix" },
+    { "date": "2019-04-27", "name": "Paris ePrix" },
+    { "date": "2019-05-11", "name": "Monaco ePrix" },
+    { "date": "2019-05-25", "name": "Berlin ePrix" },
+    { "date": "2019-06-22", "name": "Bern ePrix" },
+    { "date": "2019-07-13", "name": "New York City ePrix Race 1" },
+    { "date": "2019-07-14", "name": "New York City ePrix Race 2" }
+  ]
+}
