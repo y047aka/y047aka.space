@@ -26,16 +26,17 @@ const actions = {
 const view = (state, actions) => (
   div({
     oncreate: async () => {
-      const response_F1_2019 = await axios.get('../data/F1_2019.json').catch(e => { console.log(e) })
-      const response_IndyCar_2019 = await axios.get('../data/IndyCar_2019.json').catch(e => { console.log(e) })
-      const response_FormulaE_2018 = await axios.get('../data/FormulaE_2018-19.json').catch(e => { console.log(e) })
-      const response_WEC_2018 = await axios.get('../data/WEC_2018-19.json').catch(e => { console.log(e) })
-      const response_WEC_2019 = await axios.get('../data/WEC_2019-20.json').catch(e => { console.log(e) })
-      const response_IMSA_2019 = await axios.get('../data/IMSA_2019.json').catch(e => { console.log(e) })
-      const response_SuperGT_2019 = await axios.get('../data/SuperGT_2019.json').catch(e => { console.log(e) })
-      const response_DTM_2019 = await axios.get('../data/DTM_2019.json').catch(e => { console.log(e) })
-      const response_BlancpainGT_2019 = await axios.get('../data/BlancpainGT_2019.json').catch(e => { console.log(e) })
-      const response_AirRace_2019 = await axios.get('../data/AirRace_2019.json').catch(e => { console.log(e) })
+      const dir = 'https://y047aka.github.io/MotorSportsCalendars/data'
+      const response_F1_2019 = await axios.get(`${ dir }/F1_2019.json`).catch(e => { console.log(e) })
+      const response_IndyCar_2019 = await axios.get(`${ dir }/IndyCar_2019.json`).catch(e => { console.log(e) })
+      const response_FormulaE_2018 = await axios.get(`${ dir }/FormulaE_2018-19.json`).catch(e => { console.log(e) })
+      const response_WEC_2018 = await axios.get(`${ dir }/WEC_2018-19.json`).catch(e => { console.log(e) })
+      const response_WEC_2019 = await axios.get(`${ dir }/WEC_2019-20.json`).catch(e => { console.log(e) })
+      const response_IMSA_2019 = await axios.get(`${ dir }/IMSA_2019.json`).catch(e => { console.log(e) })
+      const response_SuperGT_2019 = await axios.get(`${ dir }/SuperGT_2019.json`).catch(e => { console.log(e) })
+      const response_DTM_2019 = await axios.get(`${ dir }/DTM_2019.json`).catch(e => { console.log(e) })
+      const response_BlancpainGT_2019 = await axios.get(`${ dir }/BlancpainGT_2019.json`).catch(e => { console.log(e) })
+      const response_AirRace_2019 = await axios.get(`${ dir }/AirRace_2019.json`).catch(e => { console.log(e) })
       actions.setCalender([
         response_F1_2019.data,
         response_IndyCar_2019.data,
