@@ -30,6 +30,7 @@ const view = (state, actions) => (
       const response_F1_2019 = await axios.get(`${ dir }/F1_2019.json`).catch(e => { console.log(e) })
       const response_IndyCar_2019 = await axios.get(`${ dir }/IndyCar_2019.json`).catch(e => { console.log(e) })
       const response_FormulaE_2018 = await axios.get(`${ dir }/FormulaE_2018-19.json`).catch(e => { console.log(e) })
+      const response_SuperFormula_2019 = await axios.get(`${ dir }/SuperFormula_2019.json`).catch(e => { console.log(e) })
       const response_WEC_2018 = await axios.get(`${ dir }/WEC_2018-19.json`).catch(e => { console.log(e) })
       const response_WEC_2019 = await axios.get(`${ dir }/WEC_2019-20.json`).catch(e => { console.log(e) })
       const response_IMSA_2019 = await axios.get(`${ dir }/IMSA_2019.json`).catch(e => { console.log(e) })
@@ -42,14 +43,15 @@ const view = (state, actions) => (
         response_F1_2019.data,
         response_IndyCar_2019.data,
         response_FormulaE_2018.data,
+        response_SuperFormula_2019.data,
         response_WEC_2018.data,
+        response_WEC_2019.data,
         response_IMSA_2019.data,
         response_SuperGT_2019.data,
         response_DTM_2019.data,
         response_BlancpainGT_2019.data,
         response_NASCAR_2019.data,
-        response_AirRace_2019.data,
-        response_WEC_2019.data
+        response_AirRace_2019.data
       ])
     }
   }, [
