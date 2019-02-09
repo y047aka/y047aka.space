@@ -22,7 +22,7 @@ const check = (sunday, series) => {
 export default () => state =>
   section([
     state.calender.map(series => [
-      h2(`${ series.seriesName } ${ series.season }`),
+      h2(`${ series.seriesName }`),
       table({ class: 'heatmap' }, [
         tr([
           array.map(d => 
