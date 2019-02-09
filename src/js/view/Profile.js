@@ -11,11 +11,6 @@ export default () => state =>
         a({ href: 'https://sorabatake.jp/', target: '_blank' }, '宙畑')
       ])
     ]),
-    h1('Motor Sports Fun :)'), 
-    ul([
-      li('Aston Martin Racing (WEC)'),
-      li('Corvette Racing (IMSA)')
-    ]),
     h1('Links'), 
     ul([
       li([

@@ -1,0 +1,15 @@
+{
+  "seriesName": "WEC",
+  "seriesFormalName": "FIA World Endurance Championship",
+  "season": "2019-20",
+  "races": [
+    { "date": "2019-09-01", "name": "6 Hours of Silverstone" },
+    { "date": "2019-10-06", "name": "6 Hours of Fuji" },
+    { "date": "2019-11-10", "name": "4 Hours of Shanghai" },
+    { "date": "2019-12-14", "name": "8 Hours of Bahrain" },
+    { "date": "2020-02-01", "name": "6 Hours of São Paulo" },
+    { "date": "2020-03-15", "name": "1000 Miles of Sebring" },
+    { "date": "2020-05-02", "name": "6 Hours of Spa-Francorchamps" },
+    { "date": "2020-06-13", "name": "24 Hours of Le Mans" }
+  ]
+}
