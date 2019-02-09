@@ -1,0 +1,19 @@
+{
+  "seriesName": "Blancpain GT",
+  "seriesFormalName": "Blancpain GT Series",
+  "season": "2019",
+  "races": [
+    { "date": "2019-03-14", "name": "Circuit Paul Ricard - Test day)" },
+    { "date": "2019-04-14", "name": "Monza" },
+    { "date": "2019-05-04", "name": "Brands Hatch" },
+    { "date": "2019-05-12", "name": "Silverstone" },
+    { "date": "2019-06-01", "name": "Circuit Paul Ricard 1000km" },
+    { "date": "2019-06-30", "name": "Misano" },
+    { "date": "2019-07-03", "name": "Total 24 Hours of Spa - Test day" },
+    { "date": "2019-07-14", "name": "Zandvoort" },
+    { "date": "2019-07-27", "name": "Total 24 Hours of Spa" },
+    { "date": "2019-09-01", "name": "Nürburgring" },
+    { "date": "2019-09-08", "name": "Hungaroring" },
+    { "date": "2019-09-29", "name": "Barcelona" }
+  ]
+}

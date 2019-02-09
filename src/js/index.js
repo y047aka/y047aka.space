@@ -32,6 +32,7 @@ const view = (state, actions) => (
       const response_IMSA_2019 = await axios.get('../data/IMSA_2019.json').catch(e => { console.log(e) })
       const response_SuperGT_2019 = await axios.get('../data/SuperGT_2019.json').catch(e => { console.log(e) })
       const response_DTM_2019 = await axios.get('../data/DTM_2019.json').catch(e => { console.log(e) })
+      const response_BlancpainGT_2019 = await axios.get('../data/BlancpainGT_2019.json').catch(e => { console.log(e) })
       const response_AirRace_2019 = await axios.get('../data/AirRace_2019.json').catch(e => { console.log(e) })
       actions.setCalender([
         response_F1_2019.data,
@@ -39,6 +40,7 @@ const view = (state, actions) => (
         response_IMSA_2019.data,
         response_SuperGT_2019.data,
         response_DTM_2019.data,
+        response_BlancpainGT_2019.data,
         response_AirRace_2019.data,
         response_WEC_2019.data
       ])
