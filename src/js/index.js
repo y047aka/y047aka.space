@@ -39,7 +39,8 @@ const view = (state, actions) => (
       const response_BlancpainGT_2019 = await axios.get(`${ dir }/BlancpainGT_2019.json`).catch(e => { console.log(e) })
       const response_WTCR_2019 = await axios.get(`${ dir }/WTCR_2019.json`).catch(e => { console.log(e) })
       const response_NASCAR_2019 = await axios.get(`${ dir }/NASCAR_2019.json`).catch(e => { console.log(e) })
-      const response_AirRace_2019 = await axios.get(`${ dir }/AirRace_2019.json`).catch(e => { console.log(e) })
+      const response_WRC_2019 = await axios.get(`${ dir }/AirRace_2019.json`).catch(e => { console.log(e) })
+      const response_AirRace_2019 = await axios.get(`${ dir }/WRC_2019.json`).catch(e => { console.log(e) })
       actions.setCalender([
         response_F1_2019.data,
         response_IndyCar_2019.data,
@@ -53,7 +54,8 @@ const view = (state, actions) => (
         response_BlancpainGT_2019.data,
         response_WTCR_2019.data,
         response_NASCAR_2019.data,
-        response_AirRace_2019.data
+        response_AirRace_2019.data,
+        response_WRC_2019.data
       ])
     }
   }, [
