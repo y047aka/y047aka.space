@@ -16,10 +16,18 @@ body
   font-size: 1.6rem
   color: hsl(210, 40%, 30%)
 
-  div
+  & > div
     display: grid
     grid-template-rows: auto auto auto
-    grid-template-columns: 1fr 50% 1fr
+
+    @media screen and (max-width: 479px)
+      grid-template-columns: 1.5rem 1fr 1.5rem
+
+    @media screen and (min-width: 480px) and (max-width: 1279px)
+      grid-template-columns: 1fr 75% 1fr
+
+    @media screen and (min-width: 1280px)
+      grid-template-columns: 1fr 50% 1fr
 
     & > header.site-header
       grid-row: 1
@@ -113,45 +121,48 @@ main
     width: 100%
     border-spacing: 0.3rem
 
-    th
+    tr
       position: relative
-      left: 0.2rem
-      height: 3rem
-      font-weight: normal
 
-      span
-        position: absolute
-        top: 2rem
-        left: 0
-        font-size: 1.1rem
-    
-    td
-      position: relative
-      left: 0.2rem
-      background: hsla(210, 40%, 30%, 0.05)
+      th
+        position: relative
+        left: 0.2rem
+        height: 3rem
+        font-weight: normal
 
-    td:first-child
-      position: relative
-      left: -0.3rem
-      width: 14rem
-      font-size: 1.5rem
-      background: #FFF
+        span
+          position: absolute
+          top: 2rem
+          left: 0
+          font-size: 1.1rem
+      
+      td
+        position: relative
+        left: 0.2rem
+        background: hsla(210, 40%, 30%, 0.05)
 
-    td.raceweek
-      position: relative
-      background: hsl(210, 100%, 40%)
+      td:first-child
+        left: -0.3rem
+        width: 14rem
+        font-size: 1.5rem
+        background: #FFF
 
-      &:hover::before
-        position: absolute
-        top: -4rem
-        left: 0
-        display: block
-        width: 20rem
-        padding: 0.5rem
-        content: attr(data-tooltip)
+      td.raceweek
+        position: relative
         background: hsl(210, 100%, 40%)
-        color: #FFF
-        border-radius: 0.2rem
+
+        &:hover::before
+          position: absolute
+          top: -4rem
+          left: 0
+          display: block
+          width: 20rem
+          padding: 0.5rem
+          content: attr(data-tooltip)
+          background: #333
+          color: #FFF
+          border-radius: 0.4rem
+          box-shadow: 0 0 0 0.2rem #FFF
 
 footer.site-footer
   .copyright
