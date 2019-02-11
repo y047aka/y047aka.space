@@ -11,28 +11,32 @@ const array = (() => {
 const check = (sunday, series) => {
   const a = series.races.filter(d => {
     const difference = sunday - new Date(d.date.replace(/-/g, '/'))
-    return (difference >= 0 && difference < 7*1000*60*60*24)
+    return (difference >= 0 && difference < 7 * (1000 * 60 * 60 * 24))
   }).length
   return a
 }
 
+const TableHead = () => state =>
+  tr(array.map(d => 
+    th([
+      span(d.getDate() <= 7 ? ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][d.getMonth()] : '')
+    ])
+  ))
+
+const TableBody = series => state =>
+  tr([
+    array.map(d => ([
+      check(d, series) ? td({ class: 'raceweek', 'data-tooltip': '24 Hours of Le Mans' }, '') : td('')
+    ]))
+  ])
+
 export default () => state =>
   section([
     state.calender.map(series => [
-      h2(`${ series.seriesName }`),
+      h2(series.seriesName),
       table({ class: 'heatmap' }, [
-        tr([
-          array.map(d => 
-            th([
-              span(d.getDate() <= 7 ? ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][d.getMonth()] : '')
-            ])
-          )
-        ]),
-        tr([
-          array.map(d => ([
-            check(d, series) ? td({ class: 'raceweek', 'data-tooltip': '24 Hours of Le Mans' }, '') : td('')
-          ]))
-        ])
+        TableHead(),
+        TableBody(series)
       ])
     ])
   ])
