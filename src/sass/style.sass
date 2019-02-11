@@ -110,23 +110,32 @@ main
       line-height: 2.6rem
 
   table.heatmap
+    width: 100%
     border-spacing: 0.3rem
 
     th
       position: relative
-      height: 1em
-      font-size: 1.1rem
+      left: 0.2rem
+      height: 3rem
       font-weight: normal
 
       span
         position: absolute
-        top: 0
+        top: 2rem
         left: 0
+        font-size: 1.1rem
     
     td
-        width: 0.7vw
-        height: 0.7vw
-        background: hsla(210, 40%, 30%, 0.05)
+      position: relative
+      left: 0.2rem
+      background: hsla(210, 40%, 30%, 0.05)
+
+    td:first-child
+      position: relative
+      left: -0.3rem
+      width: 14rem
+      font-size: 1.5rem
+      background: #FFF
 
     td.raceweek
       position: relative

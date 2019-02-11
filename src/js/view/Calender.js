@@ -1,4 +1,4 @@
-import { span, section, h2, table, tr, th, td } from '@hyperapp/html'
+import { span, section, table, tr, th, td } from '@hyperapp/html'
 
 const array = (() => {
   const array = []
@@ -17,14 +17,18 @@ const check = (sunday, series) => {
 }
 
 const TableHead = () => state =>
-  tr(array.map(d => 
-    th([
-      span(d.getDate() <= 7 ? ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][d.getMonth()] : '')
-    ])
-  ))
+  tr([
+    th(''),
+    array.map(d => 
+      th([
+        span(d.getDate() <= 7 ? ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][d.getMonth()] : '')
+      ])
+    )
+  ])
 
 const TableBody = series => state =>
   tr([
+    td(series.seriesName),
     array.map(d => ([
       check(d, series) ? td({ class: 'raceweek', 'data-tooltip': '24 Hours of Le Mans' }, '') : td('')
     ]))
@@ -32,10 +36,9 @@ const TableBody = series => state =>
 
 export default () => state =>
   section([
-    state.calender.map(series => [
-      h2(series.seriesName),
-      table({ class: 'heatmap' }, [
-        TableHead(),
+    table({ class: 'heatmap' }, [
+      state.calender.map(series => [
+        TableHead(series),
         TableBody(series)
       ])
     ])
