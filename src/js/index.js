@@ -39,8 +39,9 @@ const view = (state, actions) => (
         'BlancpainGT_2019.json',
         'WTCR_2019.json',
         'NASCAR_2019.json',
-        'AirRace_2019.json',
-        'WRC_2019.json'
+        'WRC_2019.json',
+        'MotoGP_2019.json',
+        'AirRace_2019.json'
       ].map(d => 
         axios.get(`https://y047aka.github.io/MotorSportsCalendars/${ d }`).catch(e => { console.log(e) })
       ))
