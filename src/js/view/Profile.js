@@ -11,6 +11,14 @@ export default () => state =>
         a({ href: 'https://sorabatake.jp/', target: '_blank' }, '宙畑')
       ])
     ]),
+
+    h1('Github Pages'), 
+    ul([
+      li([
+        a({ href: 'https://y047aka.github.io/MotorSportsCalandar/', target: '_blank' }, 'MotorSportsCalandar')
+      ])
+    ]),
+
     h1('Links'), 
     ul([
       li([
