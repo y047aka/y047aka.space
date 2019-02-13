@@ -15,7 +15,7 @@ export default () => state =>
     h1('Github Pages'), 
     ul([
       li([
-        a({ href: 'https://y047aka.github.io/MotorSportsCalandar/', target: '_blank' }, 'MotorSportsCalandar')
+        a({ href: 'https://y047aka.github.io/MotorSportsCalendar/', target: '_blank' }, 'MotorSportsCalendar')
       ])
     ]),
 
