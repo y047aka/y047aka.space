@@ -122,13 +122,10 @@ main
     li
       line-height: 2.6rem
 
-  table.heatmap
+  table.live-timing
     width: 100%
-    border-spacing: 0.3rem
 
     tr
-      position: relative
-
       th
         position: relative
         left: 0.2rem
@@ -145,29 +142,6 @@ main
         position: relative
         left: 0.2rem
         background: hsla(210, 40%, 30%, 0.05)
-
-      td:first-child
-        left: -0.3rem
-        width: 14rem
-        font-size: 1.5rem
-        background: #FFF
-
-      td.raceweek
-        position: relative
-        background: hsl(210, 100%, 40%)
-
-        &:hover::before
-          position: absolute
-          top: -4rem
-          left: 0
-          display: block
-          width: 20rem
-          padding: 0.5rem
-          content: attr(data-tooltip)
-          background: #333
-          color: #FFF
-          border-radius: 0.4rem
-          box-shadow: 0 0 0 0.2rem #FFF
 
 nav.side-nav
   ul
