@@ -39,6 +39,10 @@ body {
       grid-row: 3;
       grid-column: 2;
       padding: 3rem 0; }
+    body > div > nav.side-nav {
+      position: fixed;
+      top: 3.5rem;
+      right: 3rem; }
 
 header.site-header {
   display: grid;
@@ -137,6 +141,11 @@ main {
           color: #FFF;
           border-radius: 0.4rem;
           box-shadow: 0 0 0 0.2rem #FFF; }
+
+nav.side-nav ul {
+  list-style: none; }
+  nav.side-nav ul li + li {
+    margin-top: 2rem; }
 
 footer.site-footer .copyright {
   text-align: right;
