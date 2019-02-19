@@ -11,7 +11,7 @@ import SiteFooter from './view/SiteFooter'
 import SideNav from './view/SideNav'
 import Racing from './view/Racing'
 import Profile from './view/Profile'
-import LiveTiming from './view/LiveTiming'
+import Leaderboard from './view/Leaderboard'
 
 const state = {
   race_id: '',
@@ -31,7 +31,7 @@ const view = (state, actions) => (
   }, [
     SiteHeader(),
     main([
-      LiveTiming(),
+      Leaderboard(),
       Racing(),
       Profile()
     ]),
