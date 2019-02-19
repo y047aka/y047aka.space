@@ -17,15 +17,5 @@ export default () => state =>
       li([
         a({ href: 'https://y047aka.github.io/MotorSportsCalendar/', target: '_blank' }, 'MotorSportsCalendar')
       ])
-    ]),
-
-    h1('Links'), 
-    ul([
-      li([
-        a({ href: 'https://twitter.com/y047aka', target: '_blank' }, 'Twitter')
-      ]),
-      li([
-        a({ href: 'https://github.com/y047aka', target: '_blank' }, 'GitHub')
-      ])
     ])
   ])
