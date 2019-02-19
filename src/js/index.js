@@ -7,7 +7,8 @@ import { div, main } from '@hyperapp/html'
 
 // views
 import SiteHeader from './view/SiteHeader'
-import SiteFooter from './view/SiteFooter';
+import SiteFooter from './view/SiteFooter'
+import SideNav from './view/SideNav'
 import Profile from './view/Profile'
 import Calender from './view/Calender'
 
@@ -54,6 +55,7 @@ const view = (state, actions) => (
       Calender(),
       Profile()
     ]),
+    SideNav(),
     SiteFooter()
   ])
 )
