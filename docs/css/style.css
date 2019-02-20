@@ -102,17 +102,18 @@ main {
     list-style: square; }
     main ul li {
       line-height: 2.6rem; }
-  main table.live-timing {
+  main table.leaderboard {
     width: 100%;
     border-collapse: collapse; }
-    main table.live-timing tr th {
-      padding: 0.5rem 1rem;
+    main table.leaderboard tr th {
+      padding: 0.8rem 0.5rem;
       text-align: left;
-      font-size: 1.4rem;
+      font-size: 1.2rem;
       font-weight: normal; }
-    main table.live-timing tr td {
-      padding: 0.5rem 1rem; }
-    main table.live-timing tr:nth-child(even) > td {
+    main table.leaderboard tr td {
+      padding: 0.8rem 0.5rem;
+      font-size: 1.4rem; }
+    main table.leaderboard tr:nth-child(even) > td {
       background: rgba(46, 77, 107, 0.05); }
 
 nav.side-nav ul {
