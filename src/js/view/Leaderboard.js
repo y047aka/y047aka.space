@@ -14,24 +14,39 @@ const TableHead = () => state =>
   tr([
 		th('Pos'),
 		th('#'),
-		th('Name')
+    th('Driver'),
+    th(''),
+    th('Laps'),
+    th('Delta'),
+    th('Last Lap'),
+    th(''),
+    th('Best Lap'),
+    th(''),
+    th('Pit Stops')
   ])
 
-const Vehicle = (v, i) => state =>
+const Vehicle = v => state =>
   tr([
-    td(i + 1),
+    td(v.running_position),
     td(v.vehicle_number),
-    td(v.driver.full_name)
+    td(v.driver.full_name),
+    td({ Chv: 'Chevrolet', Frd: 'Ford', Tyt: 'Toyota' }[v.vehicle_manufacturer]),
+    td(v.laps_completed),
+    td(v.delta),
+    td(v.last_lap_time.toString().padEnd(6, '0')),
+    td(`${ Math.round(v.last_lap_speed * 10) / 10} mph`),
+    td(v.best_lap_time.toString().padEnd(6, '0')),
+    td(`${ Math.round(v.best_lap_speed * 10) / 10} mph`),
+    td(v.pit_stops.length)
   ])
 
 export default () => state =>
   section([
 		h1(state.run_name),
-		state.laps_in_race,
-    table({ class: 'live-timing' }, [
+    table({ class: 'leaderboard' }, [
 			TableHead(),
-      state.vehicles.map((vehicle, i) =>
-        Vehicle(vehicle, i)
+      state.vehicles.map(vehicle =>
+        Vehicle(vehicle)
       )
     ])
   ])
