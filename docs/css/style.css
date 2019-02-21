@@ -108,11 +108,16 @@ main {
     main table.leaderboard tr th {
       padding: 0.8rem 0.5rem;
       text-align: left;
-      font-size: 1.2rem;
-      font-weight: normal; }
+      font-size: 1.1rem;
+      font-weight: bold; }
+      main table.leaderboard tr th:first-child, main table.leaderboard tr th:nth-child(2) {
+        text-align: center; }
     main table.leaderboard tr td {
       padding: 0.8rem 0.5rem;
-      font-size: 1.4rem; }
+      font-size: 1.3rem;
+      font-weight: 600; }
+      main table.leaderboard tr td:first-child, main table.leaderboard tr td:nth-child(2) {
+        text-align: center; }
     main table.leaderboard tr:nth-child(even) > td {
       background: rgba(46, 77, 107, 0.05); }
 
