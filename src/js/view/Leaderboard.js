@@ -19,10 +19,9 @@ const TableHead = () => state =>
     th('Laps'),
     th('Delta'),
     th('Last Lap'),
-    th(''),
-    th('Best Lap'),
-    th(''),
-    th('Pit Stops')
+    th('mph'),
+    th('Pit Stops'),
+    th('Last Pit')
   ])
 
 const Vehicle = v => state =>
@@ -32,12 +31,11 @@ const Vehicle = v => state =>
     td(v.driver.full_name),
     td({ Chv: 'Chevrolet', Frd: 'Ford', Tyt: 'Toyota' }[v.vehicle_manufacturer]),
     td(v.laps_completed),
-    td(v.delta),
-    td(v.last_lap_time.toString().padEnd(6, '0')),
-    td(`${ Math.round(v.last_lap_speed * 10) / 10} mph`),
-    td(v.best_lap_time.toString().padEnd(6, '0')),
-    td(`${ Math.round(v.best_lap_speed * 10) / 10} mph`),
-    td(v.pit_stops.length)
+    td(v.delta > 0 ? v.delta.toFixed(3) : v.delta),
+    td(v.last_lap_time.toFixed(3)),
+    td(v.last_lap_speed.toFixed(1)),
+    td(v.pit_stops.length),
+    td(v.pit_stops.reverse()[0].pit_in_lap_count)
   ])
 
 export default () => state =>
