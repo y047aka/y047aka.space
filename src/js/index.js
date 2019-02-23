@@ -25,7 +25,7 @@ const actions = {
 const view = (state, actions) => (
   div({
     oncreate: async () => {
-      const standings = await axios.get('https://y047aka.github.io/MotorSportsData/NASCAR/Daytona500.json').catch(e => { console.log(e) })
+      const standings = await axios.get('https://www.nascar.com/live/feeds/series_2/4812/live_feed.json').catch(e => { console.log(e) })
       actions.setState(standings.data)
     }
   }, [

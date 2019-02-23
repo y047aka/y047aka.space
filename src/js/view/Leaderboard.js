@@ -35,7 +35,7 @@ const Vehicle = v => state =>
     td(v.last_lap_time.toFixed(3)),
     td(v.last_lap_speed.toFixed(1)),
     td(v.pit_stops.length),
-    td(v.pit_stops.reverse()[0].pit_in_lap_count)
+    td(v.pit_stops.length > 0 ? v.pit_stops.reverse()[0].pit_in_lap_count : '')
   ])
 
 export default () => state =>
