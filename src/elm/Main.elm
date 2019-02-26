@@ -1,9 +1,11 @@
 import Browser
-import Html exposing (Html, text, node, div, header, section, nav, footer, h1, p, a, ul, li, img)
+import Html exposing (Html, text, node, div, header, section, nav, footer, h1, h2, p, a, ul, li, img)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Task
 import Time
+import Http
+import Json.Decode exposing (Decoder, field, string)
 
 main =
     Browser.element
@@ -16,50 +18,65 @@ main =
 
 -- MODEL
 
-type alias Model =
-    { zone: Time.Zone
-    , time: Time.Posix
-    }
+type Model
+    = Failure
+    | Loading
+    | Success String
 
 init : () -> (Model, Cmd Msg)
 init _ =
-    ( Model Time.utc (Time.millisToPosix 0)
-    , Task.perform AdjustTimeZone Time.here
-    )
+    ( Loading, getRandomCatGif)
 
 
 -- UPDATE
 
 type Msg
-    = Tick Time.Posix
-    | AdjustTimeZone Time.Zone
+    = MorePlease
+    | GotGif (Result Http.Error String)
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
     case msg of
-        Tick newTime ->
-            ( { model | time = newTime }
-            , Cmd.none
-            )
-
-        AdjustTimeZone newZone ->
-            ( { model | zone = newZone }
-            , Cmd.none
-            )
+        MorePlease ->
+            (Loading, getRandomCatGif)
+        
+        GotGif result ->
+            case result of
+                Ok url ->
+                    (Success url, Cmd.none)
+                
+                Err _ ->
+                    (Failure, Cmd.none)
 
 
 -- SUBSCRIPTIONS
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Time.every 1000 Tick
+    Sub.none
 
 
 -- VIEW
 
 view : Model -> Html Msg
-view model = div []
-    [ header [ class "site-header" ]
+view model =
+    div []
+        [ siteHeader
+        , node "main" []
+            [ section []
+                [ h2 [] [ text "Random NASCAR" ]
+                , viewGif model
+                ]
+            , racing
+            , profile
+            ]
+        , sideNav
+        , siteFooter
+        ]
+
+siteHeader : Html Msg
+siteHeader =
+    header [ class "site-header" ]
         [ div [ class "icon" ] []
         , h1 [] [ text "Yoshitaka Totsuka / y047aka" ]
         , p []
@@ -67,37 +84,49 @@ view model = div []
             , text "Tokyo, Japan"
             ]
         ]
-    , node "main" []
-        [ section []
-            [
-                let
-                    hour   = String.fromInt (Time.toHour   model.zone model.time)
-                    minute = String.fromInt (Time.toMinute model.zone model.time)
-                    second = String.fromInt (Time.toSecond model.zone model.time)
-                in
-                    h1 [] [ text (hour ++ ":" ++ minute ++ ":" ++ second) ]
-            ]
-        , section []
-            [ h1 [] [ text "Racing!!" ]
-            , ul []
-                [ li []
-                    [ a [ href "https://y047aka.github.io/MotorSportsCalendar/", target "_blank" ] [ text "MotorSportsCalendar" ]
-                    ]
+
+viewGif : Model -> Html Msg
+viewGif model =
+    case model of
+        Failure ->
+            div [] [ text "I could not load a random cat for some reason." ]
+        
+        Loading ->
+            text "Loading"
+
+        Success url ->
+            div []
+                [ text url 
                 ]
-            ]
-        , section []
-            [ h1 [] [ text "I'm belong to..." ] 
-            , ul []
-                [ li []
-                    [ a [ href "http://spacemgz-telstar.com/", target "_blank" ] [ text "宇宙広報団体 TELSTAR" ]
-                    ]
-                , li []
-                    [ a [ href "https://sorabatake.jp/", target "_blank" ] [ text "宙畑" ]
-                    ]
+
+racing : Html Msg
+racing =
+    section []
+        [ h1 [] [ text "Racing!!" ]
+        , ul []
+            [ li []
+                [ a [ href "https://y047aka.github.io/MotorSportsCalendar/", target "_blank" ] [ text "MotorSportsCalendar" ]
                 ]
             ]
         ]
-    , nav [ class "side-nav" ]
+
+profile : Html Msg
+profile =
+    section []
+        [ h1 [] [ text "I'm belong to..." ] 
+        , ul []
+            [ li []
+                [ a [ href "http://spacemgz-telstar.com/", target "_blank" ] [ text "宇宙広報団体 TELSTAR" ]
+                ]
+            , li []
+                [ a [ href "https://sorabatake.jp/", target "_blank" ] [ text "宙畑" ]
+                ]
+            ]
+        ]
+
+sideNav : Html Msg
+sideNav =
+    nav [ class "side-nav" ]
         [ ul []
             [ li []
                 [ a [ href "https://github.com/y047aka", target "_blank" ]
@@ -111,7 +140,23 @@ view model = div []
                 ]
             ]
         ]
-    , footer [ class "site-footer" ]
-        [ p [ class "copyright"] [ text "© 2018-2019 y047aka" ] ]
-    ]
 
+siteFooter : Html Msg
+siteFooter =
+    footer [ class "site-footer" ]
+        [ p [ class "copyright"] [ text "© 2018-2019 y047aka" ]
+        ]
+
+
+-- HTTP
+
+getRandomCatGif : Cmd Msg
+getRandomCatGif =
+    Http.get
+        { url = "https://api.giphy.com/v1/gifs/random?apikey=dc6zaTOxFJmzC&tag=NASCAR"
+        , expect = Http.expectJson GotGif gifDecoder
+        }
+
+gifDecoder : Decoder String
+gifDecoder =
+    field "data" (field "image_url" string)
