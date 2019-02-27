@@ -5,7 +5,6 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Http
 import Json.Decode as Decode
--- import Task exposing (Task)
 
 main =
     Browser.element
@@ -19,52 +18,43 @@ main =
 -- MODEL
 
 type alias Model =
-    { input : String
-    , userState : UserState
+    { userState : UserState
     }
 
 type UserState
     = Init
-    | Waiting
-    | Loaded User
+    | Loaded Vehicles
     | Failed Http.Error
 
 init : () -> (Model, Cmd Msg)
 init _ =
-    ( Model "" Init
-    , Cmd.none
+    ( Model Init
+    , ppp
     )
 
 
 -- UPDATE
 
 type Msg
-    = Input String
-    | Send
-    | Recieve (Result Http.Error User)
+    = Recieve (Result Http.Error Vehicles)
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
     case msg of
-        Input newInput ->
-            ( { model | input = newInput }, Cmd.none )
-        
-        Send ->
-            ( { model
-                | input = ""
-                , userState = Waiting
-              }
-            , Http.get
-                { url = "https://api.github.com/users/" ++ model.input
-                , expect = Http.expectJson Recieve userDecoder
-                }
-            )
-
-        Recieve (Ok user) ->
-            ( { model | userState = Loaded user }, Cmd.none )
+        Recieve (Ok vehicles) ->
+            ( { model | userState = Loaded vehicles }, Cmd.none )
         
         Recieve (Err error) ->
             ( { model | userState = Failed error }, Cmd.none )
+
+
+ppp : Cmd Msg
+ppp =
+    Http.get
+        { url = "https://y047aka.github.io/MotorSportsData/NASCAR/Daytona500.json"
+        , expect = Http.expectJson Recieve userDecoder
+        }
+
 
 -- VIEW
 
@@ -74,52 +64,62 @@ view model =
         [ siteHeader
         , node "main" []
             [ section []
-                [ Html.form [ onSubmit Send ]
-                    [ input
-                        [ onInput Input
-                        , autofocus True
-                        , placeholder "Github name"
-                        , value model.input
-                        ]
-                        []
-                    , button
-                        [ disabled
-                            ((model.userState == Waiting) || String.isEmpty (String.trim model.input))
-                        ]
-                        [ text "Submit" ]
-                    , case model.userState of
-                        Init ->
-                            text ""
-                        
-                        Waiting ->
-                            text "Waiting..."
-                        
-                        Loaded user ->
-                            a
-                            [ href user.htmlUrl
-                            , target "_blank"
-                            ]
-                            [ img [ src user.avatarUrl, width 200 ] []
-                            , div [] [ text user.name ]
-                            , div []
-                                [ case user.bio of
-                                    Just bio ->
-                                        text bio
-                                    
-                                    Nothing ->
-                                        text ""
+                [ case model.userState of
+                    Init ->
+                        text ""
+                    
+                    Loaded vehicles ->
+                        table [ class "leaderboard" ]
+                            [ tr []
+                                [ th[] [ text "Pos" ]
+                                , th[] [ text "#" ]
+                                , th[] [ text "Driver" ]
+                                , th[] [ text "" ]
+                                , th[] [ text "Laps" ]
+                                , th[] [ text "Delta" ]
+                                , th[] [ text "Last Lap" ]
+                                , th[] [ text "mph" ]
+                                , th[] [ text "Pit Stops" ]
+                                , th[] [ text "Last Pit" ]
                                 ]
+                            , tbody [] (List.map viewRaces vehicles)
                             ]
-                        
-                        Failed error ->
-                            div [] [ text (Debug.toString error) ]
-                    ]
+                    
+                    Failed error ->
+                        div [] [ text (Debug.toString error) ]
                 ]
             , racing
             , profile
             ]
         , sideNav
         , siteFooter
+        ]
+
+viewRaces d =
+    tr []
+        [ td [] [ text (String.fromInt d.runningPosition) ]
+        , td [] [ text d.vehicleNumber ]
+        , td [] [ text d.fullName ]
+        , td []
+            [ case d.vehicleManufacturer of
+                "Chv" ->
+                    text "Chevrolet"
+
+                "Frd" ->
+                    text "Ford"
+
+                "Tyt" ->
+                    text "Toyota"
+
+                _ ->
+                    text ""
+            ]
+        , td [] [ text (String.fromInt d.lapsCompleted) ]
+        , td [] [ text (String.fromFloat d.delta) ]
+        , td [] [ text (String.fromFloat d.last_lap_time) ]
+        , td [] [ text (String.fromFloat d.last_lap_speed) ]
+        , td [] []
+        , td [] []
         ]
 
 siteHeader : Html Msg
@@ -185,24 +185,34 @@ siteFooter =
 
 -- HTTP
 
--- https://y047aka.github.io/MotorSportsData/NASCAR/Daytona500.json
-
 
 -- Data
-type alias User =
-    { login : String
-    , avatarUrl : String
-    , name : String
-    , htmlUrl : String
-    , bio : Maybe String
+type alias Vehicle =
+    { runningPosition : Int
+    , vehicleNumber : String
+    , fullName : String
+    , vehicleManufacturer : String
+    , lapsCompleted : Int
+    , delta : Float
+    , last_lap_time : Float
+    , last_lap_speed : Float
     }
 
-userDecoder : Decode.Decoder User
-userDecoder =
-    Decode.map5 User
-        (Decode.field "login" Decode.string)
-        (Decode.field "avatar_url" Decode.string)
-        (Decode.field "name" Decode.string)
-        (Decode.field "html_url" Decode.string)
-        (Decode.maybe (Decode.field "bio" Decode.string))
+type alias Vehicles =
+    List Vehicle
 
+vehicle : Decode.Decoder Vehicle
+vehicle =
+    Decode.map8 Vehicle
+        (Decode.field "running_position" Decode.int)
+        (Decode.field "vehicle_number" Decode.string)
+        (Decode.field "driver" (Decode.field "full_name" Decode.string))
+        (Decode.field "vehicle_manufacturer" Decode.string)
+        (Decode.field "laps_completed" Decode.int)
+        (Decode.field "delta" Decode.float)
+        (Decode.field "last_lap_time" Decode.float)
+        (Decode.field "last_lap_speed" Decode.float)
+
+userDecoder : Decode.Decoder Vehicles
+userDecoder =
+    Decode.field "vehicles" ( Decode.list vehicle )
