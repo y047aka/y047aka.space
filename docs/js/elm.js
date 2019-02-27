@@ -4485,15 +4485,20 @@ function _Browser_load(url)
 		}
 	}));
 }
-var author$project$Main$Loading = {$: 'Loading'};
-var author$project$Main$GotGif = function (a) {
-	return {$: 'GotGif', a: a};
-};
-var elm$core$Array$branchFactor = 32;
-var elm$core$Array$Array_elm_builtin = F4(
-	function (a, b, c, d) {
-		return {$: 'Array_elm_builtin', a: a, b: b, c: c, d: d};
+var author$project$Main$Init = {$: 'Init'};
+var author$project$Main$Model = F2(
+	function (input, userState) {
+		return {input: input, userState: userState};
 	});
+var elm$core$Basics$False = {$: 'False'};
+var elm$core$Basics$True = {$: 'True'};
+var elm$core$Result$isOk = function (result) {
+	if (result.$ === 'Ok') {
+		return true;
+	} else {
+		return false;
+	}
+};
 var elm$core$Basics$EQ = {$: 'EQ'};
 var elm$core$Basics$GT = {$: 'GT'};
 var elm$core$Basics$LT = {$: 'LT'};
@@ -4574,6 +4579,11 @@ var elm$core$Array$foldr = F3(
 var elm$core$Array$toList = function (array) {
 	return A3(elm$core$Array$foldr, elm$core$List$cons, _List_Nil, array);
 };
+var elm$core$Array$branchFactor = 32;
+var elm$core$Array$Array_elm_builtin = F4(
+	function (a, b, c, d) {
+		return {$: 'Array_elm_builtin', a: a, b: b, c: c, d: d};
+	});
 var elm$core$Basics$ceiling = _Basics_ceiling;
 var elm$core$Basics$fdiv = _Basics_fdiv;
 var elm$core$Basics$logBase = F2(
@@ -4698,7 +4708,6 @@ var elm$core$Array$builderToArray = F2(
 				builder.tail);
 		}
 	});
-var elm$core$Basics$False = {$: 'False'};
 var elm$core$Basics$idiv = _Basics_idiv;
 var elm$core$Basics$lt = _Utils_lt;
 var elm$core$Elm$JsArray$initialize = _JsArray_initialize;
@@ -4750,14 +4759,6 @@ var elm$core$Result$Err = function (a) {
 };
 var elm$core$Result$Ok = function (a) {
 	return {$: 'Ok', a: a};
-};
-var elm$core$Basics$True = {$: 'True'};
-var elm$core$Result$isOk = function (result) {
-	if (result.$ === 'Ok') {
-		return true;
-	} else {
-		return false;
-	}
 };
 var elm$json$Json$Decode$Failure = F2(
 	function (a, b) {
@@ -4964,12 +4965,50 @@ var elm$json$Json$Decode$errorToStringHelp = F2(
 			}
 		}
 	});
+var elm$core$Platform$Cmd$batch = _Platform_batch;
+var elm$core$Platform$Cmd$none = elm$core$Platform$Cmd$batch(_List_Nil);
+var author$project$Main$init = function (_n0) {
+	return _Utils_Tuple2(
+		A2(author$project$Main$Model, '', author$project$Main$Init),
+		elm$core$Platform$Cmd$none);
+};
+var author$project$Main$Failed = function (a) {
+	return {$: 'Failed', a: a};
+};
+var author$project$Main$Loaded = function (a) {
+	return {$: 'Loaded', a: a};
+};
+var author$project$Main$Recieve = function (a) {
+	return {$: 'Recieve', a: a};
+};
+var author$project$Main$Waiting = {$: 'Waiting'};
+var author$project$Main$User = F5(
+	function (login, avatarUrl, name, htmlUrl, bio) {
+		return {avatarUrl: avatarUrl, bio: bio, htmlUrl: htmlUrl, login: login, name: name};
+	});
 var elm$json$Json$Decode$field = _Json_decodeField;
+var elm$json$Json$Decode$map5 = _Json_map5;
+var elm$json$Json$Decode$map = _Json_map1;
+var elm$json$Json$Decode$oneOf = _Json_oneOf;
+var elm$json$Json$Decode$succeed = _Json_succeed;
+var elm$json$Json$Decode$maybe = function (decoder) {
+	return elm$json$Json$Decode$oneOf(
+		_List_fromArray(
+			[
+				A2(elm$json$Json$Decode$map, elm$core$Maybe$Just, decoder),
+				elm$json$Json$Decode$succeed(elm$core$Maybe$Nothing)
+			]));
+};
 var elm$json$Json$Decode$string = _Json_decodeString;
-var author$project$Main$gifDecoder = A2(
-	elm$json$Json$Decode$field,
-	'data',
-	A2(elm$json$Json$Decode$field, 'image_url', elm$json$Json$Decode$string));
+var author$project$Main$userDecoder = A6(
+	elm$json$Json$Decode$map5,
+	author$project$Main$User,
+	A2(elm$json$Json$Decode$field, 'login', elm$json$Json$Decode$string),
+	A2(elm$json$Json$Decode$field, 'avatar_url', elm$json$Json$Decode$string),
+	A2(elm$json$Json$Decode$field, 'name', elm$json$Json$Decode$string),
+	A2(elm$json$Json$Decode$field, 'html_url', elm$json$Json$Decode$string),
+	elm$json$Json$Decode$maybe(
+		A2(elm$json$Json$Decode$field, 'bio', elm$json$Json$Decode$string)));
 var elm$core$Result$mapError = F2(
 	function (f, result) {
 		if (result.$ === 'Ok') {
@@ -5851,44 +5890,53 @@ var elm$http$Http$get = function (r) {
 	return elm$http$Http$request(
 		{body: elm$http$Http$emptyBody, expect: r.expect, headers: _List_Nil, method: 'GET', timeout: elm$core$Maybe$Nothing, tracker: elm$core$Maybe$Nothing, url: r.url});
 };
-var author$project$Main$getRandomCatGif = elm$http$Http$get(
-	{
-		expect: A2(elm$http$Http$expectJson, author$project$Main$GotGif, author$project$Main$gifDecoder),
-		url: 'https://api.giphy.com/v1/gifs/random?apikey=dc6zaTOxFJmzC&tag=NASCAR'
-	});
-var author$project$Main$init = function (_n0) {
-	return _Utils_Tuple2(author$project$Main$Loading, author$project$Main$getRandomCatGif);
-};
-var elm$core$Platform$Sub$batch = _Platform_batch;
-var elm$core$Platform$Sub$none = elm$core$Platform$Sub$batch(_List_Nil);
-var author$project$Main$subscriptions = function (model) {
-	return elm$core$Platform$Sub$none;
-};
-var author$project$Main$Failure = {$: 'Failure'};
-var author$project$Main$Success = function (a) {
-	return {$: 'Success', a: a};
-};
-var elm$core$Platform$Cmd$batch = _Platform_batch;
-var elm$core$Platform$Cmd$none = elm$core$Platform$Cmd$batch(_List_Nil);
 var author$project$Main$update = F2(
 	function (msg, model) {
-		if (msg.$ === 'MorePlease') {
-			return _Utils_Tuple2(author$project$Main$Loading, author$project$Main$getRandomCatGif);
-		} else {
-			var result = msg.a;
-			if (result.$ === 'Ok') {
-				var url = result.a;
+		switch (msg.$) {
+			case 'Input':
+				var newInput = msg.a;
 				return _Utils_Tuple2(
-					author$project$Main$Success(url),
+					_Utils_update(
+						model,
+						{input: newInput}),
 					elm$core$Platform$Cmd$none);
-			} else {
-				return _Utils_Tuple2(author$project$Main$Failure, elm$core$Platform$Cmd$none);
-			}
+			case 'Send':
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{input: '', userState: author$project$Main$Waiting}),
+					elm$http$Http$get(
+						{
+							expect: A2(elm$http$Http$expectJson, author$project$Main$Recieve, author$project$Main$userDecoder),
+							url: 'https://api.github.com/users/' + model.input
+						}));
+			default:
+				if (msg.a.$ === 'Ok') {
+					var user = msg.a.a;
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{
+								userState: author$project$Main$Loaded(user)
+							}),
+						elm$core$Platform$Cmd$none);
+				} else {
+					var error = msg.a.a;
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{
+								userState: author$project$Main$Failed(error)
+							}),
+						elm$core$Platform$Cmd$none);
+				}
 		}
 	});
-var elm$json$Json$Decode$map = _Json_map1;
+var author$project$Main$Input = function (a) {
+	return {$: 'Input', a: a};
+};
+var author$project$Main$Send = {$: 'Send'};
 var elm$json$Json$Decode$map2 = _Json_map2;
-var elm$json$Json$Decode$succeed = _Json_succeed;
 var elm$virtual_dom$VirtualDom$toHandlerInt = function (handler) {
 	switch (handler.$) {
 		case 'Normal':
@@ -6142,35 +6190,91 @@ var author$project$Main$siteHeader = A2(
 					elm$html$Html$text('Tokyo, Japan')
 				]))
 		]));
-var author$project$Main$viewGif = function (model) {
-	switch (model.$) {
-		case 'Failure':
-			return A2(
-				elm$html$Html$div,
-				_List_Nil,
-				_List_fromArray(
-					[
-						elm$html$Html$text('I could not load a random cat for some reason.')
-					]));
-		case 'Loading':
-			return elm$html$Html$text('Loading');
-		default:
-			var url = model.a;
-			return A2(
-				elm$html$Html$div,
-				_List_Nil,
-				_List_fromArray(
-					[
-						elm$html$Html$text(url)
-					]));
-	}
+var elm$core$Debug$toString = _Debug_toString;
+var elm$core$String$isEmpty = function (string) {
+	return string === '';
 };
-var elm$html$Html$h2 = _VirtualDom_node('h2');
+var elm$core$String$trim = _String_trim;
+var elm$html$Html$button = _VirtualDom_node('button');
+var elm$html$Html$form = _VirtualDom_node('form');
+var elm$html$Html$input = _VirtualDom_node('input');
 var elm$virtual_dom$VirtualDom$node = function (tag) {
 	return _VirtualDom_node(
 		_VirtualDom_noScript(tag));
 };
 var elm$html$Html$node = elm$virtual_dom$VirtualDom$node;
+var elm$json$Json$Encode$bool = _Json_wrap;
+var elm$html$Html$Attributes$boolProperty = F2(
+	function (key, bool) {
+		return A2(
+			_VirtualDom_property,
+			key,
+			elm$json$Json$Encode$bool(bool));
+	});
+var elm$html$Html$Attributes$autofocus = elm$html$Html$Attributes$boolProperty('autofocus');
+var elm$html$Html$Attributes$disabled = elm$html$Html$Attributes$boolProperty('disabled');
+var elm$html$Html$Attributes$placeholder = elm$html$Html$Attributes$stringProperty('placeholder');
+var elm$html$Html$Attributes$value = elm$html$Html$Attributes$stringProperty('value');
+var elm$html$Html$Attributes$width = function (n) {
+	return A2(
+		_VirtualDom_attribute,
+		'width',
+		elm$core$String$fromInt(n));
+};
+var elm$html$Html$Events$alwaysStop = function (x) {
+	return _Utils_Tuple2(x, true);
+};
+var elm$virtual_dom$VirtualDom$MayStopPropagation = function (a) {
+	return {$: 'MayStopPropagation', a: a};
+};
+var elm$virtual_dom$VirtualDom$on = _VirtualDom_on;
+var elm$html$Html$Events$stopPropagationOn = F2(
+	function (event, decoder) {
+		return A2(
+			elm$virtual_dom$VirtualDom$on,
+			event,
+			elm$virtual_dom$VirtualDom$MayStopPropagation(decoder));
+	});
+var elm$json$Json$Decode$at = F2(
+	function (fields, decoder) {
+		return A3(elm$core$List$foldr, elm$json$Json$Decode$field, decoder, fields);
+	});
+var elm$html$Html$Events$targetValue = A2(
+	elm$json$Json$Decode$at,
+	_List_fromArray(
+		['target', 'value']),
+	elm$json$Json$Decode$string);
+var elm$html$Html$Events$onInput = function (tagger) {
+	return A2(
+		elm$html$Html$Events$stopPropagationOn,
+		'input',
+		A2(
+			elm$json$Json$Decode$map,
+			elm$html$Html$Events$alwaysStop,
+			A2(elm$json$Json$Decode$map, tagger, elm$html$Html$Events$targetValue)));
+};
+var elm$html$Html$Events$alwaysPreventDefault = function (msg) {
+	return _Utils_Tuple2(msg, true);
+};
+var elm$virtual_dom$VirtualDom$MayPreventDefault = function (a) {
+	return {$: 'MayPreventDefault', a: a};
+};
+var elm$html$Html$Events$preventDefaultOn = F2(
+	function (event, decoder) {
+		return A2(
+			elm$virtual_dom$VirtualDom$on,
+			event,
+			elm$virtual_dom$VirtualDom$MayPreventDefault(decoder));
+	});
+var elm$html$Html$Events$onSubmit = function (msg) {
+	return A2(
+		elm$html$Html$Events$preventDefaultOn,
+		'submit',
+		A2(
+			elm$json$Json$Decode$map,
+			elm$html$Html$Events$alwaysPreventDefault,
+			elm$json$Json$Decode$succeed(msg)));
+};
 var author$project$Main$view = function (model) {
 	return A2(
 		elm$html$Html$div,
@@ -6190,13 +6294,97 @@ var author$project$Main$view = function (model) {
 						_List_fromArray(
 							[
 								A2(
-								elm$html$Html$h2,
-								_List_Nil,
+								elm$html$Html$form,
 								_List_fromArray(
 									[
-										elm$html$Html$text('Random NASCAR')
-									])),
-								author$project$Main$viewGif(model)
+										elm$html$Html$Events$onSubmit(author$project$Main$Send)
+									]),
+								_List_fromArray(
+									[
+										A2(
+										elm$html$Html$input,
+										_List_fromArray(
+											[
+												elm$html$Html$Events$onInput(author$project$Main$Input),
+												elm$html$Html$Attributes$autofocus(true),
+												elm$html$Html$Attributes$placeholder('Github name'),
+												elm$html$Html$Attributes$value(model.input)
+											]),
+										_List_Nil),
+										A2(
+										elm$html$Html$button,
+										_List_fromArray(
+											[
+												elm$html$Html$Attributes$disabled(
+												_Utils_eq(model.userState, author$project$Main$Waiting) || elm$core$String$isEmpty(
+													elm$core$String$trim(model.input)))
+											]),
+										_List_fromArray(
+											[
+												elm$html$Html$text('Submit')
+											])),
+										function () {
+										var _n0 = model.userState;
+										switch (_n0.$) {
+											case 'Init':
+												return elm$html$Html$text('');
+											case 'Waiting':
+												return elm$html$Html$text('Waiting...');
+											case 'Loaded':
+												var user = _n0.a;
+												return A2(
+													elm$html$Html$a,
+													_List_fromArray(
+														[
+															elm$html$Html$Attributes$href(user.htmlUrl),
+															elm$html$Html$Attributes$target('_blank')
+														]),
+													_List_fromArray(
+														[
+															A2(
+															elm$html$Html$img,
+															_List_fromArray(
+																[
+																	elm$html$Html$Attributes$src(user.avatarUrl),
+																	elm$html$Html$Attributes$width(200)
+																]),
+															_List_Nil),
+															A2(
+															elm$html$Html$div,
+															_List_Nil,
+															_List_fromArray(
+																[
+																	elm$html$Html$text(user.name)
+																])),
+															A2(
+															elm$html$Html$div,
+															_List_Nil,
+															_List_fromArray(
+																[
+																	function () {
+																	var _n1 = user.bio;
+																	if (_n1.$ === 'Just') {
+																		var bio = _n1.a;
+																		return elm$html$Html$text(bio);
+																	} else {
+																		return elm$html$Html$text('');
+																	}
+																}()
+																]))
+														]));
+											default:
+												var error = _n0.a;
+												return A2(
+													elm$html$Html$div,
+													_List_Nil,
+													_List_fromArray(
+														[
+															elm$html$Html$text(
+															elm$core$Debug$toString(error))
+														]));
+										}
+									}()
+									]))
 							])),
 						author$project$Main$racing,
 						author$project$Main$profile
@@ -6305,9 +6493,6 @@ var elm$core$String$startsWith = _String_startsWith;
 var elm$url$Url$Http = {$: 'Http'};
 var elm$url$Url$Https = {$: 'Https'};
 var elm$core$String$indexes = _String_indexes;
-var elm$core$String$isEmpty = function (string) {
-	return string === '';
-};
 var elm$core$String$left = F2(
 	function (n, string) {
 		return (n < 1) ? '' : A3(elm$core$String$slice, 0, n, string);
@@ -6421,7 +6606,16 @@ var elm$url$Url$fromString = function (str) {
 		A2(elm$core$String$dropLeft, 8, str)) : elm$core$Maybe$Nothing);
 };
 var elm$browser$Browser$element = _Browser_element;
+var elm$core$Platform$Sub$batch = _Platform_batch;
+var elm$core$Platform$Sub$none = elm$core$Platform$Sub$batch(_List_Nil);
 var author$project$Main$main = elm$browser$Browser$element(
-	{init: author$project$Main$init, subscriptions: author$project$Main$subscriptions, update: author$project$Main$update, view: author$project$Main$view});
+	{
+		init: author$project$Main$init,
+		subscriptions: function (_n0) {
+			return elm$core$Platform$Sub$none;
+		},
+		update: author$project$Main$update,
+		view: author$project$Main$view
+	});
 _Platform_export({'Main':{'init':author$project$Main$main(
 	elm$json$Json$Decode$succeed(_Utils_Tuple0))(0)}});}(this));

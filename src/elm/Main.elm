@@ -1,60 +1,70 @@
 import Browser
-import Html exposing (Html, text, node, div, header, section, nav, footer, h1, h2, p, a, ul, li, img)
+--import Html exposing (Html, text, node, div, header, section, nav, footer, h1, h2, p, a, ul, li, img)
+import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Task
-import Time
 import Http
-import Json.Decode exposing (Decoder, field, string)
+import Json.Decode as Decode
+-- import Task exposing (Task)
 
 main =
     Browser.element
         { init = init
         , update = update
-        , subscriptions = subscriptions
         , view = view
+        , subscriptions = \_ -> Sub.none
         }
 
 
 -- MODEL
 
-type Model
-    = Failure
-    | Loading
-    | Success String
+type alias Model =
+    { input : String
+    , userState : UserState
+    }
+
+type UserState
+    = Init
+    | Waiting
+    | Loaded User
+    | Failed Http.Error
 
 init : () -> (Model, Cmd Msg)
 init _ =
-    ( Loading, getRandomCatGif)
+    ( Model "" Init
+    , Cmd.none
+    )
 
 
 -- UPDATE
 
 type Msg
-    = MorePlease
-    | GotGif (Result Http.Error String)
+    = Input String
+    | Send
+    | Recieve (Result Http.Error User)
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
     case msg of
-        MorePlease ->
-            (Loading, getRandomCatGif)
+        Input newInput ->
+            ( { model | input = newInput }, Cmd.none )
         
-        GotGif result ->
-            case result of
-                Ok url ->
-                    (Success url, Cmd.none)
-                
-                Err _ ->
-                    (Failure, Cmd.none)
+        Send ->
+            ( { model
+                | input = ""
+                , userState = Waiting
+              }
+            , Http.get
+                { url = "https://api.github.com/users/" ++ model.input
+                , expect = Http.expectJson Recieve userDecoder
+                }
+            )
 
-
--- SUBSCRIPTIONS
-
-subscriptions : Model -> Sub Msg
-subscriptions model =
-    Sub.none
-
+        Recieve (Ok user) ->
+            ( { model | userState = Loaded user }, Cmd.none )
+        
+        Recieve (Err error) ->
+            ( { model | userState = Failed error }, Cmd.none )
 
 -- VIEW
 
@@ -64,8 +74,46 @@ view model =
         [ siteHeader
         , node "main" []
             [ section []
-                [ h2 [] [ text "Random NASCAR" ]
-                , viewGif model
+                [ Html.form [ onSubmit Send ]
+                    [ input
+                        [ onInput Input
+                        , autofocus True
+                        , placeholder "Github name"
+                        , value model.input
+                        ]
+                        []
+                    , button
+                        [ disabled
+                            ((model.userState == Waiting) || String.isEmpty (String.trim model.input))
+                        ]
+                        [ text "Submit" ]
+                    , case model.userState of
+                        Init ->
+                            text ""
+                        
+                        Waiting ->
+                            text "Waiting..."
+                        
+                        Loaded user ->
+                            a
+                            [ href user.htmlUrl
+                            , target "_blank"
+                            ]
+                            [ img [ src user.avatarUrl, width 200 ] []
+                            , div [] [ text user.name ]
+                            , div []
+                                [ case user.bio of
+                                    Just bio ->
+                                        text bio
+                                    
+                                    Nothing ->
+                                        text ""
+                                ]
+                            ]
+                        
+                        Failed error ->
+                            div [] [ text (Debug.toString error) ]
+                    ]
                 ]
             , racing
             , profile
@@ -76,7 +124,7 @@ view model =
 
 siteHeader : Html Msg
 siteHeader =
-    header [ class "site-header" ]
+    Html.header [ class "site-header" ]
         [ div [ class "icon" ] []
         , h1 [] [ text "Yoshitaka Totsuka / y047aka" ]
         , p []
@@ -85,19 +133,6 @@ siteHeader =
             ]
         ]
 
-viewGif : Model -> Html Msg
-viewGif model =
-    case model of
-        Failure ->
-            div [] [ text "I could not load a random cat for some reason." ]
-        
-        Loading ->
-            text "Loading"
-
-        Success url ->
-            div []
-                [ text url 
-                ]
 
 racing : Html Msg
 racing =
@@ -150,13 +185,24 @@ siteFooter =
 
 -- HTTP
 
-getRandomCatGif : Cmd Msg
-getRandomCatGif =
-    Http.get
-        { url = "https://api.giphy.com/v1/gifs/random?apikey=dc6zaTOxFJmzC&tag=NASCAR"
-        , expect = Http.expectJson GotGif gifDecoder
-        }
+-- https://y047aka.github.io/MotorSportsData/NASCAR/Daytona500.json
 
-gifDecoder : Decoder String
-gifDecoder =
-    field "data" (field "image_url" string)
+
+-- Data
+type alias User =
+    { login : String
+    , avatarUrl : String
+    , name : String
+    , htmlUrl : String
+    , bio : Maybe String
+    }
+
+userDecoder : Decode.Decoder User
+userDecoder =
+    Decode.map5 User
+        (Decode.field "login" Decode.string)
+        (Decode.field "avatar_url" Decode.string)
+        (Decode.field "name" Decode.string)
+        (Decode.field "html_url" Decode.string)
+        (Decode.maybe (Decode.field "bio" Decode.string))
+
