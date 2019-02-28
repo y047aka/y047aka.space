@@ -4492,9 +4492,9 @@ var author$project$Main$Model = function (userState) {
 var author$project$Main$Recieve = function (a) {
 	return {$: 'Recieve', a: a};
 };
-var author$project$Main$Vehicle = F8(
-	function (runningPosition, vehicleNumber, fullName, vehicleManufacturer, lapsCompleted, delta, last_lap_time, last_lap_speed) {
-		return {delta: delta, fullName: fullName, lapsCompleted: lapsCompleted, last_lap_speed: last_lap_speed, last_lap_time: last_lap_time, runningPosition: runningPosition, vehicleManufacturer: vehicleManufacturer, vehicleNumber: vehicleNumber};
+var elm$core$Basics$apR = F2(
+	function (x, f) {
+		return f(x);
 	});
 var elm$core$Array$branchFactor = 32;
 var elm$core$Array$Array_elm_builtin = F4(
@@ -4642,10 +4642,6 @@ var elm$core$Array$compressNodes = F2(
 				continue compressNodes;
 			}
 		}
-	});
-var elm$core$Basics$apR = F2(
-	function (x, f) {
-		return f(x);
 	});
 var elm$core$Basics$eq = _Utils_equal;
 var elm$core$Tuple$first = function (_n0) {
@@ -4971,25 +4967,57 @@ var elm$json$Json$Decode$errorToStringHelp = F2(
 			}
 		}
 	});
+var elm$json$Json$Decode$map2 = _Json_map2;
+var NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$custom = elm$json$Json$Decode$map2(elm$core$Basics$apR);
 var elm$json$Json$Decode$field = _Json_decodeField;
+var NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required = F3(
+	function (key, valDecoder, decoder) {
+		return A2(
+			NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$custom,
+			A2(elm$json$Json$Decode$field, key, valDecoder),
+			decoder);
+	});
+var author$project$Main$Vehicle = F8(
+	function (runningPosition, vehicleNumber, fullName, vehicleManufacturer, lapsCompleted, delta, last_lap_time, last_lap_speed) {
+		return {delta: delta, fullName: fullName, lapsCompleted: lapsCompleted, last_lap_speed: last_lap_speed, last_lap_time: last_lap_time, runningPosition: runningPosition, vehicleManufacturer: vehicleManufacturer, vehicleNumber: vehicleNumber};
+	});
 var elm$json$Json$Decode$float = _Json_decodeFloat;
 var elm$json$Json$Decode$int = _Json_decodeInt;
-var elm$json$Json$Decode$map8 = _Json_map8;
 var elm$json$Json$Decode$string = _Json_decodeString;
-var author$project$Main$vehicle = A9(
-	elm$json$Json$Decode$map8,
-	author$project$Main$Vehicle,
-	A2(elm$json$Json$Decode$field, 'running_position', elm$json$Json$Decode$int),
-	A2(elm$json$Json$Decode$field, 'vehicle_number', elm$json$Json$Decode$string),
-	A2(
-		elm$json$Json$Decode$field,
-		'driver',
-		A2(elm$json$Json$Decode$field, 'full_name', elm$json$Json$Decode$string)),
-	A2(elm$json$Json$Decode$field, 'vehicle_manufacturer', elm$json$Json$Decode$string),
-	A2(elm$json$Json$Decode$field, 'laps_completed', elm$json$Json$Decode$int),
-	A2(elm$json$Json$Decode$field, 'delta', elm$json$Json$Decode$float),
-	A2(elm$json$Json$Decode$field, 'last_lap_time', elm$json$Json$Decode$float),
-	A2(elm$json$Json$Decode$field, 'last_lap_speed', elm$json$Json$Decode$float));
+var elm$json$Json$Decode$succeed = _Json_succeed;
+var author$project$Main$vehicle = A3(
+	NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required,
+	'last_lap_speed',
+	elm$json$Json$Decode$float,
+	A3(
+		NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required,
+		'last_lap_time',
+		elm$json$Json$Decode$float,
+		A3(
+			NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required,
+			'delta',
+			elm$json$Json$Decode$float,
+			A3(
+				NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required,
+				'laps_completed',
+				elm$json$Json$Decode$int,
+				A3(
+					NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required,
+					'vehicle_manufacturer',
+					elm$json$Json$Decode$string,
+					A3(
+						NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required,
+						'driver',
+						A2(elm$json$Json$Decode$field, 'full_name', elm$json$Json$Decode$string),
+						A3(
+							NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required,
+							'vehicle_number',
+							elm$json$Json$Decode$string,
+							A3(
+								NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required,
+								'running_position',
+								elm$json$Json$Decode$int,
+								elm$json$Json$Decode$succeed(author$project$Main$Vehicle)))))))));
 var elm$json$Json$Decode$list = _Json_decodeList;
 var author$project$Main$userDecoder = A2(
 	elm$json$Json$Decode$field,
@@ -5917,8 +5945,6 @@ var author$project$Main$update = F2(
 		}
 	});
 var elm$json$Json$Decode$map = _Json_map1;
-var elm$json$Json$Decode$map2 = _Json_map2;
-var elm$json$Json$Decode$succeed = _Json_succeed;
 var elm$virtual_dom$VirtualDom$toHandlerInt = function (handler) {
 	switch (handler.$) {
 		case 'Normal':
