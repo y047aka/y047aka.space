@@ -5,6 +5,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Http
 import Json.Decode as Decode
+import Json.Decode.Pipeline exposing (required, optional, hardcoded)
 
 main =
     Browser.element
@@ -71,16 +72,16 @@ view model =
                     Loaded vehicles ->
                         table [ class "leaderboard" ]
                             [ tr []
-                                [ th[] [ text "Pos" ]
-                                , th[] [ text "#" ]
-                                , th[] [ text "Driver" ]
-                                , th[] [ text "" ]
-                                , th[] [ text "Laps" ]
-                                , th[] [ text "Delta" ]
-                                , th[] [ text "Last Lap" ]
-                                , th[] [ text "mph" ]
-                                , th[] [ text "Pit Stops" ]
-                                , th[] [ text "Last Pit" ]
+                                [ th [] [ text "Pos" ]
+                                , th [] [ text "#" ]
+                                , th [] [ text "Driver" ]
+                                , th [] [ text "" ]
+                                , th [] [ text "Laps" ]
+                                , th [] [ text "Delta" ]
+                                , th [] [ text "Last Lap" ]
+                                , th [] [ text "mph" ]
+                                , th [] [ text "Pit Stops" ]
+                                , th [] [ text "Last Pit" ]
                                 ]
                             , tbody [] (List.map viewRaces vehicles)
                             ]
@@ -203,15 +204,15 @@ type alias Vehicles =
 
 vehicle : Decode.Decoder Vehicle
 vehicle =
-    Decode.map8 Vehicle
-        (Decode.field "running_position" Decode.int)
-        (Decode.field "vehicle_number" Decode.string)
-        (Decode.field "driver" (Decode.field "full_name" Decode.string))
-        (Decode.field "vehicle_manufacturer" Decode.string)
-        (Decode.field "laps_completed" Decode.int)
-        (Decode.field "delta" Decode.float)
-        (Decode.field "last_lap_time" Decode.float)
-        (Decode.field "last_lap_speed" Decode.float)
+    Decode.succeed Vehicle
+        |> required "running_position" Decode.int
+        |> required "vehicle_number" Decode.string
+        |> required "driver" (Decode.field "full_name" Decode.string)
+        |> required "vehicle_manufacturer" Decode.string
+        |> required "laps_completed" Decode.int
+        |> required "delta" Decode.float
+        |> required "last_lap_time" Decode.float
+        |> required "last_lap_speed" Decode.float
 
 userDecoder : Decode.Decoder Vehicles
 userDecoder =
