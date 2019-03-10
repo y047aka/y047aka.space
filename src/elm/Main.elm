@@ -51,7 +51,7 @@ update msg model =
 ppp : Cmd Msg
 ppp =
     Http.get
-        { url = "https://y047aka.github.io/MotorSportsData/NASCAR/Daytona500.json"
+        { url = "https://m.nascar.com/live/feeds/series_1/4776/live_feed.json"
         , expect = Http.expectJson Recieve userDecoder
         }
 

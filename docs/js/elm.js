@@ -5879,7 +5879,7 @@ var elm$http$Http$get = function (r) {
 var author$project$Main$ppp = elm$http$Http$get(
 	{
 		expect: A2(elm$http$Http$expectJson, author$project$Main$Recieve, author$project$Main$userDecoder),
-		url: 'https://y047aka.github.io/MotorSportsData/NASCAR/Daytona500.json'
+		url: 'https://m.nascar.com/live/feeds/series_1/4776/live_feed.json'
 	});
 var author$project$Main$init = function (_n0) {
 	return _Utils_Tuple2(
