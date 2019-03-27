@@ -1,14 +1,8 @@
 module Main exposing (main)
 
---import Html exposing (Html, text, node, div, header, section, nav, footer, h1, h2, p, a, ul, li, img)
-
 import Browser
-import Html exposing (..)
-import Html.Attributes exposing (..)
-import Html.Events exposing (..)
-import Http
-import Json.Decode as Decode
-import Json.Decode.Pipeline exposing (hardcoded, optional, required)
+import Html exposing (Html, a, div, footer, h1, img, li, nav, node, p, section, text, ul)
+import Html.Attributes exposing (class, href, src, target)
 
 
 main =
