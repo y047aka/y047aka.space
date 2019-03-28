@@ -4818,6 +4818,8 @@ var elm$virtual_dom$VirtualDom$toHandlerInt = function (handler) {
 	}
 };
 var elm$html$Html$a = _VirtualDom_node('a');
+var elm$html$Html$h1 = _VirtualDom_node('h1');
+var elm$html$Html$h2 = _VirtualDom_node('h2');
 var elm$html$Html$img = _VirtualDom_node('img');
 var elm$html$Html$li = _VirtualDom_node('li');
 var elm$html$Html$section = _VirtualDom_node('section');
@@ -4832,7 +4834,6 @@ var elm$html$Html$Attributes$stringProperty = F2(
 			key,
 			elm$json$Json$Encode$string(string));
 	});
-var elm$html$Html$Attributes$class = elm$html$Html$Attributes$stringProperty('className');
 var elm$html$Html$Attributes$href = function (url) {
 	return A2(
 		elm$html$Html$Attributes$stringProperty,
@@ -4848,12 +4849,16 @@ var elm$html$Html$Attributes$src = function (url) {
 var elm$html$Html$Attributes$target = elm$html$Html$Attributes$stringProperty('target');
 var author$project$Main$links = A2(
 	elm$html$Html$section,
+	_List_Nil,
 	_List_fromArray(
 		[
-			elm$html$Html$Attributes$class('side-nav')
-		]),
-	_List_fromArray(
-		[
+			A2(
+			elm$html$Html$h1,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('Contact me')
+				])),
 			A2(
 			elm$html$Html$ul,
 			_List_Nil,
@@ -4874,13 +4879,19 @@ var author$project$Main$links = A2(
 							_List_fromArray(
 								[
 									A2(
-									elm$html$Html$img,
+									elm$html$Html$h2,
+									_List_Nil,
 									_List_fromArray(
 										[
-											elm$html$Html$Attributes$src('/images/github.svg')
-										]),
-									_List_Nil),
-									elm$html$Html$text('Github')
+											A2(
+											elm$html$Html$img,
+											_List_fromArray(
+												[
+													elm$html$Html$Attributes$src('/images/github.svg')
+												]),
+											_List_Nil),
+											elm$html$Html$text('Github')
+										]))
 								]))
 						])),
 					A2(
@@ -4898,19 +4909,23 @@ var author$project$Main$links = A2(
 							_List_fromArray(
 								[
 									A2(
-									elm$html$Html$img,
+									elm$html$Html$h2,
+									_List_Nil,
 									_List_fromArray(
 										[
-											elm$html$Html$Attributes$src('/images/twitter.svg')
-										]),
-									_List_Nil),
-									elm$html$Html$text('Twitter')
+											A2(
+											elm$html$Html$img,
+											_List_fromArray(
+												[
+													elm$html$Html$Attributes$src('/images/twitter.svg')
+												]),
+											_List_Nil),
+											elm$html$Html$text('Twitter')
+										]))
 								]))
 						]))
 				]))
 		]));
-var elm$html$Html$h1 = _VirtualDom_node('h1');
-var elm$html$Html$h2 = _VirtualDom_node('h2');
 var author$project$Main$profile = A2(
 	elm$html$Html$section,
 	_List_Nil,
@@ -5009,13 +5024,20 @@ var author$project$Main$racing = A2(
 								]),
 							_List_fromArray(
 								[
-									elm$html$Html$text('Motor Sports Calendar')
+									A2(
+									elm$html$Html$h2,
+									_List_Nil,
+									_List_fromArray(
+										[
+											elm$html$Html$text('MOTOR SPORTS CALENDAR')
+										]))
 								]))
 						]))
 				]))
 		]));
 var elm$html$Html$footer = _VirtualDom_node('footer');
 var elm$html$Html$p = _VirtualDom_node('p');
+var elm$html$Html$Attributes$class = elm$html$Html$Attributes$stringProperty('className');
 var author$project$Main$siteFooter = A2(
 	elm$html$Html$footer,
 	_List_fromArray(

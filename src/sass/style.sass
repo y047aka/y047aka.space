@@ -86,28 +86,18 @@ header.site-header
     border-radius: 50%
 
 main
-  border-top: solid 0.5rem hsla(210, 40%, 30%, 0.05)
-  border-bottom: solid 0.5rem hsla(210, 40%, 30%, 0.05)
+  border-top: solid 0.1rem #666
+  border-bottom: solid 0.1rem #666
 
   section
     padding: 3rem 0 4rem
 
     & + section
-      border-top: solid 0.5rem hsla(210, 40%, 30%, 0.05)
+      border-top: solid 0.1rem #666
 
   h1
-    padding: 1rem 0
+    padding: 1rem 0 1rem 1rem
     font-size: 2rem
-
-  * + h1
-    margin-top: 2rem
-
-  h2
-    padding: 1rem 0
-    font-size: 1.6rem
-
-  * + h2
-    margin-top: 2rem
 
   a
     text-decoration: none
@@ -116,20 +106,26 @@ main
     li
       list-style: none
       padding: 0.5rem 0
+
       a
         display: block
-        padding: 2rem 1.5rem
+        padding: 1.5rem 1.5rem
+        font-size: 1.3rem
+        font-weight: normal
+        line-height: 1.6
         background: #000
         color: #FFF
         border: solid 0.1rem #FFF
         border-radius: 1.5rem
 
-nav.side-nav
-  ul
-    list-style: none
-
-    li + li
-      margin-top: 2rem
+        h2
+          font-size: 1.7rem
+          
+          img
+            position: relative
+            top: 0.2rem
+            display: inline-block
+            padding-right: 0.5rem
 
 footer.site-footer
   .copyright

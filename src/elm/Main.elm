@@ -84,7 +84,7 @@ racing =
         , ul []
             [ li []
                 [ a [ href "https://y047aka.github.io/MotorSportsCalendar/", target "_blank" ]
-                    [ text "Motor Sports Calendar" ]
+                    [ h2 [] [ text "MOTOR SPORTS CALENDAR" ] ]
                 ]
             ]
         ]
@@ -113,18 +113,23 @@ profile =
 
 links : Html Msg
 links =
-    section [ class "side-nav" ]
-        [ ul []
+    section []
+        [ h1 [] [ text "Contact me" ]
+        , ul []
             [ li []
                 [ a [ href "https://github.com/y047aka", target "_blank" ]
-                    [ img [ src "/images/github.svg" ] []
-                    , text "Github"
+                    [ h2 []
+                        [ img [ src "/images/github.svg" ] []
+                        , text "Github"
+                        ]
                     ]
                 ]
             , li []
                 [ a [ href "https://twitter.com/y047aka", target "_blank" ]
-                    [ img [ src "/images/twitter.svg" ] []
-                    , text "Twitter"
+                    [ h2 []
+                        [ img [ src "/images/twitter.svg" ] []
+                        , text "Twitter"
+                        ]
                     ]
                 ]
             ]
