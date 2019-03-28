@@ -12,7 +12,7 @@
     "watch": "npm-run-all -p watch:*",
     "start": "npm-run-all -s echo copy watch",
     "browser-sync": "browser-sync start --server ./docs --files \"**/*\"",
-    "updateStyle": "npm-run-all -p watch:sass browser-sync"
+    "developStyles": "npm-run-all -p watch:sass browser-sync"
   },
   "devDependencies": {
     "browser-sync": "^2.26.3",

@@ -4818,7 +4818,7 @@ var elm$virtual_dom$VirtualDom$toHandlerInt = function (handler) {
 	}
 };
 var elm$html$Html$a = _VirtualDom_node('a');
-var elm$html$Html$h1 = _VirtualDom_node('h1');
+var elm$html$Html$img = _VirtualDom_node('img');
 var elm$html$Html$li = _VirtualDom_node('li');
 var elm$html$Html$section = _VirtualDom_node('section');
 var elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
@@ -4832,13 +4832,85 @@ var elm$html$Html$Attributes$stringProperty = F2(
 			key,
 			elm$json$Json$Encode$string(string));
 	});
+var elm$html$Html$Attributes$class = elm$html$Html$Attributes$stringProperty('className');
 var elm$html$Html$Attributes$href = function (url) {
 	return A2(
 		elm$html$Html$Attributes$stringProperty,
 		'href',
 		_VirtualDom_noJavaScriptUri(url));
 };
+var elm$html$Html$Attributes$src = function (url) {
+	return A2(
+		elm$html$Html$Attributes$stringProperty,
+		'src',
+		_VirtualDom_noJavaScriptOrHtmlUri(url));
+};
 var elm$html$Html$Attributes$target = elm$html$Html$Attributes$stringProperty('target');
+var author$project$Main$links = A2(
+	elm$html$Html$section,
+	_List_fromArray(
+		[
+			elm$html$Html$Attributes$class('side-nav')
+		]),
+	_List_fromArray(
+		[
+			A2(
+			elm$html$Html$ul,
+			_List_Nil,
+			_List_fromArray(
+				[
+					A2(
+					elm$html$Html$li,
+					_List_Nil,
+					_List_fromArray(
+						[
+							A2(
+							elm$html$Html$a,
+							_List_fromArray(
+								[
+									elm$html$Html$Attributes$href('https://github.com/y047aka'),
+									elm$html$Html$Attributes$target('_blank')
+								]),
+							_List_fromArray(
+								[
+									A2(
+									elm$html$Html$img,
+									_List_fromArray(
+										[
+											elm$html$Html$Attributes$src('/images/github.svg')
+										]),
+									_List_Nil),
+									elm$html$Html$text('Github')
+								]))
+						])),
+					A2(
+					elm$html$Html$li,
+					_List_Nil,
+					_List_fromArray(
+						[
+							A2(
+							elm$html$Html$a,
+							_List_fromArray(
+								[
+									elm$html$Html$Attributes$href('https://twitter.com/y047aka'),
+									elm$html$Html$Attributes$target('_blank')
+								]),
+							_List_fromArray(
+								[
+									A2(
+									elm$html$Html$img,
+									_List_fromArray(
+										[
+											elm$html$Html$Attributes$src('/images/twitter.svg')
+										]),
+									_List_Nil),
+									elm$html$Html$text('Twitter')
+								]))
+						]))
+				]))
+		]));
+var elm$html$Html$h1 = _VirtualDom_node('h1');
+var elm$html$Html$h2 = _VirtualDom_node('h2');
 var author$project$Main$profile = A2(
 	elm$html$Html$section,
 	_List_Nil,
@@ -4870,7 +4942,14 @@ var author$project$Main$profile = A2(
 								]),
 							_List_fromArray(
 								[
-									elm$html$Html$text('宇宙広報団体 TELSTAR')
+									A2(
+									elm$html$Html$h2,
+									_List_Nil,
+									_List_fromArray(
+										[
+											elm$html$Html$text('宇宙広報団体 TELSTAR')
+										])),
+									elm$html$Html$text('宇宙への興味を 0 → 1 へ')
 								]))
 						])),
 					A2(
@@ -4887,7 +4966,14 @@ var author$project$Main$profile = A2(
 								]),
 							_List_fromArray(
 								[
-									elm$html$Html$text('宙畑')
+									A2(
+									elm$html$Html$h2,
+									_List_Nil,
+									_List_fromArray(
+										[
+											elm$html$Html$text('宙畑')
+										])),
+									elm$html$Html$text('宇宙産業を日本の誇る基幹産業に。')
 								]))
 						]))
 				]))
@@ -4923,77 +5009,7 @@ var author$project$Main$racing = A2(
 								]),
 							_List_fromArray(
 								[
-									elm$html$Html$text('MotorSportsCalendar')
-								]))
-						]))
-				]))
-		]));
-var elm$html$Html$img = _VirtualDom_node('img');
-var elm$html$Html$nav = _VirtualDom_node('nav');
-var elm$html$Html$Attributes$class = elm$html$Html$Attributes$stringProperty('className');
-var elm$html$Html$Attributes$src = function (url) {
-	return A2(
-		elm$html$Html$Attributes$stringProperty,
-		'src',
-		_VirtualDom_noJavaScriptOrHtmlUri(url));
-};
-var author$project$Main$sideNav = A2(
-	elm$html$Html$nav,
-	_List_fromArray(
-		[
-			elm$html$Html$Attributes$class('side-nav')
-		]),
-	_List_fromArray(
-		[
-			A2(
-			elm$html$Html$ul,
-			_List_Nil,
-			_List_fromArray(
-				[
-					A2(
-					elm$html$Html$li,
-					_List_Nil,
-					_List_fromArray(
-						[
-							A2(
-							elm$html$Html$a,
-							_List_fromArray(
-								[
-									elm$html$Html$Attributes$href('https://github.com/y047aka'),
-									elm$html$Html$Attributes$target('_blank')
-								]),
-							_List_fromArray(
-								[
-									A2(
-									elm$html$Html$img,
-									_List_fromArray(
-										[
-											elm$html$Html$Attributes$src('/images/github.svg')
-										]),
-									_List_Nil)
-								]))
-						])),
-					A2(
-					elm$html$Html$li,
-					_List_Nil,
-					_List_fromArray(
-						[
-							A2(
-							elm$html$Html$a,
-							_List_fromArray(
-								[
-									elm$html$Html$Attributes$href('https://twitter.com/y047aka'),
-									elm$html$Html$Attributes$target('_blank')
-								]),
-							_List_fromArray(
-								[
-									A2(
-									elm$html$Html$img,
-									_List_fromArray(
-										[
-											elm$html$Html$Attributes$src('/images/twitter.svg')
-										]),
-									_List_Nil)
+									elm$html$Html$text('Motor Sports Calendar')
 								]))
 						]))
 				]))
@@ -5073,8 +5089,7 @@ var author$project$Main$view = function (model) {
 				'main',
 				_List_Nil,
 				_List_fromArray(
-					[author$project$Main$racing, author$project$Main$profile])),
-				author$project$Main$sideNav,
+					[author$project$Main$racing, author$project$Main$profile, author$project$Main$links])),
 				author$project$Main$siteFooter
 			]),
 		title: 'y047aka.me'
