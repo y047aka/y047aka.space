@@ -5032,6 +5032,29 @@ var author$project$Main$racing = A2(
 											elm$html$Html$text('MOTOR SPORTS CALENDAR')
 										]))
 								]))
+						])),
+					A2(
+					elm$html$Html$li,
+					_List_Nil,
+					_List_fromArray(
+						[
+							A2(
+							elm$html$Html$a,
+							_List_fromArray(
+								[
+									elm$html$Html$Attributes$href('https://y047aka.github.io/Leaderboard-NASCAR/'),
+									elm$html$Html$Attributes$target('_blank')
+								]),
+							_List_fromArray(
+								[
+									A2(
+									elm$html$Html$h2,
+									_List_Nil,
+									_List_fromArray(
+										[
+											elm$html$Html$text('Leaderboard - NASCAR')
+										]))
+								]))
 						]))
 				]))
 		]));

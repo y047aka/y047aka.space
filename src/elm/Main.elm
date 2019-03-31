@@ -86,6 +86,10 @@ racing =
                 [ a [ href "https://y047aka.github.io/MotorSportsCalendar/", target "_blank" ]
                     [ h2 [] [ text "MOTOR SPORTS CALENDAR" ] ]
                 ]
+            , li []
+                [ a [ href "https://y047aka.github.io/Leaderboard-NASCAR/", target "_blank" ]
+                    [ h2 [] [ text "Leaderboard - NASCAR" ] ]
+                ]
             ]
         ]
 
