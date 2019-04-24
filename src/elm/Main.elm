@@ -107,6 +107,12 @@ profile =
                     , text "宇宙産業を日本の誇る基幹産業に。"
                     ]
                 ]
+            , li []
+                [ a [ href "https://outsense.jp/", target "_blank" ]
+                    [ h2 [] [ text "OUTSENSE" ]
+                    , text "あなたをどこにでも住めるようにする。そう、それが宇宙でもね。"
+                    ]
+                ]
             ]
         ]
 

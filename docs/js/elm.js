@@ -4990,6 +4990,30 @@ var author$project$Main$profile = A2(
 										])),
 									elm$html$Html$text('宇宙産業を日本の誇る基幹産業に。')
 								]))
+						])),
+					A2(
+					elm$html$Html$li,
+					_List_Nil,
+					_List_fromArray(
+						[
+							A2(
+							elm$html$Html$a,
+							_List_fromArray(
+								[
+									elm$html$Html$Attributes$href('https://outsense.jp/'),
+									elm$html$Html$Attributes$target('_blank')
+								]),
+							_List_fromArray(
+								[
+									A2(
+									elm$html$Html$h2,
+									_List_Nil,
+									_List_fromArray(
+										[
+											elm$html$Html$text('OUTSENSE')
+										])),
+									elm$html$Html$text('あなたをどこにでも住めるようにする。そう、それが宇宙でもね。')
+								]))
 						]))
 				]))
 		]));
