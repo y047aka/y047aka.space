@@ -101,6 +101,15 @@ main {
       color: #FFF;
       border: solid 0.1rem #FFF;
       border-radius: 1.5rem; }
+      main ul li a.telstar {
+        background: #FE0;
+        color: #000; }
+      main ul li a.sorabatake {
+        background: #00a5c1; }
+      main ul li a.github {
+        background: #2ebc4f; }
+      main ul li a.twitter {
+        background: #55acee; }
       main ul li a h2 {
         font-size: 1.7rem; }
         main ul li a h2 img {
