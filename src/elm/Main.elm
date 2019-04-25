@@ -138,6 +138,14 @@ links =
                         ]
                     ]
                 ]
+            , li []
+                [ a [ href "https://blog.y047aka.me", target "_blank" ]
+                    [ h2 []
+                        [ img [ src "/images/blog.svg" ] []
+                        , text "Blog"
+                        ]
+                    ]
+                ]
             ]
         ]
 
