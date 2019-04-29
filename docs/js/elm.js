@@ -4818,7 +4818,6 @@ var elm$virtual_dom$VirtualDom$toHandlerInt = function (handler) {
 	}
 };
 var elm$html$Html$a = _VirtualDom_node('a');
-var elm$html$Html$h1 = _VirtualDom_node('h1');
 var elm$html$Html$h2 = _VirtualDom_node('h2');
 var elm$html$Html$img = _VirtualDom_node('img');
 var elm$html$Html$li = _VirtualDom_node('li');
@@ -4852,13 +4851,6 @@ var author$project$Main$links = A2(
 	_List_Nil,
 	_List_fromArray(
 		[
-			A2(
-			elm$html$Html$h1,
-			_List_Nil,
-			_List_fromArray(
-				[
-					elm$html$Html$text('Contact me')
-				])),
 			A2(
 			elm$html$Html$ul,
 			_List_Nil,
@@ -4986,6 +4978,7 @@ var author$project$Main$links = A2(
 						]))
 				]))
 		]));
+var elm$html$Html$h1 = _VirtualDom_node('h1');
 var author$project$Main$profile = A2(
 	elm$html$Html$section,
 	_List_Nil,

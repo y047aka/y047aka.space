@@ -120,8 +120,7 @@ profile =
 links : Html Msg
 links =
     section []
-        [ h1 [] [ text "Contact me" ]
-        , ul []
+        [ ul []
             [ li []
                 [ a [ href "https://github.com/y047aka", target "_blank" ]
                     [ h2 []
