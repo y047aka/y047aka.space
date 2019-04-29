@@ -4947,6 +4947,36 @@ var author$project$Main$links = A2(
 											elm$html$Html$img,
 											_List_fromArray(
 												[
+													elm$html$Html$Attributes$src('/images/qiita.svg')
+												]),
+											_List_Nil),
+											elm$html$Html$text('Qiita')
+										]))
+								]))
+						])),
+					A2(
+					elm$html$Html$li,
+					_List_Nil,
+					_List_fromArray(
+						[
+							A2(
+							elm$html$Html$a,
+							_List_fromArray(
+								[
+									elm$html$Html$Attributes$href('https://blog.y047aka.me'),
+									elm$html$Html$Attributes$target('_blank')
+								]),
+							_List_fromArray(
+								[
+									A2(
+									elm$html$Html$h2,
+									_List_Nil,
+									_List_fromArray(
+										[
+											A2(
+											elm$html$Html$img,
+											_List_fromArray(
+												[
 													elm$html$Html$Attributes$src('/images/blog.svg')
 												]),
 											_List_Nil),
