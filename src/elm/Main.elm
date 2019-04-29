@@ -139,7 +139,7 @@ links =
                     ]
                 ]
             , li []
-                [ a [ href "https://blog.y047aka.me", target "_blank" ]
+                [ a [ href "https://qiita.com/y047aka", target "_blank" ]
                     [ h2 []
                         [ img [ src "/images/qiita.svg" ] []
                         , text "Qiita"

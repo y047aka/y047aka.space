@@ -4933,7 +4933,7 @@ var author$project$Main$links = A2(
 							elm$html$Html$a,
 							_List_fromArray(
 								[
-									elm$html$Html$Attributes$href('https://blog.y047aka.me'),
+									elm$html$Html$Attributes$href('https://qiita.com/y047aka'),
 									elm$html$Html$Attributes$target('_blank')
 								]),
 							_List_fromArray(
