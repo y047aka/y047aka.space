@@ -80,32 +80,23 @@ siteHeader =
 globalMenu : Html Msg
 globalMenu =
     nav [ class "global-menu" ]
-        [ ul []
-            [ li []
-                [ a [ href "https://github.com/y047aka", target "_blank" ]
-                    [ img [ src "/assets/images/github.svg" ] []
-                    , text "Github"
-                    ]
+        [ let
+            items =
+                [ { name = "Github", url = "https://github.com/y047aka", icon = "github.svg" }
+                , { name = "Twitter", url = "https://twitter.com/y047aka", icon = "twitter.svg" }
+                , { name = "Qiita", url = "https://qiita.com/y047aka", icon = "qiita.svg" }
+                , { name = "Blog", url = "https://blog.y047aka.me", icon = "blog.svg" }
                 ]
-            , li []
-                [ a [ href "https://twitter.com/y047aka", target "_blank" ]
-                    [ img [ src "/assets/images/twitter.svg" ] []
-                    , text "Twitter"
+
+            viewListItem item =
+                li []
+                    [ a [ href item.url, target "_blank" ]
+                        [ img [ src ("/assets/images/" ++ item.icon) ] []
+                        , text item.name
+                        ]
                     ]
-                ]
-            , li []
-                [ a [ href "https://qiita.com/y047aka", target "_blank" ]
-                    [ img [ src "/assets/images/qiita.svg" ] []
-                    , text "Qiita"
-                    ]
-                ]
-            , li []
-                [ a [ href "https://blog.y047aka.me", target "_blank" ]
-                    [ img [ src "/assets/images/blog.svg" ] []
-                    , text "Blog"
-                    ]
-                ]
-            ]
+          in
+          ul [] (List.map viewListItem items)
         ]
 
 
