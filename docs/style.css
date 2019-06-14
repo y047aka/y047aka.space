@@ -17,7 +17,7 @@ body {
   grid-template-rows: auto auto auto auto;
   font-size: 1.6rem;
   font-weight: bold;
-  color: #333; }
+  color: #000; }
   @media screen and (max-width: 479px) {
     body {
       grid-template-columns: 1.5rem 1fr 1.5rem; } }
@@ -30,11 +30,11 @@ body {
   body > header.site-header {
     grid-row: 2;
     grid-column: 2;
-    padding: 3.5rem 0 3rem; }
-  body > nav.grobal-menu {
+    padding: 3rem 0 3rem; }
+  body > nav.global-menu {
     grid-row: 1;
     grid-column: 2;
-    padding: 3.5rem 0 3rem; }
+    padding: 3rem 0 3rem; }
   body > main {
     grid-row: 3;
     grid-column: 2; }
@@ -76,22 +76,30 @@ header.site-header {
     grid-column: 1;
     width: 8rem;
     height: 8rem;
-    background: url("/images/y047aka.png");
+    background: url("/assets/images/y047aka.png");
     background-size: cover;
     border-radius: 50%; }
 
-nav.grobal-menu ul {
-  list-style: none; }
-  nav.grobal-menu ul li {
-    display: inline-block; }
-    nav.grobal-menu ul li a {
-      position: relative;
-      left: -1rem;
-      padding: 0 1rem;
-      font-weight: bold;
-      text-transform: uppercase;
-      text-decoration: none;
-      color: inherit; }
+nav.global-menu {
+  border-bottom: solid 0.1rem #666; }
+  nav.global-menu ul {
+    list-style: none; }
+    nav.global-menu ul li {
+      display: inline-block;
+      margin-right: 1rem; }
+      nav.global-menu ul li a {
+        position: relative;
+        left: -1rem;
+        padding: 0 1rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: inherit; }
+        nav.global-menu ul li a img {
+          position: relative;
+          top: 0.2rem;
+          display: inline-block;
+          padding-right: 0.5rem; }
 
 main {
   border-top: solid 0.1rem #666;
@@ -128,11 +136,6 @@ main {
         background: #55acee; }
       main ul li a h2 {
         font-size: 1.7rem; }
-        main ul li a h2 img {
-          position: relative;
-          top: 0.2rem;
-          display: inline-block;
-          padding-right: 1rem; }
 
 footer.site-footer .copyright {
   text-align: right;

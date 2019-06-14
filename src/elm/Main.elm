@@ -54,11 +54,11 @@ view model =
     { title = "y047aka.me"
     , body =
         [ siteHeader
+        , globalMenu
         , node "main"
             []
             [ racing
             , profile
-            , links
             ]
         , siteFooter
         ]
@@ -71,8 +71,40 @@ siteHeader =
         [ div [ class "icon" ] []
         , h1 [] [ text "Yoshitaka Totsuka / y047aka" ]
         , p []
-            [ img [ src "/images/location.svg" ] []
+            [ img [ src "/assets/images/location.svg" ] []
             , text "Tokyo, Japan"
+            ]
+        ]
+
+
+globalMenu : Html Msg
+globalMenu =
+    nav [ class "global-menu" ]
+        [ ul []
+            [ li []
+                [ a [ href "https://github.com/y047aka", target "_blank" ]
+                    [ img [ src "/assets/images/github.svg" ] []
+                    , text "Github"
+                    ]
+                ]
+            , li []
+                [ a [ href "https://twitter.com/y047aka", target "_blank" ]
+                    [ img [ src "/assets/images/twitter.svg" ] []
+                    , text "Twitter"
+                    ]
+                ]
+            , li []
+                [ a [ href "https://qiita.com/y047aka", target "_blank" ]
+                    [ img [ src "/assets/images/qiita.svg" ] []
+                    , text "Qiita"
+                    ]
+                ]
+            , li []
+                [ a [ href "https://blog.y047aka.me", target "_blank" ]
+                    [ img [ src "/assets/images/blog.svg" ] []
+                    , text "Blog"
+                    ]
+                ]
             ]
         ]
 
@@ -111,46 +143,6 @@ profile =
                 [ a [ href "https://outsense.jp/", target "_blank" ]
                     [ h2 [] [ text "OUTSENSE" ]
                     , text "あなたをどこにでも住めるようにする。そう、それが宇宙でもね。"
-                    ]
-                ]
-            ]
-        ]
-
-
-links : Html Msg
-links =
-    section []
-        [ ul []
-            [ li []
-                [ a [ href "https://github.com/y047aka", target "_blank" ]
-                    [ h2 []
-                        [ img [ src "/images/github.svg" ] []
-                        , text "Github"
-                        ]
-                    ]
-                ]
-            , li []
-                [ a [ href "https://twitter.com/y047aka", target "_blank" ]
-                    [ h2 []
-                        [ img [ src "/images/twitter.svg" ] []
-                        , text "Twitter"
-                        ]
-                    ]
-                ]
-            , li []
-                [ a [ href "https://qiita.com/y047aka", target "_blank" ]
-                    [ h2 []
-                        [ img [ src "/images/qiita.svg" ] []
-                        , text "Qiita"
-                        ]
-                    ]
-                ]
-            , li []
-                [ a [ href "https://blog.y047aka.me", target "_blank" ]
-                    [ h2 []
-                        [ img [ src "/images/blog.svg" ] []
-                        , text "Blog"
-                        ]
                     ]
                 ]
             ]
