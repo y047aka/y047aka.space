@@ -57,8 +57,9 @@ view model =
         , globalMenu
         , node "main"
             []
-            [ racing
-            , profile
+            [ profile
+            , racing
+            , organizations
             ]
         , siteFooter
         ]
@@ -68,12 +69,8 @@ view model =
 siteHeader : Html Msg
 siteHeader =
     Html.header [ class "site-header" ]
-        [ div [ class "icon" ] []
-        , h1 [] [ text "Yoshitaka Totsuka / y047aka" ]
-        , p []
-            [ img [ src "/assets/images/location.svg" ] []
-            , text "Tokyo, Japan"
-            ]
+        [ h1 [] [ text "y047aka.me" ]
+        , div [ class "icon" ] []
         ]
 
 
@@ -100,6 +97,18 @@ globalMenu =
         ]
 
 
+profile : Html Msg
+profile =
+    section [ class "profile" ]
+        [ h1 [] [ text "Yoshitaka Totsuka" ]
+        , div [ class "icon" ] []
+        , p []
+            [ img [ src "/assets/images/location.svg" ] []
+            , text "Tokyo, Japan"
+            ]
+        ]
+
+
 racing : Html Msg
 racing =
     section []
@@ -113,8 +122,8 @@ racing =
         ]
 
 
-profile : Html Msg
-profile =
+organizations : Html Msg
+organizations =
     section []
         [ h1 [] [ text "I'm belong to..." ]
         , ul []

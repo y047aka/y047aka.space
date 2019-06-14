@@ -4966,7 +4966,7 @@ var author$project$Main$globalMenu = A2(
 var elm$html$Html$h1 = _VirtualDom_node('h1');
 var elm$html$Html$h2 = _VirtualDom_node('h2');
 var elm$html$Html$section = _VirtualDom_node('section');
-var author$project$Main$profile = A2(
+var author$project$Main$organizations = A2(
 	elm$html$Html$section,
 	_List_Nil,
 	_List_fromArray(
@@ -5057,6 +5057,45 @@ var author$project$Main$profile = A2(
 						]))
 				]))
 		]));
+var elm$html$Html$div = _VirtualDom_node('div');
+var elm$html$Html$p = _VirtualDom_node('p');
+var author$project$Main$profile = A2(
+	elm$html$Html$section,
+	_List_fromArray(
+		[
+			elm$html$Html$Attributes$class('profile')
+		]),
+	_List_fromArray(
+		[
+			A2(
+			elm$html$Html$h1,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('Yoshitaka Totsuka')
+				])),
+			A2(
+			elm$html$Html$div,
+			_List_fromArray(
+				[
+					elm$html$Html$Attributes$class('icon')
+				]),
+			_List_Nil),
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					A2(
+					elm$html$Html$img,
+					_List_fromArray(
+						[
+							elm$html$Html$Attributes$src('/assets/images/location.svg')
+						]),
+					_List_Nil),
+					elm$html$Html$text('Tokyo, Japan')
+				]))
+		]));
 var author$project$Main$racing = A2(
 	elm$html$Html$section,
 	_List_Nil,
@@ -5100,7 +5139,6 @@ var author$project$Main$racing = A2(
 				]))
 		]));
 var elm$html$Html$footer = _VirtualDom_node('footer');
-var elm$html$Html$p = _VirtualDom_node('p');
 var author$project$Main$siteFooter = A2(
 	elm$html$Html$footer,
 	_List_fromArray(
@@ -5120,7 +5158,6 @@ var author$project$Main$siteFooter = A2(
 					elm$html$Html$text('© 2018-2019 y047aka')
 				]))
 		]));
-var elm$html$Html$div = _VirtualDom_node('div');
 var elm$html$Html$header = _VirtualDom_node('header');
 var author$project$Main$siteHeader = A2(
 	elm$html$Html$header,
@@ -5131,33 +5168,19 @@ var author$project$Main$siteHeader = A2(
 	_List_fromArray(
 		[
 			A2(
+			elm$html$Html$h1,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('y047aka.me')
+				])),
+			A2(
 			elm$html$Html$div,
 			_List_fromArray(
 				[
 					elm$html$Html$Attributes$class('icon')
 				]),
-			_List_Nil),
-			A2(
-			elm$html$Html$h1,
-			_List_Nil,
-			_List_fromArray(
-				[
-					elm$html$Html$text('Yoshitaka Totsuka / y047aka')
-				])),
-			A2(
-			elm$html$Html$p,
-			_List_Nil,
-			_List_fromArray(
-				[
-					A2(
-					elm$html$Html$img,
-					_List_fromArray(
-						[
-							elm$html$Html$Attributes$src('/assets/images/location.svg')
-						]),
-					_List_Nil),
-					elm$html$Html$text('Tokyo, Japan')
-				]))
+			_List_Nil)
 		]));
 var elm$virtual_dom$VirtualDom$node = function (tag) {
 	return _VirtualDom_node(
@@ -5175,7 +5198,7 @@ var author$project$Main$view = function (model) {
 				'main',
 				_List_Nil,
 				_List_fromArray(
-					[author$project$Main$racing, author$project$Main$profile])),
+					[author$project$Main$profile, author$project$Main$racing, author$project$Main$organizations])),
 				author$project$Main$siteFooter
 			]),
 		title: 'y047aka.me'
