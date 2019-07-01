@@ -70,7 +70,6 @@ siteHeader : Html Msg
 siteHeader =
     Html.header [ class "site-header" ]
         [ h1 [] [ text "y047aka.me" ]
-        , div [ class "icon" ] []
         ]
 
 
@@ -111,12 +110,14 @@ profile =
 
 racing : Html Msg
 racing =
-    section []
+    section [ class "racing" ]
         [ h1 [] [ text "Racing!!" ]
         , ul []
             [ li []
                 [ a [ href "https://y047aka.github.io/MotorSportsCalendar/", target "_blank" ]
-                    [ h2 [] [ text "MOTOR SPORTS CALENDAR" ] ]
+                    [ h2 [] [ text "MOTOR SPORTS CALENDAR" ]
+                    , text "2019年のモータースポーツ"
+                    ]
                 ]
             ]
         ]
@@ -124,7 +125,7 @@ racing =
 
 organizations : Html Msg
 organizations =
-    section []
+    section [ class "organization" ]
         [ h1 [] [ text "I'm belong to..." ]
         , ul []
             [ li []

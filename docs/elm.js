@@ -4968,7 +4968,10 @@ var elm$html$Html$h2 = _VirtualDom_node('h2');
 var elm$html$Html$section = _VirtualDom_node('section');
 var author$project$Main$organizations = A2(
 	elm$html$Html$section,
-	_List_Nil,
+	_List_fromArray(
+		[
+			elm$html$Html$Attributes$class('organization')
+		]),
 	_List_fromArray(
 		[
 			A2(
@@ -5098,7 +5101,10 @@ var author$project$Main$profile = A2(
 		]));
 var author$project$Main$racing = A2(
 	elm$html$Html$section,
-	_List_Nil,
+	_List_fromArray(
+		[
+			elm$html$Html$Attributes$class('racing')
+		]),
 	_List_fromArray(
 		[
 			A2(
@@ -5133,7 +5139,8 @@ var author$project$Main$racing = A2(
 									_List_fromArray(
 										[
 											elm$html$Html$text('MOTOR SPORTS CALENDAR')
-										]))
+										])),
+									elm$html$Html$text('2019年のモータースポーツ')
 								]))
 						]))
 				]))
@@ -5173,14 +5180,7 @@ var author$project$Main$siteHeader = A2(
 			_List_fromArray(
 				[
 					elm$html$Html$text('y047aka.me')
-				])),
-			A2(
-			elm$html$Html$div,
-			_List_fromArray(
-				[
-					elm$html$Html$Attributes$class('icon')
-				]),
-			_List_Nil)
+				]))
 		]));
 var elm$virtual_dom$VirtualDom$node = function (tag) {
 	return _VirtualDom_node(
