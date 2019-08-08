@@ -18,7 +18,8 @@ html {
 body {
   font-size: 1.6rem;
   font-weight: bold;
-  color: #000;
+  background: #F8F8F8;
+  color: #111;
 }
 
 header.site-header {
@@ -118,13 +119,13 @@ main ul li a {
   font-size: 1.3rem;
   font-weight: normal;
   line-height: 1.6;
-  background: #000;
+  background: #111;
   color: #FFF;
   border-radius: 1.5rem;
 }
 main ul li a.telstar {
   background: #FE0;
-  color: #000;
+  color: #111;
 }
 main ul li a.sorabatake {
   background: #00a5c1;
