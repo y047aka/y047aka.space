@@ -4799,6 +4799,94 @@ var author$project$Main$update = F2(
 	function (msg, model) {
 		return _Utils_Tuple2(model, elm$core$Platform$Cmd$none);
 	});
+var elm$core$Basics$identity = function (x) {
+	return x;
+};
+var elm$json$Json$Decode$map = _Json_map1;
+var elm$json$Json$Decode$map2 = _Json_map2;
+var elm$json$Json$Decode$succeed = _Json_succeed;
+var elm$virtual_dom$VirtualDom$toHandlerInt = function (handler) {
+	switch (handler.$) {
+		case 'Normal':
+			return 0;
+		case 'MayStopPropagation':
+			return 1;
+		case 'MayPreventDefault':
+			return 2;
+		default:
+			return 3;
+	}
+};
+var elm$html$Html$a = _VirtualDom_node('a');
+var elm$html$Html$h1 = _VirtualDom_node('h1');
+var elm$html$Html$h2 = _VirtualDom_node('h2');
+var elm$html$Html$li = _VirtualDom_node('li');
+var elm$html$Html$section = _VirtualDom_node('section');
+var elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
+var elm$html$Html$text = elm$virtual_dom$VirtualDom$text;
+var elm$html$Html$ul = _VirtualDom_node('ul');
+var elm$json$Json$Encode$string = _Json_wrap;
+var elm$html$Html$Attributes$stringProperty = F2(
+	function (key, string) {
+		return A2(
+			_VirtualDom_property,
+			key,
+			elm$json$Json$Encode$string(string));
+	});
+var elm$html$Html$Attributes$class = elm$html$Html$Attributes$stringProperty('className');
+var elm$html$Html$Attributes$href = function (url) {
+	return A2(
+		elm$html$Html$Attributes$stringProperty,
+		'href',
+		_VirtualDom_noJavaScriptUri(url));
+};
+var elm$html$Html$Attributes$target = elm$html$Html$Attributes$stringProperty('target');
+var author$project$Main$elm = A2(
+	elm$html$Html$section,
+	_List_fromArray(
+		[
+			elm$html$Html$Attributes$class('elm')
+		]),
+	_List_fromArray(
+		[
+			A2(
+			elm$html$Html$h1,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('Elm')
+				])),
+			A2(
+			elm$html$Html$ul,
+			_List_Nil,
+			_List_fromArray(
+				[
+					A2(
+					elm$html$Html$li,
+					_List_Nil,
+					_List_fromArray(
+						[
+							A2(
+							elm$html$Html$a,
+							_List_fromArray(
+								[
+									elm$html$Html$Attributes$href('https://y047aka.github.io/elm-japan-logo-generator/'),
+									elm$html$Html$Attributes$target('_blank')
+								]),
+							_List_fromArray(
+								[
+									A2(
+									elm$html$Html$h2,
+									_List_Nil,
+									_List_fromArray(
+										[
+											elm$html$Html$text('Elm Japan Logo Generator')
+										])),
+									elm$html$Html$text('Elm-jpのロゴに採用されました')
+								]))
+						]))
+				]))
+		]));
 var elm$core$List$foldrHelper = F4(
 	function (fn, acc, ctr, ls) {
 		if (!ls.b) {
@@ -4868,53 +4956,14 @@ var elm$core$List$map = F2(
 			_List_Nil,
 			xs);
 	});
-var elm$core$Basics$identity = function (x) {
-	return x;
-};
-var elm$json$Json$Decode$map = _Json_map1;
-var elm$json$Json$Decode$map2 = _Json_map2;
-var elm$json$Json$Decode$succeed = _Json_succeed;
-var elm$virtual_dom$VirtualDom$toHandlerInt = function (handler) {
-	switch (handler.$) {
-		case 'Normal':
-			return 0;
-		case 'MayStopPropagation':
-			return 1;
-		case 'MayPreventDefault':
-			return 2;
-		default:
-			return 3;
-	}
-};
-var elm$html$Html$a = _VirtualDom_node('a');
 var elm$html$Html$img = _VirtualDom_node('img');
-var elm$html$Html$li = _VirtualDom_node('li');
 var elm$html$Html$nav = _VirtualDom_node('nav');
-var elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
-var elm$html$Html$text = elm$virtual_dom$VirtualDom$text;
-var elm$html$Html$ul = _VirtualDom_node('ul');
-var elm$json$Json$Encode$string = _Json_wrap;
-var elm$html$Html$Attributes$stringProperty = F2(
-	function (key, string) {
-		return A2(
-			_VirtualDom_property,
-			key,
-			elm$json$Json$Encode$string(string));
-	});
-var elm$html$Html$Attributes$class = elm$html$Html$Attributes$stringProperty('className');
-var elm$html$Html$Attributes$href = function (url) {
-	return A2(
-		elm$html$Html$Attributes$stringProperty,
-		'href',
-		_VirtualDom_noJavaScriptUri(url));
-};
 var elm$html$Html$Attributes$src = function (url) {
 	return A2(
 		elm$html$Html$Attributes$stringProperty,
 		'src',
 		_VirtualDom_noJavaScriptOrHtmlUri(url));
 };
-var elm$html$Html$Attributes$target = elm$html$Html$Attributes$stringProperty('target');
 var author$project$Main$globalMenu = A2(
 	elm$html$Html$nav,
 	_List_fromArray(
@@ -4963,9 +5012,52 @@ var author$project$Main$globalMenu = A2(
 				A2(elm$core$List$map, viewListItem, items));
 		}()
 		]));
-var elm$html$Html$h1 = _VirtualDom_node('h1');
-var elm$html$Html$h2 = _VirtualDom_node('h2');
-var elm$html$Html$section = _VirtualDom_node('section');
+var author$project$Main$motorsport = A2(
+	elm$html$Html$section,
+	_List_fromArray(
+		[
+			elm$html$Html$Attributes$class('racing')
+		]),
+	_List_fromArray(
+		[
+			A2(
+			elm$html$Html$h1,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('Motorsport')
+				])),
+			A2(
+			elm$html$Html$ul,
+			_List_Nil,
+			_List_fromArray(
+				[
+					A2(
+					elm$html$Html$li,
+					_List_Nil,
+					_List_fromArray(
+						[
+							A2(
+							elm$html$Html$a,
+							_List_fromArray(
+								[
+									elm$html$Html$Attributes$href('https://y047aka.github.io/MotorSportsCalendar/'),
+									elm$html$Html$Attributes$target('_blank')
+								]),
+							_List_fromArray(
+								[
+									A2(
+									elm$html$Html$h2,
+									_List_Nil,
+									_List_fromArray(
+										[
+											elm$html$Html$text('MOTOR SPORTS CALENDAR')
+										])),
+									elm$html$Html$text('2019年のモータースポーツ')
+								]))
+						]))
+				]))
+		]));
 var author$project$Main$organizations = A2(
 	elm$html$Html$section,
 	_List_fromArray(
@@ -5099,52 +5191,6 @@ var author$project$Main$profile = A2(
 					elm$html$Html$text('Tokyo, Japan')
 				]))
 		]));
-var author$project$Main$racing = A2(
-	elm$html$Html$section,
-	_List_fromArray(
-		[
-			elm$html$Html$Attributes$class('racing')
-		]),
-	_List_fromArray(
-		[
-			A2(
-			elm$html$Html$h1,
-			_List_Nil,
-			_List_fromArray(
-				[
-					elm$html$Html$text('Racing!!')
-				])),
-			A2(
-			elm$html$Html$ul,
-			_List_Nil,
-			_List_fromArray(
-				[
-					A2(
-					elm$html$Html$li,
-					_List_Nil,
-					_List_fromArray(
-						[
-							A2(
-							elm$html$Html$a,
-							_List_fromArray(
-								[
-									elm$html$Html$Attributes$href('https://y047aka.github.io/MotorSportsCalendar/'),
-									elm$html$Html$Attributes$target('_blank')
-								]),
-							_List_fromArray(
-								[
-									A2(
-									elm$html$Html$h2,
-									_List_Nil,
-									_List_fromArray(
-										[
-											elm$html$Html$text('MOTOR SPORTS CALENDAR')
-										])),
-									elm$html$Html$text('2019年のモータースポーツ')
-								]))
-						]))
-				]))
-		]));
 var elm$html$Html$footer = _VirtualDom_node('footer');
 var author$project$Main$siteFooter = A2(
 	elm$html$Html$footer,
@@ -5198,7 +5244,7 @@ var author$project$Main$view = function (model) {
 				'main',
 				_List_Nil,
 				_List_fromArray(
-					[author$project$Main$profile, author$project$Main$racing, author$project$Main$organizations])),
+					[author$project$Main$profile, author$project$Main$elm, author$project$Main$motorsport, author$project$Main$organizations])),
 				author$project$Main$siteFooter
 			]),
 		title: 'y047aka.me'

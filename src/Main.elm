@@ -58,7 +58,8 @@ view model =
         , node "main"
             []
             [ profile
-            , racing
+            , elm
+            , motorsport
             , organizations
             ]
         , siteFooter
@@ -108,10 +109,25 @@ profile =
         ]
 
 
-racing : Html Msg
-racing =
+elm : Html Msg
+elm =
+    section [ class "elm" ]
+        [ h1 [] [ text "Elm" ]
+        , ul []
+            [ li []
+                [ a [ href "https://y047aka.github.io/elm-japan-logo-generator/", target "_blank" ]
+                    [ h2 [] [ text "Elm Japan Logo Generator" ]
+                    , text "Elm-jpのロゴに採用されました"
+                    ]
+                ]
+            ]
+        ]
+
+
+motorsport : Html Msg
+motorsport =
     section [ class "racing" ]
-        [ h1 [] [ text "Racing!!" ]
+        [ h1 [] [ text "Motorsport" ]
         , ul []
             [ li []
                 [ a [ href "https://y047aka.github.io/MotorSportsCalendar/", target "_blank" ]

@@ -77,16 +77,19 @@ main {
 }
 @media screen and (min-width: 1280px) {
   main {
-    grid-template-columns: 5% 1fr 2.5% 1fr 5%;
+    grid-template-columns: 5% 1fr 2.5% 1fr 2.5% 1fr 5%;
   }
   main > section.profile {
     grid-column: 2;
   }
-  main > section.racing {
+  main > section.elm {
     grid-column: 2;
   }
-  main > section.organization {
+  main > section.racing {
     grid-column: 4;
+  }
+  main > section.organization {
+    grid-column: 6;
   }
 }
 main > section {

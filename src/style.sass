@@ -66,16 +66,19 @@ main
     grid-template-columns: 1fr 75% 1fr
 
   @media screen and (min-width: 1280px)
-    grid-template-columns: 5% 1fr 2.5% 1fr 5%
+    grid-template-columns: 5% 1fr 2.5% 1fr 2.5% 1fr 5%
 
     & > section.profile
       grid-column: 2
 
-    & > section.racing
+    & > section.elm
       grid-column: 2
 
-    & > section.organization
+    & > section.racing
       grid-column: 4
+
+    & > section.organization
+      grid-column: 6
 
   & > section
     grid-column: 2
