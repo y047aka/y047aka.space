@@ -5041,7 +5041,7 @@ var author$project$Main$motorsport = A2(
 							elm$html$Html$a,
 							_List_fromArray(
 								[
-									elm$html$Html$Attributes$href('https://y047aka.github.io/MotorSportsCalendar/'),
+									elm$html$Html$Attributes$href('https://motorsports-calendar.netlify.com'),
 									elm$html$Html$Attributes$target('_blank')
 								]),
 							_List_fromArray(

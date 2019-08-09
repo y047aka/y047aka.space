@@ -130,7 +130,7 @@ motorsport =
         [ h1 [] [ text "Motorsport" ]
         , ul []
             [ li []
-                [ a [ href "https://y047aka.github.io/MotorSportsCalendar/", target "_blank" ]
+                [ a [ href "https://motorsports-calendar.netlify.com", target "_blank" ]
                     [ h2 [] [ text "MOTOR SPORTS CALENDAR" ]
                     , text "2019年のモータースポーツ"
                     ]
