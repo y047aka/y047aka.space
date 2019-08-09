@@ -1,9 +1,9 @@
 {
   "scripts": {
-    "clean": "rimraf ./docs ./public && mkdirp docs",
+    "clean": "rimraf ./docs ./public",
     "echo:CNAME": "echo 'y047aka.me' > ./docs/CNAME",
     "echo:nojekyll": "touch ./docs/.nojekyll",
-    "echo": "npm-run-all -p echo:CNAME echo:nojekyll",
+    "echo": "mkdirp docs && npm-run-all -p echo:CNAME echo:nojekyll",
     "watch:html": "cpx ./src/index.html ./docs -w",
     "watch:assets": "cpx \"./src/assets/**/*\" ./docs/assets -w",
     "watch:js": "cpx ./src/main.js ./docs -w",
