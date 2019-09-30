@@ -1,33 +1,22 @@
-body,
-header,
-footer,
-ul,
-li {
-  margin: 0;
-  padding: 0;
-  line-height: 1;
-  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", YuGothic,
-    "ヒラギノ角ゴ ProN W3", Hiragino Kaku Gothic ProN, Arial, "メイリオ", Meiryo,
-    sans-serif;
-}
+@charset "utf-8";
 
-h1,
-h2,
-h3,
-h4,
-p {
-  margin: 0;
-  padding: 0;
-}
+// Update Bulma's global variables
+// $link: #fff;
+// $link-hover: #fff;
+$body-size: 62.5%;
+$body-font-size: 1.6rem;
+$body-line-height: 1;
 
-html {
-  font-size: 62.5%;
-}
+// Update Bulma's global variables for navbar
+// $navbar-height: 6rem;
+// $navbar-padding-vertical: 0;
+// $navbar-padding-horizontal: 5%;
+// $navbar-item-color: inherit;
+// $navbar-item-hover-color: inherit;
+// $navbar-item-hover-background-color: inherit;
+// $navbar-item-img-max-height: 4.5rem;
 
 body {
-  font-size: 1.6rem;
-  font-weight: bold;
-  background: #f8f8f8;
   color: #111;
 }
 
@@ -204,3 +193,6 @@ footer.site-footer {
   right: 5%;
   bottom: 4rem;
 }
+
+// Import Bulma
+@import "../node_modules/bulma/bulma.sass";
