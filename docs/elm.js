@@ -4887,131 +4887,6 @@ var author$project$Main$elm = A2(
 						]))
 				]))
 		]));
-var elm$core$List$foldrHelper = F4(
-	function (fn, acc, ctr, ls) {
-		if (!ls.b) {
-			return acc;
-		} else {
-			var a = ls.a;
-			var r1 = ls.b;
-			if (!r1.b) {
-				return A2(fn, a, acc);
-			} else {
-				var b = r1.a;
-				var r2 = r1.b;
-				if (!r2.b) {
-					return A2(
-						fn,
-						a,
-						A2(fn, b, acc));
-				} else {
-					var c = r2.a;
-					var r3 = r2.b;
-					if (!r3.b) {
-						return A2(
-							fn,
-							a,
-							A2(
-								fn,
-								b,
-								A2(fn, c, acc)));
-					} else {
-						var d = r3.a;
-						var r4 = r3.b;
-						var res = (ctr > 500) ? A3(
-							elm$core$List$foldl,
-							fn,
-							acc,
-							elm$core$List$reverse(r4)) : A4(elm$core$List$foldrHelper, fn, acc, ctr + 1, r4);
-						return A2(
-							fn,
-							a,
-							A2(
-								fn,
-								b,
-								A2(
-									fn,
-									c,
-									A2(fn, d, res))));
-					}
-				}
-			}
-		}
-	});
-var elm$core$List$foldr = F3(
-	function (fn, acc, ls) {
-		return A4(elm$core$List$foldrHelper, fn, acc, 0, ls);
-	});
-var elm$core$List$map = F2(
-	function (f, xs) {
-		return A3(
-			elm$core$List$foldr,
-			F2(
-				function (x, acc) {
-					return A2(
-						elm$core$List$cons,
-						f(x),
-						acc);
-				}),
-			_List_Nil,
-			xs);
-	});
-var elm$html$Html$img = _VirtualDom_node('img');
-var elm$html$Html$nav = _VirtualDom_node('nav');
-var elm$html$Html$Attributes$src = function (url) {
-	return A2(
-		elm$html$Html$Attributes$stringProperty,
-		'src',
-		_VirtualDom_noJavaScriptOrHtmlUri(url));
-};
-var author$project$Main$globalMenu = A2(
-	elm$html$Html$nav,
-	_List_fromArray(
-		[
-			elm$html$Html$Attributes$class('global-menu')
-		]),
-	_List_fromArray(
-		[
-			function () {
-			var viewListItem = function (item) {
-				return A2(
-					elm$html$Html$li,
-					_List_Nil,
-					_List_fromArray(
-						[
-							A2(
-							elm$html$Html$a,
-							_List_fromArray(
-								[
-									elm$html$Html$Attributes$href(item.url),
-									elm$html$Html$Attributes$target('_blank')
-								]),
-							_List_fromArray(
-								[
-									A2(
-									elm$html$Html$img,
-									_List_fromArray(
-										[
-											elm$html$Html$Attributes$src('/assets/images/' + item.icon)
-										]),
-									_List_Nil),
-									elm$html$Html$text(item.name)
-								]))
-						]));
-			};
-			var items = _List_fromArray(
-				[
-					{icon: 'github.svg', name: 'Github', url: 'https://github.com/y047aka'},
-					{icon: 'twitter.svg', name: 'Twitter', url: 'https://twitter.com/y047aka'},
-					{icon: 'qiita.svg', name: 'Qiita', url: 'https://qiita.com/y047aka'},
-					{icon: 'blog.svg', name: 'Blog', url: 'https://blog.y047aka.me'}
-				]);
-			return A2(
-				elm$html$Html$ul,
-				_List_Nil,
-				A2(elm$core$List$map, viewListItem, items));
-		}()
-		]));
 var author$project$Main$motorsport = A2(
 	elm$html$Html$section,
 	_List_fromArray(
@@ -5152,8 +5027,17 @@ var author$project$Main$organizations = A2(
 						]))
 				]))
 		]));
-var elm$html$Html$div = _VirtualDom_node('div');
+var elm$html$Html$figure = _VirtualDom_node('figure');
+var elm$html$Html$i = _VirtualDom_node('i');
+var elm$html$Html$img = _VirtualDom_node('img');
 var elm$html$Html$p = _VirtualDom_node('p');
+var elm$html$Html$span = _VirtualDom_node('span');
+var elm$html$Html$Attributes$src = function (url) {
+	return A2(
+		elm$html$Html$Attributes$stringProperty,
+		'src',
+		_VirtualDom_noJavaScriptOrHtmlUri(url));
+};
 var author$project$Main$profile = A2(
 	elm$html$Html$section,
 	_List_fromArray(
@@ -5170,24 +5054,42 @@ var author$project$Main$profile = A2(
 					elm$html$Html$text('Yoshitaka Totsuka')
 				])),
 			A2(
-			elm$html$Html$div,
+			elm$html$Html$figure,
 			_List_fromArray(
 				[
 					elm$html$Html$Attributes$class('icon')
 				]),
-			_List_Nil),
-			A2(
-			elm$html$Html$p,
-			_List_Nil,
 			_List_fromArray(
 				[
 					A2(
 					elm$html$Html$img,
 					_List_fromArray(
 						[
-							elm$html$Html$Attributes$src('/assets/images/location.svg')
+							elm$html$Html$Attributes$src('/assets/images/y047aka.png')
 						]),
-					_List_Nil),
+					_List_Nil)
+				])),
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					A2(
+					elm$html$Html$span,
+					_List_fromArray(
+						[
+							elm$html$Html$Attributes$class('icon is-medium')
+						]),
+					_List_fromArray(
+						[
+							A2(
+							elm$html$Html$i,
+							_List_fromArray(
+								[
+									elm$html$Html$Attributes$class('fas fa-map-marker-alt')
+								]),
+							_List_Nil)
+						])),
 					elm$html$Html$text('Tokyo, Japan')
 				]))
 		]));
@@ -5211,7 +5113,77 @@ var author$project$Main$siteFooter = A2(
 					elm$html$Html$text('© 2018-2019 y047aka')
 				]))
 		]));
+var elm$core$List$foldrHelper = F4(
+	function (fn, acc, ctr, ls) {
+		if (!ls.b) {
+			return acc;
+		} else {
+			var a = ls.a;
+			var r1 = ls.b;
+			if (!r1.b) {
+				return A2(fn, a, acc);
+			} else {
+				var b = r1.a;
+				var r2 = r1.b;
+				if (!r2.b) {
+					return A2(
+						fn,
+						a,
+						A2(fn, b, acc));
+				} else {
+					var c = r2.a;
+					var r3 = r2.b;
+					if (!r3.b) {
+						return A2(
+							fn,
+							a,
+							A2(
+								fn,
+								b,
+								A2(fn, c, acc)));
+					} else {
+						var d = r3.a;
+						var r4 = r3.b;
+						var res = (ctr > 500) ? A3(
+							elm$core$List$foldl,
+							fn,
+							acc,
+							elm$core$List$reverse(r4)) : A4(elm$core$List$foldrHelper, fn, acc, ctr + 1, r4);
+						return A2(
+							fn,
+							a,
+							A2(
+								fn,
+								b,
+								A2(
+									fn,
+									c,
+									A2(fn, d, res))));
+					}
+				}
+			}
+		}
+	});
+var elm$core$List$foldr = F3(
+	function (fn, acc, ls) {
+		return A4(elm$core$List$foldrHelper, fn, acc, 0, ls);
+	});
+var elm$core$List$map = F2(
+	function (f, xs) {
+		return A3(
+			elm$core$List$foldr,
+			F2(
+				function (x, acc) {
+					return A2(
+						elm$core$List$cons,
+						f(x),
+						acc);
+				}),
+			_List_Nil,
+			xs);
+	});
 var elm$html$Html$header = _VirtualDom_node('header');
+var elm$html$Html$nav = _VirtualDom_node('nav');
 var author$project$Main$siteHeader = A2(
 	elm$html$Html$header,
 	_List_fromArray(
@@ -5225,9 +5197,60 @@ var author$project$Main$siteHeader = A2(
 			_List_Nil,
 			_List_fromArray(
 				[
-					elm$html$Html$text('y047aka.me')
-				]))
+					A2(
+					elm$html$Html$span,
+					_List_Nil,
+					_List_fromArray(
+						[
+							elm$html$Html$text('y047aka.me')
+						]))
+				])),
+			A2(
+			elm$html$Html$nav,
+			_List_fromArray(
+				[
+					elm$html$Html$Attributes$class('global-menu')
+				]),
+			function () {
+				var viewListItem = function (item) {
+					return A2(
+						elm$html$Html$a,
+						_List_fromArray(
+							[
+								elm$html$Html$Attributes$href(item.url),
+								elm$html$Html$Attributes$target('_blank')
+							]),
+						_List_fromArray(
+							[
+								A2(
+								elm$html$Html$span,
+								_List_fromArray(
+									[
+										elm$html$Html$Attributes$class('icon is-large')
+									]),
+								_List_fromArray(
+									[
+										A2(
+										elm$html$Html$i,
+										_List_fromArray(
+											[
+												elm$html$Html$Attributes$class(item.icon)
+											]),
+										_List_Nil)
+									])),
+								elm$html$Html$text(item.name)
+							]));
+				};
+				var items = _List_fromArray(
+					[
+						{icon: 'fab fa-github', name: 'Github', url: 'https://github.com/y047aka'},
+						{icon: 'fab fa-twitter', name: 'Twitter', url: 'https://twitter.com/y047aka'},
+						{icon: 'fas fa-pen-nib', name: 'Blog', url: 'https://blog.y047aka.me'}
+					]);
+				return A2(elm$core$List$map, viewListItem, items);
+			}())
 		]));
+var elm$html$Html$div = _VirtualDom_node('div');
 var elm$virtual_dom$VirtualDom$node = function (tag) {
 	return _VirtualDom_node(
 		_VirtualDom_noScript(tag));
@@ -5238,13 +5261,22 @@ var author$project$Main$view = function (model) {
 		body: _List_fromArray(
 			[
 				author$project$Main$siteHeader,
-				author$project$Main$globalMenu,
 				A3(
 				elm$html$Html$node,
 				'main',
 				_List_Nil,
 				_List_fromArray(
-					[author$project$Main$profile, author$project$Main$elm, author$project$Main$motorsport, author$project$Main$organizations])),
+					[
+						author$project$Main$profile,
+						A2(
+						elm$html$Html$div,
+						_List_fromArray(
+							[
+								elm$html$Html$Attributes$class('columns')
+							]),
+						_List_fromArray(
+							[author$project$Main$elm, author$project$Main$motorsport, author$project$Main$organizations]))
+					])),
 				author$project$Main$siteFooter
 			]),
 		title: 'y047aka.me'

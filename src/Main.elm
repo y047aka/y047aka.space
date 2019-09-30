@@ -1,7 +1,7 @@
 module Main exposing (main)
 
 import Browser
-import Html exposing (Html, a, div, footer, h1, h2, img, li, nav, node, p, section, text, ul)
+import Html exposing (Html, a, div, figure, footer, h1, h2, i, img, li, nav, node, p, section, span, text, ul)
 import Html.Attributes exposing (class, href, src, target)
 
 
@@ -54,13 +54,14 @@ view model =
     { title = "y047aka.me"
     , body =
         [ siteHeader
-        , globalMenu
         , node "main"
             []
             [ profile
-            , elm
-            , motorsport
-            , organizations
+            , div [ class "columns" ]
+                [ elm
+                , motorsport
+                , organizations
+                ]
             ]
         , siteFooter
         ]
@@ -70,30 +71,24 @@ view model =
 siteHeader : Html Msg
 siteHeader =
     Html.header [ class "site-header" ]
-        [ h1 [] [ text "y047aka.me" ]
-        ]
+        [ h1 []
+            [ span [] [ text "y047aka.me" ] ]
+        , nav [ class "global-menu" ]
+            (let
+                items =
+                    [ { name = "Github", url = "https://github.com/y047aka", icon = "fab fa-github" }
+                    , { name = "Twitter", url = "https://twitter.com/y047aka", icon = "fab fa-twitter" }
+                    , { name = "Blog", url = "https://blog.y047aka.me", icon = "fas fa-pen-nib" }
+                    ]
 
-
-globalMenu : Html Msg
-globalMenu =
-    nav [ class "global-menu" ]
-        [ let
-            items =
-                [ { name = "Github", url = "https://github.com/y047aka", icon = "github.svg" }
-                , { name = "Twitter", url = "https://twitter.com/y047aka", icon = "twitter.svg" }
-                , { name = "Qiita", url = "https://qiita.com/y047aka", icon = "qiita.svg" }
-                , { name = "Blog", url = "https://blog.y047aka.me", icon = "blog.svg" }
-                ]
-
-            viewListItem item =
-                li []
-                    [ a [ href item.url, target "_blank" ]
-                        [ img [ src ("/assets/images/" ++ item.icon) ] []
+                viewListItem item =
+                    a [ href item.url, target "_blank" ]
+                        [ span [ class "icon is-large" ] [ i [ class item.icon ] [] ]
                         , text item.name
                         ]
-                    ]
-          in
-          ul [] (List.map viewListItem items)
+             in
+             List.map viewListItem items
+            )
         ]
 
 
@@ -101,9 +96,10 @@ profile : Html Msg
 profile =
     section [ class "profile" ]
         [ h1 [] [ text "Yoshitaka Totsuka" ]
-        , div [ class "icon" ] []
+        , figure [ class "icon" ]
+            [ img [ src "/assets/images/y047aka.png" ] [] ]
         , p []
-            [ img [ src "/assets/images/location.svg" ] []
+            [ span [ class "icon is-medium" ] [ i [ class "fas fa-map-marker-alt" ] [] ]
             , text "Tokyo, Japan"
             ]
         ]
