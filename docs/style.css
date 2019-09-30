@@ -1,12 +1,20 @@
 @charset "UTF-8";
-body, header, footer, ul, li {
+body,
+header,
+footer,
+ul,
+li {
   margin: 0;
   padding: 0;
   line-height: 1;
   font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", YuGothic, "ヒラギノ角ゴ ProN W3", Hiragino Kaku Gothic ProN, Arial, "メイリオ", Meiryo, sans-serif;
 }
 
-h1, h2, h3, h4, p {
+h1,
+h2,
+h3,
+h4,
+p {
   margin: 0;
   padding: 0;
 }
@@ -18,7 +26,7 @@ html {
 body {
   font-size: 1.6rem;
   font-weight: bold;
-  background: #F8F8F8;
+  background: #f8f8f8;
   color: #111;
 }
 
@@ -120,11 +128,11 @@ main ul li a {
   font-weight: normal;
   line-height: 1.6;
   background: #111;
-  color: #FFF;
+  color: #fff;
   border-radius: 1.5rem;
 }
 main ul li a.telstar {
-  background: #FE0;
+  background: #fe0;
   color: #111;
 }
 main ul li a.sorabatake {
