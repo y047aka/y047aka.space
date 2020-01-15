@@ -5459,7 +5459,7 @@ var $author$project$Main$siteFooter = A2(
 				]),
 			_List_fromArray(
 				[
-					$elm$html$Html$text('© 2018-2019 y047aka')
+					$elm$html$Html$text('© 2020 y047aka')
 				]))
 		]));
 var $elm$html$Html$header = _VirtualDom_node('header');

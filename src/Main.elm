@@ -165,5 +165,5 @@ organizations =
 siteFooter : Html Msg
 siteFooter =
     footer [ class "site-footer" ]
-        [ p [ class "copyright" ] [ text "© 2018-2019 y047aka" ]
+        [ p [ class "copyright" ] [ text "© 2020 y047aka" ]
         ]
