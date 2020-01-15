@@ -1,0 +1,1 @@
+{"version":3,"sources":["main.js"],"names":["app","Elm","Main","init"],"mappings":";;;;;AAGA,aAHA,QAAA,gBACA,IAAA,EAAA,QAAA,cAEMA,EAAMC,EAAIC,IAAAA,KAAKC","file":"main.53523c4c.js","sourceRoot":"../src","sourcesContent":["import \"./style.sass\";\nimport { Elm } from \"./Main.elm\";\n\nconst app = Elm.Main.init();\n"]}
