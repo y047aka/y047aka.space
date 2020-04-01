@@ -58,7 +58,7 @@ articleDecoder =
 viewHead : Preamble -> String -> List (Html Never)
 viewHead preamble _ =
     [ Html.meta [ charset "utf-8" ]
-    , Html.title [] (preamble.title ++ " | y047aka.me")
+    , Html.title [] (preamble.title ++ " | y047aka.space")
     , Html.meta [ name "description", content "this is a simple static site generator for elm" ]
     , Html.link [ rel "stylesheet", href "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/default.min.css" ]
     , Html.script "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" ""

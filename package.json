@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "echo:CNAME": "echo 'y047aka.me' > ./docs/CNAME",
+    "echo:CNAME": "echo 'y047aka.space' > ./docs/CNAME",
     "start": "siteelm server",
     "build": "siteelm make && npm run echo:CNAME"
   },

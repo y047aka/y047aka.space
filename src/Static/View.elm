@@ -31,7 +31,7 @@ siteHeader =
                     , color inherit
                     ]
                 ]
-                [ text "y047aka.me" ]
+                [ text "y047aka.space" ]
             ]
         ]
 
