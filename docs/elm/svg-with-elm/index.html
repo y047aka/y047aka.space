@@ -1,0 +1,341 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>elm/svgを使ってみよう（SVGの基礎知識） | sample site</title><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/default.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/elm.min.js"></script><script>hljs.initHighlightingOnLoad()</script><style>._20f74b61{-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;line-height:1.5;color:#24292e;font-family:"-apple-system",BlinkMacSystemFont,"Segoe UI",Helvetica,"Arial,sans-serif","Apple Color Emoji","Segoe UI Emoji";font-size:16px;line-height:1.5;word-wrap:break-word}._20f74b61 details{display:block}._20f74b61 summary{display:list-item}._20f74b61 a{color:#0366d6;text-decoration:none}._20f74b61 a:hover{text-decoration:underline}._20f74b61 table{border-spacing:0;border-collapse:collapse}._20f74b61 td,._20f74b61 th{padding:0}._20f74b61 h1,._20f74b61 h2,._20f74b61 h3,._20f74b61 h4,._20f74b61 h5,._20f74b61 h6{margin-top:0;margin-bottom:0}._20f74b61 h1{font-size:32px}._20f74b61 h1,._20f74b61 h2{font-weight:600}._20f74b61 h2{font-size:24px}._20f74b61 h3{font-size:20px}._20f74b61 h3,._20f74b61 h4{font-weight:600}._20f74b61 h4{font-size:16px}._20f74b61 h5{font-size:14px}._20f74b61 h5,._20f74b61 h6{font-weight:600}._20f74b61 h6{font-size:12px}._20f74b61 p{margin-top:0;margin-bottom:10px}._20f74b61 blockquote{margin:0}._20f74b61 ol,._20f74b61 ul{padding-left:0;margin-top:0;margin-bottom:0}._20f74b61 ol ol,._20f74b61 ul ol{list-style-type:lower-roman}._20f74b61 ol ol ol,._20f74b61 ol ul ol,._20f74b61 ul ol ol,._20f74b61 ul ul ol{list-style-type:lower-alpha}._20f74b61 dd{margin-left:0}._20f74b61 code,._20f74b61 pre{font-family:SFMono-Regular,Consolas,"Liberation Mono",Menlo,monospace;font-size:12px}._20f74b61 pre{margin-top:0;margin-bottom:0}._20f74b61 blockquote,._20f74b61 details,._20f74b61 dl,._20f74b61 ol,._20f74b61 p,._20f74b61 pre,._20f74b61 table,._20f74b61 ul{margin-top:0;margin-bottom:16px}._20f74b61 hr{height:.25em;padding:0;margin:24px 0;background-color:#e1e4e8;border:0}._20f74b61 blockquote{padding:0 1em;color:#6a737d;border-left:.25em solid #dfe2e5}._20f74b61 blockquote>:first-child{margin-top:0}._20f74b61 blockquote>:last-child{margin-bottom:0}._20f74b61 h1,._20f74b61 h2,._20f74b61 h3,._20f74b61 h4,._20f74b61 h5,._20f74b61 h6{margin-top:24px;margin-bottom:16px;font-weight:600;line-height:1.25}._20f74b61 h1{font-size:2em}._20f74b61 h1,._20f74b61 h2{padding-bottom:.3em;border-bottom:1px solid #eaecef}._20f74b61 h2{font-size:1.5em}._20f74b61 h3{font-size:1.25em}._20f74b61 h4{font-size:1em}._20f74b61 h5{font-size:.875em}._20f74b61 h6{font-size:.85em;color:#6a737d}._20f74b61 ol,._20f74b61 ul{padding-left:2em}._20f74b61 ol ol,._20f74b61 ol ul,._20f74b61 ul ol,._20f74b61 ul ul{margin-top:0;margin-bottom:0}._20f74b61 li{word-wrap:break-all}._20f74b61 li+li{margin-top:.25em}._20f74b61 li>p{margin-top:16px}._20f74b61 dl{padding:0}._20f74b61 dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:600}._20f74b61 dl dd{padding:0 16px;margin-bottom:16px}._20f74b61 table{display:block;width:100%;overflow:auto}._20f74b61 table th{font-weight:600}._20f74b61 table td,._20f74b61 table th{padding:6px 13px;border:1px solid #dfe2e5}._20f74b61 table tr{background-color:#fff;border-top:1px solid #c6cbd1}._20f74b61 table tr:nth-child(2n){background-color:#f6f8fa}._20f74b61 img{max-width:100%;box-sizing:initial;background-color:#fff}._20f74b61 img[align=right]{padding-left:20px}._20f74b61 img[align=left]{padding-right:20px}._20f74b61 code{padding:.2em .4em;margin:0;font-size:85%;background-color:rgba(27,31,35,.05);border-radius:3px}._20f74b61 pre{word-wrap:normal}._20f74b61 pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:0 0;border:0}._20f74b61 pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f6f8fa;border-radius:3px}._20f74b61 pre code{display:inline;max-width:auto;padding:0;margin:0;overflow:visible;line-height:inherit;word-wrap:normal;background-color:initial;border:0}._6c2a7992{text-decoration:none;color:inherit}._7b2a7d0d{width:620px;margin:0 auto;padding:20px 0}._84da74c4{width:620px;margin:0 auto}._8ed6b1b0{padding:20px 20px;text-align:right;font-size:15px;background-color:#666;color:#fff}._9ed06373{min-height:100vh;display:flex;flex-direction:column}._9ed06373>main{flex:1}._c722d6c5{padding:20px 20px;background-color:#666;color:#fff}._ddc2b992{display:block;width:620px;margin:0 auto;font-size:15px;font-weight:400}</style><style>html{box-sizing:border-box;-webkit-text-size-adjust:100%;word-break:normal;-moz-tab-size:4;tab-size:4}*,::after,::before{background-repeat:no-repeat;box-sizing:inherit}::after,::before{text-decoration:inherit;vertical-align:inherit}*{padding:0;margin:0}hr{overflow:visible;height:0}details,main{display:block}summary{display:list-item}small{font-size:80%}[hidden]{display:none}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}a{background:0 0}a:active,a:hover{outline-width:0}code,kbd,pre,samp{font-family:monospace,monospace}pre{font-size:1em}b,strong{font-weight:bolder}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}input{border-radius:0}[disabled]{cursor:default}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{-webkit-appearance:none}textarea{overflow:auto;resize:vertical}button,input,optgroup,select,textarea{font:inherit}optgroup{font-weight:700}button{overflow:visible}button,select{text-transform:none}[role=button],[type=button],[type=reset],[type=submit],button{cursor:pointer;color:inherit}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button:-moz-focusring{outline:1px dotted ButtonText}[type=reset],[type=submit],button,html [type=button]{-webkit-appearance:button}button,input,select,textarea{background:0 0;border-style:none}select{-moz-appearance:none;-webkit-appearance:none}select::-ms-expand{display:none}select::-ms-value{color:currentColor}legend{border:0;color:inherit;display:table;max-width:100%;white-space:normal;max-width:100%}::-webkit-file-upload-button{-webkit-appearance:button;color:inherit;font:inherit}img{border-style:none}progress{vertical-align:baseline}svg:not([fill]){fill:currentColor}@media only screen{[hidden~=screen]{display:inherit}}@media only screen{[hidden~=screen]:not(:active):not(:focus):not(:target){position:absolute!important;clip:rect(0 0 0 0)!important}}[aria-busy=true]{cursor:progress}[aria-controls]{cursor:pointer}[aria-disabled]{cursor:default}</style><script src="/app.js"></script></head><body class="_9ed06373"><header class="_c722d6c5"><h1 class="_ddc2b992"><a href="/" class="_6c2a7992">blog.y047aka.me</a></h1></header><main class="_7b2a7d0d"><nav><a href="/" class="prev">home</a></nav><h2>elm/svgを使ってみよう（SVGの基礎知識）</h2><article class="_20f74b61"><div><p>この記事では、</p>
+<ul>
+<li>SVG の基本的な書き方</li>
+<li>Elm での記述方法</li>
+<li>利用できるパッケージ</li>
+</ul>
+<p>について見ていきます。</p>
+<h2 id="svg-">SVG ってなんだろう？</h2>
+<p>Scalable Vector Graphics の頭文字をとって、SVG と呼ばれています。
+解像度に制限されないベクター画像のための XML 文法として利用されています。</p>
+<h3 id="-">仕様について</h3>
+<p>SVG の仕様は W3C によって開発・勧告されています。
+ドキュメントが充実しているので、積極的に活用しましょう。</p>
+<p><a href="https://www.w3.org/TR/SVG11/" target="_blank">
+    Scalable Vector Graphics (SVG) 1.1 (Second Edition)<span>www.w3.org</span>
+</a></p>
+<p>triple_underscore さんによる日本語訳を参考にするのも良いと思います。</p>
+<p><a href="https://triple-underscore.github.io/SVG11/" target="_blank">
+    SVG 1.1 仕様 （第２版） 日本語訳<span>triple-underscore.github.io</span>
+</a></p>
+<h3 id="svg-">SVG で何ができるのか？</h3>
+<p>画像の形式は .jpg, .png, .gif など数多くありますが、</p>
+<ul>
+<li>解像度に制限されない</li>
+<li>ベクターである</li>
+<li>XML で記述できる</li>
+</ul>
+<p>といった他にはない特徴を持つことが、SVG の強みです。
+HTML 同様のスタイル指定や、アニメーションができるのも魅力ですね。</p>
+<p>アイコンやロゴイメージへの活用はもちろん、インタラクティブなコンテンツの作成、データの可視化（ビジュアライゼーション）やジェネラティブ・アートなどがブラウザ上で簡単に実現できてしまいます。</p>
+<p>すでに必須技術の 1 つと化した SVG ですが、これからも新しい使い方が発見されることでしょう。</p>
+<h3 id="-">基本的な書き方</h3>
+<p>SVG を構成しているのは要素と属性です。
+そのため、HTML と同じ感覚で記述することができます。</p>
+<p>SVG として記述されたコードは…</p>
+<pre><code class="lang-SVG">&lt;svg width="120" height="120" viewBox="0 0 120 120"&gt;
+    &lt;rect x="10" y="10" width="100" height="100" rx="15" ry="15" fill="red" /&gt;
+    &lt;circle cx="50" cy="50" r="50" fill="blue" /&gt;
+&lt;/svg&gt;
+</code></pre>
+<p>ブラウザによって画像としてレンダリングされます。</p>
+<svg width="120" height="120" viewBox="0 0 120 120">
+    <rect x="10" y="10" width="100" height="100" rx="15" ry="15" fill="red"></rect>
+    <circle cx="50" cy="50" r="50" fill="blue"></circle>
+</svg>
+
+<p>y 軸が下向きなので少しだけ違和感があるかもしれませんが、HTML の読み書きができれば SVG も問題なく扱えるはずです。</p>
+<h2 id="elm-svg-">Elm で SVG を記述しよう</h2>
+<p>同じことを Elm でもやってみましょう。
+Ellie に同じサンプルコードを用意しました。</p>
+<p><a href="https://ellie-app.com/5x8N5hXk3RFa1" target="_blank">
+    elm/svg sample<span>Ellie</span>
+</a></p>
+<pre><code class="lang-Elm">import Svg exposing (Svg, svg, rect, circle)
+import Svg.Attributes exposing (width, height, viewBox, x, y, rx, ry, cx, cy, r, fill)
+
+main : Svg msg
+main =
+    svg
+        [ width "120"
+        , height "120"
+        , viewBox "0 0 120 120"
+        ]
+        [ rect
+                [ x "10"
+                , y "10"
+                , width "100"
+                , height "100"
+                , rx "15"
+                , ry "15"
+                , fill "red"
+                ]
+                []
+        , circle
+                [ cx "50"
+                , cy "50"
+                , r "50"
+                , fill "blue"
+                ]
+                []
+        ]
+</code></pre>
+<p>記法の都合でコードが縦長になりましたが、元の SVG と対応しているのがよく分かります。
+もう少し丁寧に解説をしてみます。</p>
+<h3 id="-">モジュールのインポート</h3>
+<pre><code class="lang-Elm">import Svg exposing (Svg, svg, rect, circle)
+import Svg.Attributes exposing (width, height, viewBox, x, y, rx, ry, cx, cy, r, fill)
+</code></pre>
+<p>コードの先頭で、2 つのモジュール Svg と Svg.Attributes をインポートしました。
+これらは Elm が公式に提供しているパッケージ elm/svg に含まれています。</p>
+<p><a href="https://package.elm-lang.org/packages/elm/svg/latest/" target="_blank">
+    svg 1.0.1<span>Elm Packages</span>
+</a></p>
+<p>この記事のサンプルコードは、リンク先のサンプルコードをより分かりやすくなるように書き直したものです。</p>
+<h3 id="main-">main 関数の初期化</h3>
+<p>Svg の関数は Html と同様に扱うことができます。</p>
+<pre><code class="lang-Elm">main : Svg msg
+main =
+    svg
+        [ width "120"
+        , height "120"
+        , viewBox "0 0 120 120"
+        ]
+        []
+</code></pre>
+<p>svg の第一引数には width, height, viewBox を指定しました。</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>width</td>
+<td>画像の "幅 (px)"</td>
+</tr>
+<tr>
+<td>height</td>
+<td>画像の "高さ (px)"</td>
+</tr>
+<tr>
+<td>viewBox</td>
+<td>描画領域の "x 座標 y 座標 幅 高さ"</td>
+</tr>
+</tbody>
+</table>
+<p>viewBox は見慣れない属性かもしれません。
+この領域内に作成された図形が画面にレンダリングされます。</p>
+<p>慣れるまでは、サンプルのように "0 0 (width に指定した値) (height に指定した値)" という指定が無難でしょう。
+必要に応じて SVG の仕様や解説記事を検索してください。</p>
+<p><a href="https://triple-underscore.github.io/SVG11/struct.html#NewDocument" target="_blank">
+    SVG 文書片を定義する： svg 要素<span>文書構造 – SVG 1.1 （第２版）</span>
+</a></p>
+<h3 id="-rect">四角形（矩形）を描く：rect</h3>
+<p>矩形は「くけい」と読みます。
+これを知っていると、次は「矩計（かなばかり）図」が読めなくなります。</p>
+<pre><code class="lang-Elm">rect
+    [ x "10"
+    , y "10"
+    , width "100"
+    , height "100"
+    , rx "15"
+    , ry "15"
+    , fill "red"
+    ]
+    []
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>"x 座標 (px)"</td>
+</tr>
+<tr>
+<td>y</td>
+<td>"y 座標 (px)"</td>
+</tr>
+<tr>
+<td>width</td>
+<td>"幅 (px)"</td>
+</tr>
+<tr>
+<td>height</td>
+<td>"高さ (px)"</td>
+</tr>
+<tr>
+<td>rx</td>
+<td>"角丸の x 軸半径　(px)"</td>
+</tr>
+<tr>
+<td>ry</td>
+<td>"角丸の y 軸半径　(px)"</td>
+</tr>
+<tr>
+<td>fill</td>
+<td>塗りつぶし色の指定（色）</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://triple-underscore.github.io/SVG11/shapes.html#RectElement" target="_blank">
+    rect 要素<span>基本図形 – SVG 1.1 （第２版）</span>
+</a></p>
+<h3 id="-circle">円を描く：circle</h3>
+<pre><code class="lang-Elm">circle
+    [ cx "50"
+    , cy "50"
+    , r "50"
+    , fill "blue"
+    ]
+    []
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cx</td>
+<td>"中心の x 座標 (px)"</td>
+</tr>
+<tr>
+<td>cy</td>
+<td>"中心の y 座標 (px)"</td>
+</tr>
+<tr>
+<td>r</td>
+<td>"円の半径　(px)"</td>
+</tr>
+<tr>
+<td>fill</td>
+<td>塗りつぶし色の指定（色）</td>
+</tr>
+</tbody>
+</table>
+<p>楕円にしたいときは ellipse を使います。</p>
+<p><a href="https://triple-underscore.github.io/SVG11/shapes.html#CircleElement" target="_blank">
+    circle 要素<span>基本図形 – SVG 1.1 （第２版）</span>
+</a></p>
+<h3 id="-">そのほかの図形</h3>
+<p>パス・基本図形・テキストなどの要素と、様々なアトリビュートを組み合わせて、表現豊かな SVG を作成することができます。</p>
+<p><a href="https://triple-underscore.github.io/SVG11/paths.html" target="_blank">
+    パス – SVG 1.1 （第２版）<span>https://triple-underscore.github.io</span>
+</a></p>
+<p><a href="https://triple-underscore.github.io/SVG11/shapes.html" target="_blank">
+    基本図形 – SVG 1.1 （第２版）<span>https://triple-underscore.github.io</span>
+</a></p>
+<p><a href="https://triple-underscore.github.io/SVG11/text.html" target="_blank">
+    テキスト – SVG 1.1 （第２版）<span>https://triple-underscore.github.io</span>
+</a></p>
+<h2 id="-elm-">利用できる Elm のパッケージ</h2>
+<p>Elm Packages で使えそうなパッケージを探してみましょう。</p>
+<p><a href="https://package.elm-lang.org" target="_blank">
+    Elm Packages<span>https://package.elm-lang.org</span>
+</a></p>
+<h3 id="svg-">SVG の基本となるパッケージ</h3>
+<p>Elm では、SVG を扱うために 2 種類のパッケージが用意されています。</p>
+<table>
+<thead>
+<tr>
+<th>パッケージ</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>elm/svg</td>
+<td>Elm 公式の SVG パッケージ</td>
+</tr>
+<tr>
+<td>elm-community/typed-svg</td>
+<td>属性の型情報を付加したパッケージ</td>
+</tr>
+</tbody>
+</table>
+<p>どちらも SVG 用の基本的なモジュールを含み、互換性のあるパッケージです。
+好みに応じて使い分けると良いでしょう。
+データの可視化など、より複雑な SVG を扱う際には elm-community/typed-svg の使用をお薦めします。</p>
+<h3 id="svg-">SVG の表現力を高めるパッケージ</h3>
+<p>より複雑な SVG を作成するためのパッケージも用意されています。
+データの可視化（ビジュアライゼーション）や、ジェネラティブ・アートに挑戦してみるのも良いですね！</p>
+<table>
+<thead>
+<tr>
+<th>パッケージ</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>gampleman/elm-visualization</td>
+<td>D3.js に由来するデータ可視化用のライブラリ</td>
+</tr>
+<tr>
+<td>terezka/line-charts</td>
+<td>グラフ / チャート用のパッケージ</td>
+</tr>
+<tr>
+<td>gicentre/elm-vega</td>
+<td>Port を介して JavaScript の Vega を利用するためのパッケージ</td>
+</tr>
+</tbody>
+</table>
+<p>また、path を記述するためのパッケージは複数存在するようです。</p>
+<table>
+<thead>
+<tr>
+<th>パッケージ</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Spaxe/svg-pathd</td>
+<td>d 属性を、M, L, Z などオリジナルの SVG と同様の記法で記述できる</td>
+</tr>
+<tr>
+<td>folkertdev/svg-path-lowlevel</td>
+<td>d 属性を、SVG の記法よりも読みやすく宣言的に記述できる</td>
+</tr>
+<tr>
+<td>folkertdev/one-true-path-experiment</td>
+<td>配列から path を生成するためのパッケージ</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-">注意：廃止されたパッケージ</h3>
+<p>以下のパッケージは elm/svg よりも前に使用されていたもので、現在は廃止されています。
+ブラウザの検索結果に出ることがあるので注意してください。</p>
+<table>
+<thead>
+<tr>
+<th>パッケージ</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>evancz/elm-svg</td>
+<td>廃止</td>
+</tr>
+<tr>
+<td>elm-lang/svg</td>
+<td>廃止</td>
+</tr>
+</tbody>
+</table>
+<h2 id="svg-">SVG は難しくない！</h2>
+<p>でしょ？</p>
+</div></article></main><footer class="_8ed6b1b0"><p class="_84da74c4">© 2020 y047aka</p></footer></body></html>
