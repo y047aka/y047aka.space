@@ -1,15 +1,17 @@
 module Static.Basic exposing (main)
 
-import Css exposing (auto, margin2, padding2, px, width, zero)
+import Css exposing (..)
 import Css.Global exposing (global)
 import Css.Reset exposing (ress)
-import Html.Styled exposing (Html, a, div, h2, li, main_, text, ul)
-import Html.Styled.Attributes exposing (class, css, href, name)
+import Html.Styled exposing (Html, a, h1, li, main_, span, text, ul)
+import Html.Styled.Attributes exposing (css, href, name)
+import Iso8601
 import Json.Decode as D exposing (Decoder)
 import Siteelm.Html.Styled as Html
-import Siteelm.Html.Styled.Attributes exposing (charset, content, rel)
+import Siteelm.Html.Styled.Attributes as Attributes exposing (charset, content, rel)
 import Siteelm.Page exposing (Page, page)
 import Static.View exposing (siteFooter, siteHeader)
+import Time exposing (Month(..), Posix, Zone)
 
 
 main : Page Preamble
@@ -32,7 +34,10 @@ type alias Preamble =
 type alias Article =
     { url : String
     , title : String
-    , date : String
+    , createdAt : Posix
+    , updatedAt : Maybe Posix
+
+    -- Result (List DeadEnd) Posix
     }
 
 
@@ -47,10 +52,11 @@ preambleDecoder =
 
 articleDecoder : Decoder Article
 articleDecoder =
-    D.map3 Article
+    D.map4 Article
         (D.field "url" D.string)
         (D.field "title" D.string)
-        (D.field "date" D.string)
+        (D.field "createdAt" Iso8601.decoder)
+        (D.field "updatedAt" (D.nullable Iso8601.decoder))
 
 
 {-| Make contents inside the _head_ tag.
@@ -59,7 +65,8 @@ viewHead : Preamble -> String -> List (Html Never)
 viewHead preamble _ =
     [ Html.meta [ charset "utf-8" ]
     , Html.title [] (preamble.title ++ " | y047aka.space")
-    , Html.meta [ name "description", content "this is a simple static site generator for elm" ]
+    , Html.meta [ name "description", Attributes.content "this is a simple static site generator for elm" ]
+    , Html.link [ rel "stylesheet", href "https://fonts.googleapis.com/css2?family=Saira:wght@400;700&display=swap" ]
     , Html.link [ rel "stylesheet", href "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/default.min.css" ]
     , Html.script "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" ""
     , Html.script "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/elm.min.js" ""
@@ -80,31 +87,114 @@ viewBody preamble body =
             , padding2 (px 20) zero
             ]
         ]
-        [ div []
-            [ h2 [] [ text "get preambles in a directory" ]
-            , div [ class "inner" ]
-                [ div []
-                    [ text "Use \"preamblesIn\" parameter to get preambles of files in a specified directory."
-                    ]
-                , div []
-                    [ text "Be aware that there are some parameters which Siteelm automatically sets in an preamble. At the moment, a property \"url\" is that."
-                    ]
-                , ul []
-                    (List.map
-                        viewArticle
-                        preamble.articles
-                    )
-                ]
-            ]
-        ]
+        [ viewArticles preamble.articles ]
     , siteFooter
     ]
 
 
+viewArticles : List Article -> Html Never
+viewArticles articles =
+    ul []
+        (List.map
+            viewArticle
+            articles
+        )
+
+
 viewArticle : Article -> Html Never
 viewArticle article =
-    li []
-        [ a [ href article.url ]
-            [ text article.title
+    li
+        [ css
+            [ listStyle none
+            , nthChild "n+1"
+                [ marginTop (px 15) ]
             ]
         ]
+        [ a
+            [ href article.url
+            , css
+                [ display block
+                , padding (px 20)
+                , textDecoration none
+                , backgroundColor (hsl 0 0 0.95)
+                , borderRadius (px 15)
+                ]
+            ]
+            [ h1
+                [ css
+                    [ fontSize (px 17)
+                    , fontWeight bold
+                    , lineHeight (num 1.5)
+                    , color (hsl 0 0 0.2)
+                    ]
+                ]
+                [ text article.title ]
+            , span
+                [ css
+                    [ fontSize (px 13)
+                    , lineHeight (int 1)
+                    , color (hsl 0 0 0.4)
+                    ]
+                ]
+                [ text (dateString Time.utc article.createdAt)
+                ]
+            ]
+        ]
+
+
+dateString : Zone -> Posix -> String
+dateString zone posix =
+    let
+        year =
+            Time.toYear zone posix
+                |> String.fromInt
+
+        month =
+            Time.toMonth zone posix
+                |> monthToString
+
+        day =
+            Time.toDay zone posix
+                |> String.fromInt
+    in
+    month ++ " " ++ day ++ ", " ++ year
+
+
+monthToString : Month -> String
+monthToString month =
+    case month of
+        Jan ->
+            "Jan"
+
+        Feb ->
+            "Feb"
+
+        Mar ->
+            "Mar"
+
+        Apr ->
+            "Apr"
+
+        May ->
+            "May"
+
+        Jun ->
+            "Jun"
+
+        Jul ->
+            "Jul"
+
+        Aug ->
+            "Aug"
+
+        Sep ->
+            "Sep"
+
+        Oct ->
+            "Oct"
+
+        Nov ->
+            "Nov"
+
+        Dec ->
+            "Dec"

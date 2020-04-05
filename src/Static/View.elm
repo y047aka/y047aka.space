@@ -11,8 +11,6 @@ siteHeader =
     Html.header
         [ css
             [ padding2 (px 20) (px 20)
-            , backgroundColor (hex "#666")
-            , color (hex "#fff")
             ]
         ]
         [ Html.h1
@@ -20,7 +18,7 @@ siteHeader =
                 [ display block
                 , width (px 620)
                 , margin2 zero auto
-                , fontSize (px 15)
+                , fontSize (px 18)
                 , fontWeight normal
                 ]
             ]
@@ -42,9 +40,7 @@ siteFooter =
         [ css
             [ padding2 (px 20) (px 20)
             , textAlign right
-            , fontSize (px 15)
-            , backgroundColor (hex "#666")
-            , color (hex "#fff")
+            , fontSize (px 14)
             ]
         ]
         [ Html.p
@@ -65,7 +61,8 @@ viewArticle attributes elements =
             , property "-webkit-text-size-adjust" "100%"
             , lineHeight (num 1.5)
             , color (hex "#24292e")
-            , fontFamilies [ qt "-apple-system", qt "BlinkMacSystemFont", qt "Segoe UI", qt "Helvetica", qt "Arial,sans-serif", qt "Apple Color Emoji", qt "Segoe UI Emoji" ]
+
+            -- , fontFamilies [ qt "-apple-system", qt "BlinkMacSystemFont", qt "Segoe UI", qt "Helvetica", qt "Arial,sans-serif", qt "Apple Color Emoji", qt "Segoe UI Emoji" ]
             , fontSize (px 16)
             , lineHeight (num 1.5)
             , property "word-wrap" "break-word"

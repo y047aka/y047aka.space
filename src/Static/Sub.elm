@@ -37,6 +37,7 @@ viewHead : Preamble -> String -> List (Html Never)
 viewHead preamble _ =
     [ Html.meta [ charset "utf-8" ]
     , Html.title [] (preamble.title ++ " | y047aka.space")
+    , Html.link [ rel "stylesheet", href "https://fonts.googleapis.com/css2?family=Saira:wght@400;700&display=swap" ]
     , Html.link [ rel "stylesheet", href "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/default.min.css" ]
     , Html.script "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" ""
     , Html.script "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/elm.min.js" ""
