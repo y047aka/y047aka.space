@@ -1,6 +1,7 @@
 ---
 module: Static.Sub
-date: 2020-01-04
+createdAt: 2019-04-26
+updatedAt: 2019-04-26
 title: Elmの歩き方
 ---
 

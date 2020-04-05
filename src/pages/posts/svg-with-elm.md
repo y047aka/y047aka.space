@@ -1,6 +1,7 @@
 ---
 module: Static.Sub
-date: 2020-01-02
+createdAt: 2019-05-14
+updatedAt: 2019-05-15
 title: elm/svgを使ってみよう（SVGの基礎知識）
 ---
 
