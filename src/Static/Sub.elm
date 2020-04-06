@@ -1,14 +1,12 @@
 module Static.Sub exposing (main)
 
 import Css exposing (..)
-import Css.Global exposing (global)
-import Css.Reset exposing (ress)
 import Html.Styled exposing (Html, a, fromUnstyled, h2, main_, nav, text)
 import Html.Styled.Attributes exposing (class, css, href)
 import Json.Decode as D exposing (Decoder)
 import Markdown
 import Siteelm.Html.Styled as Html
-import Siteelm.Html.Styled.Attributes exposing (charset, rel)
+import Siteelm.Html.Styled.Attributes exposing (rel)
 import Siteelm.Page exposing (Page, page)
 import Static.View exposing (siteFooter, siteHeader, viewArticle)
 
@@ -35,14 +33,11 @@ preambleDecoder =
 
 viewHead : Preamble -> String -> List (Html Never)
 viewHead preamble _ =
-    [ Html.meta [ charset "utf-8" ]
-    , Html.title [] (preamble.title ++ " | y047aka.space")
-    , Html.link [ rel "stylesheet", href "https://fonts.googleapis.com/css2?family=Saira:wght@400;700&display=swap" ]
+    [ Html.title [] (preamble.title ++ " | y047aka.space")
     , Html.link [ rel "stylesheet", href "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/default.min.css" ]
     , Html.script "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" ""
     , Html.script "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/elm.min.js" ""
     , Html.script "" "hljs.initHighlightingOnLoad();"
-    , global ress
     ]
 
 

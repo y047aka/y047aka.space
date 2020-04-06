@@ -1,5 +1,5 @@
 ---
-module: Static.Basic
+module: Static.Top
 title: Top
 organizations:
   - name: 株式会社 Siiibo

@@ -1,14 +1,12 @@
-module Static.Basic exposing (main)
+module Static.Top exposing (main)
 
 import Css exposing (..)
-import Css.Global exposing (global)
-import Css.Reset exposing (ress)
 import Html.Styled exposing (Html, a, h1, li, main_, section, span, text, ul)
 import Html.Styled.Attributes as Attributes exposing (css, href, name)
 import Iso8601
 import Json.Decode as D exposing (Decoder)
 import Siteelm.Html.Styled as Html
-import Siteelm.Html.Styled.Attributes as Attributes exposing (charset, content, rel)
+import Siteelm.Html.Styled.Attributes as Attributes exposing (content)
 import Siteelm.Page exposing (Page, page)
 import Static.View exposing (siteFooter, siteHeader)
 import Time exposing (Month(..), Posix, Zone)
@@ -79,23 +77,16 @@ articleDecoder =
 {-| Make contents inside the _head_ tag.
 -}
 viewHead : Preamble -> String -> List (Html Never)
-viewHead preamble _ =
-    [ Html.meta [ charset "utf-8" ]
-    , Html.title [] (preamble.title ++ " | y047aka.space")
+viewHead _ _ =
+    [ Html.title [] "y047aka.space"
     , Html.meta [ name "description", Attributes.content "this is a simple static site generator for elm" ]
-    , Html.link [ rel "stylesheet", href "https://fonts.googleapis.com/css2?family=Saira:wght@400;700&display=swap" ]
-    , Html.link [ rel "stylesheet", href "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/default.min.css" ]
-    , Html.script "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" ""
-    , Html.script "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/elm.min.js" ""
-    , Html.script "" "hljs.initHighlightingOnLoad();"
-    , global ress
     ]
 
 
 {-| Make contents inside the _body_ tag. The parameter "body" is usually something like markdown.
 -}
 viewBody : Preamble -> String -> List (Html Never)
-viewBody preamble body =
+viewBody preamble _ =
     [ siteHeader
     , main_
         [ css
@@ -124,11 +115,11 @@ viewBody preamble body =
             , children =
                 [ ul []
                     (List.map
-                        (\article ->
+                        (\{ title, createdAt, url } ->
                             linkView
-                                { title = article.title
-                                , sub = dateString Time.utc article.createdAt
-                                , url = article.url
+                                { title = title
+                                , sub = dateString Time.utc createdAt
+                                , url = url
                                 }
                         )
                         preamble.articles
