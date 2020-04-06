@@ -1,7 +1,7 @@
 module Static.View exposing (siteFooter, siteHeader, viewArticle)
 
 import Css exposing (..)
-import Css.Global exposing (a, adjacentSiblings, blockquote, children, code, dd, descendants, details, div, dl, dt, each, h1, h2, h3, h4, h5, h6, hr, img, li, ol, p, selector, summary, td, th, tr, ul, withAttribute)
+import Css.Global exposing (a, adjacentSiblings, blockquote, children, code, dd, descendants, details, dl, dt, each, h1, h2, h3, h4, h5, h6, hr, img, li, ol, p, selector, summary, td, th, tr, ul, withAttribute)
 import Css.Media as Media exposing (only, screen, withMedia)
 import Html.Styled as Html exposing (Attribute, Html, text)
 import Html.Styled.Attributes exposing (css, href)

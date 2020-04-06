@@ -2,7 +2,7 @@ module Siteelm.Page exposing (Page, page)
 
 import Browser
 import Css exposing (..)
-import Css.Global exposing (children, global, main_)
+import Css.Global exposing (global)
 import Css.Reset exposing (ress)
 import Html.Styled exposing (Html, text, toUnstyled)
 import Html.Styled.Attributes exposing (css, href, name)
