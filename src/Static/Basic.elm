@@ -27,7 +27,15 @@ main =
 -}
 type alias Preamble =
     { title : String
+    , organizations : List Organization
     , articles : List Article
+    }
+
+
+type alias Organization =
+    { name : String
+    , vision : String
+    , url : String
     }
 
 
@@ -45,9 +53,18 @@ type alias Article =
 -}
 preambleDecoder : Decoder Preamble
 preambleDecoder =
-    D.map2 Preamble
+    D.map3 Preamble
         (D.field "title" D.string)
+        (D.field "organizations" (D.list organizationDecoder))
         (D.field "articles" (D.list articleDecoder))
+
+
+organizationDecoder : Decoder Organization
+organizationDecoder =
+    D.map3 Organization
+        (D.field "name" D.string)
+        (D.field "vision" D.string)
+        (D.field "url" D.string)
 
 
 articleDecoder : Decoder Article
@@ -90,17 +107,16 @@ viewBody preamble body =
             { title = "I'm belong to..."
             , children =
                 [ ul []
-                    [ linkView
-                        { title = "株式会社 Siiibo"
-                        , sub = "自由、透明、公正な直接金融を創造する"
-                        , url = "https://siiibo.com"
-                        }
-                    , linkView
-                        { title = "宇宙広報団体 TELSTAR"
-                        , sub = "宇宙への興味を 0 → 1 へ"
-                        , url = "http://spacemgz-telstar.com/"
-                        }
-                    ]
+                    (List.map
+                        (\{ name, vision, url } ->
+                            linkView
+                                { title = name
+                                , sub = vision
+                                , url = url
+                                }
+                        )
+                        preamble.organizations
+                    )
                 ]
             }
         , topSection
