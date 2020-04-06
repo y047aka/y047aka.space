@@ -74,15 +74,8 @@ renderPage head body model =
                         (head p model.body)
                 , Html.body
                     [ css
-                        [ property "display" "flex"
-                        , flexDirection column
-                        , minHeight (vh 100)
-                        , fontFamilies [ qt "Saira", sansSerif.value ]
+                        [ fontFamilies [ qt "Saira", sansSerif.value ]
                         , color (hsl 0 0 0.2)
-                        , children
-                            [ main_
-                                [ flex (int 1) ]
-                            ]
                         ]
                     ]
                     (body p model.body)

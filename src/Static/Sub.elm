@@ -1,6 +1,7 @@
 module Static.Sub exposing (main)
 
 import Css exposing (..)
+import Css.Media as Media exposing (only, screen, withMedia)
 import Html.Styled exposing (Html, a, fromUnstyled, h2, main_, nav, text)
 import Html.Styled.Attributes exposing (class, css, href)
 import Json.Decode as D exposing (Decoder)
@@ -49,6 +50,10 @@ viewBody preamble body =
             [ width (px 620)
             , margin2 zero auto
             , padding2 (px 20) zero
+            , withMedia [ only screen [ Media.maxWidth (px 480) ] ]
+                [ width (pct 100)
+                , padding (px 15)
+                ]
             ]
         ]
         [ nav []

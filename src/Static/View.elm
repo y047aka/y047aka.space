@@ -2,22 +2,24 @@ module Static.View exposing (siteFooter, siteHeader, viewArticle)
 
 import Css exposing (..)
 import Css.Global exposing (a, adjacentSiblings, blockquote, children, code, dd, descendants, details, div, dl, dt, each, h1, h2, h3, h4, h5, h6, hr, img, li, ol, p, selector, summary, td, th, tr, ul, withAttribute)
+import Css.Media as Media exposing (only, screen, withMedia)
 import Html.Styled as Html exposing (Attribute, Html, text)
 import Html.Styled.Attributes exposing (css, href)
 
 
 siteHeader : Html Never
 siteHeader =
-    Html.header
-        [ css
-            [ padding2 (px 20) (px 20)
-            ]
-        ]
+    Html.header []
         [ Html.h1
             [ css
                 [ display block
                 , width (px 620)
                 , margin2 zero auto
+                , padding2 (px 20) zero
+                , withMedia [ only screen [ Media.maxWidth (px 480) ] ]
+                    [ width (pct 100)
+                    , padding (px 15)
+                    ]
                 , fontSize (px 18)
                 , fontWeight normal
                 ]
@@ -36,17 +38,19 @@ siteHeader =
 
 siteFooter : Html Never
 siteFooter =
-    Html.footer
-        [ css
-            [ padding2 (px 20) (px 20)
-            , textAlign right
-            , fontSize (px 14)
-            ]
-        ]
+    Html.footer []
         [ Html.p
             [ css
-                [ width (px 620)
+                [ display block
+                , width (px 620)
                 , margin2 zero auto
+                , padding2 (px 20) zero
+                , withMedia [ only screen [ Media.maxWidth (px 480) ] ]
+                    [ width (pct 100)
+                    , padding (px 15)
+                    ]
+                , textAlign right
+                , fontSize (px 14)
                 ]
             ]
             [ text "© 2020 y047aka" ]

@@ -1,6 +1,7 @@
 module Static.Top exposing (main)
 
 import Css exposing (..)
+import Css.Media as Media exposing (only, screen, withMedia)
 import Html.Styled exposing (Html, a, h1, li, main_, section, span, text, ul)
 import Html.Styled.Attributes as Attributes exposing (css, href)
 import Iso8601
@@ -86,12 +87,7 @@ viewHead _ _ =
 viewBody : Preamble -> String -> List (Html Never)
 viewBody preamble _ =
     [ siteHeader
-    , main_
-        [ css
-            [ width (px 620)
-            , margin2 zero auto
-            ]
-        ]
+    , main_ []
         [ topSection
             { title = "I'm belong to..."
             , children =
@@ -132,7 +128,16 @@ viewBody preamble _ =
 topSection : { title : String, children : List (Html Never) } -> Html Never
 topSection { title, children } =
     section
-        [ css [ padding2 (px 30) zero ] ]
+        [ css
+            [ width (px 620)
+            , margin2 zero auto
+            , padding2 (px 25) zero
+            , withMedia [ only screen [ Media.maxWidth (px 480) ] ]
+                [ width (pct 100)
+                , padding (px 15)
+                ]
+            ]
+        ]
         (h1
             [ css
                 [ paddingBottom (px 10)
@@ -171,6 +176,8 @@ linkView { title, sub, url } =
             , css
                 [ display block
                 , padding (px 20)
+                , withMedia [ only screen [ Media.maxWidth (px 480) ] ]
+                    [ padding (px 15) ]
                 , textDecoration none
                 , backgroundColor (hsl 0 0 0.95)
                 , borderRadius (px 10)
