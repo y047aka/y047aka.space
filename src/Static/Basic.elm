@@ -124,11 +124,11 @@ viewBody preamble body =
             , children =
                 [ ul []
                     (List.map
-                        (\article ->
+                        (\{ title, createdAt, url } ->
                             linkView
-                                { title = article.title
-                                , sub = dateString Time.utc article.createdAt
-                                , url = article.url
+                                { title = title
+                                , sub = dateString Time.utc createdAt
+                                , url = url
                                 }
                         )
                         preamble.articles
