@@ -68,13 +68,14 @@ renderPage head body model =
                     List.append
                         [ Html.meta [ charset "utf-8" ]
                         , Html.meta [ name "viewport", Attributes.content "width=device-width, initial-scale=1" ]
-                        , Html.link [ rel "stylesheet", href "https://fonts.googleapis.com/css2?family=Saira:wght@400;700&display=swap" ]
+                        , Html.link [ rel "stylesheet", href "https://fonts.googleapis.com/css2?family=Saira:wght@400;500&display=swap" ]
+                        , Html.link [ rel "stylesheet", href "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&display=swap" ]
                         , global ress
                         ]
                         (head p model.body)
                 , Html.body
                     [ css
-                        [ fontFamilies [ qt "Saira", sansSerif.value ]
+                        [ fontFamilies [ qt "Saira", qt "Noto Sans JP", sansSerif.value ]
                         , color (hsl 0 0 0.2)
                         ]
                     ]

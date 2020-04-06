@@ -142,6 +142,7 @@ topSection { title, children } =
             [ css
                 [ paddingBottom (px 10)
                 , fontSize (px 16)
+                , fontWeight (int 500)
                 , lineHeight (int 1)
                 ]
             ]
@@ -186,6 +187,7 @@ linkView { title, sub, url } =
             [ h1
                 [ css
                     [ fontSize (px 16)
+                    , fontWeight (int 500)
                     , lineHeight (num 1.5)
                     , color (hsl 0 0 0.2)
                     ]
