@@ -2,11 +2,10 @@ module Static.Top exposing (main)
 
 import Css exposing (..)
 import Html.Styled exposing (Html, a, h1, li, main_, section, span, text, ul)
-import Html.Styled.Attributes as Attributes exposing (css, href, name)
+import Html.Styled.Attributes as Attributes exposing (css, href)
 import Iso8601
 import Json.Decode as D exposing (Decoder)
 import Siteelm.Html.Styled as Html
-import Siteelm.Html.Styled.Attributes as Attributes exposing (content)
 import Siteelm.Page exposing (Page, page)
 import Static.View exposing (siteFooter, siteHeader)
 import Time exposing (Month(..), Posix, Zone)
@@ -79,7 +78,6 @@ articleDecoder =
 viewHead : Preamble -> String -> List (Html Never)
 viewHead _ _ =
     [ Html.title [] "y047aka.space"
-    , Html.meta [ name "description", Attributes.content "this is a simple static site generator for elm" ]
     ]
 
 

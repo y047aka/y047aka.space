@@ -5,10 +5,10 @@ import Css exposing (..)
 import Css.Global exposing (children, global, main_)
 import Css.Reset exposing (ress)
 import Html.Styled exposing (Html, text, toUnstyled)
-import Html.Styled.Attributes exposing (css, href)
+import Html.Styled.Attributes exposing (css, href, name)
 import Json.Decode exposing (Decoder, decodeString)
 import Siteelm.Html.Styled as Html
-import Siteelm.Html.Styled.Attributes exposing (charset, rel)
+import Siteelm.Html.Styled.Attributes as Attributes exposing (charset, rel)
 
 
 {-| Generate a Program for static page. You need to give a decoder for your
@@ -67,6 +67,7 @@ renderPage head body model =
                 [ Html.head [] <|
                     List.append
                         [ Html.meta [ charset "utf-8" ]
+                        , Html.meta [ name "viewport", Attributes.content "width=device-width, initial-scale=1" ]
                         , Html.link [ rel "stylesheet", href "https://fonts.googleapis.com/css2?family=Saira:wght@400;700&display=swap" ]
                         , global ress
                         ]
