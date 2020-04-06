@@ -3,8 +3,8 @@ module Static.Basic exposing (main)
 import Css exposing (..)
 import Css.Global exposing (global)
 import Css.Reset exposing (ress)
-import Html.Styled exposing (Html, a, h1, li, main_, span, text, ul)
-import Html.Styled.Attributes exposing (css, href, name)
+import Html.Styled exposing (Html, a, h1, li, main_, section, span, text, ul)
+import Html.Styled.Attributes as Attributes exposing (css, href, name)
 import Iso8601
 import Json.Decode as D exposing (Decoder)
 import Siteelm.Html.Styled as Html
@@ -84,51 +84,101 @@ viewBody preamble body =
         [ css
             [ width (px 620)
             , margin2 zero auto
-            , padding2 (px 20) zero
             ]
         ]
-        [ viewArticles preamble.articles ]
+        [ topSection
+            { title = "I'm belong to..."
+            , children =
+                [ ul []
+                    [ linkView
+                        { title = "株式会社 Siiibo"
+                        , sub = "自由、透明、公正な直接金融を創造する"
+                        , url = "https://siiibo.com"
+                        }
+                    , linkView
+                        { title = "宇宙広報団体 TELSTAR"
+                        , sub = "宇宙への興味を 0 → 1 へ"
+                        , url = "http://spacemgz-telstar.com/"
+                        }
+                    ]
+                ]
+            }
+        , topSection
+            { title = "Blog posts"
+            , children =
+                [ ul []
+                    (List.map
+                        (\article ->
+                            linkView
+                                { title = article.title
+                                , sub = dateString Time.utc article.createdAt
+                                , url = article.url
+                                }
+                        )
+                        preamble.articles
+                    )
+                ]
+            }
+        ]
     , siteFooter
     ]
 
 
-viewArticles : List Article -> Html Never
-viewArticles articles =
-    ul []
-        (List.map
-            viewArticle
-            articles
+topSection : { title : String, children : List (Html Never) } -> Html Never
+topSection { title, children } =
+    section
+        [ css [ padding2 (px 30) zero ] ]
+        (h1
+            [ css
+                [ paddingBottom (px 10)
+                , fontSize (px 16)
+                , lineHeight (int 1)
+                ]
+            ]
+            [ text title ]
+            :: children
         )
 
 
-viewArticle : Article -> Html Never
-viewArticle article =
+linkView :
+    { title : String
+    , sub : String
+    , url : String
+    }
+    -> Html Never
+linkView { title, sub, url } =
     li
         [ css
             [ listStyle none
-            , nthChild "n+1"
-                [ marginTop (px 15) ]
+            , nthChild "n+2"
+                [ marginTop (px 5) ]
             ]
         ]
         [ a
-            [ href article.url
+            [ href url
+            , Attributes.target <|
+                case String.left 1 url of
+                    "/" ->
+                        "_self"
+
+                    _ ->
+                        "_blank"
             , css
                 [ display block
                 , padding (px 20)
                 , textDecoration none
                 , backgroundColor (hsl 0 0 0.95)
-                , borderRadius (px 15)
+                , borderRadius (px 10)
                 ]
             ]
             [ h1
                 [ css
-                    [ fontSize (px 17)
-                    , fontWeight bold
+                    [ fontSize (px 16)
                     , lineHeight (num 1.5)
                     , color (hsl 0 0 0.2)
                     ]
                 ]
-                [ text article.title ]
+                [ text title ]
             , span
                 [ css
                     [ fontSize (px 13)
@@ -136,8 +186,7 @@ viewArticle article =
                     , color (hsl 0 0 0.4)
                     ]
                 ]
-                [ text (dateString Time.utc article.createdAt)
-                ]
+                [ text sub ]
             ]
         ]
 
