@@ -1,5 +1,6 @@
 module Static.Top exposing (main)
 
+import Color exposing (gray020, gray040, gray095)
 import Css exposing (..)
 import Css.Media as Media exposing (only, screen, withMedia)
 import Html.Styled exposing (Html, a, h1, li, main_, section, span, text, ul)
@@ -180,7 +181,7 @@ linkView { title, sub, url } =
                 , withMedia [ only screen [ Media.maxWidth (px 480) ] ]
                     [ padding (px 15) ]
                 , textDecoration none
-                , backgroundColor (hsl 0 0 0.95)
+                , backgroundColor gray095
                 , borderRadius (px 10)
                 ]
             ]
@@ -189,7 +190,7 @@ linkView { title, sub, url } =
                     [ fontSize (px 16)
                     , fontWeight (int 500)
                     , lineHeight (num 1.5)
-                    , color (hsl 0 0 0.2)
+                    , color gray020
                     ]
                 ]
                 [ text title ]
@@ -197,7 +198,7 @@ linkView { title, sub, url } =
                 [ css
                     [ fontSize (px 13)
                     , lineHeight (int 1)
-                    , color (hsl 0 0 0.4)
+                    , color gray040
                     ]
                 ]
                 [ text sub ]

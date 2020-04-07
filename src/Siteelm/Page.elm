@@ -1,6 +1,7 @@
 module Siteelm.Page exposing (Page, page)
 
 import Browser
+import Color exposing (gray020)
 import Css exposing (..)
 import Css.Global exposing (global)
 import Css.Reset exposing (ress)
@@ -76,7 +77,7 @@ renderPage head body model =
                 , Html.body
                     [ css
                         [ fontFamilies [ qt "Saira", qt "Noto Sans JP", sansSerif.value ]
-                        , color (hsl 0 0 0.2)
+                        , color gray020
                         ]
                     ]
                     (body p model.body)
