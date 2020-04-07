@@ -1,6 +1,6 @@
 module Static.Top exposing (main)
 
-import Color exposing (gray020, gray040, gray095)
+import Color.Scheme exposing (button, buttonOnHover)
 import Css exposing (..)
 import Css.Media as Media exposing (only, screen, withMedia)
 import Html.Styled exposing (Html, a, h1, li, main_, section, span, text, ul)
@@ -181,8 +181,10 @@ linkView { title, sub, url } =
                 , withMedia [ only screen [ Media.maxWidth (px 480) ] ]
                     [ padding (px 15) ]
                 , textDecoration none
-                , backgroundColor gray095
+                , backgroundColor button.background
                 , borderRadius (px 10)
+                , hover
+                    [ backgroundColor buttonOnHover.background ]
                 ]
             ]
             [ h1
@@ -190,7 +192,7 @@ linkView { title, sub, url } =
                     [ fontSize (px 16)
                     , fontWeight (int 500)
                     , lineHeight (num 1.5)
-                    , color gray020
+                    , color button.color
                     ]
                 ]
                 [ text title ]
@@ -198,7 +200,7 @@ linkView { title, sub, url } =
                 [ css
                     [ fontSize (px 13)
                     , lineHeight (int 1)
-                    , color gray040
+                    , color button.optionalColor
                     ]
                 ]
                 [ text sub ]
