@@ -4,7 +4,7 @@ import Color.Scheme exposing (button, buttonOnHover)
 import Css exposing (..)
 import Css.Media as Media exposing (only, screen, withMedia)
 import Html.Styled exposing (Html, a, h1, li, main_, section, span, text, ul)
-import Html.Styled.Attributes as Attributes exposing (css, href)
+import Html.Styled.Attributes as Attributes exposing (css, href, rel)
 import Iso8601
 import Json.Decode as D exposing (Decoder)
 import Siteelm.Html.Styled as Html
@@ -175,6 +175,13 @@ linkView { title, sub, url } =
 
                     _ ->
                         "_blank"
+            , rel <|
+                case String.left 1 url of
+                    "/" ->
+                        ""
+
+                    _ ->
+                        "noopener"
             , css
                 [ display block
                 , padding (px 20)
