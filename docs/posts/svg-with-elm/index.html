@@ -1,15 +1,15 @@
 <!doctype html>
-<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira:wght@400;500&amp;display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&amp;display=swap"><title>elm/svgを使ってみよう（SVGの基礎知識） | y047aka.space</title><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/default.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/elm.min.js"></script><script>hljs.initHighlightingOnLoad()</script><style>._6c2a7992{text-decoration:none;color:inherit}._72df195c{font-family:Saira,"Noto Sans JP",sans-serif;color:#333}._947c09d{display:block;width:620px;margin:0 auto;padding:20px 0;text-align:right;font-size:14px}@media only screen and (max-width:480px){._947c09d{width:100%;padding:15px}}._beb10df7{width:620px;margin:0 auto;padding:20px 0}@media only screen and (max-width:480px){._beb10df7{width:100%;padding:15px}}._c119abdc{display:block;width:620px;margin:0 auto;padding:20px 0;font-size:18px;font-weight:400}@media only screen and (max-width:480px){._c119abdc{width:100%;padding:15px}}._e80aba3c{-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;line-height:1.5;color:#24292e;font-size:16px;line-height:1.5;word-wrap:break-word}._e80aba3c details{display:block}._e80aba3c summary{display:list-item}._e80aba3c a{color:#0366d6;text-decoration:none}._e80aba3c a:hover{text-decoration:underline}._e80aba3c table{border-spacing:0;border-collapse:collapse}._e80aba3c td,._e80aba3c th{padding:0}._e80aba3c h1,._e80aba3c h2,._e80aba3c h3,._e80aba3c h4,._e80aba3c h5,._e80aba3c h6{margin-top:0;margin-bottom:0}._e80aba3c h1{font-size:32px}._e80aba3c h1,._e80aba3c h2{font-weight:600}._e80aba3c h2{font-size:24px}._e80aba3c h3{font-size:20px}._e80aba3c h3,._e80aba3c h4{font-weight:600}._e80aba3c h4{font-size:16px}._e80aba3c h5{font-size:14px}._e80aba3c h5,._e80aba3c h6{font-weight:600}._e80aba3c h6{font-size:12px}._e80aba3c p{margin-top:0;margin-bottom:10px}._e80aba3c blockquote{margin:0}._e80aba3c ol,._e80aba3c ul{padding-left:0;margin-top:0;margin-bottom:0}._e80aba3c ol ol,._e80aba3c ul ol{list-style-type:lower-roman}._e80aba3c ol ol ol,._e80aba3c ol ul ol,._e80aba3c ul ol ol,._e80aba3c ul ul ol{list-style-type:lower-alpha}._e80aba3c dd{margin-left:0}._e80aba3c code,._e80aba3c pre{font-family:SFMono-Regular,Consolas,"Liberation Mono",Menlo,monospace;font-size:12px}._e80aba3c pre{margin-top:0;margin-bottom:0}._e80aba3c blockquote,._e80aba3c details,._e80aba3c dl,._e80aba3c ol,._e80aba3c p,._e80aba3c pre,._e80aba3c table,._e80aba3c ul{margin-top:0;margin-bottom:16px}._e80aba3c hr{height:.25em;padding:0;margin:24px 0;background-color:#e1e4e8;border:0}._e80aba3c blockquote{padding:0 1em;color:#6a737d;border-left:.25em solid #dfe2e5}._e80aba3c blockquote>:first-child{margin-top:0}._e80aba3c blockquote>:last-child{margin-bottom:0}._e80aba3c h1,._e80aba3c h2,._e80aba3c h3,._e80aba3c h4,._e80aba3c h5,._e80aba3c h6{margin-top:24px;margin-bottom:16px;font-weight:600;line-height:1.25}._e80aba3c h1{font-size:2em}._e80aba3c h1,._e80aba3c h2{padding-bottom:.3em;border-bottom:1px solid #eaecef}._e80aba3c h2{font-size:1.5em}._e80aba3c h3{font-size:1.25em}._e80aba3c h4{font-size:1em}._e80aba3c h5{font-size:.875em}._e80aba3c h6{font-size:.85em;color:#6a737d}._e80aba3c ol,._e80aba3c ul{padding-left:2em}._e80aba3c ol ol,._e80aba3c ol ul,._e80aba3c ul ol,._e80aba3c ul ul{margin-top:0;margin-bottom:0}._e80aba3c li{word-wrap:break-all}._e80aba3c li+li{margin-top:.25em}._e80aba3c li>p{margin-top:16px}._e80aba3c dl{padding:0}._e80aba3c dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:600}._e80aba3c dl dd{padding:0 16px;margin-bottom:16px}._e80aba3c table{display:block;width:100%;overflow:auto}._e80aba3c table th{font-weight:600}._e80aba3c table td,._e80aba3c table th{padding:6px 13px;border:1px solid #dfe2e5}._e80aba3c table tr{background-color:#fff;border-top:1px solid #c6cbd1}._e80aba3c table tr:nth-child(2n){background-color:#f6f8fa}._e80aba3c img{max-width:100%;box-sizing:initial;background-color:#fff}._e80aba3c img[align=right]{padding-left:20px}._e80aba3c img[align=left]{padding-right:20px}._e80aba3c code{padding:.2em .4em;margin:0;font-size:85%;background-color:rgba(27,31,35,.05);border-radius:3px}._e80aba3c pre{word-wrap:normal}._e80aba3c pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:0 0;border:0}._e80aba3c pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f6f8fa;border-radius:3px}._e80aba3c pre code{display:inline;max-width:auto;padding:0;margin:0;overflow:visible;line-height:inherit;word-wrap:normal;background-color:initial;border:0}</style><style>html{box-sizing:border-box;-webkit-text-size-adjust:100%;word-break:normal;-moz-tab-size:4;tab-size:4}*,::after,::before{background-repeat:no-repeat;box-sizing:inherit}::after,::before{text-decoration:inherit;vertical-align:inherit}*{padding:0;margin:0}hr{overflow:visible;height:0}details,main{display:block}summary{display:list-item}small{font-size:80%}[hidden]{display:none}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}a{background:0 0}a:active,a:hover{outline-width:0}code,kbd,pre,samp{font-family:monospace,monospace}pre{font-size:1em}b,strong{font-weight:bolder}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}input{border-radius:0}[disabled]{cursor:default}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{-webkit-appearance:none}textarea{overflow:auto;resize:vertical}button,input,optgroup,select,textarea{font:inherit}optgroup{font-weight:700}button{overflow:visible}button,select{text-transform:none}[role=button],[type=button],[type=reset],[type=submit],button{cursor:pointer;color:inherit}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button:-moz-focusring{outline:1px dotted ButtonText}[type=reset],[type=submit],button,html [type=button]{-webkit-appearance:button}button,input,select,textarea{background:0 0;border-style:none}select{-moz-appearance:none;-webkit-appearance:none}select::-ms-expand{display:none}select::-ms-value{color:currentColor}legend{border:0;color:inherit;display:table;max-width:100%;white-space:normal;max-width:100%}::-webkit-file-upload-button{-webkit-appearance:button;color:inherit;font:inherit}img{border-style:none}progress{vertical-align:baseline}svg:not([fill]){fill:currentColor}@media only screen{[hidden~=screen]{display:inherit}}@media only screen{[hidden~=screen]:not(:active):not(:focus):not(:target){position:absolute!important;clip:rect(0 0 0 0)!important}}[aria-busy=true]{cursor:progress}[aria-controls]{cursor:pointer}[aria-disabled]{cursor:default}</style><script src="/app.js"></script></head><body class="_72df195c"><header><h1 class="_c119abdc"><a href="/" class="_6c2a7992">y047aka.space</a></h1></header><main class="_beb10df7"><nav><a href="/" class="prev">home</a></nav><h2>elm/svgを使ってみよう（SVGの基礎知識）</h2><article class="_e80aba3c"><div><p>この記事では、</p>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira:wght@400;500&amp;display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&amp;display=swap"><title>elm/svgを使ってみよう（SVGの基礎知識） | y047aka.space</title><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/default.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/elm.min.js"></script><script>hljs.initHighlightingOnLoad()</script><style>._6c2a7992{text-decoration:none;color:inherit}._72df195c{font-family:Saira,"Noto Sans JP",sans-serif;color:#333}._78b9f8a{-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;line-height:1.5;color:#24292e;font-family:"-apple-system",BlinkMacSystemFont,"Segoe UI",Helvetica,"Arial,sans-serif","Apple Color Emoji","Segoe UI Emoji";font-size:16px;line-height:1.5;word-wrap:break-word}._78b9f8a details{display:block}._78b9f8a summary{display:list-item}._78b9f8a a{color:#0366d6;text-decoration:none}._78b9f8a a:hover{text-decoration:underline}._78b9f8a table{border-spacing:0;border-collapse:collapse}._78b9f8a td,._78b9f8a th{padding:0}._78b9f8a h1,._78b9f8a h2,._78b9f8a h3,._78b9f8a h4,._78b9f8a h5,._78b9f8a h6{margin-top:0;margin-bottom:0}._78b9f8a h1{font-size:32px}._78b9f8a h1,._78b9f8a h2{font-weight:600}._78b9f8a h2{font-size:24px}._78b9f8a h3{font-size:20px}._78b9f8a h3,._78b9f8a h4{font-weight:600}._78b9f8a h4{font-size:16px}._78b9f8a h5{font-size:14px}._78b9f8a h5,._78b9f8a h6{font-weight:600}._78b9f8a h6{font-size:12px}._78b9f8a p{margin-top:0;margin-bottom:10px}._78b9f8a blockquote{margin:0}._78b9f8a ol,._78b9f8a ul{padding-left:0;margin-top:0;margin-bottom:0}._78b9f8a ol ol,._78b9f8a ul ol{list-style-type:lower-roman}._78b9f8a ol ol ol,._78b9f8a ol ul ol,._78b9f8a ul ol ol,._78b9f8a ul ul ol{list-style-type:lower-alpha}._78b9f8a dd{margin-left:0}._78b9f8a code,._78b9f8a pre{font-family:SFMono-Regular,Consolas,"Liberation Mono",Menlo,monospace;font-size:12px}._78b9f8a pre{margin-top:0;margin-bottom:0}._78b9f8a blockquote,._78b9f8a details,._78b9f8a dl,._78b9f8a ol,._78b9f8a p,._78b9f8a pre,._78b9f8a table,._78b9f8a ul{margin-top:0;margin-bottom:16px}._78b9f8a hr{height:.25em;padding:0;margin:24px 0;background-color:#e1e4e8;border:0}._78b9f8a blockquote{padding:0 1em;color:#6a737d;border-left:.25em solid #dfe2e5}._78b9f8a blockquote>:first-child{margin-top:0}._78b9f8a blockquote>:last-child{margin-bottom:0}._78b9f8a h1,._78b9f8a h2,._78b9f8a h3,._78b9f8a h4,._78b9f8a h5,._78b9f8a h6{margin-top:24px;margin-bottom:16px;font-weight:600;line-height:1.25}._78b9f8a h1{margin:1.5em 0;font-size:1.4em;font-weight:700;line-height:3;text-align:center;border-top:1px solid;border-bottom:1px solid}._78b9f8a h2{font-size:1.4em}._78b9f8a h3{font-size:1em}._78b9f8a h4{font-size:1em}._78b9f8a h5{font-size:.875em}._78b9f8a h6{font-size:.85em;color:#6a737d}._78b9f8a ol,._78b9f8a ul{padding-left:2em}._78b9f8a ol ol,._78b9f8a ol ul,._78b9f8a ul ol,._78b9f8a ul ul{margin-top:0;margin-bottom:0}._78b9f8a li{word-wrap:break-all}._78b9f8a li+li{margin-top:.25em}._78b9f8a li>p{margin-top:16px}._78b9f8a dl{padding:0}._78b9f8a dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:600}._78b9f8a dl dd{padding:0 16px;margin-bottom:16px}._78b9f8a table{display:block;width:100%;overflow:auto}._78b9f8a table th{font-weight:600}._78b9f8a table td,._78b9f8a table th{padding:6px 13px;border:1px solid #dfe2e5}._78b9f8a table tr{background-color:#fff;border-top:1px solid #c6cbd1}._78b9f8a table tr:nth-child(2n){background-color:#f6f8fa}._78b9f8a img{max-width:100%;box-sizing:initial;background-color:#fff}._78b9f8a img[align=right]{padding-left:20px}._78b9f8a img[align=left]{padding-right:20px}._78b9f8a code{padding:.2em .4em;margin:0;font-size:85%;background-color:rgba(27,31,35,.05);border-radius:3px}._78b9f8a pre{word-wrap:normal}._78b9f8a pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:0 0;border:0}._78b9f8a pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f6f8fa;border-radius:3px}._78b9f8a pre code{display:inline;max-width:auto;padding:0;margin:0;overflow:visible;line-height:inherit;word-wrap:normal;background-color:initial;border:0}._947c09d{display:block;width:620px;margin:0 auto;padding:20px 0;text-align:right;font-size:14px}@media only screen and (max-width:480px){._947c09d{width:100%;padding:15px}}._beb10df7{width:620px;margin:0 auto;padding:20px 0}@media only screen and (max-width:480px){._beb10df7{width:100%;padding:15px}}._c119abdc{display:block;width:620px;margin:0 auto;padding:20px 0;font-size:18px;font-weight:400}@media only screen and (max-width:480px){._c119abdc{width:100%;padding:15px}}</style><style>html{box-sizing:border-box;-webkit-text-size-adjust:100%;word-break:normal;-moz-tab-size:4;tab-size:4}*,::after,::before{background-repeat:no-repeat;box-sizing:inherit}::after,::before{text-decoration:inherit;vertical-align:inherit}*{padding:0;margin:0}hr{overflow:visible;height:0}details,main{display:block}summary{display:list-item}small{font-size:80%}[hidden]{display:none}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}a{background:0 0}a:active,a:hover{outline-width:0}code,kbd,pre,samp{font-family:monospace,monospace}pre{font-size:1em}b,strong{font-weight:bolder}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}input{border-radius:0}[disabled]{cursor:default}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{-webkit-appearance:none}textarea{overflow:auto;resize:vertical}button,input,optgroup,select,textarea{font:inherit}optgroup{font-weight:700}button{overflow:visible}button,select{text-transform:none}[role=button],[type=button],[type=reset],[type=submit],button{cursor:pointer;color:inherit}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button:-moz-focusring{outline:1px dotted ButtonText}[type=reset],[type=submit],button,html [type=button]{-webkit-appearance:button}button,input,select,textarea{background:0 0;border-style:none}select{-moz-appearance:none;-webkit-appearance:none}select::-ms-expand{display:none}select::-ms-value{color:currentColor}legend{border:0;color:inherit;display:table;max-width:100%;white-space:normal;max-width:100%}::-webkit-file-upload-button{-webkit-appearance:button;color:inherit;font:inherit}img{border-style:none}progress{vertical-align:baseline}svg:not([fill]){fill:currentColor}@media only screen{[hidden~=screen]{display:inherit}}@media only screen{[hidden~=screen]:not(:active):not(:focus):not(:target){position:absolute!important;clip:rect(0 0 0 0)!important}}[aria-busy=true]{cursor:progress}[aria-controls]{cursor:pointer}[aria-disabled]{cursor:default}</style><script src="/app.js"></script></head><body class="_72df195c"><header><h1 class="_c119abdc"><a href="/" class="_6c2a7992">y047aka.space</a></h1></header><main class="_beb10df7"><nav><a href="/" class="prev">home</a></nav><h2>elm/svgを使ってみよう（SVGの基礎知識）</h2><article class="_78b9f8a"><div><p>この記事では、</p>
 <ul>
 <li>SVG の基本的な書き方</li>
 <li>Elm での記述方法</li>
 <li>利用できるパッケージ</li>
 </ul>
 <p>について見ていきます。</p>
-<h2 id="svg-">SVG ってなんだろう？</h2>
+<h1 id="svg-">SVG ってなんだろう？</h1>
 <p>Scalable Vector Graphics の頭文字をとって、SVG と呼ばれています。
 解像度に制限されないベクター画像のための XML 文法として利用されています。</p>
-<h3 id="-">仕様について</h3>
+<h2 id="-">仕様について</h2>
 <p>SVG の仕様は W3C によって開発・勧告されています。
 ドキュメントが充実しているので、積極的に活用しましょう。</p>
 <p><a href="https://www.w3.org/TR/SVG11/" target="_blank">
@@ -19,7 +19,7 @@
 <p><a href="https://triple-underscore.github.io/SVG11/" target="_blank">
     SVG 1.1 仕様 （第２版） 日本語訳<span>triple-underscore.github.io</span>
 </a></p>
-<h3 id="svg-">SVG で何ができるのか？</h3>
+<h2 id="svg-">SVG で何ができるのか？</h2>
 <p>画像の形式は .jpg, .png, .gif など数多くありますが、</p>
 <ul>
 <li>解像度に制限されない</li>
@@ -30,7 +30,7 @@
 HTML 同様のスタイル指定や、アニメーションができるのも魅力ですね。</p>
 <p>アイコンやロゴイメージへの活用はもちろん、インタラクティブなコンテンツの作成、データの可視化（ビジュアライゼーション）やジェネラティブ・アートなどがブラウザ上で簡単に実現できてしまいます。</p>
 <p>すでに必須技術の 1 つと化した SVG ですが、これからも新しい使い方が発見されることでしょう。</p>
-<h3 id="-">基本的な書き方</h3>
+<h2 id="-">基本的な書き方</h2>
 <p>SVG を構成しているのは要素と属性です。
 そのため、HTML と同じ感覚で記述することができます。</p>
 <p>SVG として記述されたコードは…</p>
@@ -46,7 +46,7 @@ HTML 同様のスタイル指定や、アニメーションができるのも魅
 </svg>
 
 <p>y 軸が下向きなので少しだけ違和感があるかもしれませんが、HTML の読み書きができれば SVG も問題なく扱えるはずです。</p>
-<h2 id="elm-svg-">Elm で SVG を記述しよう</h2>
+<h1 id="elm-svg-">Elm で SVG を記述しよう</h1>
 <p>同じことを Elm でもやってみましょう。
 Ellie に同じサンプルコードを用意しました。</p>
 <p><a href="https://ellie-app.com/5x8N5hXk3RFa1" target="_blank">
@@ -83,7 +83,7 @@ main =
 </code></pre>
 <p>記法の都合でコードが縦長になりましたが、元の SVG と対応しているのがよく分かります。
 もう少し丁寧に解説をしてみます。</p>
-<h3 id="-">モジュールのインポート</h3>
+<h2 id="-">モジュールのインポート</h2>
 <pre><code class="lang-Elm">import Svg exposing (Svg, svg, rect, circle)
 import Svg.Attributes exposing (width, height, viewBox, x, y, rx, ry, cx, cy, r, fill)
 </code></pre>
@@ -93,7 +93,7 @@ import Svg.Attributes exposing (width, height, viewBox, x, y, rx, ry, cx, cy, r,
     svg 1.0.1<span>Elm Packages</span>
 </a></p>
 <p>この記事のサンプルコードは、リンク先のサンプルコードをより分かりやすくなるように書き直したものです。</p>
-<h3 id="main-">main 関数の初期化</h3>
+<h2 id="main-">main 関数の初期化</h2>
 <p>Svg の関数は Html と同様に扱うことができます。</p>
 <pre><code class="lang-Elm">main : Svg msg
 main =
@@ -134,7 +134,7 @@ main =
 <p><a href="https://triple-underscore.github.io/SVG11/struct.html#NewDocument" target="_blank">
     SVG 文書片を定義する： svg 要素<span>文書構造 – SVG 1.1 （第２版）</span>
 </a></p>
-<h3 id="-rect">四角形（矩形）を描く：rect</h3>
+<h2 id="-rect">四角形（矩形）を描く：rect</h2>
 <p>矩形は「くけい」と読みます。
 これを知っていると、次は「矩計（かなばかり）図」が読めなくなります。</p>
 <pre><code class="lang-Elm">rect
@@ -189,7 +189,7 @@ main =
 <p><a href="https://triple-underscore.github.io/SVG11/shapes.html#RectElement" target="_blank">
     rect 要素<span>基本図形 – SVG 1.1 （第２版）</span>
 </a></p>
-<h3 id="-circle">円を描く：circle</h3>
+<h2 id="-circle">円を描く：circle</h2>
 <pre><code class="lang-Elm">circle
     [ cx "50"
     , cy "50"
@@ -228,7 +228,7 @@ main =
 <p><a href="https://triple-underscore.github.io/SVG11/shapes.html#CircleElement" target="_blank">
     circle 要素<span>基本図形 – SVG 1.1 （第２版）</span>
 </a></p>
-<h3 id="-">そのほかの図形</h3>
+<h2 id="-">そのほかの図形</h2>
 <p>パス・基本図形・テキストなどの要素と、様々なアトリビュートを組み合わせて、表現豊かな SVG を作成することができます。</p>
 <p><a href="https://triple-underscore.github.io/SVG11/paths.html" target="_blank">
     パス – SVG 1.1 （第２版）<span>https://triple-underscore.github.io</span>
@@ -239,12 +239,12 @@ main =
 <p><a href="https://triple-underscore.github.io/SVG11/text.html" target="_blank">
     テキスト – SVG 1.1 （第２版）<span>https://triple-underscore.github.io</span>
 </a></p>
-<h2 id="-elm-">利用できる Elm のパッケージ</h2>
+<h1 id="-elm-">利用できる Elm のパッケージ</h1>
 <p>Elm Packages で使えそうなパッケージを探してみましょう。</p>
 <p><a href="https://package.elm-lang.org" target="_blank">
     Elm Packages<span>https://package.elm-lang.org</span>
 </a></p>
-<h3 id="svg-">SVG の基本となるパッケージ</h3>
+<h2 id="svg-">SVG の基本となるパッケージ</h2>
 <p>Elm では、SVG を扱うために 2 種類のパッケージが用意されています。</p>
 <table>
 <thead>
@@ -267,7 +267,7 @@ main =
 <p>どちらも SVG 用の基本的なモジュールを含み、互換性のあるパッケージです。
 好みに応じて使い分けると良いでしょう。
 データの可視化など、より複雑な SVG を扱う際には elm-community/typed-svg の使用をお薦めします。</p>
-<h3 id="svg-">SVG の表現力を高めるパッケージ</h3>
+<h2 id="svg-">SVG の表現力を高めるパッケージ</h2>
 <p>より複雑な SVG を作成するためのパッケージも用意されています。
 データの可視化（ビジュアライゼーション）や、ジェネラティブ・アートに挑戦してみるのも良いですね！</p>
 <table>
@@ -315,7 +315,7 @@ main =
 </tr>
 </tbody>
 </table>
-<h3 id="-">注意：廃止されたパッケージ</h3>
+<h2 id="-">注意：廃止されたパッケージ</h2>
 <p>以下のパッケージは elm/svg よりも前に使用されていたもので、現在は廃止されています。
 ブラウザの検索結果に出ることがあるので注意してください。</p>
 <table>
@@ -336,6 +336,6 @@ main =
 </tr>
 </tbody>
 </table>
-<h2 id="svg-">SVG は難しくない！</h2>
+<h1 id="svg-">SVG は難しくない！</h1>
 <p>でしょ？</p>
 </div></article></main><footer><p class="_947c09d">© 2020 y047aka</p></footer></body></html>
