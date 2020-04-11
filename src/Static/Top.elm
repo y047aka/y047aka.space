@@ -108,8 +108,8 @@ viewBody preamble _ =
         , topSection
             { title = "Blog posts"
             , children =
-                [ ul []
-                    (List.map
+                [ ul [] <|
+                    List.map
                         (\{ title, createdAt, url } ->
                             linkView
                                 { title = title
@@ -117,8 +117,7 @@ viewBody preamble _ =
                                 , url = url
                                 }
                         )
-                        preamble.articles
-                    )
+                        (preamble.articles |> List.sortBy (.createdAt >> Iso8601.fromTime) |> List.reverse)
                 ]
             }
         ]
