@@ -13,13 +13,13 @@ title: Elmでの開発用テンプレート elm-starfighter を作った
 
 - [elm-starfighter](https://github.com/y047aka/elm-starfighter)
 
-# なぜ作ろうと思ったのか？
+## なぜ作ろうと思ったのか？
 
 JavaScript での開発と同様に、Elm においても webpack や Parcel を使った開発方法が普及しています。しかし、Elm はモジュールバンドラーを必要とはしていないかもしれません。それならばモジュールバンドラーに頼らない、よりシンプルな開発ができるのではないかと考えました。
 
 既に知られている [create-elm-app](https://github.com/halfzebra/create-elm-app) や [elm-webpack-starter](https://github.com/elm-community/elm-webpack-starter) に対して「毎回使うには大きすぎる」と感じたことも動機の 1 つです。Elm 入門者が簡単に使える開発ツールがあれば、Elm の持つ魅力をもっと引き出せるのではないかと思います。
 
-# 開発の方針
+## 開発の方針
 
 ### Elm 入門者に優しく
 
@@ -34,7 +34,7 @@ JavaScript と Elm では何が違うのかを意識しながら作りました�
 適材適所を意識すること。例えば、Port を積極的に使うならモジュールバンドラーの方が有利のはず。
 （私は Port をほとんど使わないので、推測で言っています）
 
-### 謝辞
+## 謝辞
 
 @ababup1192 さんには、開発初期の段階で多くの相談に乗っていただきました。ありがとうございました。
 
@@ -52,7 +52,7 @@ $ npm start
 また、リポジトリのトップから緑色のボタン「Use this template」を選択すると、elm-starfighter を使った新しいリポジトリを作る事もできます。
 <img width="305" alt="スクリーンショット 2019-07-06 6.21.56.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/406109/3faa5b0f-8ff3-9280-fa09-6ba62e3495e8.png">
 
-### npm start
+## npm start
 
 `npm start` を実行すると、
 
@@ -60,7 +60,7 @@ $ npm start
 2.  開発用サーバーが起動し
 3.  ブラウザに最初のページが表示されます
 
-### npm run build
+## npm run build
 
 もう 1 つのコマンドは `npm run build` で起動します。
 
@@ -77,7 +77,7 @@ src
  - assets（画像など）
 ```
 
-### ディレクトリ名について
+## ディレクトリ名について
 
 `docs` は Github Pages を、`public` は Netlify をすぐに使えるよう意図して設定しています。
 
@@ -86,7 +86,7 @@ src
 この記事の本編は、ここで終了です。
 カスタマイズして使う場合には以下の付録を参考にしてください。
 
-# 付録： package.json を読む
+# 付録 1： package.json を読む
 
 ここに elm-starfighter のすべてがあります。webpack や Parcel の姿はなく、代わりに `npm scripts` が並んでいます。`elm make` コマンドや `elm-live` を使っていることが分かりますね。これから `scripts` を詳しく見ていきましょう。
 
@@ -143,7 +143,7 @@ src
 
 生成したファイルは `docs` に出力されます。出力先のディレクトリ名を変更する場合は、以下のコマンド内の `docs` を新しい名前に書き直します。（実際には package.json をエディタで一括変換すれば問題ありません）
 
-#### clean
+### clean
 
 `docs` と `public` ディレクトリを 2 つとも削除します。このコマンドのみ、`build` と共有しています。
 
@@ -151,7 +151,7 @@ src
 "clean": "rimraf docs public"
 ```
 
-#### watch
+### watch
 
 「watch:」で始まるコマンドを、すべて同時に実行します。それぞれが `src` のファイルを監視し、変更があれば `docs` に出力します。
 
@@ -176,15 +176,7 @@ src
 
 生成したファイルは `public` に出力されます。出力先のディレクトリ名を変更する場合は、以下のコマンド内の `public` を新しい名前に書き直します。
 
-#### clean
-
-`docs` と `public` ディレクトリを 2 つとも削除します。このコマンドのみ、`start` と共有しています。
-
-```json
-"clean": "rimraf docs public"
-```
-
-#### compile
+### compile
 
 「compile:」で始まるコマンドを、すべて同時に実行します。
 
@@ -199,7 +191,7 @@ src
 
 **注意：** minify まで実行しないと elm.js を出力できない実装になっています。cpx でどうにかしたい。（2019 年 7 月 6 日）
 
-#### minify:elm
+### minify:elm
 
 elm.optimized.js を圧縮し、elm.js として出力します。
 
@@ -207,7 +199,7 @@ elm.optimized.js を圧縮し、elm.js として出力します。
 "minify:elm": "google-closure-compiler --js=public/elm.optimized.js --js_output_file=public/elm.js && rimraf public/elm.optimized.js"
 ```
 
-# 付録： devDependencies
+# 付録 2： devDependencies
 
 使用した npm のパッケージについて簡単にコメントします。
 
@@ -247,25 +239,3 @@ sass（Dart Sass）に変更しました。（2019 年 7 月 9 日）
 ### rimraf
 
 フォルダの削除を、Mac でも Windows でも出来るように。
-
-# 付録： 今後について
-
-バージョン 1.0 としてリリースするために残っているタスクなど。
-
-### Main.elm
-
-暫定的に作ってありますが、アイデアを思いついたら更新します。
-
-~~また、`Browser.element` と `Browser.document` のどちらを提供するべきかでも迷っています。~~
-→ Browser.document が過剰だったので、Browser.element に変更しました。
-
-### npm scripts の見直し
-
-~~クロスプラットフォーム対応を心がけましたが、手元に Windows 環境がないので未検証です。検証とプルリクエストをお待ちしています。~~
-→ ご協力ありがとうございました。
-
-### elm-chagama （茶釜）
-
-elm-stargfighter 1 つで全ての開発ケースに対応することはできないので、最大公約数をとって耐えるのか他にもいくつかのテンプレートを作成するのかを考えています。後者はコンセプトだけ書きました。
-
-- [elm-chagama](https://elm-chagama.github.io/docs/)

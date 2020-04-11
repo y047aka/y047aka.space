@@ -65,8 +65,7 @@ viewArticle attributes elements =
             , property "-webkit-text-size-adjust" "100%"
             , lineHeight (num 1.5)
             , color (hex "#24292e")
-
-            -- , fontFamilies [ qt "-apple-system", qt "BlinkMacSystemFont", qt "Segoe UI", qt "Helvetica", qt "Arial,sans-serif", qt "Apple Color Emoji", qt "Segoe UI Emoji" ]
+            , fontFamilies [ qt "-apple-system", qt "BlinkMacSystemFont", qt "Segoe UI", qt "Helvetica", qt "Arial,sans-serif", qt "Apple Color Emoji", qt "Segoe UI Emoji" ]
             , fontSize (px 16)
             , lineHeight (num 1.5)
             , property "word-wrap" "break-word"
@@ -188,15 +187,18 @@ viewArticle attributes elements =
                     , lineHeight (num 1.25)
                     ]
                 , h1
-                    [ fontSize (em 2) ]
-                , each [ h1, h2 ]
-                    [ paddingBottom (em 0.3)
-                    , borderBottom3 (px 1) solid (hex "#eaecef")
+                    [ margin2 (em 1.5) zero
+                    , fontSize (em 1.4)
+                    , fontWeight bold
+                    , lineHeight (int 3)
+                    , textAlign center
+                    , borderTop2 (px 1) solid
+                    , borderBottom2 (px 1) solid
                     ]
                 , h2
-                    [ fontSize (em 1.5) ]
+                    [ fontSize (em 1.4) ]
                 , h3
-                    [ fontSize (em 1.25) ]
+                    [ fontSize (em 1) ]
                 , h4
                     [ fontSize (em 1) ]
                 , h5
