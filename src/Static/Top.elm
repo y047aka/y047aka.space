@@ -141,6 +141,7 @@ topSection { title, children } =
         (h1
             [ css
                 [ paddingBottom (px 10)
+                , fontFamilies [ qt "Saira", sansSerif.value ]
                 , fontSize (px 16)
                 , fontWeight (int 500)
                 , lineHeight (int 1)
@@ -196,7 +197,7 @@ linkView { title, sub, url } =
             [ h1
                 [ css
                     [ fontSize (px 16)
-                    , fontWeight (int 500)
+                    , fontWeight (int 600)
                     , lineHeight (num 1.5)
                     , color button.color
                     ]

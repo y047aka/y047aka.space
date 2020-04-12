@@ -20,6 +20,7 @@ siteHeader =
                     [ width (pct 100)
                     , padding (px 15)
                     ]
+                , fontFamilies [ qt "Saira", sansSerif.value ]
                 , fontSize (px 18)
                 , fontWeight normal
                 ]
@@ -50,6 +51,7 @@ siteFooter =
                     , padding (px 15)
                     ]
                 , textAlign right
+                , fontFamilies [ qt "Saira", sansSerif.value ]
                 , fontSize (px 14)
                 ]
             ]

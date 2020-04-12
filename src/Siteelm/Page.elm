@@ -76,7 +76,7 @@ renderPage head body model =
                         (head p model.body)
                 , Html.body
                     [ css
-                        [ fontFamilies [ qt "Saira", qt "Noto Sans JP", sansSerif.value ]
+                        [ fontFamilies [ qt "-apple-system", qt "BlinkMacSystemFont", sansSerif.value ]
                         , color gray020
                         ]
                     ]
