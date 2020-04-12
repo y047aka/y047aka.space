@@ -63,11 +63,10 @@ viewArticle attributes elements =
         (css
             [ property "-ms-text-size-adjust" "100%"
             , property "-webkit-text-size-adjust" "100%"
-            , lineHeight (num 1.5)
             , color (hex "#24292e")
             , fontFamilies [ qt "-apple-system", qt "BlinkMacSystemFont", qt "Segoe UI", qt "Helvetica", qt "Arial,sans-serif", qt "Apple Color Emoji", qt "Segoe UI Emoji" ]
             , fontSize (px 16)
-            , lineHeight (num 1.5)
+            , lineHeight (num 1.6)
             , property "word-wrap" "break-word"
             , descendants
                 [ details
@@ -160,7 +159,7 @@ viewArticle attributes elements =
                     , ul
                     ]
                     [ marginTop zero
-                    , marginBottom (px 16)
+                    , marginBottom (px 25)
                     ]
                 , hr
                     [ height (em 0.25)
