@@ -65,10 +65,7 @@ viewArticle attributes elements =
         (css
             [ property "-ms-text-size-adjust" "100%"
             , property "-webkit-text-size-adjust" "100%"
-            , color (hex "#24292e")
-            , fontFamilies [ qt "-apple-system", qt "BlinkMacSystemFont", qt "Segoe UI", qt "Helvetica", qt "Arial,sans-serif", qt "Apple Color Emoji", qt "Segoe UI Emoji" ]
-            , fontSize (px 16)
-            , lineHeight (num 1.6)
+            , lineHeight (num 1.5)
             , property "word-wrap" "break-word"
             , descendants
                 [ details
@@ -96,28 +93,6 @@ viewArticle attributes elements =
                 , each [ h1, h2, h3, h4, h5, h6 ]
                     [ marginTop zero
                     , marginBottom zero
-                    ]
-                , h1
-                    [ fontSize (px 32) ]
-                , each [ h1, h2 ]
-                    [ fontWeight (int 600) ]
-                , h2
-                    [ fontSize (px 24) ]
-                , h3
-                    [ fontSize (px 20) ]
-                , each [ h3, h4 ]
-                    [ fontWeight (int 600) ]
-                , h4
-                    [ fontSize (px 16) ]
-                , h5
-                    [ fontSize (px 14) ]
-                , each [ h5, h6 ]
-                    [ fontWeight (int 600) ]
-                , h6
-                    [ fontSize (px 12) ]
-                , p
-                    [ marginTop zero
-                    , marginBottom (px 10)
                     ]
                 , blockquote
                     [ margin zero ]
@@ -161,7 +136,7 @@ viewArticle attributes elements =
                     , ul
                     ]
                     [ marginTop zero
-                    , marginBottom (px 25)
+                    , marginBottom (px 24)
                     ]
                 , hr
                     [ height (em 0.25)
@@ -182,22 +157,23 @@ viewArticle attributes elements =
                         ]
                     ]
                 , each [ h1, h2, h3, h4, h5, h6 ]
-                    [ marginTop (px 24)
-                    , marginBottom (px 16)
-                    , fontWeight (int 600)
-                    , lineHeight (num 1.25)
+                    [ fontWeight (int 600)
                     ]
                 , h1
-                    [ margin2 (em 1.5) zero
-                    , fontSize (em 1.4)
-                    , fontWeight bold
-                    , lineHeight (int 3)
+                    [ margin2 (px 24) zero
+                    , padding2 (px 24) zero
+                    , fontSize (em 1.125)
+                    , lineHeight (num 1.333)
                     , textAlign center
                     , borderTop2 (px 1) solid
                     , borderBottom2 (px 1) solid
                     ]
                 , h2
-                    [ fontSize (em 1.4) ]
+                    [ marginTop (px -0.5)
+                    , marginBottom (px 23.5)
+                    , fontSize (em 1.25)
+                    , lineHeight (num 1.25)
+                    ]
                 , h3
                     [ fontSize (em 1) ]
                 , h4
