@@ -1,8 +1,9 @@
 module Siteelm.Page exposing (Page, page)
 
 import Browser
-import Color exposing (gray020)
+import Color.Scheme exposing (basic)
 import Css exposing (..)
+import Css.Extra exposing (palette)
 import Css.Global exposing (global)
 import Css.Reset exposing (ress)
 import Html.Styled exposing (Html, text, toUnstyled)
@@ -77,7 +78,8 @@ renderPage head body model =
                 , Html.body
                     [ css
                         [ fontFamilies [ qt "-apple-system", qt "BlinkMacSystemFont", sansSerif.value ]
-                        , color gray020
+                        , batch <|
+                            palette basic
                         ]
                     ]
                     (body p model.body)

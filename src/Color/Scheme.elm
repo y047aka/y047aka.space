@@ -1,24 +1,22 @@
-module Color.Scheme exposing (button, buttonOnHover, global)
+module Color.Scheme exposing (basic, button, buttonOnHover)
 
 import Color exposing (gray020, gray040, gray090, gray095)
 import Color.Palette exposing (..)
 
 
-global : Palette
-global =
-    seed
-        |> setColor gray020
+basic : Palette
+basic =
+    { init | color = gray020 }
 
 
 button : Palette
 button =
-    seed
-        |> setBackground gray095
-        |> setColor gray020
-        |> setOptionalColor gray040
+    { basic
+        | background = gray095
+        , optionalColor = gray040
+    }
 
 
 buttonOnHover : Palette
 buttonOnHover =
-    button
-        |> setBackground gray090
+    { button | background = gray090 }

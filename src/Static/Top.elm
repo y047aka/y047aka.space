@@ -2,6 +2,7 @@ module Static.Top exposing (main)
 
 import Color.Scheme exposing (button, buttonOnHover)
 import Css exposing (..)
+import Css.Extra exposing (palette)
 import Css.Media as Media exposing (only, screen, withMedia)
 import Html.Styled exposing (Html, a, h1, li, main_, section, span, text, ul)
 import Html.Styled.Attributes as Attributes exposing (css, href, rel)
@@ -188,10 +189,11 @@ linkView { title, sub, url } =
                 , withMedia [ only screen [ Media.maxWidth (px 480) ] ]
                     [ padding (px 15) ]
                 , textDecoration none
-                , backgroundColor button.background
                 , borderRadius (px 10)
+                , batch <|
+                    palette button
                 , hover
-                    [ backgroundColor buttonOnHover.background ]
+                    (palette buttonOnHover)
                 ]
             ]
             [ h1
@@ -199,7 +201,6 @@ linkView { title, sub, url } =
                     [ fontSize (px 16)
                     , fontWeight (int 600)
                     , lineHeight (num 1.5)
-                    , color button.color
                     ]
                 ]
                 [ text title ]
@@ -207,7 +208,11 @@ linkView { title, sub, url } =
                 [ css
                     [ fontSize (px 13)
                     , lineHeight (int 1)
-                    , color button.optionalColor
+                    , batch
+                        (button.optionalColor
+                            |> Maybe.map (\c -> [ color c ])
+                            |> Maybe.withDefault []
+                        )
                     ]
                 ]
                 [ text sub ]

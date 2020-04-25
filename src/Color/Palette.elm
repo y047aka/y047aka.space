@@ -1,48 +1,22 @@
-module Color.Palette exposing (Palette, seed, setBackground, setBorder, setColor, setOptionalColor, setShadow)
+module Color.Palette exposing (Palette, init)
 
-import Color exposing (transparent)
 import Css exposing (Color)
 
 
 type alias Palette =
-    { background : Color
-    , color : Color
-    , optionalColor : Color
-    , border : Color
-    , shadow : Color
+    { background : Maybe Color
+    , color : Maybe Color
+    , optionalColor : Maybe Color
+    , border : Maybe Color
+    , shadow : Maybe Color
     }
 
 
-seed : Palette
-seed =
-    { background = transparent
-    , color = transparent
-    , optionalColor = transparent
-    , border = transparent
-    , shadow = transparent
+init : Palette
+init =
+    { background = Nothing
+    , color = Nothing
+    , optionalColor = Nothing
+    , border = Nothing
+    , shadow = Nothing
     }
-
-
-setBackground : Color -> Palette -> Palette
-setBackground background palette =
-    { palette | background = background }
-
-
-setColor : Color -> Palette -> Palette
-setColor color palette =
-    { palette | color = color }
-
-
-setOptionalColor : Color -> Palette -> Palette
-setOptionalColor optionalColor palette =
-    { palette | optionalColor = optionalColor }
-
-
-setBorder : Color -> Palette -> Palette
-setBorder border palette =
-    { palette | border = border }
-
-
-setShadow : Color -> Palette -> Palette
-setShadow shadow palette =
-    { palette | shadow = shadow }
