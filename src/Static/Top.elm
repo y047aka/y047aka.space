@@ -1,6 +1,6 @@
 module Static.Top exposing (main)
 
-import Color.Scheme exposing (button, buttonOnHover)
+import Color.Palette exposing (button, buttonOnHover)
 import Css exposing (..)
 import Css.Extra exposing (palette)
 import Css.Media as Media exposing (only, screen, withMedia)

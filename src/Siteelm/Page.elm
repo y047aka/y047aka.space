@@ -1,7 +1,7 @@
 module Siteelm.Page exposing (Page, page)
 
 import Browser
-import Color.Scheme exposing (basic)
+import Color.Palette exposing (basic)
 import Css exposing (..)
 import Css.Extra exposing (palette)
 import Css.Global exposing (global)
