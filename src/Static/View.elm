@@ -65,7 +65,7 @@ viewArticle attributes elements =
         (css
             [ property "-ms-text-size-adjust" "100%"
             , property "-webkit-text-size-adjust" "100%"
-            , lineHeight (num 1.5)
+            , lineHeight (num 1.8)
             , property "word-wrap" "break-word"
             , descendants
                 [ details
@@ -136,7 +136,7 @@ viewArticle attributes elements =
                     , ul
                     ]
                     [ marginTop zero
-                    , marginBottom (px 24)
+                    , marginBottom (px 29)
                     ]
                 , hr
                     [ height (em 0.25)
@@ -160,8 +160,8 @@ viewArticle attributes elements =
                     [ fontWeight (int 600)
                     ]
                 , h1
-                    [ margin2 (px 24) zero
-                    , padding2 (px 24) zero
+                    [ margin2 (px 28) zero
+                    , padding2 (px 17) zero
                     , fontSize (em 1.125)
                     , lineHeight (num 1.333)
                     , textAlign center
@@ -169,8 +169,8 @@ viewArticle attributes elements =
                     , borderBottom2 (px 1) solid
                     ]
                 , h2
-                    [ marginTop (px -0.5)
-                    , marginBottom (px 23.5)
+                    [ marginTop (px 2)
+                    , marginBottom (px 31)
                     , fontSize (em 1.25)
                     , lineHeight (num 1.25)
                     ]
