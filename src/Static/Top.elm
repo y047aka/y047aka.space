@@ -4,6 +4,7 @@ import Color.Palette exposing (button, buttonOnHover)
 import Css exposing (..)
 import Css.Extra exposing (palette)
 import Css.Media as Media exposing (only, screen, withMedia)
+import DateFormat exposing (dayOfMonthSuffix, format, monthNameFull, yearNumber)
 import Html.Styled exposing (Html, a, h1, li, main_, section, span, text, ul)
 import Html.Styled.Attributes as Attributes exposing (css, href, rel)
 import Iso8601
@@ -221,58 +222,11 @@ linkView { title, sub, url } =
 
 
 dateString : Zone -> Posix -> String
-dateString zone posix =
-    let
-        year =
-            Time.toYear zone posix
-                |> String.fromInt
-
-        month =
-            Time.toMonth zone posix
-                |> monthToString
-
-        day =
-            Time.toDay zone posix
-                |> String.fromInt
-    in
-    month ++ " " ++ day ++ ", " ++ year
-
-
-monthToString : Month -> String
-monthToString month =
-    case month of
-        Jan ->
-            "Jan"
-
-        Feb ->
-            "Feb"
-
-        Mar ->
-            "Mar"
-
-        Apr ->
-            "Apr"
-
-        May ->
-            "May"
-
-        Jun ->
-            "Jun"
-
-        Jul ->
-            "Jul"
-
-        Aug ->
-            "Aug"
-
-        Sep ->
-            "Sep"
-
-        Oct ->
-            "Oct"
-
-        Nov ->
-            "Nov"
-
-        Dec ->
-            "Dec"
+dateString =
+    format
+        [ monthNameFull
+        , DateFormat.text " "
+        , dayOfMonthSuffix
+        , DateFormat.text ", "
+        , yearNumber
+        ]
