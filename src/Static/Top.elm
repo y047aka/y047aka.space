@@ -92,6 +92,21 @@ viewBody preamble _ =
     [ siteHeader
     , main_ []
         [ topSection
+            { title = "Blog posts"
+            , children =
+                [ ul [] <|
+                    List.map
+                        (\{ title, createdAt, url } ->
+                            linkView
+                                { title = title
+                                , sub = dateString Time.utc createdAt
+                                , url = url
+                                }
+                        )
+                        (preamble.articles |> List.sortBy (.createdAt >> Iso8601.fromTime) |> List.reverse)
+                ]
+            }
+        , topSection
             { title = "I'm belong to..."
             , children =
                 [ ul []
@@ -105,21 +120,6 @@ viewBody preamble _ =
                         )
                         preamble.organizations
                     )
-                ]
-            }
-        , topSection
-            { title = "Blog posts"
-            , children =
-                [ ul [] <|
-                    List.map
-                        (\{ title, createdAt, url } ->
-                            linkView
-                                { title = title
-                                , sub = dateString Time.utc createdAt
-                                , url = url
-                                }
-                        )
-                        (preamble.articles |> List.sortBy (.createdAt >> Iso8601.fromTime) |> List.reverse)
                 ]
             }
         ]
