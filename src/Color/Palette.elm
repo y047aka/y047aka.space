@@ -1,6 +1,6 @@
 module Color.Palette exposing (Palette, basic, button, buttonOnHover, init)
 
-import Color exposing (gray020, gray040, gray090, gray095)
+import Color exposing (gray020, gray040, gray050, gray090, gray095)
 import Css exposing (Color)
 
 
@@ -25,7 +25,10 @@ init =
 
 basic : Palette
 basic =
-    { init | color = gray020 }
+    { init
+        | color = gray020
+        , optionalColor = gray050
+    }
 
 
 button : Palette

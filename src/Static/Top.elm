@@ -12,7 +12,7 @@ import Json.Decode as D exposing (Decoder)
 import Siteelm.Html.Styled as Html
 import Siteelm.Page exposing (Page, page)
 import Static.View exposing (siteFooter, siteHeader)
-import Time exposing (Month(..), Posix, Zone)
+import Time exposing (Posix, Zone)
 
 
 main : Page Preamble

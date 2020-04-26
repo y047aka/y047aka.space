@@ -1,15 +1,20 @@
 module Static.Sub exposing (main)
 
+import Color.Palette exposing (basic)
 import Css exposing (..)
+import Css.Global exposing (children)
 import Css.Media as Media exposing (only, screen, withMedia)
-import Html.Styled exposing (Html, a, fromUnstyled, h2, main_, nav, text)
-import Html.Styled.Attributes exposing (class, css, href)
+import DateFormat exposing (dayOfMonthSuffix, format, monthNameFull, yearNumber)
+import Html.Styled exposing (Html, div, fromUnstyled, h1, header, main_, p, text)
+import Html.Styled.Attributes exposing (css, href)
+import Iso8601
 import Json.Decode as D exposing (Decoder)
 import Markdown
 import Siteelm.Html.Styled as Html
 import Siteelm.Html.Styled.Attributes exposing (rel)
 import Siteelm.Page exposing (Page, page)
 import Static.View exposing (siteFooter, siteHeader, viewArticle)
+import Time exposing (Posix, Zone)
 
 
 main : Page Preamble
@@ -23,13 +28,17 @@ main =
 
 type alias Preamble =
     { title : String
+    , createdAt : Posix
+    , updatedAt : Maybe Posix
     }
 
 
 preambleDecoder : Decoder Preamble
 preambleDecoder =
-    D.map Preamble
+    D.map3 Preamble
         (D.field "title" D.string)
+        (D.field "createdAt" Iso8601.decoder)
+        (D.field "updatedAt" (D.nullable Iso8601.decoder))
 
 
 viewHead : Preamble -> String -> List (Html Never)
@@ -56,10 +65,46 @@ viewBody preamble body =
                 ]
             ]
         ]
-        [ nav []
-            [ a [ href "/", class "prev" ] [ text "home" ]
+        [ header []
+            [ h1
+                [ css
+                    [ padding2 (px 5) zero
+                    , fontFamilies [ qt "-apple-system", sansSerif.value ]
+                    , fontSize (px 24)
+                    , fontWeight (int 600)
+                    ]
+                ]
+                [ text preamble.title ]
+            , div
+                [ css
+                    [ batch
+                        (basic.optionalColor
+                            |> Maybe.map (\c -> [ color c ])
+                            |> Maybe.withDefault []
+                        )
+                    , children
+                        [ Css.Global.p
+                            [ padding2 (px 5) zero
+                            , fontSize (px 14)
+                            , lineHeight (int 1)
+                            ]
+                        ]
+                    ]
+                ]
+                [ p []
+                    [ text "Posted: "
+                    , text (dateString Time.utc preamble.createdAt)
+                    ]
+                , p []
+                    [ text "Updated: "
+                    , text
+                        (preamble.updatedAt
+                            |> Maybe.map (dateString Time.utc)
+                            |> Maybe.withDefault ""
+                        )
+                    ]
+                ]
             ]
-        , h2 [] [ text preamble.title ]
         , viewArticle []
             [ fromUnstyled <|
                 Markdown.toHtmlWith markdownOptions [] body
@@ -76,3 +121,14 @@ markdownOptions =
     , sanitize = False
     , smartypants = False
     }
+
+
+dateString : Zone -> Posix -> String
+dateString =
+    format
+        [ monthNameFull
+        , DateFormat.text " "
+        , dayOfMonthSuffix
+        , DateFormat.text ", "
+        , yearNumber
+        ]

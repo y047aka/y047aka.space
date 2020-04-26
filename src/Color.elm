@@ -1,4 +1,4 @@
-module Color exposing (gray020, gray040, gray090, gray095)
+module Color exposing (gray020, gray040, gray050, gray090, gray095)
 
 import Css exposing (Color, hsl)
 
@@ -16,6 +16,11 @@ gray020 =
 gray040 : Maybe Color
 gray040 =
     gray 0.4
+
+
+gray050 : Maybe Color
+gray050 =
+    gray 0.5
 
 
 gray090 : Maybe Color

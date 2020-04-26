@@ -63,7 +63,8 @@ viewArticle : List (Attribute Never) -> List (Html Never) -> Html Never
 viewArticle attributes elements =
     Html.article
         (css
-            [ property "-ms-text-size-adjust" "100%"
+            [ paddingTop (px 20)
+            , property "-ms-text-size-adjust" "100%"
             , property "-webkit-text-size-adjust" "100%"
             , lineHeight (num 1.8)
             , property "word-wrap" "break-word"
