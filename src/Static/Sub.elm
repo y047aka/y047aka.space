@@ -2,6 +2,7 @@ module Static.Sub exposing (main)
 
 import Color.Palette exposing (basic)
 import Css exposing (..)
+import Css.Extra exposing (orNoStyle)
 import Css.Global exposing (children)
 import Css.Media as Media exposing (only, screen, withMedia)
 import DateFormat exposing (dayOfMonthSuffix, format, monthNameFull, yearNumber)
@@ -77,11 +78,7 @@ viewBody preamble body =
                 [ text preamble.title ]
             , div
                 [ css
-                    [ batch
-                        (basic.optionalColor
-                            |> Maybe.map (\c -> [ color c ])
-                            |> Maybe.withDefault []
-                        )
+                    [ color |> orNoStyle basic.optionalColor
                     , children
                         [ Css.Global.p
                             [ padding2 (px 5) zero

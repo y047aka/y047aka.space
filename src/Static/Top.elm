@@ -2,7 +2,7 @@ module Static.Top exposing (main)
 
 import Color.Palette exposing (button, buttonOnHover)
 import Css exposing (..)
-import Css.Extra exposing (palette)
+import Css.Extra exposing (orNoStyle, palette)
 import Css.Media as Media exposing (only, screen, withMedia)
 import DateFormat exposing (dayOfMonthSuffix, format, monthNameFull, yearNumber)
 import Html.Styled exposing (Html, a, h1, li, main_, section, span, text, ul)
@@ -208,11 +208,7 @@ linkView { title, sub, url } =
                 [ css
                     [ fontSize (px 13)
                     , lineHeight (int 1)
-                    , batch
-                        (button.optionalColor
-                            |> Maybe.map (\c -> [ color c ])
-                            |> Maybe.withDefault []
-                        )
+                    , color |> orNoStyle button.optionalColor
                     ]
                 ]
                 [ text sub ]

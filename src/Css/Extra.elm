@@ -1,28 +1,21 @@
-module Css.Extra exposing (palette)
+module Css.Extra exposing (orNoStyle, palette)
 
 import Color.Palette exposing (Palette)
-import Css exposing (Style, backgroundColor, batch, color)
+import Css exposing (Style, backgroundColor, batch, borderColor, color)
+
+
+orNoStyle : Maybe a -> (a -> Style) -> Style
+orNoStyle maybe property =
+    maybe
+        |> Maybe.map (\v -> [ property v ])
+        |> Maybe.withDefault []
+        |> batch
 
 
 palette : Palette -> Style
 palette p =
-    let
-        background =
-            case p.background of
-                Just c ->
-                    [ backgroundColor c ]
-
-                Nothing ->
-                    []
-
-        textColor =
-            case p.color of
-                Just c ->
-                    [ color c ]
-
-                Nothing ->
-                    []
-    in
-    [ background, textColor ]
-        |> List.concat
-        |> batch
+    batch
+        [ backgroundColor |> orNoStyle p.background
+        , color |> orNoStyle p.color
+        , borderColor |> orNoStyle p.border
+        ]
