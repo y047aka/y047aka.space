@@ -1,10 +1,10 @@
 module Css.Extra exposing (palette)
 
 import Color.Palette exposing (Palette)
-import Css exposing (Style, backgroundColor, color)
+import Css exposing (Style, backgroundColor, batch, color)
 
 
-palette : Palette -> List Style
+palette : Palette -> Style
 palette p =
     let
         background =
@@ -23,4 +23,6 @@ palette p =
                 Nothing ->
                     []
     in
-    List.concat [ background, textColor ]
+    [ background, textColor ]
+        |> List.concat
+        |> batch

@@ -191,10 +191,9 @@ linkView { title, sub, url } =
                     [ padding (px 15) ]
                 , textDecoration none
                 , borderRadius (px 10)
-                , batch <|
-                    palette button
+                , palette button
                 , hover
-                    (palette buttonOnHover)
+                    [ palette buttonOnHover ]
                 ]
             ]
             [ h1

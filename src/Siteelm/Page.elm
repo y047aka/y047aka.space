@@ -78,8 +78,7 @@ renderPage head body model =
                     [ css
                         [ fontFamilies [ qt "-apple-system", qt "BlinkMacSystemFont", sansSerif.value ]
                         , property "font-feature-settings" (qt "palt")
-                        , batch <|
-                            palette basic
+                        , palette basic
                         ]
                     ]
                     (body p model.body)
