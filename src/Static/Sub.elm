@@ -47,8 +47,8 @@ preambleDecoder =
 viewHead : Preamble -> String -> List (Html Never)
 viewHead preamble _ =
     let
-        title =
-            preamble.title ++ " | y047aka.space"
+        siteName =
+            "y047aka.space"
 
         siteUrl =
             "https://y047aka.space"
@@ -59,14 +59,14 @@ viewHead preamble _ =
         imageUrl =
             crossOrigin siteUrl [ "assets", "M3fRFrmf.jpg" ] []
     in
-    [ Html.title [] title
+    [ Html.title [] (String.join " | " [ preamble.title, siteName ])
     , Html.link [ rel "canonical", href siteUrl ]
     , Html.meta [ name "description", Attributes.content description ]
-    , Ogp.title title
+    , Ogp.title preamble.title
     , Ogp.type_ "article"
     , Ogp.url siteUrl
     , Ogp.image imageUrl
-    , Ogp.siteName "y047aka.space"
+    , Ogp.siteName siteName
     , Ogp.description description
     , Ogp.locale "ja_JP"
     , Ogp.twitterCard "summary"
