@@ -1,7 +1,12 @@
-module Siteelm.Html.Styled.Attributes exposing (charset, content, data, rel, role)
+module Siteelm.Html.Styled.Attributes exposing (charset, content, data, prefix, property, rel, role)
 
 import Html.Styled exposing (Attribute)
 import Html.Styled.Attributes exposing (attribute)
+
+
+charset : String -> Attribute msg
+charset =
+    attribute "charset"
 
 
 content : String -> Attribute msg
@@ -9,9 +14,14 @@ content =
     attribute "content"
 
 
-charset : String -> Attribute msg
-charset =
-    attribute "charset"
+prefix : String -> Attribute msg
+prefix =
+    attribute "prefix"
+
+
+property : String -> Attribute msg
+property =
+    attribute "property"
 
 
 rel : String -> Attribute msg

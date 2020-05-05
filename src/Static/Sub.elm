@@ -7,15 +7,17 @@ import Css.Global exposing (children)
 import Css.Media as Media exposing (only, screen, withMedia)
 import DateFormat exposing (dayOfMonthSuffix, format, monthNameFull, yearNumber)
 import Html.Styled exposing (Html, div, fromUnstyled, h1, header, main_, p, text)
-import Html.Styled.Attributes exposing (css, href)
+import Html.Styled.Attributes exposing (css, href, name)
 import Iso8601
 import Json.Decode as D exposing (Decoder)
 import Markdown
 import Siteelm.Html.Styled as Html
-import Siteelm.Html.Styled.Attributes exposing (rel)
+import Siteelm.Html.Styled.Attributes as Attributes exposing (rel)
+import Siteelm.Ogp as Ogp
 import Siteelm.Page exposing (Page, page)
 import Static.View exposing (siteFooter, siteHeader, viewArticle)
 import Time exposing (Posix, Zone)
+import Url.Builder exposing (crossOrigin)
 
 
 main : Page Preamble
@@ -44,7 +46,31 @@ preambleDecoder =
 
 viewHead : Preamble -> String -> List (Html Never)
 viewHead preamble _ =
-    [ Html.title [] (preamble.title ++ " | y047aka.space")
+    let
+        title =
+            preamble.title ++ " | y047aka.space"
+
+        siteUrl =
+            "https://y047aka.space"
+
+        description =
+            "My Tanuki logo symbolizes this with a smart animal that works in a group to achieve a common goal."
+
+        imageUrl =
+            crossOrigin siteUrl [ "assets", "M3fRFrmf.jpg" ] []
+    in
+    [ Html.title [] title
+    , Html.link [ rel "canonical", href siteUrl ]
+    , Html.meta [ name "description", Attributes.content description ]
+    , Ogp.title title
+    , Ogp.type_ "article"
+    , Ogp.url siteUrl
+    , Ogp.image imageUrl
+    , Ogp.siteName "y047aka.space"
+    , Ogp.description description
+    , Ogp.locale "ja_JP"
+    , Ogp.twitterCard "summary"
+    , Ogp.twitterSite "@y047aka"
     , Html.link [ rel "stylesheet", href "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/default.min.css" ]
     , Html.script "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" ""
     , Html.script "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/elm.min.js" ""

@@ -66,7 +66,7 @@ renderPage head body model =
     case model.preamble of
         Just p ->
             Html.html []
-                [ Html.head [] <|
+                [ Html.head [ Attributes.prefix "og: http://ogp.me/ns#" ] <|
                     List.append
                         [ Html.meta [ charset "utf-8" ]
                         , Html.meta [ name "viewport", Attributes.content "width=device-width, initial-scale=1" ]
