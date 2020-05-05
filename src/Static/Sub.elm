@@ -57,7 +57,7 @@ viewHead preamble _ =
             "My Tanuki logo symbolizes this with a smart animal that works in a group to achieve a common goal."
 
         imageUrl =
-            crossOrigin siteUrl [ "assets", "M3fRFrmf.jpg" ] []
+            crossOrigin siteUrl [ "M3fRFrmf.jpg" ] []
     in
     [ Html.title [] (String.join " | " [ preamble.title, siteName ])
     , Html.link [ rel "canonical", href siteUrl ]
