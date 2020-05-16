@@ -1,6 +1,8 @@
 module Static.View exposing (siteFooter, siteHeader, viewArticle)
 
+import Color.Palette exposing (textLink, textLinkVisited)
 import Css exposing (..)
+import Css.Extra exposing (palette)
 import Css.Global exposing (a, adjacentSiblings, blockquote, children, code, dd, descendants, details, dl, dt, each, h1, h2, h3, h4, h5, h6, hr, img, li, ol, p, selector, summary, td, th, tr, ul, withAttribute)
 import Css.Media as Media exposing (only, screen, withMedia)
 import Html.Styled as Html exposing (Attribute, Html, text)
@@ -76,10 +78,30 @@ viewArticle attributes elements =
 
                 -- 中略
                 , a
-                    [ color (hex "#0366d6")
+                    [ palette textLink
                     , textDecoration none
                     , hover
                         [ textDecoration underline ]
+                    , visited
+                        [ palette textLinkVisited ]
+                    , withAttribute "target=_blank"
+                        [ after
+                            [ property "content" (qt " \\f35d")
+                            , position relative
+                            , top (px -1)
+                            , display inlineBlock
+                            , padding2 zero (px 5)
+                            , fontFamilies [ qt "Font Awesome 5 Free" ]
+                            , fontSize (px 12)
+                            , fontWeight (int 900)
+                            , textDecoration none
+                            , color inherit
+                            ]
+                        , visited
+                            [ after
+                                [ palette textLinkVisited ]
+                            ]
+                        ]
                     ]
 
                 -- 中略

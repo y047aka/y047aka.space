@@ -72,6 +72,7 @@ viewHead preamble _ =
     , Ogp.twitterCard "summary"
     , Ogp.twitterSite "@y047aka"
     , Html.link [ rel "stylesheet", href "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/default.min.css" ]
+    , Html.script "https://kit.fontawesome.com/a26b6242ff.js" ""
     , Html.script "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" ""
     , Html.script "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/elm.min.js" ""
     , Html.script "" "hljs.initHighlightingOnLoad();"

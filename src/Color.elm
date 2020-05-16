@@ -1,12 +1,14 @@
 module Color exposing
     ( gray020, gray040, gray050, gray090, gray095
     , coolGray040, coolGray050, coolGray090, coolGray095
+    , limeGreen020, limeGreen040
     )
 
 {-|
 
 @docs gray020, gray040, gray050, gray090, gray095
 @docs coolGray040, coolGray050, coolGray090, coolGray095
+@docs limeGreen020, limeGreen040
 
 -}
 
@@ -66,3 +68,18 @@ coolGray090 =
 coolGray095 : Maybe Color
 coolGray095 =
     coolGray 0.95
+
+
+limeGreen : Float -> Maybe Color
+limeGreen lightness =
+    Just (hsl 90 1.0 lightness)
+
+
+limeGreen020 : Maybe Color
+limeGreen020 =
+    limeGreen 0.2
+
+
+limeGreen040 : Maybe Color
+limeGreen040 =
+    limeGreen 0.4

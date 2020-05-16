@@ -1,6 +1,6 @@
-module Color.Palette exposing (Palette, button, buttonOnHover, default)
+module Color.Palette exposing (Palette, button, buttonOnHover, default, textLink, textLinkVisited)
 
-import Color exposing (coolGray040, coolGray050, coolGray090, coolGray095, gray020)
+import Color exposing (coolGray040, coolGray050, coolGray090, coolGray095, gray020, limeGreen020, limeGreen040)
 import Css exposing (Color)
 
 
@@ -29,6 +29,16 @@ default =
         | color = gray020
         , optionalColor = coolGray050
     }
+
+
+textLink : Palette
+textLink =
+    { empty | color = limeGreen040 }
+
+
+textLinkVisited : Palette
+textLinkVisited =
+    { textLink | color = limeGreen020 }
 
 
 button : Palette

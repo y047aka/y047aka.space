@@ -49,7 +49,7 @@ Elm を初めてからしばらくは、使い慣れた HTML で CSS ファイ�
 elm-live の v3 系では CSS ファイルの更新を感知してブラウザをリロードする機能あり、非常に快適に開発を進めることができました。
 4.0.0 で大きな変更がありこの機能は省略されてしまいましたが、今後復活することを期待しています。
 
-[Watching css files? · Issue #196 · wking-io/elm-live](https://github.com/wking-io/elm-live/issues/196)
+<a href="https://github.com/wking-io/elm-live/issues/196" target="_blank" rel="noopener">Watching css files? · Issue #196 · wking-io/elm-live</a>
 
 ### 別の方法を探す
 
