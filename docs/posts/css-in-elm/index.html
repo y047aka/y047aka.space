@@ -1,0 +1,106 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira:wght@400;500&amp;display=swap"><title>Elm + CSS の検討と実践記録 | y047aka.space</title><link rel="canonical" href="https://y047aka.space"><meta name="description" content="My Tanuki logo symbolizes this with a smart animal that works in a group to achieve a common goal."><meta property="og:title" content="Elm + CSS の検討と実践記録"><meta property="og:type" content="article"><meta property="og:url" content="https://y047aka.space"><meta property="og:image" content="https://y047aka.space/M3fRFrmf.jpg"><meta property="og:site_name" content="y047aka.space"><meta property="og:description" content="My Tanuki logo symbolizes this with a smart animal that works in a group to achieve a common goal."><meta property="og:locale" content="ja_JP"><meta name="twitter:card" content="summary"><meta name="twitter:site" content="@y047aka"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/default.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/elm.min.js"></script><script>hljs.initHighlightingOnLoad()</script><style>._1f6e253d{padding-top:20px;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;line-height:1.8;word-wrap:break-word}._1f6e253d details{display:block}._1f6e253d summary{display:list-item}._1f6e253d a{color:#0366d6;text-decoration:none}._1f6e253d a:hover{text-decoration:underline}._1f6e253d table{border-spacing:0;border-collapse:collapse}._1f6e253d td,._1f6e253d th{padding:0}._1f6e253d h1,._1f6e253d h2,._1f6e253d h3,._1f6e253d h4,._1f6e253d h5,._1f6e253d h6{margin-top:0;margin-bottom:0}._1f6e253d blockquote{margin:0}._1f6e253d ol,._1f6e253d ul{padding-left:0;margin-top:0;margin-bottom:0}._1f6e253d ol ol,._1f6e253d ul ol{list-style-type:lower-roman}._1f6e253d ol ol ol,._1f6e253d ol ul ol,._1f6e253d ul ol ol,._1f6e253d ul ul ol{list-style-type:lower-alpha}._1f6e253d dd{margin-left:0}._1f6e253d code,._1f6e253d pre{font-family:SFMono-Regular,Consolas,"Liberation Mono",Menlo,monospace;font-size:12px}._1f6e253d pre{margin-top:0;margin-bottom:0}._1f6e253d blockquote,._1f6e253d details,._1f6e253d dl,._1f6e253d ol,._1f6e253d p,._1f6e253d pre,._1f6e253d table,._1f6e253d ul{margin-top:0;margin-bottom:29px}._1f6e253d hr{height:.25em;padding:0;margin:24px 0;background-color:#e1e4e8;border:0}._1f6e253d blockquote{padding:0 1em;color:#6a737d;border-left:.25em solid #dfe2e5}._1f6e253d blockquote>:first-child{margin-top:0}._1f6e253d blockquote>:last-child{margin-bottom:0}._1f6e253d h1,._1f6e253d h2,._1f6e253d h3,._1f6e253d h4,._1f6e253d h5,._1f6e253d h6{font-weight:600}._1f6e253d h1{margin:28px 0;padding:17px 0;font-size:1.125em;line-height:1.333;text-align:center;border-top:1px solid;border-bottom:1px solid}._1f6e253d h2{margin-top:2px;margin-bottom:31px;font-size:1.25em;line-height:1.25}._1f6e253d h3{font-size:1em}._1f6e253d h4{font-size:1em}._1f6e253d h5{font-size:.875em}._1f6e253d h6{font-size:.85em;color:#6a737d}._1f6e253d ol,._1f6e253d ul{padding-left:2em}._1f6e253d ol ol,._1f6e253d ol ul,._1f6e253d ul ol,._1f6e253d ul ul{margin-top:0;margin-bottom:0}._1f6e253d li{word-wrap:break-all}._1f6e253d li+li{margin-top:.25em}._1f6e253d li>p{margin-top:16px}._1f6e253d dl{padding:0}._1f6e253d dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:600}._1f6e253d dl dd{padding:0 16px;margin-bottom:16px}._1f6e253d table{display:block;width:100%;overflow:auto}._1f6e253d table th{font-weight:600}._1f6e253d table td,._1f6e253d table th{padding:6px 13px;border:1px solid #dfe2e5}._1f6e253d table tr{background-color:#fff;border-top:1px solid #c6cbd1}._1f6e253d table tr:nth-child(2n){background-color:#f6f8fa}._1f6e253d img{max-width:100%;box-sizing:initial;background-color:#fff}._1f6e253d img[align=right]{padding-left:20px}._1f6e253d img[align=left]{padding-right:20px}._1f6e253d code{padding:.2em .4em;margin:0;font-size:85%;background-color:rgba(27,31,35,.05);border-radius:3px}._1f6e253d pre{word-wrap:normal}._1f6e253d pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:0 0;border:0}._1f6e253d pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f6f8fa;border-radius:3px}._1f6e253d pre code{display:inline;max-width:auto;padding:0;margin:0;overflow:visible;line-height:inherit;word-wrap:normal;background-color:initial;border:0}._3a71fdb5{color:#797f85}._3a71fdb5>p{padding:5px 0;font-size:14px;line-height:1}._5758449e{display:block;width:620px;margin:0 auto;padding:20px 0;font-family:Saira,sans-serif;font-size:18px;font-weight:400}@media only screen and (max-width:480px){._5758449e{width:100%;padding:15px}}._6c2a7992{text-decoration:none;color:inherit}._96049fe0{padding:5px 0;font-family:"-apple-system",sans-serif;font-size:24px;font-weight:600}._beb10df7{width:620px;margin:0 auto;padding:20px 0}@media only screen and (max-width:480px){._beb10df7{width:100%;padding:15px}}._d8a7d977{display:block;width:620px;margin:0 auto;padding:20px 0;text-align:right;font-family:Saira,sans-serif;font-size:14px}@media only screen and (max-width:480px){._d8a7d977{width:100%;padding:15px}}._eca6e413{font-family:"-apple-system",BlinkMacSystemFont,sans-serif;font-feature-settings:"palt";color:#333}</style><style>html{box-sizing:border-box;-webkit-text-size-adjust:100%;word-break:normal;-moz-tab-size:4;tab-size:4}*,::after,::before{background-repeat:no-repeat;box-sizing:inherit}::after,::before{text-decoration:inherit;vertical-align:inherit}*{padding:0;margin:0}hr{overflow:visible;height:0}details,main{display:block}summary{display:list-item}small{font-size:80%}[hidden]{display:none}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}a{background:0 0}a:active,a:hover{outline-width:0}code,kbd,pre,samp{font-family:monospace,monospace}pre{font-size:1em}b,strong{font-weight:bolder}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}input{border-radius:0}[disabled]{cursor:default}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{-webkit-appearance:none}textarea{overflow:auto;resize:vertical}button,input,optgroup,select,textarea{font:inherit}optgroup{font-weight:700}button{overflow:visible}button,select{text-transform:none}[role=button],[type=button],[type=reset],[type=submit],button{cursor:pointer;color:inherit}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button:-moz-focusring{outline:1px dotted ButtonText}[type=reset],[type=submit],button,html [type=button]{-webkit-appearance:button}button,input,select,textarea{background:0 0;border-style:none}select{-moz-appearance:none;-webkit-appearance:none}select::-ms-expand{display:none}select::-ms-value{color:currentColor}legend{border:0;color:inherit;display:table;max-width:100%;white-space:normal;max-width:100%}::-webkit-file-upload-button{-webkit-appearance:button;color:inherit;font:inherit}img{border-style:none}progress{vertical-align:baseline}svg:not([fill]){fill:currentColor}@media only screen{[hidden~=screen]{display:inherit}}@media only screen{[hidden~=screen]:not(:active):not(:focus):not(:target){position:absolute!important;clip:rect(0 0 0 0)!important}}[aria-busy=true]{cursor:progress}[aria-controls]{cursor:pointer}[aria-disabled]{cursor:default}</style><script src="/app.js"></script></head><body class="_eca6e413"><header><h1 class="_5758449e"><a href="/" class="_6c2a7992">y047aka.space</a></h1></header><main class="_beb10df7"><header><h1 class="_96049fe0">Elm + CSS の検討と実践記録</h1><div class="_3a71fdb5"><p>Posted: May 16th, 2020</p><p>Updated: May 16th, 2020</p></div></header><article class="_1f6e253d"><div><p>Elm で CSS を扱う方法の検討と、<a href="https://package.elm-lang.org/packages/rtfeldman/elm-css/latest" target="_blank" rel="noopener">elm-css</a> に至るまでの記録です。</p>
+<h1 id="-">選択肢</h1>
+<p>Elm のアプリケーションで CSS を扱うための方法にはどのようなものがあるでしょうか？</p>
+<h3 id="html-css-">HTML で CSS ファイルを読み込む</h3>
+<p>最もオーソドックスな方法です。
+Sass などのプリプロセッサや PostCSS などの仕組みも問題なく使うことができます。
+ただし、この方法が Elm で常に使えるわけではありません。
+Ellie などのオンラインエディタや、HTML を生成しない <code>elm reactor</code> などで実行する場合は CSS を読み込むことはできず、インラインに記述するなどの工夫が必要です。</p>
+<h3 id="css-">CSS フレームワーク</h3>
+<p><a href="https://bulma.io/" target="_blank" rel="noopener">Bulma</a>、<a href="https://tailwindcss.com/" target="_blank" rel="noopener">Tailwind CSS</a>、<a href="https://semantic-ui.com/" target="_blank" rel="noopener">Semantic UI</a> などがあります。
+このうち Bulma については 3 ヶ月ほど使ってみました。
+用意されているスタイルだけでは足りない場合は、自分でスタイルを書く必要があります。</p>
+<h3 id="elm-ui">elm-ui</h3>
+<p>従来 CSS が担っていたレイアウトの定義を Elm で記述できるようにしたライブラリです。
+レイアウト以外のスタイルは別の方法で指定する必要がありますが、使い勝手の良いライブラリとして人気を集めています。
+（私はまだ使ったことがない）</p>
+<h3 id="elm-css">elm-css</h3>
+<p>私が現在使っている方法です。
+プロパティや値が型つきで定義されていて、Elm のファイル内でスタイルを指定できます。
+これまで日本ではあまり注目されていませんでしたが、この記事をきっかけにして普及するといいな。</p>
+<p>「HTML で CSS ファイルを読み込む」と「elm-css」について、詳しく見てみましょう。</p>
+<h1 id="-html-css-">記録： HTML で CSS ファイルを読み込む</h1>
+<p>Elm を初めてからしばらくは、使い慣れた HTML で CSS ファイルを読み込む方法を採用していました。
+<a href="https://www.elm-live.com/" target="_blank" rel="noopener">elm-live</a> というツールが非常に便利だったため、モジュールバンドラー不要の開発を実現していました。
+当時の私が書いていた CSS は一般的な CSS 設計とは異なるスタイルでしたが、「Elm で CSS を扱う」という目的は充分に達成していました。</p>
+<h3 id="elm-live-">elm-live のリロード機能</h3>
+<p>elm-live の v3 系では CSS ファイルの更新を感知してブラウザをリロードする機能あり、非常に快適に開発を進めることができました。
+4.0.0 で大きな変更がありこの機能は省略されてしまいましたが、今後復活することを期待しています。</p>
+<p><a href="https://github.com/wking-io/elm-live/issues/196">Watching css files? · Issue #196 · wking-io/elm-live</a></p>
+<h3 id="-">別の方法を探す</h3>
+<p>実際のところ、elm-live から CSS のライブリロード機能がなくなったことは、私が別の方法を模索するきっかけになりました。
+CSS フレームワークの Bulma を試していたりもしましたが、ここでは省略します。
+ジンジャーさんが書かれている <a href="http://jinjor-labo.hatenablog.com/entry/2019/03/13/084116" target="_blank" rel="noopener">CSS フレームワークを使いたくない - ジンジャー研究室</a>
+は、私の感想にかなり近いと思います。
+とはいえ、デザインをフォーマットする手段としては有効だと感じます。</p>
+<h1 id="-elm-css">記録： elm-css</h1>
+<p>2020 年に入り elm-css を導入しました。
+そして、この試みは今のところ上手くいっています。
+elm-css の特徴や使ってみての感想を以下に列挙します。</p>
+<h3 id="-">型の存在</h3>
+<p>プロパティや値に応じた型が用意されているため、コンパイル時に記述のミスを発見することができます。
+CSS であることに変わりはないので、詳細度やその他いくつかの問題に対しては CSS を記述する時と同じように気をつける必要があります。</p>
+<h3 id="locally-scoped-css">locally scoped CSS</h3>
+<p>記述したスタイルにはランダムな class 名が付与されます。
+これを HTML の要素と紐付けることでローカルなスコープを実現しています。
+クラスを使ったセレクタも書けるようになっているので、ローカルなスコープ以外の方法で紐付けたい場合に使いましょう。</p>
+<h3 id="css-">CSS のプロパティや値はそのまま</h3>
+<p>過去に CSS の経験があれば、知識をそのまま活用できます。
+すべてが網羅されているわけではありませんが、不足があれば新たに関数を作って補うことができます。
+「CSS でできることは、elm-css でも同じようにできる」という認識で良さそうです。</p>
+<h3 id="-">動的な値を含めることができる</h3>
+<p>数値を Elm で計算して含めることも、ロジックに応じてプロパティ単位で指定を変更することもできます。
+なんでもできてしまうので、やりすぎに注意する必要はあるかもしれません。</p>
+<h3 id="-">関心の分離</h3>
+<p>CSS in Elm の採用にあたって気になる部分だと思うのですが、elm-css の採用検討にあたってはそれほど重要ではないと感じています。
+書き方の工夫で大きく変わるので、採用後に色々と検討してみると良いと思います。
+「関心の分離」は個人的には重要なので、いつか詳しい記事を書くつもり。</p>
+<h3 id="-">コンパイルが必要</h3>
+<p>アプリケーションが小さいうちはそれほど気になりませんが、スタイルを変更するたびにコンパイルが必要です。
+大きくなると少しストレスに感じるかもしれません。
+そのうち慣れます。</p>
+<h1 id="q-a">Q &amp; A</h1>
+<h3 id="-">学習コスト</h3>
+<p>CSS を書けるのであれば、それほど苦労はしないと思います。
+プロパティや値のほとんどは、スネークケースをキャメルケースにすれば使うことができます。
+よく言われる「デザイナーとの協業」については試したことがないのでわかりません。
+CSS in JS を採用している人に聞いてみたい。</p>
+<h3 id="-">捨てやすさ</h3>
+<p>すべてのプロパティや値は CSS と共通なので、クラスを改めて指定する手間さえ惜しまなければ適当に変換できるはずです。</p>
+<h3 id="css-">CSS に型安全は過剰？</h3>
+<p>型安全が elm-css のすべてではないので総合的に判断すれば良いと思います。</p>
+<h3 id="-">擬似クラス、擬似要素、メディアクエリは使える？</h3>
+<p>使えます。</p>
+<h3 id="postcss-">PostCSS は使える？</h3>
+<p>現行の elm-css だけでは PostCSS は使えません。
+必要な機能は関数として作ってしまえば、それほど困ることはないのかなと考えています。</p>
+<h3 id="-css-">リセット CSS がほしい</h3>
+<p><a href="https://package.elm-lang.org/packages/y047aka/elm-reset-css/latest/" target="_blank" rel="noopener">y047aka/elm-reset-css</a> を作りました。</p>
+<h3 id="elm-css-css-">elm-css を既存の CSS と組み合わせたい</h3>
+<p>HTML ファイルで既存の CSS を読み込みつつ、適宜 elm-css の指定を追加できます。
+既存の CSS から elm-css へと段階的な移行もできますね。</p>
+<h3 id="css-">CSS ファイルを生成したい</h3>
+<p>過去に <a href="https://github.com/tcoopman/elm-css-webpack-loader" target="_blank" rel="noopener">elm-css-webpack-loader</a> や <a href="https://package.elm-lang.org/packages/ThinkAlexandria/css-in-elm/latest/" target="_blank" rel="noopener">ThinkAlexandria/css-in-elm</a> が開発されていたので、参考にすると良さそうです。
+私は今のところ試していません。</p>
+<h1 id="-">参考</h1>
+<p>elm-css を採用している事例の紹介です。</p>
+<h3 id="noredink-ui">noredink-ui</h3>
+<p>NoRedInk 社製の UI ウィジェット集です。
+実践的な使い方はこのパッケージの実装を参考にするのが良いかも。<br><a href="https://package.elm-lang.org/packages/NoRedInk/noredink-ui/latest/" target="_blank" rel="noopener">NoRedInk/noredink-ui</a></p>
+<h3 id="elm-css-patterns">elm-css patterns</h3>
+<p>elm-css のレイアウトパターン集です。
+綺麗にまとまっているので、elm-ui との比較検討をする場合に役立ちそう。<br><a href="https://elmcsspatterns.io/" target="_blank" rel="noopener">elm-css patterns</a></p>
+<h1 id="-">今後の展望</h1>
+<p>いま試しているものや、未来の可能性など。</p>
+<h3 id="palette-">Palette の導入</h3>
+<p>CSS で最も難しいことのひとつが色の管理です。
+変数を活用する方法は既存の CSS でも普及していますが、私は background / color / border などをセットにした Palette という単位を試しています。
+今のところ上手く機能しているので、elm-css を使う利点の 1 つとして考えています。<br><a href="https://github.com/y047aka/y047aka.space/blob/master/src/Color/Palette.elm" target="_blank" rel="noopener">https://github.com/y047aka/y047aka.space/blob/master/src/Color/Palette.elm</a></p>
+<h3 id="elm-ui-">elm-ui との関係性</h3>
+<p>レイアウトに関するスタイルのみを CSS から切り離すことへの違和感が強く、私自身は <a href="https://package.elm-lang.org/packages/mdgriffith/elm-ui/latest/" target="_blank" rel="noopener">elm-ui</a> を使ったことがありませんでした。
+elm-css を深めていく中で、いまは elm-ui の手法を一部取り入れる可能性もあると考えています。</p>
+<h3 id="css-">CSS への期待</h3>
+<p>elm-css を導入した背景には、CSS 設計（BEM など）への反発もありました。
+従来の CSS 設計とは異なる新しいパラダイムの登場や CSS 自体のさらなる進化を期待しています。</p>
+</div></article></main><footer><p class="_d8a7d977">© 2020 y047aka</p></footer></body></html>
