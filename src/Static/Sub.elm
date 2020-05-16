@@ -6,8 +6,8 @@ import Css.Extra exposing (orNoStyle)
 import Css.Global exposing (children)
 import Css.Media as Media exposing (only, screen, withMedia)
 import DateFormat exposing (dayOfMonthSuffix, format, monthNameFull, yearNumber)
-import Html.Styled exposing (Html, div, fromUnstyled, h1, header, main_, p, text)
-import Html.Styled.Attributes exposing (css, href, name)
+import Html.Styled exposing (Html, div, fromUnstyled, h1, header, i, main_, p, text)
+import Html.Styled.Attributes exposing (class, css, href, name)
 import Iso8601
 import Json.Decode as D exposing (Decoder)
 import Markdown
@@ -116,11 +116,13 @@ viewBody preamble body =
                     ]
                 ]
                 [ p []
-                    [ text "Posted: "
+                    [ i [ class "fas fa-edit" ] []
+                    , text " "
                     , text (dateString Time.utc preamble.createdAt)
                     ]
                 , p []
-                    [ text "Updated: "
+                    [ i [ class "fas fa-redo-alt" ] []
+                    , text " "
                     , text
                         (preamble.updatedAt
                             |> Maybe.map (dateString Time.utc)
