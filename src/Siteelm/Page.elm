@@ -1,7 +1,7 @@
 module Siteelm.Page exposing (Page, page)
 
 import Browser
-import Color.Palette exposing (basic)
+import Color.Palette as Palette
 import Css exposing (..)
 import Css.Extra exposing (palette)
 import Css.Global exposing (global)
@@ -78,7 +78,7 @@ renderPage head body model =
                     [ css
                         [ fontFamilies [ qt "-apple-system", qt "BlinkMacSystemFont", sansSerif.value ]
                         , property "font-feature-settings" (qt "palt")
-                        , palette basic
+                        , palette Palette.default
                         ]
                     ]
                     (body p model.body)

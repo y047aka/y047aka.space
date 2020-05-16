@@ -1,6 +1,6 @@
 module Static.Sub exposing (main)
 
-import Color.Palette exposing (basic)
+import Color.Palette as Palette
 import Css exposing (..)
 import Css.Extra exposing (orNoStyle)
 import Css.Global exposing (children)
@@ -104,7 +104,7 @@ viewBody preamble body =
                 [ text preamble.title ]
             , div
                 [ css
-                    [ color |> orNoStyle basic.optionalColor
+                    [ color |> orNoStyle Palette.default.optionalColor
                     , children
                         [ Css.Global.p
                             [ padding2 (px 5) zero
