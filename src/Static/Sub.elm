@@ -6,11 +6,11 @@ import Css.Extra exposing (orNoStyle)
 import Css.Global exposing (children)
 import Css.Media as Media exposing (only, screen, withMedia)
 import DateFormat exposing (dayOfMonthSuffix, format, monthNameFull, yearNumber)
-import Html.Styled exposing (Html, div, fromUnstyled, h1, header, i, main_, p, text)
+import Html.Styled as Html exposing (Html, div, h1, header, i, main_, p, text)
 import Html.Styled.Attributes exposing (class, css, href, name)
 import Iso8601
 import Json.Decode as D exposing (Decoder)
-import Markdown
+import Markdown.Customized exposing (markdownToHtml)
 import Siteelm.Html.Styled as Html
 import Siteelm.Html.Styled.Attributes as Attributes exposing (rel)
 import Siteelm.Ogp as Ogp
@@ -131,22 +131,10 @@ viewBody preamble body =
                     ]
                 ]
             ]
-        , viewArticle []
-            [ fromUnstyled <|
-                Markdown.toHtmlWith markdownOptions [] body
-            ]
+        , viewArticle [] [ markdownToHtml [] body ]
         ]
     , siteFooter
     ]
-
-
-markdownOptions : Markdown.Options
-markdownOptions =
-    { githubFlavored = Just { tables = True, breaks = False }
-    , defaultHighlighting = Nothing
-    , sanitize = False
-    , smartypants = False
-    }
 
 
 dateString : Zone -> Posix -> String
