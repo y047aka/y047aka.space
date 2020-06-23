@@ -1,8 +1,11 @@
 module Markdown.Customized exposing (markdownToHtml)
 
+import Color.Palette exposing (textLink, textLinkVisited)
 import Css exposing (..)
+import Css.Extra exposing (palette)
+import Css.Global exposing (a, blockquote, children, code, descendants, details, dl, each, h1, h2, h3, h4, h5, h6, hr, img, li, ol, p, selector, td, th, tr, ul, withAttribute)
 import Html.Styled as Html exposing (Attribute, Html, div, text)
-import Html.Styled.Attributes as Attr exposing (rel, target)
+import Html.Styled.Attributes as Attr exposing (css, rel, target)
 import Json.Encode exposing (null)
 import Markdown.Parser exposing (deadEndToString)
 import Markdown.Renderer exposing (Renderer)
@@ -24,7 +27,7 @@ markdownToHtml attributes markdown =
             |> Result.andThen (\ast -> Markdown.Renderer.render customRenderer ast)
     of
         Ok rendered ->
-            div attributes rendered
+            Html.div (css markdownStyles :: attributes) rendered
 
         Err errors ->
             text errors
@@ -70,3 +73,180 @@ customRenderer =
                     )
                     content
     }
+
+
+{-| Implemented with reference to [github-markdown-css](https://github.com/sindresorhus/github-markdown-css).
+-}
+markdownStyles : List Style
+markdownStyles =
+    [ paddingTop (px 20)
+    , lineHeight (num 1.8)
+    , property "word-wrap" "break-word"
+    , descendants
+        [ a
+            [ whiteSpace preWrap
+            , textDecoration none
+            , palette textLink
+            , hover
+                [ textDecoration underline ]
+            , visited
+                [ palette textLinkVisited ]
+            , withAttribute "target=_blank"
+                [ after
+                    [ property "content" (qt " \\f35d")
+                    , position relative
+                    , top (px -1)
+                    , display inlineBlock
+                    , padding2 zero (px 5)
+                    , fontFamilies [ qt "Font Awesome 5 Free" ]
+                    , fontSize (px 12)
+                    , fontWeight (int 900)
+                    , textDecoration none
+                    , color inherit
+                    ]
+                , visited
+                    [ after
+                        [ palette textLinkVisited ]
+                    ]
+                ]
+            ]
+        , Css.Global.table
+            [ borderSpacing zero
+            , borderCollapse collapse
+            ]
+        , each [ th, td ]
+            [ padding zero ]
+        , each
+            [ selector "ol ol"
+            , selector "ul ol"
+            ]
+            [ listStyleType lowerRoman ]
+        , each
+            [ selector "ol ol ol"
+            , selector "ol ul ol"
+            , selector "ul ol ol"
+            , selector "ul ul ol"
+            ]
+            [ listStyleType lowerAlpha ]
+        , each
+            [ blockquote
+            , details
+            , dl
+            , ol
+            , p
+            , Css.Global.pre
+            , Css.Global.table
+            , ul
+            ]
+            [ nthChild "n+2"
+                [ marginTop (px 29) ]
+            ]
+        , hr
+            [ height zero
+            , padding zero
+            , margin2 (px 24) zero
+            , borderTopWidth (px 1)
+            , borderStyle solid
+            , borderColor (hex "#e1e4e8")
+            ]
+        , blockquote
+            [ paddingLeft (em 1)
+            , borderWidth zero
+            , borderLeftWidth (em 0.25)
+            , borderStyle solid
+            , color (hex "#6a737d")
+            , borderColor (hex "#dfe2e5")
+            ]
+        , each [ h1, h2, h3, h4, h5, h6 ]
+            [ fontWeight (int 600)
+            , nthChild "n+2"
+                [ marginTop (px 29) ]
+            ]
+        , h1
+            [ margin2 (px 28) zero
+            , padding2 (px 17) zero
+            , fontSize (em 1.125)
+            , lineHeight (num 1.333)
+            , textAlign center
+            , borderTop2 (px 1) solid
+            , borderBottom2 (px 1) solid
+            ]
+        , h2
+            [ marginTop (px 2)
+            , marginBottom (px 31)
+            , fontSize (em 1.25)
+            , lineHeight (num 1.25)
+            ]
+        , h3
+            [ fontSize (em 1) ]
+        , h4
+            [ fontSize (em 1) ]
+        , h5
+            [ fontSize (em 0.875) ]
+        , h6
+            [ fontSize (em 0.85)
+            , color (hex "#6a737d")
+            ]
+        , each [ ol, ul ]
+            [ paddingLeft (em 2) ]
+        , li
+            [ children
+                [ p [ marginTop (px 16) ] ]
+            , nthChild "n+2"
+                [ marginTop (em 0.25) ]
+            ]
+        , Css.Global.table
+            [ display block
+            , width (pct 100)
+            , overflow auto
+            , descendants
+                [ th
+                    [ fontWeight (int 600) ]
+                , each [ th, td ]
+                    [ padding2 (px 6) (px 13)
+                    , border3 (px 1) solid (hex "#dfe2e5")
+                    ]
+                , tr
+                    [ backgroundColor (hex "#fff")
+                    , borderTop3 (px 1) solid (hex "#c6cbd1")
+                    , nthChild "2n"
+                        [ backgroundColor (hex "#f6f8fa") ]
+                    ]
+                ]
+            ]
+        , img
+            [ maxWidth (pct 100) ]
+        , each [ code, Css.Global.pre ]
+            [ fontFamilies [ qt "SFMono-Regular", qt "Consolas", qt "Liberation Mono", qt "Menlo", monospace.value ]
+            , fontSize (px 12)
+            ]
+        , code
+            [ padding2 (em 0.2) (em 0.4)
+            , margin zero
+            , fontSize (pct 85)
+            , backgroundColor (rgba 27 31 35 0.05)
+            , borderRadius (px 3)
+            ]
+        , Css.Global.pre
+            [ padding (px 16)
+            , overflow auto
+            , fontSize (pct 85)
+            , lineHeight (num 1.45)
+            , backgroundColor (hex "#f6f8fa")
+            , borderRadius (px 3)
+            , descendants
+                [ code
+                    [ display inline
+                    , property "max-width" "auto"
+                    , padding zero
+                    , margin zero
+                    , overflow visible
+                    , lineHeight inherit
+                    , property "word-wrap" "normal"
+                    , backgroundColor initial
+                    , border zero
+                    ]
+                ]
+            ]
+        ]
+    ]

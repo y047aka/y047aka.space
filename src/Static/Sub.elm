@@ -15,7 +15,7 @@ import Siteelm.Html.Styled as Html
 import Siteelm.Html.Styled.Attributes as Attributes exposing (rel)
 import Siteelm.Ogp as Ogp
 import Siteelm.Page exposing (Page, page)
-import Static.View exposing (siteFooter, siteHeader, viewArticle)
+import Static.View exposing (siteFooter, siteHeader)
 import Time exposing (Posix, Zone)
 import Url.Builder exposing (crossOrigin)
 
@@ -131,7 +131,7 @@ viewBody preamble body =
                     ]
                 ]
             ]
-        , viewArticle [] [ markdownToHtml [] body ]
+        , markdownToHtml [] body
         ]
     , siteFooter
     ]
