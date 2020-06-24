@@ -3,7 +3,7 @@ module Markdown.Customized exposing (markdownToHtml)
 import Color.Palette exposing (textLink, textLinkVisited)
 import Css exposing (..)
 import Css.Extra exposing (palette)
-import Css.Global exposing (a, blockquote, children, code, descendants, details, dl, each, h1, h2, h3, h4, h5, h6, hr, img, li, ol, p, selector, td, th, tr, ul, withAttribute)
+import Css.Global exposing (a, adjacentSiblings, blockquote, children, code, descendants, details, dl, each, h1, h2, h3, h4, h5, h6, hr, img, li, ol, p, selector, td, th, tr, ul, withAttribute)
 import Html.Styled as Html exposing (Attribute, Html, div, text)
 import Html.Styled.Attributes as Attr exposing (css, rel, target)
 import Json.Encode exposing (null)
@@ -93,7 +93,7 @@ markdownStyles =
                 [ palette textLinkVisited ]
             , withAttribute "target=_blank"
                 [ after
-                    [ property "content" (qt " \\f35d")
+                    [ property "content" (qt "\\f35d")
                     , position relative
                     , top (px -1)
                     , display inlineBlock
@@ -138,8 +138,19 @@ markdownStyles =
             , Css.Global.table
             , ul
             ]
-            [ nthChild "n+2"
-                [ marginTop (px 29) ]
+            [ adjacentSiblings
+                [ each
+                    [ blockquote
+                    , details
+                    , dl
+                    , ol
+                    , p
+                    , Css.Global.pre
+                    , Css.Global.table
+                    , ul
+                    ]
+                    [ marginTop (px 29) ]
+                ]
             ]
         , hr
             [ height zero
@@ -226,6 +237,20 @@ markdownStyles =
             , fontSize (pct 85)
             , backgroundColor (rgba 27 31 35 0.05)
             , borderRadius (px 3)
+            ]
+        , Css.Global.pre
+            [ property "word-wrap" "normal"
+            , children
+                [ code
+                    [ padding zero
+                    , margin zero
+                    , fontSize (pct 100)
+                    , property "word-break" "normal"
+                    , whiteSpace pre
+                    , property "background" "transparent"
+                    , border zero
+                    ]
+                ]
             ]
         , Css.Global.pre
             [ padding (px 16)
