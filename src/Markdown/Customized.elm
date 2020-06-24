@@ -3,13 +3,16 @@ module Markdown.Customized exposing (markdownToHtml)
 import Color.Palette exposing (textLink, textLinkVisited)
 import Css exposing (..)
 import Css.Extra exposing (palette)
-import Css.Global exposing (a, adjacentSiblings, blockquote, children, code, descendants, details, dl, each, h1, h2, h3, h4, h5, h6, hr, img, li, ol, p, selector, td, th, tr, ul, withAttribute)
+import Css.Global exposing (a, adjacentSiblings, blockquote, children, code, descendants, details, dl, each, h1, h2, h3, h4, h5, h6, hr, img, li, ol, p, selector, td, th, tr, ul)
 import Html.Styled as Html exposing (Attribute, Html, div, text)
 import Html.Styled.Attributes as Attr exposing (css, rel, target)
 import Json.Encode exposing (null)
+import Markdown.Html exposing (withAttribute)
 import Markdown.Parser exposing (deadEndToString)
 import Markdown.Renderer exposing (Renderer)
 import Markdown.Renderer.Styled exposing (styledRenderer)
+import Svg.Styled as Svg
+import Svg.Styled.Attributes
 
 
 markdownToHtml : List (Attribute msg) -> String -> Html msg
@@ -72,6 +75,55 @@ customRenderer =
                            )
                     )
                     content
+        , html =
+            Markdown.Html.oneOf
+                [ Markdown.Html.tag "svg"
+                    (\w h viewBox children ->
+                        Svg.svg
+                            [ Svg.Styled.Attributes.width w
+                            , Svg.Styled.Attributes.height h
+                            , Svg.Styled.Attributes.viewBox viewBox
+                            ]
+                            children
+                    )
+                    |> withAttribute "width"
+                    |> withAttribute "height"
+                    |> withAttribute "viewbox"
+                , Markdown.Html.tag "circle"
+                    (\cx cy r fill children ->
+                        Svg.circle
+                            [ Svg.Styled.Attributes.cx cx
+                            , Svg.Styled.Attributes.cy cy
+                            , Svg.Styled.Attributes.r r
+                            , Svg.Styled.Attributes.fill fill
+                            ]
+                            children
+                    )
+                    |> withAttribute "cx"
+                    |> withAttribute "cy"
+                    |> withAttribute "r"
+                    |> withAttribute "fill"
+                , Markdown.Html.tag "rect"
+                    (\x y w h rx ry fill children ->
+                        Svg.rect
+                            [ Svg.Styled.Attributes.x x
+                            , Svg.Styled.Attributes.y y
+                            , Svg.Styled.Attributes.width w
+                            , Svg.Styled.Attributes.height h
+                            , Svg.Styled.Attributes.rx rx
+                            , Svg.Styled.Attributes.ry ry
+                            , Svg.Styled.Attributes.fill fill
+                            ]
+                            children
+                    )
+                    |> withAttribute "x"
+                    |> withAttribute "y"
+                    |> withAttribute "width"
+                    |> withAttribute "height"
+                    |> withAttribute "rx"
+                    |> withAttribute "ry"
+                    |> withAttribute "fill"
+                ]
     }
 
 
@@ -91,7 +143,7 @@ markdownStyles =
                 [ textDecoration underline ]
             , visited
                 [ palette textLinkVisited ]
-            , withAttribute "target=_blank"
+            , Css.Global.withAttribute "target=_blank"
                 [ after
                     [ property "content" (qt "\\f35d")
                     , position relative
