@@ -77,7 +77,15 @@ customRenderer =
                     content
         , html =
             Markdown.Html.oneOf
-                [ Markdown.Html.tag "svg"
+                [ Markdown.Html.tag "table"
+                    (\children -> Html.table [] children)
+                , Markdown.Html.tag "tr"
+                    (\children -> Html.tr [] children)
+                , Markdown.Html.tag "th"
+                    (\children -> Html.th [] children)
+                , Markdown.Html.tag "td"
+                    (\children -> Html.td [] children)
+                , Markdown.Html.tag "svg"
                     (\w h viewBox children ->
                         Svg.svg
                             [ Svg.Styled.Attributes.width w
