@@ -77,7 +77,9 @@ customRenderer =
                     content
         , html =
             Markdown.Html.oneOf
-                [ Markdown.Html.tag "table"
+                [ Markdown.Html.tag "s"
+                    (\children -> Html.s [] children)
+                , Markdown.Html.tag "table"
                     (\children -> Html.table [] children)
                 , Markdown.Html.tag "tr"
                     (\children -> Html.tr [] children)
