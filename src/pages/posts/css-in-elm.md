@@ -5,7 +5,7 @@ updatedAt: 2020-05-16
 title: Elm + CSS の検討と実践記録
 ---
 
-Elm で CSS を扱う方法の検討と、<a href="https://package.elm-lang.org/packages/rtfeldman/elm-css/latest" target="_blank" rel="noopener">elm-css</a> に至るまでの記録です。
+Elm で CSS を扱う方法の検討と、[elm-css](https://package.elm-lang.org/packages/rtfeldman/elm-css/latest) に至るまでの記録です。
 
 # 選択肢
 
@@ -20,7 +20,7 @@ Ellie などのオンラインエディタや、HTML を生成しない `elm rea
 
 ### CSS フレームワーク
 
-<a href="https://bulma.io/" target="_blank" rel="noopener">Bulma</a>、<a href="https://tailwindcss.com/" target="_blank" rel="noopener">Tailwind CSS</a>、<a href="https://semantic-ui.com/" target="_blank" rel="noopener">Semantic UI</a> などがあります。
+[Bulma](https://bulma.io/)、[Tailwind CSS](https://tailwindcss.com/)、[Semantic UI](https://semantic-ui.com/) などがあります。
 このうち Bulma については 3 ヶ月ほど使ってみました。
 用意されているスタイルだけでは足りない場合は、自分でスタイルを書く必要があります。
 
@@ -41,7 +41,7 @@ Ellie などのオンラインエディタや、HTML を生成しない `elm rea
 # 記録： HTML で CSS ファイルを読み込む
 
 Elm を初めてからしばらくは、使い慣れた HTML で CSS ファイルを読み込む方法を採用していました。
-<a href="https://www.elm-live.com/" target="_blank" rel="noopener">elm-live</a> というツールが非常に便利だったため、モジュールバンドラー不要の開発を実現していました。
+[elm-live](https://www.elm-live.com/) というツールが非常に便利だったため、モジュールバンドラー不要の開発を実現していました。
 当時の私が書いていた CSS は一般的な CSS 設計とは異なるスタイルでしたが、「Elm で CSS を扱う」という目的は充分に達成していました。
 
 ### elm-live のリロード機能
@@ -49,13 +49,13 @@ Elm を初めてからしばらくは、使い慣れた HTML で CSS ファイ�
 elm-live の v3 系では CSS ファイルの更新を感知してブラウザをリロードする機能あり、非常に快適に開発を進めることができました。
 4.0.0 で大きな変更がありこの機能は省略されてしまいましたが、今後復活することを期待しています。
 
-<a href="https://github.com/wking-io/elm-live/issues/196" target="_blank" rel="noopener">Watching css files? · Issue #196 · wking-io/elm-live</a>
+[Watching css files? · Issue #196 · wking-io/elm-live](https://github.com/wking-io/elm-live/issues/196)
 
 ### 別の方法を探す
 
 実際のところ、elm-live から CSS のライブリロード機能がなくなったことは、私が別の方法を模索するきっかけになりました。
 CSS フレームワークの Bulma を試していたりもしましたが、ここでは省略します。
-ジンジャーさんが書かれている <a href="http://jinjor-labo.hatenablog.com/entry/2019/03/13/084116" target="_blank" rel="noopener">CSS フレームワークを使いたくない - ジンジャー研究室</a>
+ジンジャーさんが書かれている [CSS フレームワークを使いたくない - ジンジャー研究室](http://jinjor-labo.hatenablog.com/entry/2019/03/13/084116)
 は、私の感想にかなり近いと思います。
 とはいえ、デザインをフォーマットする手段としては有効だと感じます。
 
@@ -127,7 +127,7 @@ CSS in JS を採用している人に聞いてみたい。
 
 ### リセット CSS がほしい
 
-<a href="https://package.elm-lang.org/packages/y047aka/elm-reset-css/latest/" target="_blank" rel="noopener">y047aka/elm-reset-css</a> を作りました。
+[y047aka/elm-reset-css](https://package.elm-lang.org/packages/y047aka/elm-reset-css/latest/) を作りました。
 
 ### elm-css を既存の CSS と組み合わせたい
 
@@ -136,7 +136,7 @@ HTML ファイルで既存の CSS を読み込みつつ、適宜 elm-css の指�
 
 ### CSS ファイルを生成したい
 
-過去に <a href="https://github.com/tcoopman/elm-css-webpack-loader" target="_blank" rel="noopener">elm-css-webpack-loader</a> や <a href="https://package.elm-lang.org/packages/ThinkAlexandria/css-in-elm/latest/" target="_blank" rel="noopener">ThinkAlexandria/css-in-elm</a> が開発されていたので、参考にすると良さそうです。
+過去に [elm-css-webpack-loader](https://github.com/tcoopman/elm-css-webpack-loader) や [ThinkAlexandria/css-in-elm](https://package.elm-lang.org/packages/ThinkAlexandria/css-in-elm/latest/) が開発されていたので、参考にすると良さそうです。
 私は今のところ試していません。
 
 # 参考
@@ -146,14 +146,14 @@ elm-css を採用している事例の紹介です。
 ### noredink-ui
 
 NoRedInk 社製の UI ウィジェット集です。
-実践的な使い方はこのパッケージの実装を参考にするのが良いかも。  
-<a href="https://package.elm-lang.org/packages/NoRedInk/noredink-ui/latest/" target="_blank" rel="noopener">NoRedInk/noredink-ui</a>
+実践的な使い方はこのパッケージの実装を参考にするのが良いかも。
+[NoRedInk/noredink-ui](https://package.elm-lang.org/packages/NoRedInk/noredink-ui/latest/)
 
 ### elm-css patterns
 
 elm-css のレイアウトパターン集です。
-綺麗にまとまっているので、elm-ui との比較検討をする場合に役立ちそう。  
-<a href="https://elmcsspatterns.io/" target="_blank" rel="noopener">elm-css patterns</a>
+綺麗にまとまっているので、elm-ui との比較検討をする場合に役立ちそう。
+[elm-css patterns](https://elmcsspatterns.io/)
 
 # 今後の展望
 
@@ -163,12 +163,12 @@ elm-css のレイアウトパターン集です。
 
 CSS で最も難しいことのひとつが色の管理です。
 変数を活用する方法は既存の CSS でも普及していますが、私は background / color / border などをセットにした Palette という単位を試しています。
-今のところ上手く機能しているので、elm-css を使う利点の 1 つとして考えています。  
-<a href="https://github.com/y047aka/y047aka.space/blob/master/src/Color/Palette.elm" target="_blank" rel="noopener">https://github.com/y047aka/y047aka.space/blob/master/src/Color/Palette.elm</a>
+今のところ上手く機能しているので、elm-css を使う利点の 1 つとして考えています。
+[https://github.com/y047aka/y047aka.space/blob/master/src/Color/Palette.elm](https://github.com/y047aka/y047aka.space/blob/master/src/Color/Palette.elm)
 
 ### elm-ui との関係性
 
-レイアウトに関するスタイルのみを CSS から切り離すことへの違和感が強く、私自身は <a href="https://package.elm-lang.org/packages/mdgriffith/elm-ui/latest/" target="_blank" rel="noopener">elm-ui</a> を使ったことがありませんでした。
+レイアウトに関するスタイルのみを CSS から切り離すことへの違和感が強く、私自身は [elm-ui](https://package.elm-lang.org/packages/mdgriffith/elm-ui/latest/) を使ったことがありませんでした。
 elm-css を深めていく中で、いまは elm-ui の手法を一部取り入れる可能性もあると考えています。
 
 ### CSS への期待

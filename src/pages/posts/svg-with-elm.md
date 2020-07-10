@@ -23,15 +23,11 @@ Scalable Vector Graphics の頭文字をとって、SVG と呼ばれています
 SVG の仕様は W3C によって開発・勧告されています。
 ドキュメントが充実しているので、積極的に活用しましょう。
 
-<a href="https://www.w3.org/TR/SVG11/" target="_blank">
-    Scalable Vector Graphics (SVG) 1.1 (Second Edition)<span>www.w3.org</span>
-</a>
+[Scalable Vector Graphics (SVG) 1.1 (Second Edition) | www.w3.org](https://www.w3.org/TR/SVG11/)
 
 triple_underscore さんによる日本語訳を参考にするのも良いと思います。
 
-<a href="https://triple-underscore.github.io/SVG11/" target="_blank">
-    SVG 1.1 仕様 （第２版） 日本語訳<span>triple-underscore.github.io</span>
-</a>
+[SVG 1.1 仕様 （第２版） 日本語訳 | triple-underscore.github.io](https://triple-underscore.github.io/SVG11/)
 
 ## SVG で何ができるのか？
 
@@ -65,8 +61,8 @@ SVG として記述されたコードは…
 ブラウザによって画像としてレンダリングされます。
 
 <svg width="120" height="120" viewBox="0 0 120 120">
-    <rect x="10" y="10" width="100" height="100" rx="15" ry="15" fill="red" />
-    <circle cx="50" cy="50" r="50" fill="blue" />
+<rect x="10" y="10" width="100" height="100" rx="15" ry="15" fill="red" />
+<circle cx="50" cy="50" r="50" fill="blue" />
 </svg>
 
 y 軸が下向きなので少しだけ違和感があるかもしれませんが、HTML の読み書きができれば SVG も問題なく扱えるはずです。
@@ -76,9 +72,7 @@ y 軸が下向きなので少しだけ違和感があるかもしれませんが
 同じことを Elm でもやってみましょう。
 Ellie に同じサンプルコードを用意しました。
 
-<a href="https://ellie-app.com/5x8N5hXk3RFa1" target="_blank">
-    elm/svg sample<span>Ellie</span>
-</a>
+[elm/svg sample | Ellie](https://ellie-app.com/5x8N5hXk3RFa1)
 
 ```Elm
 import Svg exposing (Svg, svg, rect, circle)
@@ -124,9 +118,7 @@ import Svg.Attributes exposing (width, height, viewBox, x, y, rx, ry, cx, cy, r,
 コードの先頭で、2 つのモジュール Svg と Svg.Attributes をインポートしました。
 これらは Elm が公式に提供しているパッケージ elm/svg に含まれています。
 
-<a href="https://package.elm-lang.org/packages/elm/svg/latest/" target="_blank">
-    svg 1.0.1<span>Elm Packages</span>
-</a>
+[svg 1.0.1 | Elm Packages](https://package.elm-lang.org/packages/elm/svg/latest/)
 
 この記事のサンプルコードは、リンク先のサンプルコードをより分かりやすくなるように書き直したものです。
 
@@ -147,11 +139,24 @@ main =
 
 svg の第一引数には width, height, viewBox を指定しました。
 
-| 属性    | 説明                               |
-| ------- | ---------------------------------- |
-| width   | 画像の "幅 (px)"                   |
-| height  | 画像の "高さ (px)"                 |
-| viewBox | 描画領域の "x 座標 y 座標 幅 高さ" |
+<table>
+<tr>
+<th>属性</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>width</td>
+<td>画像の "幅 (px)"</td>
+</tr>
+<tr>
+<td>height</td>
+<td>画像の "高さ (px)"</td>
+</tr>
+<tr>
+<td>viewBox</td>
+<td>描画領域の "x 座標 y 座標 幅 高さ"</td>
+</tr>
+</table>
 
 viewBox は見慣れない属性かもしれません。
 この領域内に作成された図形が画面にレンダリングされます。
@@ -159,9 +164,7 @@ viewBox は見慣れない属性かもしれません。
 慣れるまでは、サンプルのように "0 0 (width に指定した値) (height に指定した値)" という指定が無難でしょう。
 必要に応じて SVG の仕様や解説記事を検索してください。
 
-<a href="https://triple-underscore.github.io/SVG11/struct.html#NewDocument" target="_blank">
-    SVG 文書片を定義する： svg 要素<span>文書構造 – SVG 1.1 （第２版）</span>
-</a>
+[SVG 文書片を定義する： svg 要素 | 文書構造 – SVG 1.1 （第２版）](https://triple-underscore.github.io/SVG11/struct.html#NewDocument)
 
 ## 四角形（矩形）を描く：rect
 
@@ -191,9 +194,7 @@ rect
 | ry     | "角丸の y 軸半径　(px)"  |
 | fill   | 塗りつぶし色の指定（色） |
 
-<a href="https://triple-underscore.github.io/SVG11/shapes.html#RectElement" target="_blank">
-    rect 要素<span>基本図形 – SVG 1.1 （第２版）</span>
-</a>
+[rect 要素 | 基本図形 – SVG 1.1 （第２版）](https://triple-underscore.github.io/SVG11/shapes.html#RectElement)
 
 ## 円を描く：circle
 
@@ -216,33 +217,23 @@ circle
 
 楕円にしたいときは ellipse を使います。
 
-<a href="https://triple-underscore.github.io/SVG11/shapes.html#CircleElement" target="_blank">
-    circle 要素<span>基本図形 – SVG 1.1 （第２版）</span>
-</a>
+[circle 要素 | 基本図形 – SVG 1.1 （第２版）](https://triple-underscore.github.io/SVG11/shapes.html#CircleElement)
 
 ## そのほかの図形
 
 パス・基本図形・テキストなどの要素と、様々なアトリビュートを組み合わせて、表現豊かな SVG を作成することができます。
 
-<a href="https://triple-underscore.github.io/SVG11/paths.html" target="_blank">
-    パス – SVG 1.1 （第２版）<span>https://triple-underscore.github.io</span>
-</a>
+[パス – SVG 1.1 （第２版） | https://triple-underscore.github.io](https://triple-underscore.github.io/SVG11/paths.html)
 
-<a href="https://triple-underscore.github.io/SVG11/shapes.html" target="_blank">
-    基本図形 – SVG 1.1 （第２版）<span>https://triple-underscore.github.io</span>
-</a>
+[基本図形 – SVG 1.1 （第２版） | https://triple-underscore.github.io](https://triple-underscore.github.io/SVG11/shapes.html)
 
-<a href="https://triple-underscore.github.io/SVG11/text.html" target="_blank">
-    テキスト – SVG 1.1 （第２版）<span>https://triple-underscore.github.io</span>
-</a>
+[テキスト – SVG 1.1 （第２版） | https://triple-underscore.github.io](https://triple-underscore.github.io/SVG11/text.html)
 
 # 利用できる Elm のパッケージ
 
 Elm Packages で使えそうなパッケージを探してみましょう。
 
-<a href="https://package.elm-lang.org" target="_blank">
-    Elm Packages<span>https://package.elm-lang.org</span>
-</a>
+[Elm Packages | https://package.elm-lang.org](https://package.elm-lang.org/)
 
 ## SVG の基本となるパッケージ
 

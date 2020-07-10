@@ -50,7 +50,7 @@ $ npm start
 ```
 
 また、リポジトリのトップから緑色のボタン「Use this template」を選択すると、elm-starfighter を使った新しいリポジトリを作る事もできます。
-<img width="305" alt="スクリーンショット 2019-07-06 6.21.56.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/406109/3faa5b0f-8ff3-9280-fa09-6ba62e3495e8.png">
+![](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/406109/3faa5b0f-8ff3-9280-fa09-6ba62e3495e8.png)
 
 ## npm start
 
@@ -227,9 +227,9 @@ browser-sync を試したものの、コンパイルエラーを無視してサ�
 Elm をコンパイルした後の js ファイルを圧縮する。
 elm-minify が deprecated となり、こちらが推奨されていたので使用した。
 
-### ~~node-sass~~
+### <s>node-sass</s>
 
-~~SASS を扱うために使用。いつか sass（Dart Sass）に変えるかもしれない。~~
+<s>SASS を扱うために使用。いつか sass（Dart Sass）に変えるかもしれない。</s>
 sass（Dart Sass）に変更しました。（2019 年 7 月 9 日）
 
 ### npm-run-all
