@@ -28,8 +28,15 @@ main =
 -}
 type alias Preamble =
     { title : String
+    , motorsports : List Motorsports
     , organizations : List Organization
     , articles : List Article
+    }
+
+
+type alias Motorsports =
+    { name : String
+    , url : String
     }
 
 
@@ -54,10 +61,18 @@ type alias Article =
 -}
 preambleDecoder : Decoder Preamble
 preambleDecoder =
-    D.map3 Preamble
+    D.map4 Preamble
         (D.field "title" D.string)
+        (D.field "motorsports" (D.list motorsportsDecoder))
         (D.field "organizations" (D.list organizationDecoder))
         (D.field "articles" (D.list articleDecoder))
+
+
+motorsportsDecoder : Decoder Motorsports
+motorsportsDecoder =
+    D.map2 Motorsports
+        (D.field "name" D.string)
+        (D.field "url" D.string)
 
 
 organizationDecoder : Decoder Organization
@@ -92,6 +107,22 @@ viewBody preamble _ =
     [ siteHeader
     , main_ []
         [ topSection
+            { title = "MotorSports"
+            , children =
+                [ ul []
+                    (List.map
+                        (\{ name, url } ->
+                            linkView
+                                { title = name
+                                , sub = url
+                                , url = url
+                                }
+                        )
+                        preamble.motorsports
+                    )
+                ]
+            }
+        , topSection
             { title = "Blog posts"
             , children =
                 [ ul [] <|

@@ -1,6 +1,9 @@
 ---
 module: Static.Top
 title: Top
+motorsports:
+  - name: MotorSportsCalendar 2020
+    url: https://y047aka.github.io/MotorSportsCalendar/
 organizations:
   - name: 株式会社 Siiibo
     vision: 自由、透明、公正な直接金融を創造する
