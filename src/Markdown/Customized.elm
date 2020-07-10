@@ -17,16 +17,10 @@ import Svg.Styled.Attributes
 
 markdownToHtml : List (Attribute msg) -> String -> Html msg
 markdownToHtml attributes markdown =
-    let
-        deadEndsToString deadEnds =
-            deadEnds
-                |> List.map deadEndToString
-                |> String.join "\n"
-    in
     case
         markdown
             |> Markdown.Parser.parse
-            |> Result.mapError deadEndsToString
+            |> Result.mapError (\error -> error |> List.map deadEndToString |> String.join "\n")
             |> Result.andThen (\ast -> Markdown.Renderer.render customRenderer ast)
     of
         Ok rendered ->
