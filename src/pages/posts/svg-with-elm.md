@@ -184,15 +184,40 @@ rect
     []
 ```
 
-| 属性   | 説明                     |
-| ------ | ------------------------ |
-| x      | "x 座標 (px)"            |
-| y      | "y 座標 (px)"            |
-| width  | "幅 (px)"                |
-| height | "高さ (px)"              |
-| rx     | "角丸の x 軸半径　(px)"  |
-| ry     | "角丸の y 軸半径　(px)"  |
-| fill   | 塗りつぶし色の指定（色） |
+<table>
+<tr>
+<th>属性</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>x</td>
+<td>"x 座標 (px)"</td>
+</tr>
+<tr>
+<td>y</td>
+<td>"y 座標 (px)"</td>
+</tr>
+<tr>
+<td>width</td>
+<td>"幅 (px)"</td>
+</tr>
+<tr>
+<td>height</td>
+<td>"高さ (px)"</td>
+</tr>
+<tr>
+<td>rx</td>
+<td>"角丸の x 軸半径　(px)"</td>
+</tr>
+<tr>
+<td>ry</td>
+<td>"角丸の y 軸半径　(px)"</td>
+</tr>
+<tr>
+<td>fill</td>
+<td>塗りつぶし色の指定（色）</td>
+</tr>
+</table>
 
 [rect 要素 | 基本図形 – SVG 1.1 （第２版）](https://triple-underscore.github.io/SVG11/shapes.html#RectElement)
 
@@ -208,12 +233,28 @@ circle
     []
 ```
 
-| 属性 | 説明                     |
-| ---- | ------------------------ |
-| cx   | "中心の x 座標 (px)"     |
-| cy   | "中心の y 座標 (px)"     |
-| r    | "円の半径　(px)"         |
-| fill | 塗りつぶし色の指定（色） |
+<table>
+<tr>
+<th>属性</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>cx</td>
+<td>"中心の x 座標 (px)"</td>
+</tr>
+<tr>
+<td>cy</td>
+<td>"中心の y 座標 (px)"</td>
+</tr>
+<tr>
+<td>r</td>
+<td>"円の半径　(px)"</td>
+</tr>
+<tr>
+<td>fill</td>
+<td>塗りつぶし色の指定（色）</td>
+</tr>
+</table>
 
 楕円にしたいときは ellipse を使います。
 
@@ -239,10 +280,20 @@ Elm Packages で使えそうなパッケージを探してみましょう。
 
 Elm では、SVG を扱うために 2 種類のパッケージが用意されています。
 
-| パッケージ              | 説明                             |
-| ----------------------- | -------------------------------- |
-| elm/svg                 | Elm 公式の SVG パッケージ        |
-| elm-community/typed-svg | 属性の型情報を付加したパッケージ |
+<table>
+<tr>
+<th>パッケージ</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>elm/svg</td>
+<td>Elm 公式の SVG パッケージ</td>
+</tr>
+<tr>
+<td>elm-community/typed-svg</td>
+<td>属性の型情報を付加したパッケージ</td>
+</tr>
+</table>
 
 どちらも SVG 用の基本的なモジュールを含み、互換性のあるパッケージです。
 好みに応じて使い分けると良いでしょう。
@@ -253,29 +304,65 @@ Elm では、SVG を扱うために 2 種類のパッケージが用意されて
 より複雑な SVG を作成するためのパッケージも用意されています。
 データの可視化（ビジュアライゼーション）や、ジェネラティブ・アートに挑戦してみるのも良いですね！
 
-| パッケージ                  | 説明                                                        |
-| --------------------------- | ----------------------------------------------------------- |
-| gampleman/elm-visualization | D3.js に由来するデータ可視化用のライブラリ                  |
-| terezka/line-charts         | グラフ / チャート用のパッケージ                             |
-| gicentre/elm-vega           | Port を介して JavaScript の Vega を利用するためのパッケージ |
+<table>
+<tr>
+<th>パッケージ</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>gampleman/elm-visualization</td>
+<td>D3.js に由来するデータ可視化用のライブラリ</td>
+</tr>
+<tr>
+<td>terezka/line-charts</td>
+<td>グラフ / チャート用のパッケージ</td>
+</tr>
+<tr>
+<td>gicentre/elm-vega</td>
+<td>Port を介して JavaScript の Vega を利用するためのパッケージ</td>
+</tr>
+</table>
 
 また、path を記述するためのパッケージは複数存在するようです。
 
-| パッケージ                          | 説明                                                            |
-| ----------------------------------- | --------------------------------------------------------------- |
-| Spaxe/svg-pathd                     | d 属性を、M, L, Z などオリジナルの SVG と同様の記法で記述できる |
-| folkertdev/svg-path-lowlevel        | d 属性を、SVG の記法よりも読みやすく宣言的に記述できる          |
-| folkertdev/one-true-path-experiment | 配列から path を生成するためのパッケージ                        |
+<table>
+<tr>
+<th>パッケージ</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>Spaxe/svg-pathd</td>
+<td>d 属性を、M, L, Z などオリジナルの SVG と同様の記法で記述できる</td>
+</tr>
+<tr>
+<td>folkertdev/svg-path-lowlevel</td>
+<td>d 属性を、SVG の記法よりも読みやすく宣言的に記述できる</td>
+</tr>
+<tr>
+<td>folkertdev/one-true-path-experiment</td>
+<td>配列から path を生成するためのパッケージ</td>
+</tr>
+</table>
 
 ## 注意：廃止されたパッケージ
 
 以下のパッケージは elm/svg よりも前に使用されていたもので、現在は廃止されています。
 ブラウザの検索結果に出ることがあるので注意してください。
 
-| パッケージ     | 説明 |
-| -------------- | ---- |
-| evancz/elm-svg | 廃止 |
-| elm-lang/svg   | 廃止 |
+<table>
+<tr>
+<th>パッケージ</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>evancz/elm-svg</td>
+<td>廃止</td>
+</tr>
+<tr>
+<td>elm-lang/svg</td>
+<td>廃止</td>
+</tr>
+</table>
 
 # SVG は難しくない！
 
