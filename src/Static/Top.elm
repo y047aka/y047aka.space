@@ -28,9 +28,16 @@ main =
 -}
 type alias Preamble =
     { title : String
+    , elm : List Elm
     , motorsports : List Motorsports
     , organizations : List Organization
     , articles : List Article
+    }
+
+
+type alias Elm =
+    { name : String
+    , url : String
     }
 
 
@@ -61,11 +68,19 @@ type alias Article =
 -}
 preambleDecoder : Decoder Preamble
 preambleDecoder =
-    D.map4 Preamble
+    D.map5 Preamble
         (D.field "title" D.string)
+        (D.field "elm" (D.list elmDecoder))
         (D.field "motorsports" (D.list motorsportsDecoder))
         (D.field "organizations" (D.list organizationDecoder))
         (D.field "articles" (D.list articleDecoder))
+
+
+elmDecoder : Decoder Elm
+elmDecoder =
+    D.map2 Elm
+        (D.field "name" D.string)
+        (D.field "url" D.string)
 
 
 motorsportsDecoder : Decoder Motorsports
@@ -107,6 +122,22 @@ viewBody preamble _ =
     [ siteHeader
     , main_ []
         [ topSection
+            { title = "Elm"
+            , children =
+                [ ul []
+                    (List.map
+                        (\{ name, url } ->
+                            linkView
+                                { title = name
+                                , sub = url
+                                , url = url
+                                }
+                        )
+                        preamble.elm
+                    )
+                ]
+            }
+        , topSection
             { title = "MotorSports"
             , children =
                 [ ul []
