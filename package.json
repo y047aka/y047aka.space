@@ -9,7 +9,7 @@
     "elm-analyse": "^0.16.5",
     "elm-format": "^0.8.2",
     "elm-json": "^0.2.7",
-    "elm-test": "^0.19.1-revision2",
+    "elm-test": "^0.19.1-revision3",
     "siteelm": "^0.3.2"
   },
   "dependencies": {}
