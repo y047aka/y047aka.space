@@ -73,14 +73,6 @@ customRenderer =
             Markdown.Html.oneOf
                 [ Markdown.Html.tag "s"
                     (\children -> Html.s [] children)
-                , Markdown.Html.tag "table"
-                    (\children -> Html.table [] children)
-                , Markdown.Html.tag "tr"
-                    (\children -> Html.tr [] children)
-                , Markdown.Html.tag "th"
-                    (\children -> Html.th [] children)
-                , Markdown.Html.tag "td"
-                    (\children -> Html.td [] children)
                 , Markdown.Html.tag "svg"
                     (\w h viewBox children ->
                         Svg.svg

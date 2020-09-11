@@ -154,5 +154,26 @@ styledRenderer =
                         |> Maybe.withDefault []
             in
             Html.th attrs
-    , tableCell = Html.td []
+    , tableCell =
+        \maybeAlignment ->
+            let
+                attrs =
+                    maybeAlignment
+                        |> Maybe.map
+                            (\alignment ->
+                                case alignment of
+                                    Block.AlignLeft ->
+                                        "left"
+
+                                    Block.AlignCenter ->
+                                        "center"
+
+                                    Block.AlignRight ->
+                                        "right"
+                            )
+                        |> Maybe.map Attr.align
+                        |> Maybe.map List.singleton
+                        |> Maybe.withDefault []
+            in
+            Html.td attrs
     }
