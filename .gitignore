@@ -1,8 +1,6 @@
-# Dependency directory
-node_modules
+node_modules/
+elm-stuff/
+dist/
+.cache/
+gen/
 
-# Elm Dependency directory
-elm-stuff
-
-# Default directory at "siteelm server"
-dist
