@@ -1,12 +1,511 @@
-<!doctype html>
-<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira:wght@400;500&amp;display=swap"><title>elm/svgを使ってみよう（SVGの基礎知識） | y047aka.space</title><link rel="canonical" href="https://y047aka.space"><meta name="description" content="My Tanuki logo symbolizes this with a smart animal that works in a group to achieve a common goal."><meta property="og:title" content="elm/svgを使ってみよう（SVGの基礎知識）"><meta property="og:type" content="article"><meta property="og:url" content="https://y047aka.space"><meta property="og:image" content="https://y047aka.space/M3fRFrmf.jpg"><meta property="og:site_name" content="y047aka.space"><meta property="og:description" content="My Tanuki logo symbolizes this with a smart animal that works in a group to achieve a common goal."><meta property="og:locale" content="ja_JP"><meta name="twitter:card" content="summary"><meta name="twitter:site" content="@y047aka"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/default.min.css"><script src="https://kit.fontawesome.com/a26b6242ff.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/elm.min.js"></script><script>hljs.initHighlightingOnLoad()</script><style>._2064e38f{padding-top:20px;line-height:1.8;word-wrap:break-word}._2064e38f a{white-space:pre-wrap;text-decoration:none;color:#6c0}._2064e38f a:hover{text-decoration:underline}._2064e38f a:visited{color:#360}._2064e38f a[target=_blank]::after{content:"\f35d";position:relative;top:-1px;display:inline-block;padding:0 5px;font-family:"Font Awesome 5 Free";font-size:12px;font-weight:900;text-decoration:none;color:inherit}._2064e38f a[target=_blank]:visited::after{color:#360}._2064e38f table{border-spacing:0;border-collapse:collapse}._2064e38f td,._2064e38f th{padding:0}._2064e38f ol ol,._2064e38f ul ol{list-style-type:lower-roman}._2064e38f ol ol ol,._2064e38f ol ul ol,._2064e38f ul ol ol,._2064e38f ul ul ol{list-style-type:lower-alpha}._2064e38f blockquote+blockquote,._2064e38f blockquote+details,._2064e38f blockquote+dl,._2064e38f blockquote+ol,._2064e38f blockquote+p,._2064e38f blockquote+pre,._2064e38f blockquote+table,._2064e38f blockquote+ul,._2064e38f details+blockquote,._2064e38f details+details,._2064e38f details+dl,._2064e38f details+ol,._2064e38f details+p,._2064e38f details+pre,._2064e38f details+table,._2064e38f details+ul,._2064e38f dl+blockquote,._2064e38f dl+details,._2064e38f dl+dl,._2064e38f dl+ol,._2064e38f dl+p,._2064e38f dl+pre,._2064e38f dl+table,._2064e38f dl+ul,._2064e38f ol+blockquote,._2064e38f ol+details,._2064e38f ol+dl,._2064e38f ol+ol,._2064e38f ol+p,._2064e38f ol+pre,._2064e38f ol+table,._2064e38f ol+ul,._2064e38f p+blockquote,._2064e38f p+details,._2064e38f p+dl,._2064e38f p+ol,._2064e38f p+p,._2064e38f p+pre,._2064e38f p+table,._2064e38f p+ul,._2064e38f pre+blockquote,._2064e38f pre+details,._2064e38f pre+dl,._2064e38f pre+ol,._2064e38f pre+p,._2064e38f pre+pre,._2064e38f pre+table,._2064e38f pre+ul,._2064e38f table+blockquote,._2064e38f table+details,._2064e38f table+dl,._2064e38f table+ol,._2064e38f table+p,._2064e38f table+pre,._2064e38f table+table,._2064e38f table+ul,._2064e38f ul+blockquote,._2064e38f ul+details,._2064e38f ul+dl,._2064e38f ul+ol,._2064e38f ul+p,._2064e38f ul+pre,._2064e38f ul+table,._2064e38f ul+ul{margin-top:29px}._2064e38f hr{height:0;padding:0;margin:24px 0;border-top-width:1px;border-style:solid;border-color:#e1e4e8}._2064e38f blockquote{padding-left:1em;border-width:0;border-left-width:.25em;border-style:solid;color:#6a737d;border-color:#dfe2e5}._2064e38f h1,._2064e38f h2,._2064e38f h3,._2064e38f h4,._2064e38f h5,._2064e38f h6{font-weight:600}._2064e38f h1:nth-child(n+2),._2064e38f h2:nth-child(n+2),._2064e38f h3:nth-child(n+2),._2064e38f h4:nth-child(n+2),._2064e38f h5:nth-child(n+2),._2064e38f h6:nth-child(n+2){margin-top:29px}._2064e38f h1{margin:28px 0;padding:17px 0;font-size:1.125em;line-height:1.333;text-align:center;border-top:1px solid;border-bottom:1px solid}._2064e38f h2{margin-top:2px;margin-bottom:31px;font-size:1.25em;line-height:1.25}._2064e38f h3{font-size:1em}._2064e38f h4{font-size:1em}._2064e38f h5{font-size:.875em}._2064e38f h6{font-size:.85em;color:#6a737d}._2064e38f ol,._2064e38f ul{padding-left:2em}._2064e38f li:nth-child(n+2){margin-top:.25em}._2064e38f li>p{margin-top:16px}._2064e38f table{display:block;width:100%;overflow:auto}._2064e38f table th{font-weight:600}._2064e38f table td,._2064e38f table th{padding:6px 13px;border:1px solid #dfe2e5}._2064e38f table tr{background-color:#fff;border-top:1px solid #c6cbd1}._2064e38f table tr:nth-child(2n){background-color:#f6f8fa}._2064e38f img{max-width:100%}._2064e38f code,._2064e38f pre{font-family:SFMono-Regular,Consolas,"Liberation Mono",Menlo,monospace;font-size:12px}._2064e38f code{padding:.2em .4em;margin:0;font-size:85%;background-color:rgba(27,31,35,.05);border-radius:3px}._2064e38f pre{word-wrap:normal}._2064e38f pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:0 0;border:0}._2064e38f pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f6f8fa;border-radius:3px}._2064e38f pre code{display:inline;max-width:auto;padding:0;margin:0;overflow:visible;line-height:inherit;word-wrap:normal;background-color:initial;border:0}._3a71fdb5{color:#797f85}._3a71fdb5>p{padding:5px 0;font-size:14px;line-height:1}._5758449e{display:block;width:620px;margin:0 auto;padding:20px 0;font-family:Saira,sans-serif;font-size:18px;font-weight:400}@media only screen and (max-width:480px){._5758449e{width:100%;padding:15px}}._6c2a7992{text-decoration:none;color:inherit}._96049fe0{padding:5px 0;font-family:"-apple-system",sans-serif;font-size:24px;font-weight:600}._beb10df7{width:620px;margin:0 auto;padding:20px 0}@media only screen and (max-width:480px){._beb10df7{width:100%;padding:15px}}._d8a7d977{display:block;width:620px;margin:0 auto;padding:20px 0;text-align:right;font-family:Saira,sans-serif;font-size:14px}@media only screen and (max-width:480px){._d8a7d977{width:100%;padding:15px}}._eca6e413{font-family:"-apple-system",BlinkMacSystemFont,sans-serif;font-feature-settings:"palt";color:#333}</style><style>html{box-sizing:border-box;-webkit-text-size-adjust:100%;word-break:normal;-moz-tab-size:4;tab-size:4}*,::after,::before{background-repeat:no-repeat;box-sizing:inherit}::after,::before{text-decoration:inherit;vertical-align:inherit}*{padding:0;margin:0}hr{overflow:visible;height:0}details,main{display:block}summary{display:list-item}small{font-size:80%}[hidden]{display:none}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}a{background:0 0}a:active,a:hover{outline-width:0}code,kbd,pre,samp{font-family:monospace,monospace}pre{font-size:1em}b,strong{font-weight:bolder}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}input{border-radius:0}[disabled]{cursor:default}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{-webkit-appearance:none}textarea{overflow:auto;resize:vertical}button,input,optgroup,select,textarea{font:inherit}optgroup{font-weight:700}button{overflow:visible}button,select{text-transform:none}[role=button],[type=button],[type=reset],[type=submit],button{cursor:pointer;color:inherit}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button:-moz-focusring{outline:1px dotted ButtonText}[type=reset],[type=submit],button,html [type=button]{-webkit-appearance:button}button,input,select,textarea{background:0 0;border-style:none}select{-moz-appearance:none;-webkit-appearance:none}select::-ms-expand{display:none}select::-ms-value{color:currentColor}legend{border:0;color:inherit;display:table;max-width:100%;white-space:normal;max-width:100%}::-webkit-file-upload-button{-webkit-appearance:button;color:inherit;font:inherit}img{border-style:none}progress{vertical-align:baseline}svg:not([fill]){fill:currentColor}@media only screen{[hidden~=screen]{display:inherit}}@media only screen{[hidden~=screen]:not(:active):not(:focus):not(:target){position:absolute!important;clip:rect(0 0 0 0)!important}}[aria-busy=true]{cursor:progress}[aria-controls]{cursor:pointer}[aria-disabled]{cursor:default}</style><script src="/dynamic.js"></script></head><body class="_eca6e413"><header><h1 class="_5758449e"><a href="/" class="_6c2a7992">y047aka.space</a></h1></header><main class="_beb10df7"><header><h1 class="_96049fe0">elm/svgを使ってみよう（SVGの基礎知識）</h1><div class="_3a71fdb5"><p><i class="fas fa-edit"></i> May 14th, 2019</p><p><i class="fas fa-redo-alt"></i> May 15th, 2019</p></div></header><div class="_2064e38f"><p>この記事では、</p><ul><li>SVG の基本的な書き方</li><li>Elm での記述方法</li><li>利用できるパッケージ</li></ul><p>について見ていきます。</p><h1>SVG ってなんだろう？</h1><p>Scalable Vector Graphics の頭文字をとって、SVG と呼ばれています。
+<!DOCTYPE html><html lang="en"><head><link rel="preload" href="content.json" as="fetch" crossorigin=""><base href="../../"><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><script>if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("service-worker.js");
+      });
+    } else {
+      console.log("No service worker registered.");
+    }</script><link rel="shortcut icon" href="assets/favicon.ico"><link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png"><link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-48x48.png"><link rel="manifest" href="assets/manifest.json"><meta name="mobile-web-app-capable" content="yes"><meta name="theme-color" content="#ffffff"><meta name="application-name" content="y047aka.space"><link rel="apple-touch-icon" sizes="57x57" href="assets/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="assets/apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="assets/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="assets/apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="assets/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="assets/apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="assets/apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="assets/apple-touch-icon-152x152.png"><link rel="apple-touch-icon" sizes="167x167" href="assets/apple-touch-icon-167x167.png"><link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon-180x180.png"><link rel="apple-touch-icon" sizes="1024x1024" href="assets/apple-touch-icon-1024x1024.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="y047aka.space"><script defer="defer" src="main.js"></script><link rel="preload" href="main.js" as="script"><style>@import url(https://fonts.googleapis.com/css2?family=Saira:wght@400;500&display=swap);</style><style>@import url(https://use.fontawesome.com/releases/v5.15.1/css/all.css);</style><style>
+</style><title>elm/svgを使ってみよう（SVGの基礎知識）</title><meta name="generator" content="elm-pages v1.5.4"><link rel="canonical" href="https://y047aka.netlify.com/posts/svg-with-elm"><meta name="description" content=""><meta property="og:image" content="https://y047aka.netlify.com/images/icon-png.png"><meta property="og:image:secure_url" content="https://y047aka.netlify.com/images/icon-png.png"><meta property="og:image:alt" content=""><meta property="og:title" content="elm/svgを使ってみよう（SVGの基礎知識）"><meta property="og:url" content="https://y047aka.netlify.com/posts/svg-with-elm"><meta property="og:description" content=""><meta property="og:site_name" content="y047aka.space"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="elm/svgを使ってみよう（SVGの基礎知識）"><meta property="twitter:description" content=""><meta property="twitter:image" content="https://y047aka.netlify.com/images/icon-png.png"><meta property="twitter:image:alt" content=""><meta property="og:type" content="article"><meta property="article:published_time" content="2019-05-14"></head><body><div data-url="http://localhost:8000/posts/svg-with-elm" display="none"></div><div><style>._2064e38f {
+    padding-top:20px;
+    line-height:1.8;
+    word-wrap:break-word;
+}
+
+._2064e38f  a {
+    white-space:pre-wrap;
+    text-decoration:none;
+    color:hsl(90, 100%, 40%);
+}
+
+._2064e38f  a:hover {
+    text-decoration:underline;
+}
+
+._2064e38f  a:visited {
+    color:hsl(90, 100%, 20%);
+}
+
+._2064e38f  a[target=_blank]::after {
+    content:"\f35d";
+    position:relative;
+    top:-1px;
+    display:inline-block;
+    padding:0 5px;
+    font-family:"Font Awesome 5 Free";
+    font-size:12px;
+    font-weight:900;
+    text-decoration:none;
+    color:inherit;
+}
+
+._2064e38f  a[target=_blank]:visited::after {
+    color:hsl(90, 100%, 20%);
+}
+
+._2064e38f  table {
+    border-spacing:0;
+    border-collapse:collapse;
+}
+
+._2064e38f  th, ._2064e38f  td {
+    padding:0;
+}
+
+._2064e38f  ol ol, ._2064e38f  ul ol {
+    list-style-type:lower-roman;
+}
+
+._2064e38f  ol ol ol, ._2064e38f  ol ul ol, ._2064e38f  ul ol ol, ._2064e38f  ul ul ol {
+    list-style-type:lower-alpha;
+}
+
+._2064e38f  blockquote + blockquote, ._2064e38f  blockquote + details, ._2064e38f  blockquote + dl, ._2064e38f  blockquote + ol, ._2064e38f  blockquote + p, ._2064e38f  blockquote + pre, ._2064e38f  blockquote + table, ._2064e38f  blockquote + ul, ._2064e38f  details + blockquote, ._2064e38f  details + details, ._2064e38f  details + dl, ._2064e38f  details + ol, ._2064e38f  details + p, ._2064e38f  details + pre, ._2064e38f  details + table, ._2064e38f  details + ul, ._2064e38f  dl + blockquote, ._2064e38f  dl + details, ._2064e38f  dl + dl, ._2064e38f  dl + ol, ._2064e38f  dl + p, ._2064e38f  dl + pre, ._2064e38f  dl + table, ._2064e38f  dl + ul, ._2064e38f  ol + blockquote, ._2064e38f  ol + details, ._2064e38f  ol + dl, ._2064e38f  ol + ol, ._2064e38f  ol + p, ._2064e38f  ol + pre, ._2064e38f  ol + table, ._2064e38f  ol + ul, ._2064e38f  p + blockquote, ._2064e38f  p + details, ._2064e38f  p + dl, ._2064e38f  p + ol, ._2064e38f  p + p, ._2064e38f  p + pre, ._2064e38f  p + table, ._2064e38f  p + ul, ._2064e38f  pre + blockquote, ._2064e38f  pre + details, ._2064e38f  pre + dl, ._2064e38f  pre + ol, ._2064e38f  pre + p, ._2064e38f  pre + pre, ._2064e38f  pre + table, ._2064e38f  pre + ul, ._2064e38f  table + blockquote, ._2064e38f  table + details, ._2064e38f  table + dl, ._2064e38f  table + ol, ._2064e38f  table + p, ._2064e38f  table + pre, ._2064e38f  table + table, ._2064e38f  table + ul, ._2064e38f  ul + blockquote, ._2064e38f  ul + details, ._2064e38f  ul + dl, ._2064e38f  ul + ol, ._2064e38f  ul + p, ._2064e38f  ul + pre, ._2064e38f  ul + table, ._2064e38f  ul + ul {
+    margin-top:29px;
+}
+
+._2064e38f  hr {
+    height:0;
+    padding:0;
+    margin:24px 0;
+    border-top-width:1px;
+    border-style:solid;
+    border-color:#e1e4e8;
+}
+
+._2064e38f  blockquote {
+    padding-left:1em;
+    border-width:0;
+    border-left-width:0.25em;
+    border-style:solid;
+    color:#6a737d;
+    border-color:#dfe2e5;
+}
+
+._2064e38f  h1, ._2064e38f  h2, ._2064e38f  h3, ._2064e38f  h4, ._2064e38f  h5, ._2064e38f  h6 {
+    font-weight:600;
+}
+
+._2064e38f  h1:nth-child(n+2), ._2064e38f  h2:nth-child(n+2), ._2064e38f  h3:nth-child(n+2), ._2064e38f  h4:nth-child(n+2), ._2064e38f  h5:nth-child(n+2), ._2064e38f  h6:nth-child(n+2) {
+    margin-top:29px;
+}
+
+._2064e38f  h1 {
+    margin:28px 0;
+    padding:17px 0;
+    font-size:1.125em;
+    line-height:1.333;
+    text-align:center;
+    border-top:1px solid;
+    border-bottom:1px solid;
+}
+
+._2064e38f  h2 {
+    margin-top:2px;
+    margin-bottom:31px;
+    font-size:1.25em;
+    line-height:1.25;
+}
+
+._2064e38f  h3 {
+    font-size:1em;
+}
+
+._2064e38f  h4 {
+    font-size:1em;
+}
+
+._2064e38f  h5 {
+    font-size:0.875em;
+}
+
+._2064e38f  h6 {
+    font-size:0.85em;
+    color:#6a737d;
+}
+
+._2064e38f  ol, ._2064e38f  ul {
+    padding-left:2em;
+}
+
+._2064e38f  li:nth-child(n+2) {
+    margin-top:0.25em;
+}
+
+._2064e38f  li > p {
+    margin-top:16px;
+}
+
+._2064e38f  table {
+    display:block;
+    width:100%;
+    overflow:auto;
+}
+
+._2064e38f  table  th {
+    font-weight:600;
+}
+
+._2064e38f  table  th, ._2064e38f  table  td {
+    padding:6px 13px;
+    border:1px solid #dfe2e5;
+}
+
+._2064e38f  table  tr {
+    background-color:#fff;
+    border-top:1px solid #c6cbd1;
+}
+
+._2064e38f  table  tr:nth-child(2n) {
+    background-color:#f6f8fa;
+}
+
+._2064e38f  img {
+    max-width:100%;
+}
+
+._2064e38f  code, ._2064e38f  pre {
+    font-family:"SFMono-Regular", "Consolas", "Liberation Mono", "Menlo", monospace;
+    font-size:12px;
+}
+
+._2064e38f  code {
+    padding:0.2em 0.4em;
+    margin:0;
+    font-size:85%;
+    background-color:rgba(27, 31, 35, 0.05);
+    border-radius:3px;
+}
+
+._2064e38f  pre {
+    word-wrap:normal;
+}
+
+._2064e38f  pre > code {
+    padding:0;
+    margin:0;
+    font-size:100%;
+    word-break:normal;
+    white-space:pre;
+    background:transparent;
+    border:0;
+}
+
+._2064e38f  pre {
+    padding:16px;
+    overflow:auto;
+    font-size:85%;
+    line-height:1.45;
+    background-color:#f6f8fa;
+    border-radius:3px;
+}
+
+._2064e38f  pre  code {
+    display:inline;
+    max-width:auto;
+    padding:0;
+    margin:0;
+    overflow:visible;
+    line-height:inherit;
+    word-wrap:normal;
+    background-color:initial;
+    border:0;
+}
+
+._3a71fdb5 {
+    color:hsl(210, 5%, 50%);
+}
+
+._3a71fdb5 > p {
+    padding:5px 0;
+    font-size:14px;
+    line-height:1;
+}
+
+._5758449e {
+    display:block;
+    width:620px;
+    margin:0 auto;
+    padding:20px 0;
+    font-family:"Saira", sans-serif;
+    font-size:18px;
+    font-weight:normal;
+}
+
+@media only screen and (max-width: 480px) {
+    ._5758449e {
+        width:100%;
+    padding:15px;
+    }
+}
+
+._6c2a7992 {
+    text-decoration:none;
+    color:inherit;
+}
+
+._96049fe0 {
+    padding:5px 0;
+    font-family:"-apple-system", sans-serif;
+    font-size:24px;
+    font-weight:600;
+}
+
+._beb10df7 {
+    width:620px;
+    margin:0 auto;
+    padding:20px 0;
+}
+
+@media only screen and (max-width: 480px) {
+    ._beb10df7 {
+        width:100%;
+    padding:15px;
+    }
+}
+
+._d8a7d977 {
+    display:block;
+    width:620px;
+    margin:0 auto;
+    padding:20px 0;
+    text-align:right;
+    font-family:"Saira", sans-serif;
+    font-size:14px;
+}
+
+@media only screen and (max-width: 480px) {
+    ._d8a7d977 {
+        width:100%;
+    padding:15px;
+    }
+}</style><style>html {
+    box-sizing:border-box;
+    -webkit-text-size-adjust:100%;
+    word-break:normal;
+    -moz-tab-size:4;
+    tab-size:4;
+}
+
+*, ::before, ::after {
+    background-repeat:no-repeat;
+    box-sizing:inherit;
+}
+
+::before, ::after {
+    text-decoration:inherit;
+    vertical-align:inherit;
+}
+
+* {
+    padding:0;
+    margin:0;
+}
+
+hr {
+    overflow:visible;
+    height:0;
+}
+
+details, main {
+    display:block;
+}
+
+summary {
+    display:list-item;
+}
+
+small {
+    font-size:80%;
+}
+
+[hidden] {
+    display:none;
+}
+
+abbr[title] {
+    border-bottom:none;
+    text-decoration:underline;
+    text-decoration:underline dotted;
+}
+
+a {
+    background:transparent;
+}
+
+a:active, a:hover {
+    outline-width:0;
+}
+
+code, kbd, pre, samp {
+    font-family:monospace, monospace;
+}
+
+pre {
+    font-size:1em;
+}
+
+b, strong {
+    font-weight:bolder;
+}
+
+sub, sup {
+    font-size:75%;
+    line-height:0;
+    position:relative;
+    vertical-align:baseline;
+}
+
+sub {
+    bottom:-0.25em;
+}
+
+sup {
+    top:-0.5em;
+}
+
+input {
+    border-radius:0;
+}
+
+[disabled] {
+    cursor:default;
+}
+
+[type="number"]::-webkit-inner-spin-button, [type="number"]::-webkit-outer-spin-button {
+    height:auto;
+}
+
+[type="search"] {
+    -webkit-appearance:textfield;
+    outline-offset:-2px;
+}
+
+[type="search"]::-webkit-search-decoration {
+    -webkit-appearance:none;
+}
+
+textarea {
+    overflow:auto;
+    resize:vertical;
+}
+
+button, input, optgroup, select, textarea {
+    font:inherit;
+}
+
+optgroup {
+    font-weight:bold;
+}
+
+button {
+    overflow:visible;
+}
+
+button, select {
+    text-transform:none;
+}
+
+button, [type="button"], [type="reset"], [type="submit"], [role="button"] {
+    cursor:pointer;
+    color:inherit;
+}
+
+button::-moz-focus-inner, [type="button"]::-moz-focus-inner, [type="reset"]::-moz-focus-inner, [type="submit"]::-moz-focus-inner {
+    border-style:none;
+    padding:0;
+}
+
+button:-moz-focusring, [type="button"]::-moz-focus-inner, [type="reset"]::-moz-focus-inner, [type="submit"]::-moz-focus-inner {
+    outline:1px dotted ButtonText;
+}
+
+button, html [type="button"], [type="reset"], [type="submit"] {
+    -webkit-appearance:button;
+}
+
+button, input, select, textarea {
+    background:transparent;
+    border-style:none;
+}
+
+select {
+    -moz-appearance:none;
+    -webkit-appearance:none;
+}
+
+select::-ms-expand {
+    display:none;
+}
+
+select::-ms-value {
+    color:currentColor;
+}
+
+legend {
+    border:0;
+    color:inherit;
+    display:table;
+    max-width:100%;
+    white-space:normal;
+    max-width:100%;
+}
+
+::-webkit-file-upload-button {
+    -webkit-appearance:button;
+    color:inherit;
+    font:inherit;
+}
+
+img {
+    border-style:none;
+}
+
+progress {
+    vertical-align:baseline;
+}
+
+svg:not([fill]) {
+    fill:currentColor;
+}
+
+@media only screen {
+    [hidden~="screen"] {
+        display:inherit;
+    }
+}
+
+@media only screen {
+    [hidden~="screen"]:not(:active):not(:focus):not(:target) {
+        position:absolute !important;
+    clip:rect(0 0 0 0) !important;
+    }
+}
+
+[aria-busy="true"] {
+    cursor:progress;
+}
+
+[aria-controls] {
+    cursor:pointer;
+}
+
+[aria-disabled] {
+    cursor:default;
+}
+
+body {
+    font-family:"-apple-system", "BlinkMacSystemFont", sans-serif;
+    font-feature-settings:"palt";
+    color:hsl(0, 0%, 20%);
+}</style><header><h1 class="_5758449e"><a href="/" class="_6c2a7992">y047aka.space</a></h1></header><main><div class="_beb10df7"><header><h1 class="_96049fe0">elm/svgを使ってみよう（SVGの基礎知識）</h1><div class="_3a71fdb5">May 14th, 2019</div></header><div class="_2064e38f"><p>この記事では、</p><ul><li>SVG の基本的な書き方</li><li>Elm での記述方法</li><li>利用できるパッケージ</li></ul><p>について見ていきます。</p><h1>SVG ってなんだろう？</h1><p>Scalable Vector Graphics の頭文字をとって、SVG と呼ばれています。
 解像度に制限されないベクター画像のための XML 文法として利用されています。</p><h2>仕様について</h2><p>SVG の仕様は W3C によって開発・勧告されています。
 ドキュメントが充実しているので、積極的に活用しましょう。</p><p><a href="https://www.w3.org/TR/SVG11/" target="_blank" rel="noopener">Scalable Vector Graphics (SVG) 1.1 (Second Edition) | www.w3.org</a></p><p>triple_underscore さんによる日本語訳を参考にするのも良いと思います。</p><p><a href="https://triple-underscore.github.io/SVG11/" target="_blank" rel="noopener">SVG 1.1 仕様 （第２版） 日本語訳 | triple-underscore.github.io</a></p><h2>SVG で何ができるのか？</h2><p>画像の形式は .jpg, .png, .gif など数多くありますが、</p><ul><li>解像度に制限されない</li><li>ベクターである</li><li>XML で記述できる</li></ul><p>といった他にはない特徴を持つことが、SVG の強みです。
 HTML 同様のスタイル指定や、アニメーションができるのも魅力ですね。</p><p>アイコンやロゴイメージへの活用はもちろん、インタラクティブなコンテンツの作成、データの可視化（ビジュアライゼーション）やジェネラティブ・アートなどがブラウザ上で簡単に実現できてしまいます。</p><p>すでに必須技術の 1 つと化した SVG ですが、これからも新しい使い方が発見されることでしょう。</p><h2>基本的な書き方</h2><p>SVG を構成しているのは要素と属性です。
 そのため、HTML と同じ感覚で記述することができます。</p><p>SVG として記述されたコードは…</p><pre><code>&lt;svg width="120" height="120" viewBox="0 0 120 120"&gt;
     &lt;rect x="10" y="10" width="100" height="100" rx="15" ry="15" fill="red" /&gt;
     &lt;circle cx="50" cy="50" r="50" fill="blue" /&gt;
-&lt;/svg&gt;</code></pre><p>ブラウザによって画像としてレンダリングされます。</p><svg width="120" height="120" viewBox="0 0 120 120"><rect x="10" y="10" width="100" height="100" rx="15" ry="15" fill="red"></rect><circle cx="50" cy="50" r="50" fill="blue"></circle></svg><p>y 軸が下向きなので少しだけ違和感があるかもしれませんが、HTML の読み書きができれば SVG も問題なく扱えるはずです。</p><h1>Elm で SVG を記述しよう</h1><p>同じことを Elm でもやってみましょう。
+&lt;/svg&gt;
+</code></pre><p>ブラウザによって画像としてレンダリングされます。</p><svg width="120" height="120" viewBox="0 0 120 120"><rect x="10" y="10" width="100" height="100" rx="15" ry="15" fill="red"></rect><circle cx="50" cy="50" r="50" fill="blue"></circle></svg><p>y 軸が下向きなので少しだけ違和感があるかもしれませんが、HTML の読み書きができれば SVG も問題なく扱えるはずです。</p><h1>Elm で SVG を記述しよう</h1><p>同じことを Elm でもやってみましょう。
 Ellie に同じサンプルコードを用意しました。</p><p><a href="https://ellie-app.com/5x8N5hXk3RFa1" target="_blank" rel="noopener">elm/svg sample | Ellie</a></p><pre><code>import Svg exposing (Svg, svg, rect, circle)
 import Svg.Attributes exposing (width, height, viewBox, x, y, rx, ry, cx, cy, r, fill)
 
@@ -34,9 +533,11 @@ main =
                 , fill "blue"
                 ]
                 []
-        ]</code></pre><p>記法の都合でコードが縦長になりましたが、元の SVG と対応しているのがよく分かります。
+        ]
+</code></pre><p>記法の都合でコードが縦長になりましたが、元の SVG と対応しているのがよく分かります。
 もう少し丁寧に解説をしてみます。</p><h2>モジュールのインポート</h2><pre><code>import Svg exposing (Svg, svg, rect, circle)
-import Svg.Attributes exposing (width, height, viewBox, x, y, rx, ry, cx, cy, r, fill)</code></pre><p>コードの先頭で、2 つのモジュール Svg と Svg.Attributes をインポートしました。
+import Svg.Attributes exposing (width, height, viewBox, x, y, rx, ry, cx, cy, r, fill)
+</code></pre><p>コードの先頭で、2 つのモジュール Svg と Svg.Attributes をインポートしました。
 これらは Elm が公式に提供しているパッケージ elm/svg に含まれています。</p><p><a href="https://package.elm-lang.org/packages/elm/svg/latest/" target="_blank" rel="noopener">svg 1.0.1 | Elm Packages</a></p><p>この記事のサンプルコードは、リンク先のサンプルコードをより分かりやすくなるように書き直したものです。</p><h2>main 関数の初期化</h2><p>Svg の関数は Html と同様に扱うことができます。</p><pre><code>main : Svg msg
 main =
     svg
@@ -44,7 +545,8 @@ main =
         , height "120"
         , viewBox "0 0 120 120"
         ]
-        []</code></pre><p>svg の第一引数には width, height, viewBox を指定しました。</p><table><thead><tr><th>属性</th><th>説明</th></tr></thead><tbody><tr><td>width</td><td>画像の "幅 (px)"</td></tr><tr><td>height</td><td>画像の "高さ (px)"</td></tr><tr><td>viewBox</td><td>描画領域の "x 座標 y 座標 幅 高さ"</td></tr></tbody></table><p>viewBox は見慣れない属性かもしれません。
+        []
+</code></pre><p>svg の第一引数には width, height, viewBox を指定しました。</p><table><thead><tr><th>属性</th><th>説明</th></tr></thead><tbody><tr><td>width</td><td>画像の "幅 (px)"</td></tr><tr><td>height</td><td>画像の "高さ (px)"</td></tr><tr><td>viewBox</td><td>描画領域の "x 座標 y 座標 幅 高さ"</td></tr></tbody></table><p>viewBox は見慣れない属性かもしれません。
 この領域内に作成された図形が画面にレンダリングされます。</p><p>慣れるまでは、サンプルのように "0 0 (width に指定した値) (height に指定した値)" という指定が無難でしょう。
 必要に応じて SVG の仕様や解説記事を検索してください。</p><p><a href="https://triple-underscore.github.io/SVG11/struct.html#NewDocument" target="_blank" rel="noopener">SVG 文書片を定義する： svg 要素 | 文書構造 – SVG 1.1 （第２版）</a></p><h2>四角形（矩形）を描く：rect</h2><p>矩形は「くけい」と読みます。
 これを知っていると、次は「矩計（かなばかり）図」が読めなくなります。</p><pre><code>rect
@@ -56,14 +558,16 @@ main =
     , ry "15"
     , fill "red"
     ]
-    []</code></pre><table><thead><tr><th>属性</th><th>説明</th></tr></thead><tbody><tr><td>x</td><td>"x 座標 (px)"</td></tr><tr><td>y</td><td>"y 座標 (px)"</td></tr><tr><td>width</td><td>"幅 (px)"</td></tr><tr><td>height</td><td>"高さ (px)"</td></tr><tr><td>rx</td><td>"角丸の x 軸半径　(px)"</td></tr><tr><td>ry</td><td>"角丸の y 軸半径　(px)"</td></tr><tr><td>fill</td><td>塗りつぶし色の指定（色）</td></tr></tbody></table><p><a href="https://triple-underscore.github.io/SVG11/shapes.html#RectElement" target="_blank" rel="noopener">rect 要素 | 基本図形 – SVG 1.1 （第２版）</a></p><h2>円を描く：circle</h2><pre><code>circle
+    []
+</code></pre><table><thead><tr><th>属性</th><th>説明</th></tr></thead><tbody><tr><td>x</td><td>"x 座標 (px)"</td></tr><tr><td>y</td><td>"y 座標 (px)"</td></tr><tr><td>width</td><td>"幅 (px)"</td></tr><tr><td>height</td><td>"高さ (px)"</td></tr><tr><td>rx</td><td>"角丸の x 軸半径　(px)"</td></tr><tr><td>ry</td><td>"角丸の y 軸半径　(px)"</td></tr><tr><td>fill</td><td>塗りつぶし色の指定（色）</td></tr></tbody></table><p><a href="https://triple-underscore.github.io/SVG11/shapes.html#RectElement" target="_blank" rel="noopener">rect 要素 | 基本図形 – SVG 1.1 （第２版）</a></p><h2>円を描く：circle</h2><pre><code>circle
     [ cx "50"
     , cy "50"
     , r "50"
     , fill "blue"
     ]
-    []</code></pre><table><thead><tr><th>属性</th><th>説明</th></tr></thead><tbody><tr><td>cx</td><td>"中心の x 座標 (px)"</td></tr><tr><td>cy</td><td>"中心の y 座標 (px)"</td></tr><tr><td>r</td><td>"円の半径　(px)"</td></tr><tr><td>fill</td><td>塗りつぶし色の指定（色）</td></tr></tbody></table><p>楕円にしたいときは ellipse を使います。</p><p><a href="https://triple-underscore.github.io/SVG11/shapes.html#CircleElement" target="_blank" rel="noopener">circle 要素 | 基本図形 – SVG 1.1 （第２版）</a></p><h2>そのほかの図形</h2><p>パス・基本図形・テキストなどの要素と、様々なアトリビュートを組み合わせて、表現豊かな SVG を作成することができます。</p><p><a href="https://triple-underscore.github.io/SVG11/paths.html" target="_blank" rel="noopener">パス – SVG 1.1 （第２版） | https://triple-underscore.github.io</a></p><p><a href="https://triple-underscore.github.io/SVG11/shapes.html" target="_blank" rel="noopener">基本図形 – SVG 1.1 （第２版） | https://triple-underscore.github.io</a></p><p><a href="https://triple-underscore.github.io/SVG11/text.html" target="_blank" rel="noopener">テキスト – SVG 1.1 （第２版） | https://triple-underscore.github.io</a></p><h1>利用できる Elm のパッケージ</h1><p>Elm Packages で使えそうなパッケージを探してみましょう。</p><p><a href="https://package.elm-lang.org/" target="_blank" rel="noopener">Elm Packages | https://package.elm-lang.org</a></p><h2>SVG の基本となるパッケージ</h2><p>Elm では、SVG を扱うために 2 種類のパッケージが用意されています。</p><table><thead><tr><th>パッケージ</th><th>説明</th></tr></thead><tbody><tr><td>elm/svg</td><td>Elm 公式の SVG パッケージ</td></tr><tr><td>elm-community/typed-svg</td><td>属性の型情報を付加したパッケージ</td></tr></tbody></table><p>どちらも SVG 用の基本的なモジュールを含み、互換性のあるパッケージです。
+    []
+</code></pre><table><thead><tr><th>属性</th><th>説明</th></tr></thead><tbody><tr><td>cx</td><td>"中心の x 座標 (px)"</td></tr><tr><td>cy</td><td>"中心の y 座標 (px)"</td></tr><tr><td>r</td><td>"円の半径　(px)"</td></tr><tr><td>fill</td><td>塗りつぶし色の指定（色）</td></tr></tbody></table><p>楕円にしたいときは ellipse を使います。</p><p><a href="https://triple-underscore.github.io/SVG11/shapes.html#CircleElement" target="_blank" rel="noopener">circle 要素 | 基本図形 – SVG 1.1 （第２版）</a></p><h2>そのほかの図形</h2><p>パス・基本図形・テキストなどの要素と、様々なアトリビュートを組み合わせて、表現豊かな SVG を作成することができます。</p><p><a href="https://triple-underscore.github.io/SVG11/paths.html" target="_blank" rel="noopener">パス – SVG 1.1 （第２版） | https://triple-underscore.github.io</a></p><p><a href="https://triple-underscore.github.io/SVG11/shapes.html" target="_blank" rel="noopener">基本図形 – SVG 1.1 （第２版） | https://triple-underscore.github.io</a></p><p><a href="https://triple-underscore.github.io/SVG11/text.html" target="_blank" rel="noopener">テキスト – SVG 1.1 （第２版） | https://triple-underscore.github.io</a></p><h1>利用できる Elm のパッケージ</h1><p>Elm Packages で使えそうなパッケージを探してみましょう。</p><p><a href="https://package.elm-lang.org/" target="_blank" rel="noopener">Elm Packages | https://package.elm-lang.org</a></p><h2>SVG の基本となるパッケージ</h2><p>Elm では、SVG を扱うために 2 種類のパッケージが用意されています。</p><table><thead><tr><th>パッケージ</th><th>説明</th></tr></thead><tbody><tr><td>elm/svg</td><td>Elm 公式の SVG パッケージ</td></tr><tr><td>elm-community/typed-svg</td><td>属性の型情報を付加したパッケージ</td></tr></tbody></table><p>どちらも SVG 用の基本的なモジュールを含み、互換性のあるパッケージです。
 好みに応じて使い分けると良いでしょう。
 データの可視化など、より複雑な SVG を扱う際には elm-community/typed-svg の使用をお薦めします。</p><h2>SVG の表現力を高めるパッケージ</h2><p>より複雑な SVG を作成するためのパッケージも用意されています。
 データの可視化（ビジュアライゼーション）や、ジェネラティブ・アートに挑戦してみるのも良いですね！</p><table><thead><tr><th>パッケージ</th><th>説明</th></tr></thead><tbody><tr><td>gampleman/elm-visualization</td><td>D3.js に由来するデータ可視化用のライブラリ</td></tr><tr><td>terezka/line-charts</td><td>グラフ / チャート用のパッケージ</td></tr><tr><td>gicentre/elm-vega</td><td>Port を介して JavaScript の Vega を利用するためのパッケージ</td></tr></tbody></table><p>また、path を記述するためのパッケージは複数存在するようです。</p><table><thead><tr><th>パッケージ</th><th>説明</th></tr></thead><tbody><tr><td>Spaxe/svg-pathd</td><td>d 属性を、M, L, Z などオリジナルの SVG と同様の記法で記述できる</td></tr><tr><td>folkertdev/svg-path-lowlevel</td><td>d 属性を、SVG の記法よりも読みやすく宣言的に記述できる</td></tr><tr><td>folkertdev/one-true-path-experiment</td><td>配列から path を生成するためのパッケージ</td></tr></tbody></table><h2>注意：廃止されたパッケージ</h2><p>以下のパッケージは elm/svg よりも前に使用されていたもので、現在は廃止されています。
-ブラウザの検索結果に出ることがあるので注意してください。</p><table><thead><tr><th>パッケージ</th><th>説明</th></tr></thead><tbody><tr><td>evancz/elm-svg</td><td>廃止</td></tr><tr><td>elm-lang/svg</td><td>廃止</td></tr></tbody></table><h1>SVG は難しくない！</h1><p>でしょ？</p></div></main><footer><p class="_d8a7d977">© 2020 y047aka</p></footer></body></html>
+ブラウザの検索結果に出ることがあるので注意してください。</p><table><thead><tr><th>パッケージ</th><th>説明</th></tr></thead><tbody><tr><td>evancz/elm-svg</td><td>廃止</td></tr><tr><td>elm-lang/svg</td><td>廃止</td></tr></tbody></table><h1>SVG は難しくない！</h1><p>でしょ？</p></div></div></main><footer><p class="_d8a7d977">© 2020 y047aka</p></footer></div></body></html>

@@ -1,7 +1,7 @@
 module Css.Extra exposing (orNoStyle, palette)
 
-import Color.Palette exposing (Palette)
 import Css exposing (Style, backgroundColor, batch, borderColor, color)
+import Css.Palette exposing (Palette)
 
 
 orNoStyle : Maybe a -> (a -> Style) -> Style
