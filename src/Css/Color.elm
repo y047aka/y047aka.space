@@ -1,4 +1,4 @@
-module Color exposing
+module Css.Color exposing
     ( gray020, gray040, gray050, gray090, gray095
     , coolGray040, coolGray050, coolGray090, coolGray095
     , limeGreen020, limeGreen040

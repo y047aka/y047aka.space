@@ -1,7 +1,7 @@
-module Color.Palette exposing (Palette, button, buttonOnHover, default, textLink, textLinkVisited)
+module Css.Palette exposing (Palette, button, buttonOnHover, default, textLink, textLinkVisited)
 
-import Color exposing (coolGray040, coolGray050, coolGray090, coolGray095, gray020, limeGreen020, limeGreen040)
 import Css exposing (Color)
+import Css.Color exposing (coolGray040, coolGray050, coolGray090, coolGray095, gray020, limeGreen020, limeGreen040)
 
 
 type alias Palette =

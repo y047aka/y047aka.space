@@ -1,8 +1,11 @@
 ---
-module: Static.Sub
-createdAt: 2019-05-14
-updatedAt: 2019-05-15
-title: elm/svgを使ってみよう（SVGの基礎知識）
+{
+  "type": "blog",
+  "title": "elm/svgを使ってみよう（SVGの基礎知識）",
+  "description": "",
+  "published": "2019-05-14",
+  "updated": "2019-05-15",
+}
 ---
 
 この記事では、

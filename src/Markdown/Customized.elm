@@ -1,9 +1,9 @@
 module Markdown.Customized exposing (markdownToHtml)
 
-import Color.Palette exposing (textLink, textLinkVisited)
 import Css exposing (..)
 import Css.Extra exposing (palette)
 import Css.Global exposing (a, adjacentSiblings, blockquote, children, code, descendants, details, dl, each, h1, h2, h3, h4, h5, h6, hr, img, li, ol, p, selector, td, th, tr, ul)
+import Css.Palette exposing (textLink, textLinkVisited)
 import Html.Styled as Html exposing (Attribute, Html, div, text)
 import Html.Styled.Attributes as Attr exposing (css, rel, target)
 import Json.Encode exposing (null)
