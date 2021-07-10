@@ -4,9 +4,9 @@
     "build": "elm-pages build"
   },
   "devDependencies": {
-    "elm-format": "^0.8.4",
-    "elm-json": "^0.2.8",
-    "elm-pages": "^1.5.4"
+    "elm-format": "^0.8.5",
+    "elm-json": "^0.2.10",
+    "elm-pages": "^1.5.5"
   },
   "dependencies": {}
 }
