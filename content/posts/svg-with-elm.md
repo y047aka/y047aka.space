@@ -1,6 +1,5 @@
 ---
 {
-  "type": "blog",
   "title": "elm/svgを使ってみよう（SVGの基礎知識）",
   "description": "",
   "published": "2019-05-14",

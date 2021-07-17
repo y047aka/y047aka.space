@@ -1,6 +1,5 @@
 ---
 {
-  "type": "blog",
   "title": "ドイツのロックバンド Silbermond の曲を翻訳したら、諸行無常のフロントエンドに Elm を求める人のポエムになった",
   "description": "",
   "published": "2019-12-25",

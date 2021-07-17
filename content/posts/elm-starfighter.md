@@ -1,6 +1,5 @@
 ---
 {
-  "type": "blog",
   "title": "Elm での開発用テンプレート elm-starfighter を作った",
   "description": "",
   "published": "2019-07-06",

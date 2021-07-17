@@ -1,6 +1,5 @@
 ---
 {
-  "type": "blog",
   "title": "Elm + CSS の検討と実践記録",
   "description": "",
   "published": "2020-05-16",
