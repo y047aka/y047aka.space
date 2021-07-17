@@ -1,19 +1,21 @@
 module Page.Index exposing (Data, Model, Msg, page)
 
+import Article
 import Css exposing (..)
 import Css.Extra exposing (orNoStyle, palette)
 import Css.Media as Media exposing (only, screen, withMedia)
 import Css.Palette exposing (button, buttonOnHover)
 import DataSource exposing (DataSource)
+import Date
 import Head
 import Head.Seo as Seo
-import Html
-import Html.Styled exposing (Html, a, h1, li, section, span, text, toUnstyled, ul)
+import Html.Styled exposing (Attribute, Html, a, h1, li, section, span, text, ul)
 import Html.Styled.Attributes as Attributes exposing (css, href, rel)
 import Page exposing (Page, StaticPayload)
 import Pages.PageUrl exposing (PageUrl)
 import Pages.Url
 import Path
+import Route exposing (Route)
 import Shared
 import Site
 import View exposing (View)
@@ -31,6 +33,10 @@ type alias RouteParams =
     {}
 
 
+type alias Data =
+    List ( Route, Article.ArticleMetadata )
+
+
 page : Page RouteParams Data
 page =
     Page.single
@@ -38,11 +44,6 @@ page =
         , data = data
         }
         |> Page.buildNoState { view = view }
-
-
-data : DataSource Data
-data =
-    DataSource.succeed ()
 
 
 head : StaticPayload Data RouteParams -> List Head.Tag
@@ -63,8 +64,9 @@ head static =
         |> Seo.website
 
 
-type alias Data =
-    ()
+data : DataSource Data
+data =
+    Article.allMetadata
 
 
 view :
@@ -97,8 +99,22 @@ view maybeUrl sharedModel static =
                         ]
                 ]
             }
+        , topSection
+            { title = "Blog posts"
+            , children =
+                [ static.data
+                    |> List.sortWith postPublishDateDescending
+                    |> List.map postSummary
+                    |> ul []
+                ]
+            }
         ]
     }
+
+
+postPublishDateDescending : ( Route, Article.ArticleMetadata ) -> ( Route, Article.ArticleMetadata ) -> Order
+postPublishDateDescending ( _, metadata1 ) ( _, metadata2 ) =
+    Date.compare metadata2.published metadata1.published
 
 
 topSection : { title : String, children : List (Html msg) } -> Html msg
@@ -182,3 +198,49 @@ title_ str =
             ]
         ]
         [ text str ]
+
+
+postSummary : ( Route, Article.ArticleMetadata ) -> Html msg
+postSummary ( route, info ) =
+    li
+        [ css
+            [ listStyle none
+            , nthChild "n+2"
+                [ marginTop (px 5) ]
+            ]
+        ]
+        [ link route
+            [ css
+                [ display block
+                , padding (px 20)
+                , withMedia [ only screen [ Media.maxWidth (px 480) ] ]
+                    [ padding (px 15) ]
+                , textDecoration none
+                , borderRadius (px 10)
+                , palette button
+                , hover
+                    [ palette buttonOnHover ]
+                ]
+            ]
+            [ title_ info.title
+            , span
+                [ css
+                    [ fontSize (px 13)
+                    , lineHeight (int 1)
+                    , orNoStyle button.optionalColor color
+                    ]
+                ]
+                [ text (Date.format "MMMM ddd, yyyy" info.published) ]
+            ]
+        ]
+
+
+link : Route.Route -> List (Attribute msg) -> List (Html msg) -> Html msg
+link route attrs children =
+    Route.toLink
+        (\anchorAttrs ->
+            a
+                (List.map Attributes.fromUnstyled anchorAttrs ++ attrs)
+                children
+        )
+        route
