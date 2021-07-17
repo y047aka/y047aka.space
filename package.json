@@ -1,12 +1,11 @@
 {
   "scripts": {
-    "start": "elm-pages develop --debug",
+    "start": "elm-pages dev",
     "build": "elm-pages build"
   },
   "devDependencies": {
     "elm-format": "^0.8.5",
     "elm-json": "^0.2.10",
-    "elm-pages": "^1.5.5"
-  },
-  "dependencies": {}
+    "elm-pages": "file:elm-pages"
+  }
 }
