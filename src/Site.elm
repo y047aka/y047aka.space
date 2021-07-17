@@ -1,7 +1,9 @@
-module Site exposing (config)
+module Site exposing (config, tagline)
 
 import DataSource
 import Head
+import LanguageTag exposing (emptySubtags)
+import LanguageTag.Language exposing (ja)
 import Pages.Manifest as Manifest
 import Route
 import SiteConfig exposing (SiteConfig)
@@ -15,7 +17,7 @@ config : SiteConfig Data
 config =
     \_ ->
         { data = data
-        , canonicalUrl = "https://y047aka.netlify.com"
+        , canonicalUrl = canonicalUrl
         , manifest = manifest
         , head = head
         }
@@ -27,16 +29,27 @@ data =
 
 
 head : Data -> List Head.Tag
-head static =
-    [ Head.sitemapLink "/sitemap.xml"
-    ]
+head _ =
+    [ Head.sitemapLink "/sitemap.xml" ]
+
+
+canonicalUrl : String
+canonicalUrl =
+    "https://y047aka.space"
 
 
 manifest : Data -> Manifest.Config
-manifest static =
+manifest _ =
     Manifest.init
         { name = "y047aka.space"
-        , description = "My Tanuki logo symbolizes this with a smart animal that works in a group to achieve a common goal."
+        , description = tagline
         , startUrl = Route.Index |> Route.toPath
         , icons = []
         }
+        |> Manifest.withLang (LanguageTag.build emptySubtags ja)
+        |> Manifest.withShortName "y047aka.space"
+
+
+tagline : String
+tagline =
+    "My Tanuki logo symbolizes this with a smart animal that works in a group to achieve a common goal."

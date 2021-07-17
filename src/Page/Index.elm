@@ -13,7 +13,9 @@ import Html.Styled.Attributes as Attributes exposing (css, href, rel)
 import Page exposing (Page, StaticPayload)
 import Pages.PageUrl exposing (PageUrl)
 import Pages.Url
+import Path
 import Shared
+import Site
 import View exposing (View)
 
 
@@ -49,14 +51,14 @@ head static =
         { canonicalUrlOverride = Nothing
         , siteName = "y047aka.space"
         , image =
-            { url = Pages.Url.external "TODO"
-            , alt = "elm-pages logo"
+            { url = [ "images", "icon-png.png" ] |> Path.join |> Pages.Url.fromPath
+            , alt = "y047aka.space logo"
             , dimensions = Nothing
             , mimeType = Nothing
             }
-        , description = "TODO"
+        , description = Site.tagline
         , locale = Nothing
-        , title = "TODO title" -- metadata.title -- TODO
+        , title = "y047aka.space"
         }
         |> Seo.website
 

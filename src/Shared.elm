@@ -114,13 +114,13 @@ view sharedData page model toMsg pageView =
     in
     { title = pageView.title
     , body =
-        toUnstyled <|
-            div []
-                [ global (ress ++ globalCustomStyles)
-                , siteHeader
-                , main_ [] pageView.body
-                , siteFooter
-                ]
+        [ global (ress ++ globalCustomStyles)
+        , siteHeader
+        , main_ [] pageView.body
+        , siteFooter
+        ]
+            |> div []
+            |> toUnstyled
     }
 
 
@@ -172,5 +172,5 @@ siteFooter =
                 , fontSize (px 14)
                 ]
             ]
-            [ text "© 2020 y047aka" ]
+            [ text "© 2021 y047aka" ]
         ]
