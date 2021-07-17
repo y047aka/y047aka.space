@@ -1,11 +1,34 @@
-<!DOCTYPE html><html lang="en"><head><link rel="preload" href="content.json" as="fetch" crossorigin=""><base href="../../"><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><script>if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => {
-        navigator.serviceWorker.register("service-worker.js");
-      });
-    } else {
-      console.log("No service worker registered.");
-    }</script><link rel="shortcut icon" href="assets/favicon.ico"><link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png"><link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-48x48.png"><link rel="manifest" href="assets/manifest.json"><meta name="mobile-web-app-capable" content="yes"><meta name="theme-color" content="#ffffff"><meta name="application-name" content="y047aka.space"><link rel="apple-touch-icon" sizes="57x57" href="assets/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="assets/apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="assets/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="assets/apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="assets/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="assets/apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="assets/apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="assets/apple-touch-icon-152x152.png"><link rel="apple-touch-icon" sizes="167x167" href="assets/apple-touch-icon-167x167.png"><link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon-180x180.png"><link rel="apple-touch-icon" sizes="1024x1024" href="assets/apple-touch-icon-1024x1024.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="y047aka.space"><script defer="defer" src="main.js"></script><link rel="preload" href="main.js" as="script"><style>@import url(https://fonts.googleapis.com/css2?family=Saira:wght@400;500&display=swap);</style><style>@import url(https://use.fontawesome.com/releases/v5.15.1/css/all.css);</style><style>
-</style><title>Elm + CSS の検討と実践記録</title><meta name="generator" content="elm-pages v1.5.4"><link rel="canonical" href="https://y047aka.netlify.com/posts/css-in-elm"><meta name="description" content=""><meta property="og:image" content="https://y047aka.netlify.com/images/icon-png.png"><meta property="og:image:secure_url" content="https://y047aka.netlify.com/images/icon-png.png"><meta property="og:image:alt" content=""><meta property="og:title" content="Elm + CSS の検討と実践記録"><meta property="og:url" content="https://y047aka.netlify.com/posts/css-in-elm"><meta property="og:description" content=""><meta property="og:site_name" content="y047aka.space"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="Elm + CSS の検討と実践記録"><meta property="twitter:description" content=""><meta property="twitter:image" content="https://y047aka.netlify.com/images/icon-png.png"><meta property="twitter:image:alt" content=""><meta property="og:type" content="article"><meta property="article:published_time" content="2020-05-16"></head><body><div data-url="http://localhost:8000/posts/css-in-elm" display="none"></div><div><style>._2064e38f {
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <link rel="stylesheet" href="/style.css">
+    
+    <link rel="preload" href="/elm.js" as="script">
+    <link rel="modulepreload" href="/index.js">
+    
+    <script defer="defer" src="/elm.js" type="text/javascript"></script>
+    <base href="../../">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script type="module">
+import userInit from"/index.js";
+let prefetchedPages=[window.location.pathname],initialLocationHash=document.location.hash.replace(/^#/,"");function loadContentAndInitializeApp(){let a=window.location.pathname.replace(/(w)$/,"$1/");a.endsWith("/")||(a+="/");const b=Elm.TemplateModulesBeta.init({flags:{secrets:null,baseUrl:document.baseURI,isPrerendering:!1,isDevServer:!1,isElmDebugMode:!1,contentJson:JSON.parse(document.getElementById("__ELM_PAGES_DATA__").innerHTML),userFlags:userInit.flags()}});return b.ports.toJsPort.subscribe(()=>{loadNamedAnchor()}),b}function loadNamedAnchor(){if(""!==initialLocationHash){const a=document.querySelector(`[name=${initialLocationHash}]`);a&&a.scrollIntoView()}}function prefetchIfNeeded(a){if(a.host===window.location.host&&!prefetchedPages.includes(a.pathname)){prefetchedPages.push(a.pathname),console.log("Preloading...",a.pathname);const b=document.createElement("link");b.setAttribute("as","fetch"),b.setAttribute("rel","prefetch"),b.setAttribute("href",origin+a.pathname+"/content.json"),document.head.appendChild(b)}}const appPromise=new Promise(function(a){document.addEventListener("DOMContentLoaded",()=>{a(loadContentAndInitializeApp())})});userInit.load(appPromise),"function"==typeof connect&&connect(function(a){appPromise.then(b=>{b.ports.fromJsPort.send({contentJson:a})})});const trigger_prefetch=b=>{const c=find_anchor(b.target);c&&c.href&&c.hasAttribute("elm-pages:prefetch")&&prefetchIfNeeded(c)};let mousemove_timeout;const handle_mousemove=a=>{clearTimeout(mousemove_timeout),mousemove_timeout=setTimeout(()=>{trigger_prefetch(a)},20)};addEventListener("touchstart",trigger_prefetch),addEventListener("mousemove",handle_mousemove);function find_anchor(a){for(;a&&"A"!==a.nodeName.toUpperCase();)a=a.parentNode;return a}
+    </script>
+    <title>Elm + CSS の検討と実践記録 - y047aka.space</title>
+    <meta name="generator" content="elm-pages v1.5.5">
+    <link rel="manifest" href="manifest.json">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <script type="application/ld+json">
+{"@context":"http://schema.org/","@type":"Article","headline":"Elm + CSS の検討と実践記録","description":"","image":"","author":{"@type":"Person","name":""},"publisher":{"@type":"Person","name":""},"url":"","datePublished":"2020-05-16","mainEntityOfPage":{"@type":"SoftwareSourceCode","codeRepository":"https://github.com/y047aka/y047aka.space","description":"My site.","author":"Yoshitaka Totsuka","programmingLanguage":{"@type":"ComputerLanguage","url":"http://elm-lang.org/","name":"Elm","image":"http://elm-lang.org/","identifier":"http://elm-lang.org/"}}}
+</script>    <link rel="canonical" href="https://y047aka.space/posts/css-in-elm" />    <meta name="description" content="" />    <meta property="og:image" content="https://y047aka.space/images/icon-png.png" />    <meta property="og:image:secure_url" content="https://y047aka.space/images/icon-png.png" />    <meta property="og:image:alt" content="y047aka.space logo" />    <meta property="og:title" content="Elm + CSS の検討と実践記録" />    <meta property="og:url" content="https://y047aka.space/posts/css-in-elm" />    <meta property="og:description" content="" />    <meta property="og:site_name" content="y047aka.space" />    <meta property="twitter:card" content="summary_large_image" />    <meta property="twitter:title" content="Elm + CSS の検討と実践記録" />    <meta property="twitter:description" content="" />    <meta property="twitter:image" content="https://y047aka.space/images/icon-png.png" />    <meta property="twitter:image:alt" content="y047aka.space logo" />    <meta property="og:type" content="article" />    <meta property="article:published_time" content="2020-05-16" />    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+    <script id="__ELM_PAGES_DATA__" type="application/json">{"is404":false,"staticData":{"markdown-blocks-content/posts/css-in-elm.md":"[1,[[6,[[8,\"Elm で CSS を扱う方法の検討と、\"],[2,\"https://package.elm-lang.org/packages/rtfeldman/elm-css/latest\",[0],[[8,\"elm-css\"]]],[8,\" に至るまでの記録です。\"]]],[5,[0],[[8,\"選択肢\"]]],[6,[[8,\"Elm のアプリケーションで CSS を扱うための方法にはどのようなものがあるでしょうか？\"]]],[5,[2],[[8,\"HTML で CSS ファイルを読み込む\"]]],[6,[[8,\"最もオーソドックスな方法です。\\nSass などのプリプロセッサや PostCSS などの仕組みも問題なく使うことができます。\\nただし、この方法が Elm で常に使えるわけではありません。\\nEllie などのオンラインエディタや、HTML を生成しない \"],[7,\"elm reactor\"],[8,\" などで実行する場合は CSS を読み込むことはできず、インラインに記述するなどの工夫が必要です。\"]]],[5,[2],[[8,\"CSS フレームワーク\"]]],[6,[[2,\"https://bulma.io/\",[0],[[8,\"Bulma\"]]],[8,\"、\"],[2,\"https://tailwindcss.com/\",[0],[[8,\"Tailwind CSS\"]]],[8,\"、\"],[2,\"https://semantic-ui.com/\",[0],[[8,\"Semantic UI\"]]],[8,\" などがあります。\\nこのうち Bulma については 3 ヶ月ほど使ってみました。\\n用意されているスタイルだけでは足りない場合は、自分でスタイルを書く必要があります。\"]]],[5,[2],[[8,\"elm-ui\"]]],[6,[[8,\"従来 CSS が担っていたレイアウトの定義を Elm で記述できるようにしたライブラリです。\\nレイアウト以外のスタイルは別の方法で指定する必要がありますが、使い勝手の良いライブラリとして人気を集めています。\\n（私はまだ使ったことがない）\"]]],[5,[2],[[8,\"elm-css\"]]],[6,[[8,\"私が現在使っている方法です。\\nプロパティや値が型つきで定義されていて、Elm のファイル内でスタイルを指定できます。\\nこれまで日本ではあまり注目されていませんでしたが、この記事をきっかけにして普及するといいな。\"]]],[6,[[8,\"「HTML で CSS ファイルを読み込む」と「elm-css」について、詳しく見てみましょう。\"]]],[5,[0],[[8,\"記録： HTML で CSS ファイルを読み込む\"]]],[6,[[8,\"Elm を初めてからしばらくは、使い慣れた HTML で CSS ファイルを読み込む方法を採用していました。\\n\"],[2,\"https://www.elm-live.com/\",[0],[[8,\"elm-live\"]]],[8,\" というツールが非常に便利だったため、モジュールバンドラー不要の開発を実現していました。\\n当時の私が書いていた CSS は一般的な CSS 設計とは異なるスタイルでしたが、「Elm で CSS を扱う」という目的は充分に達成していました。\"]]],[5,[2],[[8,\"elm-live のリロード機能\"]]],[6,[[8,\"elm-live の v3 系では CSS ファイルの更新を感知してブラウザをリロードする機能あり、非常に快適に開発を進めることができました。\\n4.0.0 で大きな変更がありこの機能は省略されてしまいましたが、今後復活することを期待しています。\"]]],[6,[[2,\"https://github.com/wking-io/elm-live/issues/196\",[0],[[8,\"Watching css files? · Issue #196 · wking-io/elm-live\"]]]]],[5,[2],[[8,\"別の方法を探す\"]]],[6,[[8,\"実際のところ、elm-live から CSS のライブリロード機能がなくなったことは、私が別の方法を模索するきっかけになりました。\\nCSS フレームワークの Bulma を試していたりもしましたが、ここでは省略します。\\nジンジャーさんが書かれている \"],[2,\"http://jinjor-labo.hatenablog.com/entry/2019/03/13/084116\",[0],[[8,\"CSS フレームワークを使いたくない - ジンジャー研究室\"]]],[8,\"\\nは、私の感想にかなり近いと思います。\\nとはいえ、デザインをフォーマットする手段としては有効だと感じます。\"]]],[5,[0],[[8,\"記録： elm-css\"]]],[6,[[8,\"2020 年に入り elm-css を導入しました。\\nそして、この試みは今のところ上手くいっています。\\nelm-css の特徴や使ってみての感想を以下に列挙します。\"]]],[5,[2],[[8,\"型の存在\"]]],[6,[[8,\"プロパティや値に応じた型が用意されているため、コンパイル時に記述のミスを発見することができます。\\nCSS であることに変わりはないので、詳細度やその他いくつかの問題に対しては CSS を記述する時と同じように気をつける必要があります。\"]]],[5,[2],[[8,\"locally scoped CSS\"]]],[6,[[8,\"記述したスタイルにはランダムな class 名が付与されます。\\nこれを HTML の要素と紐付けることでローカルなスコープを実現しています。\\nクラスを使ったセレクタも書けるようになっているので、ローカルなスコープ以外の方法で紐付けたい場合に使いましょう。\"]]],[5,[2],[[8,\"CSS のプロパティや値はそのまま\"]]],[6,[[8,\"過去に CSS の経験があれば、知識をそのまま活用できます。\\nすべてが網羅されているわけではありませんが、不足があれば新たに関数を作って補うことができます。\\n「CSS でできることは、elm-css でも同じようにできる」という認識で良さそうです。\"]]],[5,[2],[[8,\"動的な値を含めることができる\"]]],[6,[[8,\"数値を Elm で計算して含めることも、ロジックに応じてプロパティ単位で指定を変更することもできます。\\nなんでもできてしまうので、やりすぎに注意する必要はあるかもしれません。\"]]],[5,[2],[[8,\"関心の分離\"]]],[6,[[8,\"CSS in Elm の採用にあたって気になる部分だと思うのですが、elm-css の採用検討にあたってはそれほど重要ではないと感じています。\\n書き方の工夫で大きく変わるので、採用後に色々と検討してみると良いと思います。\\n「関心の分離」は個人的には重要なので、いつか詳しい記事を書くつもり。\"]]],[5,[2],[[8,\"コンパイルが必要\"]]],[6,[[8,\"アプリケーションが小さいうちはそれほど気になりませんが、スタイルを変更するたびにコンパイルが必要です。\\n大きくなると少しストレスに感じるかもしれません。\\nそのうち慣れます。\"]]],[5,[0],[[8,\"Q & A\"]]],[5,[2],[[8,\"学習コスト\"]]],[6,[[8,\"CSS を書けるのであれば、それほど苦労はしないと思います。\\nプロパティや値のほとんどは、スネークケースをキャメルケースにすれば使うことができます。\\nよく言われる「デザイナーとの協業」については試したことがないのでわかりません。\\nCSS in JS を採用している人に聞いてみたい。\"]]],[5,[2],[[8,\"捨てやすさ\"]]],[6,[[8,\"すべてのプロパティや値は CSS と共通なので、クラスを改めて指定する手間さえ惜しまなければ適当に変換できるはずです。\"]]],[5,[2],[[8,\"CSS に型安全は過剰？\"]]],[6,[[8,\"型安全が elm-css のすべてではないので総合的に判断すれば良いと思います。\"]]],[5,[2],[[8,\"擬似クラス、擬似要素、メディアクエリは使える？\"]]],[6,[[8,\"使えます。\"]]],[5,[2],[[8,\"PostCSS は使える？\"]]],[6,[[8,\"現行の elm-css だけでは PostCSS は使えません。\\n必要な機能は関数として作ってしまえば、それほど困ることはないのかなと考えています。\"]]],[5,[2],[[8,\"リセット CSS がほしい\"]]],[6,[[2,\"https://package.elm-lang.org/packages/y047aka/elm-reset-css/latest/\",[0],[[8,\"y047aka/elm-reset-css\"]]],[8,\" を作りました。\"]]],[5,[2],[[8,\"elm-css を既存の CSS と組み合わせたい\"]]],[6,[[8,\"HTML ファイルで既存の CSS を読み込みつつ、適宜 elm-css の指定を追加できます。\\n既存の CSS から elm-css へと段階的な移行もできますね。\"]]],[5,[2],[[8,\"CSS ファイルを生成したい\"]]],[6,[[8,\"過去に \"],[2,\"https://github.com/tcoopman/elm-css-webpack-loader\",[0],[[8,\"elm-css-webpack-loader\"]]],[8,\" や \"],[2,\"https://package.elm-lang.org/packages/ThinkAlexandria/css-in-elm/latest/\",[0],[[8,\"ThinkAlexandria/css-in-elm\"]]],[8,\" が開発されていたので、参考にすると良さそうです。\\n私は今のところ試していません。\"]]],[5,[0],[[8,\"参考\"]]],[6,[[8,\"elm-css を採用している事例の紹介です。\"]]],[5,[2],[[8,\"noredink-ui\"]]],[6,[[8,\"NoRedInk 社製の UI ウィジェット集です。\\n実践的な使い方はこのパッケージの実装を参考にするのが良いかも。\\n\"],[2,\"https://package.elm-lang.org/packages/NoRedInk/noredink-ui/latest/\",[0],[[8,\"NoRedInk/noredink-ui\"]]]]],[5,[2],[[8,\"elm-css patterns\"]]],[6,[[8,\"elm-css のレイアウトパターン集です。\\n綺麗にまとまっているので、elm-ui との比較検討をする場合に役立ちそう。\\n\"],[2,\"https://elmcsspatterns.io/\",[0],[[8,\"elm-css patterns\"]]]]],[5,[0],[[8,\"今後の展望\"]]],[6,[[8,\"いま試しているものや、未来の可能性など。\"]]],[5,[2],[[8,\"Palette の導入\"]]],[6,[[8,\"CSS で最も難しいことのひとつが色の管理です。\\n変数を活用する方法は既存の CSS でも普及していますが、私は background / color / border などをセットにした Palette という単位を試しています。\\n今のところ上手く機能しているので、elm-css を使う利点の 1 つとして考えています。\\n\"],[2,\"https://github.com/y047aka/y047aka.space/blob/master/src/Color/Palette.elm\",[0],[[8,\"https://github.com/y047aka/y047aka.space/blob/master/src/Color/Palette.elm\"]]]]],[5,[2],[[8,\"elm-ui との関係性\"]]],[6,[[8,\"レイアウトに関するスタイルのみを CSS から切り離すことへの違和感が強く、私自身は \"],[2,\"https://package.elm-lang.org/packages/mdgriffith/elm-ui/latest/\",[0],[[8,\"elm-ui\"]]],[8,\" を使ったことがありませんでした。\\nelm-css を深めていく中で、いまは elm-ui の手法を一部取り入れる可能性もあると考えています。\"]]],[5,[2],[[8,\"CSS への期待\"]]],[6,[[8,\"elm-css を導入した背景には、CSS 設計（BEM など）への反発もありました。\\n従来の CSS 設計とは異なる新しいパラダイムの登場や CSS 自体のさらなる進化を期待しています。\"]]]]]","{\"method\":\"GET\",\"url\":\"file://content/posts/css-in-elm.md\",\"headers\":[],\"body\":{\"type\":\"empty\"}}":"{\"parsedFrontmatter\":{\"title\":\"Elm + CSS の検討と実践記録\",\"description\":\"\",\"published\":\"2020-05-16\"}}"}}</script>
+    </head>
+    <body>
+      <div data-url="" display="none"></div>
+      <div><style>._2064e38f {
     padding-top:20px;
     line-height:1.8;
     word-wrap:break-word;
@@ -26,12 +49,12 @@
 }
 
 ._2064e38f  a[target=_blank]::after {
-    content:"\f35d";
+    content:&quot;\f35d&quot;;
     position:relative;
     top:-1px;
     display:inline-block;
     padding:0 5px;
-    font-family:"Font Awesome 5 Free";
+    font-family:&quot;Font Awesome 5 Free&quot;;
     font-size:12px;
     font-weight:900;
     text-decoration:none;
@@ -131,7 +154,7 @@
     margin-top:0.25em;
 }
 
-._2064e38f  li > p {
+._2064e38f  li &gt; p {
     margin-top:16px;
 }
 
@@ -164,7 +187,7 @@
 }
 
 ._2064e38f  code, ._2064e38f  pre {
-    font-family:"SFMono-Regular", "Consolas", "Liberation Mono", "Menlo", monospace;
+    font-family:&quot;SFMono-Regular&quot;, &quot;Consolas&quot;, &quot;Liberation Mono&quot;, &quot;Menlo&quot;, monospace;
     font-size:12px;
 }
 
@@ -180,7 +203,7 @@
     word-wrap:normal;
 }
 
-._2064e38f  pre > code {
+._2064e38f  pre &gt; code {
     padding:0;
     margin:0;
     font-size:100%;
@@ -215,7 +238,7 @@
     color:hsl(210, 5%, 50%);
 }
 
-._3a71fdb5 > p {
+._3a71fdb5 &gt; p {
     padding:5px 0;
     font-size:14px;
     line-height:1;
@@ -226,7 +249,7 @@
     width:620px;
     margin:0 auto;
     padding:20px 0;
-    font-family:"Saira", sans-serif;
+    font-family:&quot;Saira&quot;, sans-serif;
     font-size:18px;
     font-weight:normal;
 }
@@ -245,7 +268,7 @@
 
 ._96049fe0 {
     padding:5px 0;
-    font-family:"-apple-system", sans-serif;
+    font-family:&quot;-apple-system&quot;, sans-serif;
     font-size:24px;
     font-weight:600;
 }
@@ -269,7 +292,7 @@
     margin:0 auto;
     padding:20px 0;
     text-align:right;
-    font-family:"Saira", sans-serif;
+    font-family:&quot;Saira&quot;, sans-serif;
     font-size:14px;
 }
 
@@ -329,7 +352,7 @@ abbr[title] {
 }
 
 a {
-    background:transparent;
+    background-color:transparent;
 }
 
 a:active, a:hover {
@@ -371,16 +394,16 @@ input {
     cursor:default;
 }
 
-[type="number"]::-webkit-inner-spin-button, [type="number"]::-webkit-outer-spin-button {
+[type=&quot;number&quot;]::-webkit-inner-spin-button, [type=&quot;number&quot;]::-webkit-outer-spin-button {
     height:auto;
 }
 
-[type="search"] {
+[type=&quot;search&quot;] {
     -webkit-appearance:textfield;
     outline-offset:-2px;
 }
 
-[type="search"]::-webkit-search-decoration {
+[type=&quot;search&quot;]::-webkit-search-decoration {
     -webkit-appearance:none;
 }
 
@@ -405,26 +428,26 @@ button, select {
     text-transform:none;
 }
 
-button, [type="button"], [type="reset"], [type="submit"], [role="button"] {
+button, [type=&quot;button&quot;], [type=&quot;reset&quot;], [type=&quot;submit&quot;], [role=&quot;button&quot;] {
     cursor:pointer;
     color:inherit;
 }
 
-button::-moz-focus-inner, [type="button"]::-moz-focus-inner, [type="reset"]::-moz-focus-inner, [type="submit"]::-moz-focus-inner {
+button::-moz-focus-inner, [type=&quot;button&quot;]::-moz-focus-inner, [type=&quot;reset&quot;]::-moz-focus-inner, [type=&quot;submit&quot;]::-moz-focus-inner {
     border-style:none;
     padding:0;
 }
 
-button:-moz-focusring, [type="button"]::-moz-focus-inner, [type="reset"]::-moz-focus-inner, [type="submit"]::-moz-focus-inner {
+button:-moz-focusring, [type=&quot;button&quot;]::-moz-focus-inner, [type=&quot;reset&quot;]::-moz-focus-inner, [type=&quot;submit&quot;]::-moz-focus-inner {
     outline:1px dotted ButtonText;
 }
 
-button, html [type="button"], [type="reset"], [type="submit"] {
+button, html [type=&quot;button&quot;], [type=&quot;reset&quot;], [type=&quot;submit&quot;] {
     -webkit-appearance:button;
 }
 
 button, input, select, textarea {
-    background:transparent;
+    background-color:transparent;
     border-style:none;
 }
 
@@ -464,24 +487,20 @@ progress {
     vertical-align:baseline;
 }
 
-svg:not([fill]) {
-    fill:currentColor;
-}
-
 @media only screen {
-    [hidden~="screen"] {
+    [hidden~=&quot;screen&quot;] {
         display:inherit;
     }
 }
 
 @media only screen {
-    [hidden~="screen"]:not(:active):not(:focus):not(:target) {
+    [hidden~=&quot;screen&quot;]:not(:active):not(:focus):not(:target) {
         position:absolute !important;
     clip:rect(0 0 0 0) !important;
     }
 }
 
-[aria-busy="true"] {
+[aria-busy=&quot;true&quot;] {
     cursor:progress;
 }
 
@@ -494,24 +513,24 @@ svg:not([fill]) {
 }
 
 body {
-    font-family:"-apple-system", "BlinkMacSystemFont", sans-serif;
-    font-feature-settings:"palt";
+    font-family:&quot;-apple-system&quot;, &quot;BlinkMacSystemFont&quot;, sans-serif;
+    font-feature-settings:&quot;palt&quot;;
     color:hsl(0, 0%, 20%);
-}</style><header><h1 class="_5758449e"><a href="/" class="_6c2a7992">y047aka.space</a></h1></header><main><div class="_beb10df7"><header><h1 class="_96049fe0">Elm + CSS の検討と実践記録</h1><div class="_3a71fdb5">May 16th, 2020</div></header><div class="_2064e38f"><p>Elm で CSS を扱う方法の検討と、<a href="https://package.elm-lang.org/packages/rtfeldman/elm-css/latest" target="_blank" rel="noopener">elm-css</a> に至るまでの記録です。</p><h1>選択肢</h1><p>Elm のアプリケーションで CSS を扱うための方法にはどのようなものがあるでしょうか？</p><h3>HTML で CSS ファイルを読み込む</h3><p>最もオーソドックスな方法です。
+}</style><header><h1 class="_5758449e"><a class="_6c2a7992" href="/">y047aka.space</a></h1></header><main><div class="_beb10df7"><header><h1 class="_96049fe0">Elm + CSS の検討と実践記録</h1><div class="_3a71fdb5">May 16th, 2020</div></header><div class="_2064e38f"><p>Elm で CSS を扱う方法の検討と、<a href="https://package.elm-lang.org/packages/rtfeldman/elm-css/latest" rel="noopener" target="_blank">elm-css</a> に至るまでの記録です。</p><h1>選択肢</h1><p>Elm のアプリケーションで CSS を扱うための方法にはどのようなものがあるでしょうか？</p><h3>HTML で CSS ファイルを読み込む</h3><p>最もオーソドックスな方法です。
 Sass などのプリプロセッサや PostCSS などの仕組みも問題なく使うことができます。
 ただし、この方法が Elm で常に使えるわけではありません。
-Ellie などのオンラインエディタや、HTML を生成しない <code>elm reactor</code> などで実行する場合は CSS を読み込むことはできず、インラインに記述するなどの工夫が必要です。</p><h3>CSS フレームワーク</h3><p><a href="https://bulma.io/" target="_blank" rel="noopener">Bulma</a>、<a href="https://tailwindcss.com/" target="_blank" rel="noopener">Tailwind CSS</a>、<a href="https://semantic-ui.com/" target="_blank" rel="noopener">Semantic UI</a> などがあります。
+Ellie などのオンラインエディタや、HTML を生成しない <code>elm reactor</code> などで実行する場合は CSS を読み込むことはできず、インラインに記述するなどの工夫が必要です。</p><h3>CSS フレームワーク</h3><p><a href="https://bulma.io/" rel="noopener" target="_blank">Bulma</a>、<a href="https://tailwindcss.com/" rel="noopener" target="_blank">Tailwind CSS</a>、<a href="https://semantic-ui.com/" rel="noopener" target="_blank">Semantic UI</a> などがあります。
 このうち Bulma については 3 ヶ月ほど使ってみました。
 用意されているスタイルだけでは足りない場合は、自分でスタイルを書く必要があります。</p><h3>elm-ui</h3><p>従来 CSS が担っていたレイアウトの定義を Elm で記述できるようにしたライブラリです。
 レイアウト以外のスタイルは別の方法で指定する必要がありますが、使い勝手の良いライブラリとして人気を集めています。
 （私はまだ使ったことがない）</p><h3>elm-css</h3><p>私が現在使っている方法です。
 プロパティや値が型つきで定義されていて、Elm のファイル内でスタイルを指定できます。
 これまで日本ではあまり注目されていませんでしたが、この記事をきっかけにして普及するといいな。</p><p>「HTML で CSS ファイルを読み込む」と「elm-css」について、詳しく見てみましょう。</p><h1>記録： HTML で CSS ファイルを読み込む</h1><p>Elm を初めてからしばらくは、使い慣れた HTML で CSS ファイルを読み込む方法を採用していました。
-<a href="https://www.elm-live.com/" target="_blank" rel="noopener">elm-live</a> というツールが非常に便利だったため、モジュールバンドラー不要の開発を実現していました。
+<a href="https://www.elm-live.com/" rel="noopener" target="_blank">elm-live</a> というツールが非常に便利だったため、モジュールバンドラー不要の開発を実現していました。
 当時の私が書いていた CSS は一般的な CSS 設計とは異なるスタイルでしたが、「Elm で CSS を扱う」という目的は充分に達成していました。</p><h3>elm-live のリロード機能</h3><p>elm-live の v3 系では CSS ファイルの更新を感知してブラウザをリロードする機能あり、非常に快適に開発を進めることができました。
-4.0.0 で大きな変更がありこの機能は省略されてしまいましたが、今後復活することを期待しています。</p><p><a href="https://github.com/wking-io/elm-live/issues/196" target="_blank" rel="noopener">Watching css files? · Issue #196 · wking-io/elm-live</a></p><h3>別の方法を探す</h3><p>実際のところ、elm-live から CSS のライブリロード機能がなくなったことは、私が別の方法を模索するきっかけになりました。
+4.0.0 で大きな変更がありこの機能は省略されてしまいましたが、今後復活することを期待しています。</p><p><a href="https://github.com/wking-io/elm-live/issues/196" rel="noopener" target="_blank">Watching css files? · Issue #196 · wking-io/elm-live</a></p><h3>別の方法を探す</h3><p>実際のところ、elm-live から CSS のライブリロード機能がなくなったことは、私が別の方法を模索するきっかけになりました。
 CSS フレームワークの Bulma を試していたりもしましたが、ここでは省略します。
-ジンジャーさんが書かれている <a href="http://jinjor-labo.hatenablog.com/entry/2019/03/13/084116" target="_blank" rel="noopener">CSS フレームワークを使いたくない - ジンジャー研究室</a>
+ジンジャーさんが書かれている <a href="http://jinjor-labo.hatenablog.com/entry/2019/03/13/084116" rel="noopener" target="_blank">CSS フレームワークを使いたくない - ジンジャー研究室</a>
 は、私の感想にかなり近いと思います。
 とはいえ、デザインをフォーマットする手段としては有効だと感じます。</p><h1>記録： elm-css</h1><p>2020 年に入り elm-css を導入しました。
 そして、この試みは今のところ上手くいっています。
@@ -529,15 +548,18 @@ CSS であることに変わりはないので、詳細度やその他いくつ�
 プロパティや値のほとんどは、スネークケースをキャメルケースにすれば使うことができます。
 よく言われる「デザイナーとの協業」については試したことがないのでわかりません。
 CSS in JS を採用している人に聞いてみたい。</p><h3>捨てやすさ</h3><p>すべてのプロパティや値は CSS と共通なので、クラスを改めて指定する手間さえ惜しまなければ適当に変換できるはずです。</p><h3>CSS に型安全は過剰？</h3><p>型安全が elm-css のすべてではないので総合的に判断すれば良いと思います。</p><h3>擬似クラス、擬似要素、メディアクエリは使える？</h3><p>使えます。</p><h3>PostCSS は使える？</h3><p>現行の elm-css だけでは PostCSS は使えません。
-必要な機能は関数として作ってしまえば、それほど困ることはないのかなと考えています。</p><h3>リセット CSS がほしい</h3><p><a href="https://package.elm-lang.org/packages/y047aka/elm-reset-css/latest/" target="_blank" rel="noopener">y047aka/elm-reset-css</a> を作りました。</p><h3>elm-css を既存の CSS と組み合わせたい</h3><p>HTML ファイルで既存の CSS を読み込みつつ、適宜 elm-css の指定を追加できます。
-既存の CSS から elm-css へと段階的な移行もできますね。</p><h3>CSS ファイルを生成したい</h3><p>過去に <a href="https://github.com/tcoopman/elm-css-webpack-loader" target="_blank" rel="noopener">elm-css-webpack-loader</a> や <a href="https://package.elm-lang.org/packages/ThinkAlexandria/css-in-elm/latest/" target="_blank" rel="noopener">ThinkAlexandria/css-in-elm</a> が開発されていたので、参考にすると良さそうです。
+必要な機能は関数として作ってしまえば、それほど困ることはないのかなと考えています。</p><h3>リセット CSS がほしい</h3><p><a href="https://package.elm-lang.org/packages/y047aka/elm-reset-css/latest/" rel="noopener" target="_blank">y047aka/elm-reset-css</a> を作りました。</p><h3>elm-css を既存の CSS と組み合わせたい</h3><p>HTML ファイルで既存の CSS を読み込みつつ、適宜 elm-css の指定を追加できます。
+既存の CSS から elm-css へと段階的な移行もできますね。</p><h3>CSS ファイルを生成したい</h3><p>過去に <a href="https://github.com/tcoopman/elm-css-webpack-loader" rel="noopener" target="_blank">elm-css-webpack-loader</a> や <a href="https://package.elm-lang.org/packages/ThinkAlexandria/css-in-elm/latest/" rel="noopener" target="_blank">ThinkAlexandria/css-in-elm</a> が開発されていたので、参考にすると良さそうです。
 私は今のところ試していません。</p><h1>参考</h1><p>elm-css を採用している事例の紹介です。</p><h3>noredink-ui</h3><p>NoRedInk 社製の UI ウィジェット集です。
 実践的な使い方はこのパッケージの実装を参考にするのが良いかも。
-<a href="https://package.elm-lang.org/packages/NoRedInk/noredink-ui/latest/" target="_blank" rel="noopener">NoRedInk/noredink-ui</a></p><h3>elm-css patterns</h3><p>elm-css のレイアウトパターン集です。
+<a href="https://package.elm-lang.org/packages/NoRedInk/noredink-ui/latest/" rel="noopener" target="_blank">NoRedInk/noredink-ui</a></p><h3>elm-css patterns</h3><p>elm-css のレイアウトパターン集です。
 綺麗にまとまっているので、elm-ui との比較検討をする場合に役立ちそう。
-<a href="https://elmcsspatterns.io/" target="_blank" rel="noopener">elm-css patterns</a></p><h1>今後の展望</h1><p>いま試しているものや、未来の可能性など。</p><h3>Palette の導入</h3><p>CSS で最も難しいことのひとつが色の管理です。
+<a href="https://elmcsspatterns.io/" rel="noopener" target="_blank">elm-css patterns</a></p><h1>今後の展望</h1><p>いま試しているものや、未来の可能性など。</p><h3>Palette の導入</h3><p>CSS で最も難しいことのひとつが色の管理です。
 変数を活用する方法は既存の CSS でも普及していますが、私は background / color / border などをセットにした Palette という単位を試しています。
 今のところ上手く機能しているので、elm-css を使う利点の 1 つとして考えています。
-<a href="https://github.com/y047aka/y047aka.space/blob/master/src/Color/Palette.elm" target="_blank" rel="noopener">https://github.com/y047aka/y047aka.space/blob/master/src/Color/Palette.elm</a></p><h3>elm-ui との関係性</h3><p>レイアウトに関するスタイルのみを CSS から切り離すことへの違和感が強く、私自身は <a href="https://package.elm-lang.org/packages/mdgriffith/elm-ui/latest/" target="_blank" rel="noopener">elm-ui</a> を使ったことがありませんでした。
+<a href="https://github.com/y047aka/y047aka.space/blob/master/src/Color/Palette.elm" rel="noopener" target="_blank">https://github.com/y047aka/y047aka.space/blob/master/src/Color/Palette.elm</a></p><h3>elm-ui との関係性</h3><p>レイアウトに関するスタイルのみを CSS から切り離すことへの違和感が強く、私自身は <a href="https://package.elm-lang.org/packages/mdgriffith/elm-ui/latest/" rel="noopener" target="_blank">elm-ui</a> を使ったことがありませんでした。
 elm-css を深めていく中で、いまは elm-ui の手法を一部取り入れる可能性もあると考えています。</p><h3>CSS への期待</h3><p>elm-css を導入した背景には、CSS 設計（BEM など）への反発もありました。
-従来の CSS 設計とは異なる新しいパラダイムの登場や CSS 自体のさらなる進化を期待しています。</p></div></div></main><footer><p class="_d8a7d977">© 2020 y047aka</p></footer></div></body></html>
+従来の CSS 設計とは異なる新しいパラダイムの登場や CSS 自体のさらなる進化を期待しています。</p></div></div></main><footer><p class="_d8a7d977">© 2021 y047aka</p></footer></div>
+    </body>
+  </html>
+  
