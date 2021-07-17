@@ -1,10 +1,10 @@
-module Markdown.Customized exposing (markdownToHtml)
+module Markdown.Customized exposing (markdownStyles, markdownToHtml, renderer)
 
 import Css exposing (..)
 import Css.Extra exposing (palette)
 import Css.Global exposing (a, adjacentSiblings, blockquote, children, code, descendants, details, dl, each, h1, h2, h3, h4, h5, h6, hr, img, li, ol, p, selector, td, th, tr, ul)
 import Css.Palette exposing (textLink, textLinkVisited)
-import Html.Styled as Html exposing (Attribute, Html,  text)
+import Html.Styled as Html exposing (Attribute, Html, text)
 import Html.Styled.Attributes as Attr exposing (css, rel)
 import Json.Encode exposing (null)
 import Markdown.Html exposing (withAttribute)
@@ -21,7 +21,7 @@ markdownToHtml attributes markdown =
         markdown
             |> Markdown.Parser.parse
             |> Result.mapError (\error -> error |> List.map deadEndToString |> String.join "\n")
-            |> Result.andThen (\ast -> Markdown.Renderer.render customRenderer ast)
+            |> Result.andThen (\ast -> Markdown.Renderer.render renderer ast)
     of
         Ok rendered ->
             Html.div (css markdownStyles :: attributes) rendered
@@ -47,8 +47,8 @@ isExternalLink url =
     not <| isInternalLink url
 
 
-customRenderer : Renderer (Html msg)
-customRenderer =
+renderer : Renderer (Html msg)
+renderer =
     { styledRenderer
         | link =
             \link content ->
