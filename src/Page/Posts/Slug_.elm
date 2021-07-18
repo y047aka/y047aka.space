@@ -1,11 +1,11 @@
 module Page.Posts.Slug_ exposing (Data, Model, Msg, page)
 
-import Article
 import Css exposing (..)
 import Css.Extra exposing (orNoStyle)
 import Css.Global exposing (children)
 import Css.Media as Media exposing (only, screen, withMedia)
 import Css.Palette as Palette
+import Data.Article as Article exposing (ArticleMetadata)
 import DataSource exposing (DataSource)
 import Date exposing (Date)
 import Head
@@ -14,7 +14,6 @@ import Html.Styled exposing (..)
 import Html.Styled.Attributes exposing (css)
 import Markdown.Customized
 import MarkdownCodec
-import OptimizedDecoder
 import Page exposing (Page, StaticPayload)
 import Pages.PageUrl exposing (PageUrl)
 import Pages.Url
@@ -169,34 +168,6 @@ type alias Data =
 data : RouteParams -> DataSource Data
 data route =
     MarkdownCodec.withFrontmatter Data
-        frontmatterDecoder
+        Article.frontmatterDecoder
         Markdown.Customized.renderer
         ("content/posts/" ++ route.slug ++ ".md")
-
-
-type alias ArticleMetadata =
-    { title : String
-    , description : String
-    , published : Date
-    , draft : Bool
-    }
-
-
-frontmatterDecoder : OptimizedDecoder.Decoder ArticleMetadata
-frontmatterDecoder =
-    OptimizedDecoder.map4 ArticleMetadata
-        (OptimizedDecoder.field "title" OptimizedDecoder.string)
-        (OptimizedDecoder.field "description" OptimizedDecoder.string)
-        (OptimizedDecoder.field "published"
-            (OptimizedDecoder.string
-                |> OptimizedDecoder.andThen
-                    (\isoString ->
-                        Date.fromIsoString isoString
-                            |> OptimizedDecoder.fromResult
-                    )
-            )
-        )
-        (OptimizedDecoder.field "draft" OptimizedDecoder.bool
-            |> OptimizedDecoder.maybe
-            |> OptimizedDecoder.map (Maybe.withDefault False)
-        )

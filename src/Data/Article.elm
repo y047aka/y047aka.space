@@ -1,4 +1,4 @@
-module Article exposing (..)
+module Data.Article exposing (ArticleMetadata, allMetadata, blogPostsGlob, frontmatterDecoder)
 
 import DataSource
 import DataSource.File as File

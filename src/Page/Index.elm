@@ -1,10 +1,10 @@
 module Page.Index exposing (Data, Model, Msg, page)
 
-import Article
 import Css exposing (..)
 import Css.Extra exposing (orNoStyle, palette)
 import Css.Media as Media exposing (only, screen, withMedia)
 import Css.Palette exposing (button, buttonOnHover)
+import Data.Article as Article exposing (ArticleMetadata)
 import DataSource exposing (DataSource)
 import Date
 import Head
@@ -34,7 +34,7 @@ type alias RouteParams =
 
 
 type alias Data =
-    List ( Route, Article.ArticleMetadata )
+    List ( Route, ArticleMetadata )
 
 
 page : Page RouteParams Data
@@ -112,7 +112,7 @@ view maybeUrl sharedModel static =
     }
 
 
-postPublishDateDescending : ( Route, Article.ArticleMetadata ) -> ( Route, Article.ArticleMetadata ) -> Order
+postPublishDateDescending : ( Route, ArticleMetadata ) -> ( Route, ArticleMetadata ) -> Order
 postPublishDateDescending ( _, metadata1 ) ( _, metadata2 ) =
     Date.compare metadata2.published metadata1.published
 
@@ -200,7 +200,7 @@ title_ str =
         [ text str ]
 
 
-postSummary : ( Route, Article.ArticleMetadata ) -> Html msg
+postSummary : ( Route, ArticleMetadata ) -> Html msg
 postSummary ( route, info ) =
     li
         [ css
