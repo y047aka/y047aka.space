@@ -6,6 +6,6 @@
   "devDependencies": {
     "elm-format": "^0.8.5",
     "elm-json": "^0.2.10",
-    "elm-pages": "file:elm-pages"
+    "elm-pages": "^2.1.4"
   }
 }

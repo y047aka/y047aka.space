@@ -2,7 +2,6 @@
     "type": "application",
     "source-directories": [
         "src",
-        "elm-pages/src",
         ".elm-pages"
     ],
     "elm-version": "0.19.1",
@@ -13,6 +12,7 @@
             "danyx23/elm-mimetype": "4.0.1",
             "dillonkearns/elm-bcp47-language-tag": "1.0.1",
             "dillonkearns/elm-markdown": "6.0.1",
+            "dillonkearns/elm-pages": "8.0.2",
             "elm/browser": "1.0.2",
             "elm/core": "1.0.5",
             "elm/html": "1.0.0",
@@ -41,7 +41,9 @@
             "elm/virtual-dom": "1.0.2",
             "fredcy/elm-parseint": "2.0.1",
             "mgold/elm-nonempty-list": "4.2.0",
-            "rtfeldman/elm-hex": "1.0.0"
+            "robinheghan/murmur3": "1.0.0",
+            "rtfeldman/elm-hex": "1.0.0",
+            "vito/elm-ansi": "10.0.1"
         }
     },
     "test-dependencies": {

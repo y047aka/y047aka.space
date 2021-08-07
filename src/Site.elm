@@ -15,12 +15,11 @@ type alias Data =
 
 config : SiteConfig Data
 config =
-    \_ ->
-        { data = data
-        , canonicalUrl = canonicalUrl
-        , manifest = manifest
-        , head = head
-        }
+    { data = data
+    , canonicalUrl = canonicalUrl
+    , manifest = manifest
+    , head = head
+    }
 
 
 data : DataSource.DataSource Data
