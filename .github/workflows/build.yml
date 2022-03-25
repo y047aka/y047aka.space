@@ -32,8 +32,6 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
-      - name: Generate
-        run: npm run generate
       - name: Archive Production Artifact
         uses: actions/upload-artifact@v2
         with:
@@ -65,8 +63,6 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
-      - name: Generate
-        run: npm run generate
       - name: Archive Production Artifact
         uses: actions/upload-artifact@v2
         with:
