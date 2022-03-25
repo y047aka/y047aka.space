@@ -1,12 +1,193 @@
-module MarkdownCodec exposing (codec, withFrontmatter)
+module MarkdownCodec exposing (isPlaceholder, noteTitle, titleAndDescription, withFrontmatter, withoutFrontmatter)
 
-import DataSource
+import DataSource exposing (DataSource)
 import DataSource.File as StaticFile
+import List.Extra
 import Markdown.Block as Block exposing (Block)
 import Markdown.Parser
 import Markdown.Renderer
+import MarkdownExtra
 import OptimizedDecoder exposing (Decoder)
 import Serialize as S
+
+
+isPlaceholder : String -> DataSource (Maybe ())
+isPlaceholder filePath =
+    filePath
+        |> StaticFile.bodyWithoutFrontmatter
+        |> DataSource.andThen
+            (\rawContent ->
+                Markdown.Parser.parse rawContent
+                    |> Result.mapError (\_ -> "Markdown error")
+                    |> Result.map
+                        (\blocks ->
+                            List.any
+                                (\block ->
+                                    case block of
+                                        Block.Heading _ inlines ->
+                                            False
+
+                                        _ ->
+                                            True
+                                )
+                                blocks
+                                |> not
+                        )
+                    |> DataSource.fromResult
+            )
+        |> DataSource.distillSerializeCodec (filePath ++ "-is-placeholder") S.bool
+        |> DataSource.map
+            (\bool ->
+                if bool then
+                    Nothing
+
+                else
+                    Just ()
+            )
+
+
+noteTitle : String -> DataSource String
+noteTitle filePath =
+    titleFromFrontmatter filePath
+        |> DataSource.andThen
+            (\maybeTitle ->
+                maybeTitle
+                    |> Maybe.map DataSource.succeed
+                    |> Maybe.withDefault
+                        (StaticFile.bodyWithoutFrontmatter filePath
+                            |> DataSource.andThen
+                                (\rawContent ->
+                                    Markdown.Parser.parse rawContent
+                                        |> Result.mapError (\_ -> "Markdown error")
+                                        |> Result.map
+                                            (\blocks ->
+                                                List.Extra.findMap
+                                                    (\block ->
+                                                        case block of
+                                                            Block.Heading Block.H1 inlines ->
+                                                                Just (Block.extractInlineText inlines)
+
+                                                            _ ->
+                                                                Nothing
+                                                    )
+                                                    blocks
+                                            )
+                                        |> Result.andThen (Result.fromMaybe <| "Expected to find an H1 heading for page " ++ filePath)
+                                        |> DataSource.fromResult
+                                )
+                        )
+            )
+        |> DataSource.distillSerializeCodec ("note-title-" ++ filePath) S.string
+
+
+titleAndDescription : String -> DataSource { title : String, description : String }
+titleAndDescription filePath =
+    filePath
+        |> StaticFile.onlyFrontmatter
+            (OptimizedDecoder.map2 (\title description -> { title = title, description = description })
+                (OptimizedDecoder.optionalField "title" OptimizedDecoder.string)
+                (OptimizedDecoder.optionalField "description" OptimizedDecoder.string)
+            )
+        |> DataSource.andThen
+            (\metadata ->
+                Maybe.map2 (\title description -> { title = title, description = description })
+                    metadata.title
+                    metadata.description
+                    |> Maybe.map DataSource.succeed
+                    |> Maybe.withDefault
+                        (StaticFile.bodyWithoutFrontmatter filePath
+                            |> DataSource.andThen
+                                (\rawContent ->
+                                    Markdown.Parser.parse rawContent
+                                        |> Result.mapError (\_ -> "Markdown error")
+                                        |> Result.map
+                                            (\blocks ->
+                                                Maybe.map
+                                                    (\title ->
+                                                        { title = title
+                                                        , description =
+                                                            case metadata.description of
+                                                                Just description ->
+                                                                    description
+
+                                                                Nothing ->
+                                                                    findDescription blocks
+                                                        }
+                                                    )
+                                                    (case metadata.title of
+                                                        Just title ->
+                                                            Just title
+
+                                                        Nothing ->
+                                                            findH1 blocks
+                                                    )
+                                            )
+                                        |> Result.andThen (Result.fromMaybe <| "Expected to find an H1 heading for page " ++ filePath)
+                                        |> DataSource.fromResult
+                                )
+                        )
+            )
+
+
+findH1 : List Block -> Maybe String
+findH1 blocks =
+    List.Extra.findMap
+        (\block ->
+            case block of
+                Block.Heading Block.H1 inlines ->
+                    Just (Block.extractInlineText inlines)
+
+                _ ->
+                    Nothing
+        )
+        blocks
+
+
+findDescription : List Block -> String
+findDescription blocks =
+    blocks
+        |> List.Extra.findMap
+            (\block ->
+                case block of
+                    Block.Paragraph inlines ->
+                        Just (MarkdownExtra.extractInlineText inlines)
+
+                    _ ->
+                        Nothing
+            )
+        |> Maybe.withDefault ""
+
+
+titleFromFrontmatter : String -> DataSource (Maybe String)
+titleFromFrontmatter filePath =
+    StaticFile.onlyFrontmatter
+        (OptimizedDecoder.optionalField "title" OptimizedDecoder.string)
+        filePath
+
+
+withoutFrontmatter :
+    Markdown.Renderer.Renderer view
+    -> String
+    -> DataSource (List view)
+withoutFrontmatter renderer filePath =
+    (filePath
+        |> StaticFile.bodyWithoutFrontmatter
+        |> DataSource.andThen
+            (\rawBody ->
+                rawBody
+                    |> Markdown.Parser.parse
+                    |> Result.mapError (\_ -> "Couldn't parse markdown.")
+                    |> DataSource.fromResult
+            )
+    )
+        |> DataSource.distillSerializeCodec ("markdown-blocks-" ++ filePath)
+            (S.list codec)
+        |> DataSource.andThen
+            (\blocks ->
+                blocks
+                    |> Markdown.Renderer.render renderer
+                    |> DataSource.fromResult
+            )
 
 
 withFrontmatter :
@@ -14,41 +195,8 @@ withFrontmatter :
     -> Decoder frontmatter
     -> Markdown.Renderer.Renderer view
     -> String
-    -> DataSource.DataSource value
+    -> DataSource value
 withFrontmatter constructor frontmatterDecoder renderer filePath =
-    DataSource.map2 constructor
-        (StaticFile.onlyFrontmatter
-            frontmatterDecoder
-            filePath
-        )
-        ((StaticFile.bodyWithoutFrontmatter
-            filePath
-            |> DataSource.andThen
-                (\rawBody ->
-                    rawBody
-                        |> Markdown.Parser.parse
-                        |> Result.mapError (\_ -> "Couldn't parse markdown.")
-                        |> DataSource.fromResult
-                )
-         )
-            |> DataSource.distillSerializeCodec ("markdown-blocks-" ++ filePath)
-                (S.list codec)
-            |> DataSource.andThen
-                (\blocks ->
-                    blocks
-                        |> Markdown.Renderer.render renderer
-                        |> DataSource.fromResult
-                )
-        )
-
-
-withoutFrontmatter :
-    (frontmatter -> List view -> value)
-    -> Decoder frontmatter
-    -> Markdown.Renderer.Renderer view
-    -> String
-    -> DataSource.DataSource value
-withoutFrontmatter constructor frontmatterDecoder renderer filePath =
     DataSource.map2 constructor
         (StaticFile.onlyFrontmatter
             frontmatterDecoder
@@ -86,11 +234,11 @@ codec =
                 Block.HtmlBlock html ->
                     encodeHtmlBlock html
 
-                Block.UnorderedList listItems ->
-                    encodeUnorderedList listItems
+                Block.UnorderedList listSpacing listItems ->
+                    encodeUnorderedList listSpacing listItems
 
-                Block.OrderedList int lists ->
-                    encodeOrderedList int lists
+                Block.OrderedList listSpacing int lists ->
+                    encodeOrderedList listSpacing int lists
 
                 Block.BlockQuote blocks ->
                     encodeBlockQuote blocks
@@ -109,8 +257,8 @@ codec =
         )
         |> S.variant0 Block.ThematicBreak
         |> S.variant1 Block.HtmlBlock htmlCodec
-        |> S.variant1 Block.UnorderedList (S.list listItemCodec)
-        |> S.variant2 Block.OrderedList S.int (S.list (S.list inlineCodec))
+        |> S.variant2 Block.UnorderedList listSpacingCodec (S.list listItemCodec)
+        |> S.variant3 Block.OrderedList listSpacingCodec S.int (S.list (S.list (S.lazy (\() -> codec))))
         |> S.variant1 Block.BlockQuote (S.list (S.lazy (\() -> codec)))
         |> S.variant2 Block.Heading headingCodec (S.list inlineCodec)
         |> S.variant1 Block.Paragraph (S.list inlineCodec)
@@ -121,6 +269,22 @@ codec =
                 |> S.field .language (S.maybe S.string)
                 |> S.finishRecord
             )
+        |> S.finishCustomType
+
+
+listSpacingCodec : S.Codec e Block.ListSpacing
+listSpacingCodec =
+    S.customType
+        (\vLoose vTight value ->
+            case value of
+                Block.Loose ->
+                    vLoose
+
+                Block.Tight ->
+                    vTight
+        )
+        |> S.variant0 Block.Loose
+        |> S.variant0 Block.Tight
         |> S.finishCustomType
 
 
@@ -272,7 +436,7 @@ htmlAttributeCodec =
         |> S.finishRecord
 
 
-listItemCodec : S.Codec Never (Block.ListItem Block.Inline)
+listItemCodec : S.Codec Never (Block.ListItem Block.Block)
 listItemCodec =
     S.customType
         (\encodeListItem value ->
@@ -280,7 +444,7 @@ listItemCodec =
                 Block.ListItem task children ->
                     encodeListItem task children
         )
-        |> S.variant2 Block.ListItem taskCodec (S.list inlineCodec)
+        |> S.variant2 Block.ListItem taskCodec (S.list (S.lazy (\() -> codec)))
         |> S.finishCustomType
 
 
