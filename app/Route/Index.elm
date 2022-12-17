@@ -10,7 +10,7 @@ import DataSource.Glob as Glob
 import Date exposing (Date)
 import Head
 import Head.Seo as Seo
-import Html.Styled exposing (Attribute, Html, a, div, h1, li, section, span, text, toUnstyled, ul)
+import Html.Styled exposing (Attribute, Html, a, h1, li, section, span, text, ul)
 import Html.Styled.Attributes as Attributes exposing (css, href, rel)
 import Json.Decode as Decode exposing (Decoder)
 import Pages.Msg
