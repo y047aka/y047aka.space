@@ -1,32 +1,34 @@
-module Page.Index exposing (Data, Model, Msg, page)
+module Route.Index exposing (ActionData, Data, Model, Msg, route)
 
 import Css exposing (..)
 import Css.Extra exposing (orNoStyle, palette)
 import Css.Media as Media exposing (only, screen, withMedia)
 import Css.Palette exposing (button, buttonOnHover)
-import Data.Article as Article exposing (ArticleMetadata)
 import DataSource exposing (DataSource)
-import Date
+import DataSource.File as File
+import DataSource.Glob as Glob
+import Date exposing (Date)
 import Head
 import Head.Seo as Seo
-import Html.Styled exposing (Attribute, Html, a, h1, li, section, span, text, ul)
+import Html.Styled exposing (Attribute, Html, a, div, h1, li, section, span, text, toUnstyled, ul)
 import Html.Styled.Attributes as Attributes exposing (css, href, rel)
-import Page exposing (Page, StaticPayload)
+import Json.Decode as Decode exposing (Decoder)
+import Pages.Msg
 import Pages.PageUrl exposing (PageUrl)
 import Pages.Url
 import Path
 import Route exposing (Route)
+import RouteBuilder exposing (StatelessRoute, StaticPayload)
 import Shared
-import Site
 import View exposing (View)
 
 
 type alias Model =
-    ()
+    {}
 
 
 type alias Msg =
-    Never
+    ()
 
 
 type alias RouteParams =
@@ -37,17 +39,101 @@ type alias Data =
     List ( Route, ArticleMetadata )
 
 
-page : Page RouteParams Data
-page =
-    Page.single
+type alias ActionData =
+    {}
+
+
+route : StatelessRoute RouteParams Data ActionData
+route =
+    RouteBuilder.single
         { head = head
         , data = data
         }
-        |> Page.buildNoState { view = view }
+        |> RouteBuilder.buildNoState { view = view }
 
 
-head : StaticPayload Data RouteParams -> List Head.Tag
-head static =
+data : DataSource Data
+data =
+    allMetadata
+
+
+type alias BlogPost =
+    { filePath : String
+    , slug : String
+    }
+
+
+blogPostsGlob : DataSource.DataSource (List { filePath : String, slug : String })
+blogPostsGlob =
+    Glob.succeed BlogPost
+        |> Glob.captureFilePath
+        |> Glob.match (Glob.literal "content/posts/")
+        |> Glob.capture Glob.wildcard
+        |> Glob.match (Glob.literal ".md")
+        |> Glob.toDataSource
+
+
+allMetadata : DataSource (List ( Route, ArticleMetadata ))
+allMetadata =
+    blogPostsGlob
+        |> DataSource.map
+            (List.map
+                (\{ filePath, slug } ->
+                    DataSource.map2 Tuple.pair
+                        (DataSource.succeed <| Route.Blog__Slug_ { slug = slug })
+                        (File.onlyFrontmatter frontmatterDecoder filePath)
+                )
+            )
+        |> DataSource.resolve
+        |> DataSource.map
+            (List.filterMap
+                (\( route_, metadata ) ->
+                    if metadata.draft then
+                        Nothing
+
+                    else
+                        Just ( route_, metadata )
+                )
+            )
+
+
+type alias ArticleMetadata =
+    { title : String
+    , description : String
+    , published : Date
+    , draft : Bool
+    }
+
+
+frontmatterDecoder : Decoder ArticleMetadata
+frontmatterDecoder =
+    Decode.map4 ArticleMetadata
+        (Decode.field "title" Decode.string)
+        (Decode.field "description" Decode.string)
+        (Decode.field "published"
+            (Decode.string
+                |> Decode.andThen
+                    (\isoString ->
+                        Date.fromIsoString isoString
+                            |> (\result ->
+                                    case result of
+                                        Ok okValue ->
+                                            Decode.succeed okValue
+
+                                        Err error ->
+                                            Decode.fail error
+                               )
+                    )
+            )
+        )
+        (Decode.field "draft" Decode.bool
+            |> Decode.maybe
+            |> Decode.map (Maybe.withDefault False)
+        )
+
+
+head : StaticPayload Data ActionData RouteParams -> List Head.Tag
+head app =
     Seo.summary
         { canonicalUrlOverride = Nothing
         , siteName = "y047aka.space"
@@ -57,24 +143,19 @@ head static =
             , dimensions = Nothing
             , mimeType = Nothing
             }
-        , description = Site.tagline
+        , description = "My Tanuki logo symbolizes this with a smart animal that works in a group to achieve a common goal."
         , locale = Nothing
         , title = "y047aka.space"
         }
         |> Seo.website
 
 
-data : DataSource Data
-data =
-    Article.allMetadata
-
-
 view :
     Maybe PageUrl
     -> Shared.Model
-    -> StaticPayload Data RouteParams
-    -> View Msg
-view maybeUrl sharedModel static =
+    -> StaticPayload Data ActionData RouteParams
+    -> View (Pages.Msg.Msg Msg)
+view maybeUrl sharedModel app =
     { title = "y047aka.space"
     , body =
         [ topSection
@@ -102,7 +183,7 @@ view maybeUrl sharedModel static =
         , topSection
             { title = "Blog posts"
             , children =
-                [ static.data
+                [ app.data
                     |> List.sortWith postPublishDateDescending
                     |> List.map postSummary
                     |> ul []
@@ -136,7 +217,7 @@ topSection { title, children } =
                 , fontFamilies [ qt "Saira", sansSerif.value ]
                 , fontSize (px 16)
                 , fontWeight (int 500)
-                , lineHeight (int 1)
+                , lineHeight (num 1)
                 ]
             ]
             [ text title ]
@@ -158,7 +239,7 @@ siteSummary { name, url } =
             , span
                 [ css
                     [ fontSize (px 13)
-                    , lineHeight (int 1)
+                    , lineHeight (num 1)
                     , orNoStyle button.optionalColor color
                     ]
                 ]
@@ -201,7 +282,7 @@ title_ str =
 
 
 postSummary : ( Route, ArticleMetadata ) -> Html msg
-postSummary ( route, info ) =
+postSummary ( route_, { title, published } ) =
     li
         [ css
             [ listStyle none
@@ -209,7 +290,7 @@ postSummary ( route, info ) =
                 [ marginTop (px 5) ]
             ]
         ]
-        [ link route
+        [ link route_
             [ css
                 [ display block
                 , padding (px 20)
@@ -222,25 +303,25 @@ postSummary ( route, info ) =
                     [ palette buttonOnHover ]
                 ]
             ]
-            [ title_ info.title
+            [ title_ title
             , span
                 [ css
                     [ fontSize (px 13)
-                    , lineHeight (int 1)
+                    , lineHeight (num 1)
                     , orNoStyle button.optionalColor color
                     ]
                 ]
-                [ text (Date.format "MMMM ddd, yyyy" info.published) ]
+                [ text (Date.format "MMMM ddd, yyyy" published) ]
             ]
         ]
 
 
-link : Route.Route -> List (Attribute msg) -> List (Html msg) -> Html msg
-link route attrs children =
+link : Route -> List (Attribute msg) -> List (Html msg) -> Html msg
+link route_ attrs children =
     Route.toLink
         (\anchorAttrs ->
             a
                 (List.map Attributes.fromUnstyled anchorAttrs ++ attrs)
                 children
         )
-        route
+        route_
