@@ -1,6 +1,5 @@
-module Shared exposing (Data, Model, Msg(..), template)
+module Shared exposing (Data, Model, Msg(..), SharedMsg(..), template)
 
-import Browser.Navigation
 import Css exposing (..)
 import Css.Extra exposing (palette)
 import Css.Global exposing (global)
@@ -8,8 +7,9 @@ import Css.Media as Media exposing (only, screen, withMedia)
 import Css.Palette as Palette
 import Css.Reset exposing (ress)
 import DataSource
+import Effect exposing (Effect)
 import Html
-import Html.Styled exposing (..)
+import Html.Styled exposing (Html, a, footer, h1, header, main_, p, text, toUnstyled)
 import Html.Styled.Attributes exposing (css, href)
 import Pages.Flags
 import Pages.PageUrl exposing (PageUrl)
@@ -26,30 +26,28 @@ template =
     , view = view
     , data = data
     , subscriptions = subscriptions
-    , onPageChange = Just OnPageChange
+    , onPageChange = Nothing
     }
 
 
 type Msg
-    = OnPageChange
-        { path : Path
-        , query : Maybe String
-        , fragment : Maybe String
-        }
+    = SharedMsg SharedMsg
 
 
 type alias Data =
     ()
 
 
+type SharedMsg
+    = NoOp
+
+
 type alias Model =
-    { showMobileMenu : Bool
-    }
+    {}
 
 
 init :
-    Maybe Browser.Navigation.Key
-    -> Pages.Flags.Flags
+    Pages.Flags.Flags
     ->
         Maybe
             { path :
@@ -60,18 +58,18 @@ init :
             , metadata : route
             , pageUrl : Maybe PageUrl
             }
-    -> ( Model, Cmd Msg )
-init navigationKey flags maybePagePath =
-    ( { showMobileMenu = False }
-    , Cmd.none
+    -> ( Model, Effect Msg )
+init flags maybePagePath =
+    ( {}
+    , Effect.none
     )
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+update : Msg -> Model -> ( Model, Effect Msg )
 update msg model =
     case msg of
-        OnPageChange _ ->
-            ( { model | showMobileMenu = False }, Cmd.none )
+        SharedMsg globalMsg ->
+            ( model, Effect.none )
 
 
 subscriptions : Path -> Model -> Sub Msg
@@ -93,7 +91,7 @@ view :
     -> Model
     -> (Msg -> msg)
     -> View msg
-    -> { body : Html.Html msg, title : String }
+    -> { body : List (Html.Html msg), title : String }
 view sharedData page model toMsg pageView =
     let
         globalCustomStyles =
@@ -111,8 +109,7 @@ view sharedData page model toMsg pageView =
         , main_ [] pageView.body
         , siteFooter
         ]
-            |> div []
-            |> toUnstyled
+            |> List.map toUnstyled
     }
 
 
