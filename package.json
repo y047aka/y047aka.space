@@ -5,9 +5,11 @@
   },
   "devDependencies": {
     "elm": "^0.19.1-5",
+    "elm-codegen": "^0.3.0",
     "elm-format": "^0.8.5",
-    "elm-optimize-level-2": "^0.2.3",
-    "elm-pages": "^2.1.12",
-    "elm-review": "^2.8.5"
+    "elm-optimize-level-2": "^0.3.5",
+    "elm-pages": "^3.0.0-beta.33",
+    "elm-review": "2.8.5",
+    "vite": "^4.1.1"
   }
 }
