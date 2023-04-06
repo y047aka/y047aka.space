@@ -1,4 +1,4 @@
-module Route.Blog.Slug_ exposing (ActionData, Data, Model, Msg, route)
+module Route.Posts.Slug_ exposing (ActionData, Data, Model, Msg, route)
 
 import BackendTask exposing (BackendTask)
 import BackendTask.Glob as Glob
@@ -57,7 +57,7 @@ pages : BackendTask FatalError (List RouteParams)
 pages =
     Glob.succeed BlogPost
         |> Glob.captureFilePath
-        |> Glob.match (Glob.literal "content/blog/")
+        |> Glob.match (Glob.literal "content/posts/")
         |> Glob.capture Glob.wildcard
         |> Glob.match (Glob.literal ".md")
         |> Glob.toBackendTask
@@ -88,7 +88,7 @@ data routeParams =
     MarkdownCodec.withFrontmatter Data
         frontmatterDecoder
         -- Markdown.Customized.renderer
-        ("content/blog/" ++ routeParams.slug ++ ".md")
+        ("content/posts/" ++ routeParams.slug ++ ".md")
 
 
 frontmatterDecoder : Decoder ArticleMetadata

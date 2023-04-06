@@ -67,7 +67,7 @@ blogPostsGlob : BackendTask FatalError (List { filePath : String, slug : String 
 blogPostsGlob =
     Glob.succeed BlogPost
         |> Glob.captureFilePath
-        |> Glob.match (Glob.literal "content/blog/")
+        |> Glob.match (Glob.literal "content/posts/")
         |> Glob.capture Glob.wildcard
         |> Glob.match (Glob.literal ".md")
         |> Glob.toBackendTask
@@ -80,7 +80,7 @@ allMetadata =
             (List.map
                 (\{ filePath, slug } ->
                     BackendTask.map2 Tuple.pair
-                        (BackendTask.succeed <| Route.Blog__Slug_ { slug = slug })
+                        (BackendTask.succeed <| Route.Posts__Slug_ { slug = slug })
                         (BackendTask.allowFatal <| File.onlyFrontmatter frontmatterDecoder filePath)
                 )
             )
