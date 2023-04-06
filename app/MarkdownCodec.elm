@@ -1,7 +1,8 @@
 module MarkdownCodec exposing (isPlaceholder, noteTitle, titleAndDescription, withFrontmatter, withoutFrontmatter)
 
-import DataSource exposing (DataSource)
-import DataSource.File as StaticFile
+import BackendTask exposing (BackendTask)
+import BackendTask.File as StaticFile
+import FatalError exposing (FatalError)
 import Json.Decode as Decode exposing (Decoder)
 import Json.Decode.Extra
 import List.Extra
@@ -11,14 +12,15 @@ import Markdown.Renderer
 import MarkdownExtra
 
 
-isPlaceholder : String -> DataSource (Maybe ())
+isPlaceholder : String -> BackendTask FatalError (Maybe ())
 isPlaceholder filePath =
     filePath
         |> StaticFile.bodyWithoutFrontmatter
-        |> DataSource.andThen
+        |> BackendTask.allowFatal
+        |> BackendTask.andThen
             (\rawContent ->
                 Markdown.Parser.parse rawContent
-                    |> Result.mapError (\_ -> "Markdown error")
+                    |> Result.mapError (\_ -> FatalError.fromString "Markdown error")
                     |> Result.map
                         (\blocks ->
                             List.any
@@ -33,9 +35,9 @@ isPlaceholder filePath =
                                 blocks
                                 |> not
                         )
-                    |> DataSource.fromResult
+                    |> BackendTask.fromResult
             )
-        |> DataSource.map
+        |> BackendTask.map
             (\bool ->
                 if bool then
                     Nothing
@@ -45,19 +47,20 @@ isPlaceholder filePath =
             )
 
 
-noteTitle : String -> DataSource String
+noteTitle : String -> BackendTask FatalError String
 noteTitle filePath =
     titleFromFrontmatter filePath
-        |> DataSource.andThen
+        |> BackendTask.andThen
             (\maybeTitle ->
                 maybeTitle
-                    |> Maybe.map DataSource.succeed
+                    |> Maybe.map BackendTask.succeed
                     |> Maybe.withDefault
                         (StaticFile.bodyWithoutFrontmatter filePath
-                            |> DataSource.andThen
+                            |> BackendTask.allowFatal
+                            |> BackendTask.andThen
                                 (\rawContent ->
                                     Markdown.Parser.parse rawContent
-                                        |> Result.mapError (\_ -> "Markdown error")
+                                        |> Result.mapError (\_ -> FatalError.fromString "Markdown error")
                                         |> Result.map
                                             (\blocks ->
                                                 List.Extra.findMap
@@ -71,14 +74,14 @@ noteTitle filePath =
                                                     )
                                                     blocks
                                             )
-                                        |> Result.andThen (Result.fromMaybe <| "Expected to find an H1 heading for page " ++ filePath)
-                                        |> DataSource.fromResult
+                                        |> Result.andThen (Result.fromMaybe <| FatalError.fromString <| "Expected to find an H1 heading for page " ++ filePath)
+                                        |> BackendTask.fromResult
                                 )
                         )
             )
 
 
-titleAndDescription : String -> DataSource { title : String, description : String }
+titleAndDescription : String -> BackendTask FatalError { title : String, description : String }
 titleAndDescription filePath =
     filePath
         |> StaticFile.onlyFrontmatter
@@ -86,18 +89,20 @@ titleAndDescription filePath =
                 (Json.Decode.Extra.optionalField "title" Decode.string)
                 (Json.Decode.Extra.optionalField "description" Decode.string)
             )
-        |> DataSource.andThen
+        |> BackendTask.allowFatal
+        |> BackendTask.andThen
             (\metadata ->
                 Maybe.map2 (\title description -> { title = title, description = description })
                     metadata.title
                     metadata.description
-                    |> Maybe.map DataSource.succeed
+                    |> Maybe.map BackendTask.succeed
                     |> Maybe.withDefault
                         (StaticFile.bodyWithoutFrontmatter filePath
-                            |> DataSource.andThen
+                            |> BackendTask.allowFatal
+                            |> BackendTask.andThen
                                 (\rawContent ->
                                     Markdown.Parser.parse rawContent
-                                        |> Result.mapError (\_ -> "Markdown error")
+                                        |> Result.mapError (\_ -> FatalError.fromString "Markdown error")
                                         |> Result.map
                                             (\blocks ->
                                                 Maybe.map
@@ -120,8 +125,8 @@ titleAndDescription filePath =
                                                             findH1 blocks
                                                     )
                                             )
-                                        |> Result.andThen (Result.fromMaybe <| "Expected to find an H1 heading for page " ++ filePath)
-                                        |> DataSource.fromResult
+                                        |> Result.andThen (Result.fromMaybe <| FatalError.fromString <| "Expected to find an H1 heading for page " ++ filePath)
+                                        |> BackendTask.fromResult
                                 )
                         )
             )
@@ -156,62 +161,67 @@ findDescription blocks =
         |> Maybe.withDefault ""
 
 
-titleFromFrontmatter : String -> DataSource (Maybe String)
+titleFromFrontmatter : String -> BackendTask FatalError (Maybe String)
 titleFromFrontmatter filePath =
-    StaticFile.onlyFrontmatter
-        (Json.Decode.Extra.optionalField "title" Decode.string)
-        filePath
+    BackendTask.allowFatal <|
+        StaticFile.onlyFrontmatter
+            (Json.Decode.Extra.optionalField "title" Decode.string)
+            filePath
 
 
 withoutFrontmatter :
     Markdown.Renderer.Renderer view
     -> String
-    -> DataSource (List view)
+    -> BackendTask FatalError (List view)
 withoutFrontmatter renderer filePath =
     (filePath
         |> StaticFile.bodyWithoutFrontmatter
-        |> DataSource.andThen
+        |> BackendTask.allowFatal
+        |> BackendTask.andThen
             (\rawBody ->
                 rawBody
                     |> Markdown.Parser.parse
-                    |> Result.mapError (\_ -> "Couldn't parse markdown.")
-                    |> DataSource.fromResult
+                    |> Result.mapError (\_ -> FatalError.fromString "Couldn't parse markdown.")
+                    |> BackendTask.fromResult
             )
     )
-        |> DataSource.andThen
+        |> BackendTask.andThen
             (\blocks ->
                 blocks
                     |> Markdown.Renderer.render renderer
-                    |> DataSource.fromResult
+                    |> Result.mapError (\_ -> FatalError.fromString "Couldn't render markdown.")
+                    |> BackendTask.fromResult
             )
 
 
 withFrontmatter :
-    (frontmatter -> List view -> value)
+    (frontmatter -> List Block -> value)
     -> Decoder frontmatter
-    -> Markdown.Renderer.Renderer view
+    -- -> Markdown.Renderer.Renderer view
     -> String
-    -> DataSource value
-withFrontmatter constructor frontmatterDecoder renderer filePath =
-    DataSource.map2 constructor
-        (StaticFile.onlyFrontmatter
-            frontmatterDecoder
-            filePath
+    -> BackendTask FatalError value
+withFrontmatter constructor frontmatterDecoder filePath =
+    BackendTask.map2 constructor
+        (BackendTask.allowFatal <|
+            StaticFile.onlyFrontmatter
+                frontmatterDecoder
+                filePath
         )
-        ((StaticFile.bodyWithoutFrontmatter
+        (StaticFile.bodyWithoutFrontmatter
             filePath
-            |> DataSource.andThen
+            |> BackendTask.allowFatal
+            |> BackendTask.andThen
                 (\rawBody ->
                     rawBody
                         |> Markdown.Parser.parse
-                        |> Result.mapError (\_ -> "Couldn't parse markdown.")
-                        |> DataSource.fromResult
+                        |> Result.mapError (\_ -> FatalError.fromString "Couldn't parse markdown.")
+                        |> BackendTask.fromResult
                 )
-         )
-            |> DataSource.andThen
-                (\blocks ->
-                    blocks
-                        |> Markdown.Renderer.render renderer
-                        |> DataSource.fromResult
-                )
+         -- |> BackendTask.andThen
+         --     (\blocks ->
+         --         blocks
+         --             |> Markdown.Renderer.render renderer
+         --             |> Result.mapError (\_ -> FatalError.fromString "Couldn't render markdown.")
+         --             |> BackendTask.fromResult
+         --     )
         )

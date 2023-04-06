@@ -1,24 +1,24 @@
 module Route.Index exposing (ActionData, Data, Model, Msg, route)
 
+import BackendTask exposing (BackendTask)
+import BackendTask.File as File
+import BackendTask.Glob as Glob
 import Css exposing (..)
 import Css.Extra exposing (orNoStyle, palette)
 import Css.Media as Media exposing (only, screen, withMedia)
 import Css.Palette exposing (button, buttonOnHover)
-import DataSource exposing (DataSource)
-import DataSource.File as File
-import DataSource.Glob as Glob
 import Date exposing (Date)
+import FatalError exposing (FatalError)
 import Head
 import Head.Seo as Seo
 import Html.Styled exposing (Attribute, Html, a, h1, li, section, span, text, ul)
 import Html.Styled.Attributes as Attributes exposing (css, href, rel)
 import Json.Decode as Decode exposing (Decoder)
-import Pages.Msg
-import Pages.PageUrl exposing (PageUrl)
 import Pages.Url
+import PagesMsg exposing (PagesMsg)
 import Path
 import Route exposing (Route)
-import RouteBuilder exposing (StatelessRoute, StaticPayload)
+import RouteBuilder exposing (App, StatelessRoute)
 import Shared
 import View exposing (View)
 
@@ -52,7 +52,7 @@ route =
         |> RouteBuilder.buildNoState { view = view }
 
 
-data : DataSource Data
+data : BackendTask FatalError Data
 data =
     allMetadata
 
@@ -63,29 +63,29 @@ type alias BlogPost =
     }
 
 
-blogPostsGlob : DataSource.DataSource (List { filePath : String, slug : String })
+blogPostsGlob : BackendTask FatalError (List { filePath : String, slug : String })
 blogPostsGlob =
     Glob.succeed BlogPost
         |> Glob.captureFilePath
         |> Glob.match (Glob.literal "content/blog/")
         |> Glob.capture Glob.wildcard
         |> Glob.match (Glob.literal ".md")
-        |> Glob.toDataSource
+        |> Glob.toBackendTask
 
 
-allMetadata : DataSource (List ( Route, ArticleMetadata ))
+allMetadata : BackendTask FatalError (List ( Route, ArticleMetadata ))
 allMetadata =
     blogPostsGlob
-        |> DataSource.map
+        |> BackendTask.map
             (List.map
                 (\{ filePath, slug } ->
-                    DataSource.map2 Tuple.pair
-                        (DataSource.succeed <| Route.Blog__Slug_ { slug = slug })
-                        (File.onlyFrontmatter frontmatterDecoder filePath)
+                    BackendTask.map2 Tuple.pair
+                        (BackendTask.succeed <| Route.Blog__Slug_ { slug = slug })
+                        (BackendTask.allowFatal <| File.onlyFrontmatter frontmatterDecoder filePath)
                 )
             )
-        |> DataSource.resolve
-        |> DataSource.map
+        |> BackendTask.resolve
+        |> BackendTask.map
             (List.filterMap
                 (\( route_, metadata ) ->
                     if metadata.draft then
@@ -132,7 +132,9 @@ frontmatterDecoder =
         )
 
 
-head : StaticPayload Data ActionData RouteParams -> List Head.Tag
+head :
+    App Data ActionData RouteParams
+    -> List Head.Tag
 head app =
     Seo.summary
         { canonicalUrlOverride = Nothing
@@ -151,11 +153,10 @@ head app =
 
 
 view :
-    Maybe PageUrl
+    App Data ActionData RouteParams
     -> Shared.Model
-    -> StaticPayload Data ActionData RouteParams
-    -> View (Pages.Msg.Msg Msg)
-view maybeUrl sharedModel app =
+    -> View (PagesMsg Msg)
+view app shared =
     { title = "y047aka.space"
     , body =
         [ topSection

@@ -1,6 +1,7 @@
 module Site exposing (config)
 
-import DataSource exposing (DataSource)
+import BackendTask exposing (BackendTask)
+import FatalError exposing (FatalError)
 import Head
 import SiteConfig exposing (SiteConfig)
 
@@ -12,8 +13,9 @@ config =
     }
 
 
-head : DataSource (List Head.Tag)
+head : BackendTask FatalError (List Head.Tag)
 head =
-    [ Head.sitemapLink "/sitemap.xml"
+    [ Head.metaName "viewport" (Head.raw "width=device-width,initial-scale=1")
+    , Head.sitemapLink "/sitemap.xml"
     ]
-        |> DataSource.succeed
+        |> BackendTask.succeed

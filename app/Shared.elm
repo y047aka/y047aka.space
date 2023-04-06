@@ -1,13 +1,14 @@
 module Shared exposing (Data, Model, Msg(..), SharedMsg(..), template)
 
+import BackendTask exposing (BackendTask)
 import Css exposing (..)
 import Css.Extra exposing (palette)
 import Css.Global exposing (global)
 import Css.Media as Media exposing (only, screen, withMedia)
 import Css.Palette as Palette
 import Css.Reset exposing (ress)
-import DataSource
 import Effect exposing (Effect)
+import FatalError exposing (FatalError)
 import Html
 import Html.Styled exposing (Html, a, footer, h1, header, main_, p, text, toUnstyled)
 import Html.Styled.Attributes exposing (css, href)
@@ -77,9 +78,9 @@ subscriptions _ _ =
     Sub.none
 
 
-data : DataSource.DataSource Data
+data : BackendTask FatalError Data
 data =
-    DataSource.succeed ()
+    BackendTask.succeed ()
 
 
 view :

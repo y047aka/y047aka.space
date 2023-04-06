@@ -1,24 +1,26 @@
 module Route.Blog.Slug_ exposing (ActionData, Data, Model, Msg, route)
 
+import BackendTask exposing (BackendTask)
+import BackendTask.Glob as Glob
 import Css exposing (..)
 import Css.Extra exposing (orNoStyle)
 import Css.Global exposing (children)
 import Css.Media as Media exposing (only, screen, withMedia)
 import Css.Palette as Palette
-import DataSource exposing (DataSource)
-import DataSource.Glob as Glob
 import Date exposing (Date)
+import FatalError exposing (FatalError)
 import Head
 import Head.Seo as Seo
 import Html.Styled exposing (Html, div, h1, header, text)
 import Html.Styled.Attributes exposing (css)
 import Json.Decode as Decode exposing (Decoder)
+import Markdown.Block exposing (Block)
 import Markdown.Customized
+import Markdown.Renderer
 import MarkdownCodec
-import Pages.Msg
-import Pages.PageUrl exposing (PageUrl)
 import Pages.Url
-import RouteBuilder exposing (StatelessRoute, StaticPayload)
+import PagesMsg exposing (PagesMsg)
+import RouteBuilder exposing (App, StatelessRoute)
 import Shared
 import View exposing (View)
 
@@ -51,21 +53,21 @@ type alias BlogPost =
     }
 
 
-pages : DataSource (List RouteParams)
+pages : BackendTask FatalError (List RouteParams)
 pages =
     Glob.succeed BlogPost
         |> Glob.captureFilePath
         |> Glob.match (Glob.literal "content/blog/")
         |> Glob.capture Glob.wildcard
         |> Glob.match (Glob.literal ".md")
-        |> Glob.toDataSource
-        |> DataSource.map
+        |> Glob.toBackendTask
+        |> BackendTask.map
             (List.map (\globData -> { slug = globData.slug }))
 
 
 type alias Data =
     { metadata : ArticleMetadata
-    , body : List (Html (Pages.Msg.Msg Msg))
+    , body : List Block
     }
 
 
@@ -81,11 +83,11 @@ type alias ActionData =
     {}
 
 
-data : RouteParams -> DataSource Data
+data : RouteParams -> BackendTask FatalError Data
 data routeParams =
     MarkdownCodec.withFrontmatter Data
         frontmatterDecoder
-        Markdown.Customized.renderer
+        -- Markdown.Customized.renderer
         ("content/blog/" ++ routeParams.slug ++ ".md")
 
 
@@ -117,9 +119,9 @@ frontmatterDecoder =
 
 
 head :
-    StaticPayload Data ActionData RouteParams
+    App Data ActionData RouteParams
     -> List Head.Tag
-head static =
+head app =
     Seo.summary
         { canonicalUrlOverride = Nothing
         , siteName = "y047aka.space"
@@ -129,20 +131,19 @@ head static =
             , dimensions = Nothing
             , mimeType = Nothing
             }
-        , description = static.data.metadata.description
+        , description = app.data.metadata.description
         , locale = Nothing
-        , title = static.data.metadata.title
+        , title = app.data.metadata.title
         }
         |> Seo.website
 
 
 view :
-    Maybe PageUrl
+    App Data ActionData RouteParams
     -> Shared.Model
-    -> StaticPayload Data ActionData RouteParams
-    -> View (Pages.Msg.Msg Msg)
-view maybeUrl sharedModel static =
-    { title = static.data.metadata.title ++ " - y047aka.space"
+    -> View (PagesMsg Msg)
+view app sharedModel =
+    { title = app.data.metadata.title ++ " - y047aka.space"
     , body =
         [ div
             [ css
@@ -164,7 +165,7 @@ view maybeUrl sharedModel static =
                         , fontWeight (int 600)
                         ]
                     ]
-                    [ text static.data.metadata.title ]
+                    [ text app.data.metadata.title ]
                 , div
                     [ css
                         [ orNoStyle Palette.default.optionalColor color
@@ -177,9 +178,11 @@ view maybeUrl sharedModel static =
                             ]
                         ]
                     ]
-                    [ publishedDateView static.data.metadata ]
+                    [ publishedDateView app.data.metadata ]
                 ]
-            , div [ css Markdown.Customized.markdownStyles ] static.data.body
+            , div [ css Markdown.Customized.markdownStyles ] <|
+                Result.withDefault [] <|
+                    Markdown.Renderer.render Markdown.Customized.renderer app.data.body
             ]
         ]
     }
