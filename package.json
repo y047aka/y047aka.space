@@ -4,12 +4,12 @@
     "build": "elm-pages build"
   },
   "devDependencies": {
-    "elm": "^0.19.1-5",
-    "elm-codegen": "^0.3.0",
-    "elm-format": "^0.8.5",
+    "elm": "^0.19.1-6",
+    "elm-codegen": "^0.5.3",
+    "elm-format": "^0.8.7",
     "elm-optimize-level-2": "^0.3.5",
     "elm-pages": "^3.0.0-beta.33",
-    "elm-review": "2.8.5",
-    "vite": "^4.1.1"
+    "elm-review": "^2.8.5",
+    "vite": "^5.3.2"
   }
 }
