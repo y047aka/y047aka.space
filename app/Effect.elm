@@ -7,7 +7,6 @@ module Effect exposing (Effect(..), batch, fromCmd, map, none, perform)
 -}
 
 import Browser.Navigation
-import Form.FormData exposing (FormData)
 import Http
 import Pages.Fetcher
 import Url exposing (Url)
@@ -55,12 +54,12 @@ map fn effect =
 {-| -}
 perform :
     { fetchRouteData :
-        { data : Maybe FormData
+        { data : Maybe a
         , toMsg : Result Http.Error Url -> pageMsg
         }
         -> Cmd msg
     , submit :
-        { values : FormData
+        { values : b
         , toMsg : Result Http.Error Url -> pageMsg
         }
         -> Cmd msg

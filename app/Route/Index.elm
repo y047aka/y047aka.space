@@ -16,7 +16,6 @@ import Html.Styled.Attributes as Attributes exposing (css, href, rel)
 import Json.Decode as Decode exposing (Decoder)
 import Pages.Url
 import PagesMsg exposing (PagesMsg)
-import Path
 import Route exposing (Route)
 import RouteBuilder exposing (App, StatelessRoute)
 import Shared
@@ -140,7 +139,7 @@ head app =
         { canonicalUrlOverride = Nothing
         , siteName = "y047aka.space"
         , image =
-            { url = [ "images", "icon-png.png" ] |> Path.join |> Pages.Url.fromPath
+            { url = Pages.Url.external "TODO"
             , alt = "y047aka.space logo"
             , dimensions = Nothing
             , mimeType = Nothing
