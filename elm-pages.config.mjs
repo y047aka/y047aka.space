@@ -1,10 +1,7 @@
 import { defineConfig } from "vite";
 
-import adapter from "./adapter.mjs";
-
 export default {
   vite: defineConfig({}),
-  adapter,
   headTagsTemplate(context) {
     return `
 <link rel="stylesheet" href="/style.css" />

@@ -14,9 +14,9 @@ import Html.Styled exposing (Html, a, footer, h1, header, main_, p, text, toUnst
 import Html.Styled.Attributes exposing (css, href)
 import Pages.Flags
 import Pages.PageUrl exposing (PageUrl)
-import UrlPath exposing (UrlPath)
 import Route exposing (Route)
 import SharedTemplate exposing (SharedTemplate)
+import UrlPath exposing (UrlPath)
 import View exposing (View)
 
 
