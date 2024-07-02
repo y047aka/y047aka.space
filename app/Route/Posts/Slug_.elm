@@ -15,7 +15,7 @@ import Html.Styled exposing (Html, div, h1, header, text)
 import Html.Styled.Attributes exposing (css)
 import Json.Decode as Decode exposing (Decoder)
 import Markdown.Block exposing (Block)
-import Markdown.Customized
+import MarkdownRenderer
 import Markdown.Renderer
 import Plugins.MarkdownCodec as MarkdownCodec
 import Pages.Url
@@ -87,7 +87,7 @@ data : RouteParams -> BackendTask FatalError Data
 data routeParams =
     MarkdownCodec.withFrontmatter Data
         frontmatterDecoder
-        Markdown.Customized.renderer
+        MarkdownRenderer.renderer
         ("content/posts/" ++ routeParams.slug ++ ".md")
 
 
@@ -180,9 +180,9 @@ view app sharedModel =
                     ]
                     [ publishedDateView app.data.metadata ]
                 ]
-            , div [ css Markdown.Customized.markdownStyles ] <|
+            , div [ css MarkdownRenderer.markdownStyles ] <|
                 Result.withDefault [] <|
-                    Markdown.Renderer.render Markdown.Customized.renderer app.data.body
+                    Markdown.Renderer.render MarkdownRenderer.renderer app.data.body
             ]
         ]
     }

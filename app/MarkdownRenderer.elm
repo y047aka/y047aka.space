@@ -1,4 +1,4 @@
-module Markdown.Customized exposing (markdownStyles, markdownToHtml, renderer)
+module MarkdownRenderer exposing (markdownStyles, markdownToHtml, renderer)
 
 import Css exposing (..)
 import Css.Extra exposing (palette)
