@@ -17,7 +17,7 @@ import Json.Decode as Decode exposing (Decoder)
 import Markdown.Block exposing (Block)
 import Markdown.Customized
 import Markdown.Renderer
-import MarkdownCodec
+import Plugins.MarkdownCodec as MarkdownCodec
 import Pages.Url
 import PagesMsg exposing (PagesMsg)
 import RouteBuilder exposing (App, StatelessRoute)

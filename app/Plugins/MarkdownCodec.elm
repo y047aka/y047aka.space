@@ -1,4 +1,4 @@
-module MarkdownCodec exposing (isPlaceholder, noteTitle, titleAndDescription, withFrontmatter, withoutFrontmatter)
+module Plugins.MarkdownCodec exposing (isPlaceholder, noteTitle, titleAndDescription, withFrontmatter, withoutFrontmatter)
 
 import BackendTask exposing (BackendTask)
 import BackendTask.File as StaticFile
@@ -9,7 +9,7 @@ import List.Extra
 import Markdown.Block as Block exposing (Block)
 import Markdown.Parser
 import Markdown.Renderer
-import MarkdownExtra
+import Plugins.MarkdownExtra
 
 
 isPlaceholder : String -> BackendTask FatalError (Maybe ())
@@ -153,7 +153,7 @@ findDescription blocks =
             (\block ->
                 case block of
                     Block.Paragraph inlines ->
-                        Just (MarkdownExtra.extractInlineText inlines)
+                        Just (Plugins.MarkdownExtra.extractInlineText inlines)
 
                     _ ->
                         Nothing

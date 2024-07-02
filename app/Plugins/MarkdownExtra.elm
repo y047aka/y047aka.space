@@ -1,4 +1,4 @@
-module MarkdownExtra exposing (extractInlineText)
+module Plugins.MarkdownExtra exposing (extractInlineText)
 
 import Markdown.Block exposing (Block(..), Html(..), Inline(..), ListItem(..))
 
