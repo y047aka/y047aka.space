@@ -9,7 +9,7 @@ import List.Extra
 import Markdown.Block as Block exposing (Block)
 import Markdown.Parser
 import Markdown.Renderer
-import Plugins.MarkdownExtra
+import Plugins.MarkdownExtra as MarkdownExtra
 
 
 isPlaceholder : String -> BackendTask FatalError (Maybe ())
@@ -74,7 +74,10 @@ noteTitle filePath =
                                                     )
                                                     blocks
                                             )
-                                        |> Result.andThen (Result.fromMaybe <| FatalError.fromString <| "Expected to find an H1 heading for page " ++ filePath)
+                                        |> Result.andThen
+                                            (Result.fromMaybe <|
+                                                FatalError.fromString ("Expected to find an H1 heading for page " ++ filePath)
+                                            )
                                         |> BackendTask.fromResult
                                 )
                         )
@@ -153,7 +156,7 @@ findDescription blocks =
             (\block ->
                 case block of
                     Block.Paragraph inlines ->
-                        Just (Plugins.MarkdownExtra.extractInlineText inlines)
+                        Just (MarkdownExtra.extractInlineText inlines)
 
                     _ ->
                         Nothing
@@ -163,16 +166,16 @@ findDescription blocks =
 
 titleFromFrontmatter : String -> BackendTask FatalError (Maybe String)
 titleFromFrontmatter filePath =
-    BackendTask.allowFatal <|
-        StaticFile.onlyFrontmatter
-            (Json.Decode.Extra.optionalField "title" Decode.string)
-            filePath
+    StaticFile.onlyFrontmatter
+        (Json.Decode.Extra.optionalField "title" Decode.string)
+        filePath
+        |> BackendTask.allowFatal
 
 
 withoutFrontmatter :
     Markdown.Renderer.Renderer view
     -> String
-    -> BackendTask FatalError (List view)
+    -> BackendTask FatalError (List Block)
 withoutFrontmatter renderer filePath =
     (filePath
         |> StaticFile.bodyWithoutFrontmatter
@@ -189,7 +192,10 @@ withoutFrontmatter renderer filePath =
             (\blocks ->
                 blocks
                     |> Markdown.Renderer.render renderer
-                    |> Result.mapError (\_ -> FatalError.fromString "Couldn't render markdown.")
+                    -- we don't want to encode the HTML since it contains functions so it's not serializable
+                    -- but we can at least make sure there are no errors turning it into HTML before encoding it
+                    |> Result.map (\_ -> blocks)
+                    |> Result.mapError (\error -> FatalError.fromString error)
                     |> BackendTask.fromResult
             )
 
@@ -197,15 +203,15 @@ withoutFrontmatter renderer filePath =
 withFrontmatter :
     (frontmatter -> List Block -> value)
     -> Decoder frontmatter
-    -- -> Markdown.Renderer.Renderer view
+    -> Markdown.Renderer.Renderer view
     -> String
     -> BackendTask FatalError value
-withFrontmatter constructor frontmatterDecoder filePath =
+withFrontmatter constructor frontmatterDecoder_ renderer filePath =
     BackendTask.map2 constructor
-        (BackendTask.allowFatal <|
-            StaticFile.onlyFrontmatter
-                frontmatterDecoder
-                filePath
+        (StaticFile.onlyFrontmatter
+            frontmatterDecoder_
+            filePath
+            |> BackendTask.allowFatal
         )
         (StaticFile.bodyWithoutFrontmatter
             filePath
@@ -217,11 +223,14 @@ withFrontmatter constructor frontmatterDecoder filePath =
                         |> Result.mapError (\_ -> FatalError.fromString "Couldn't parse markdown.")
                         |> BackendTask.fromResult
                 )
-         -- |> BackendTask.andThen
-         --     (\blocks ->
-         --         blocks
-         --             |> Markdown.Renderer.render renderer
-         --             |> Result.mapError (\_ -> FatalError.fromString "Couldn't render markdown.")
-         --             |> BackendTask.fromResult
-         --     )
+            |> BackendTask.andThen
+                (\blocks ->
+                    blocks
+                        |> Markdown.Renderer.render renderer
+                        -- we don't want to encode the HTML since it contains functions so it's not serializable
+                        -- but we can at least make sure there are no errors turning it into HTML before encoding it
+                        |> Result.map (\_ -> blocks)
+                        |> Result.mapError (\error -> FatalError.fromString error)
+                        |> BackendTask.fromResult
+                )
         )

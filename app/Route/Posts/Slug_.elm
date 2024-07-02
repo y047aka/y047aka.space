@@ -87,7 +87,7 @@ data : RouteParams -> BackendTask FatalError Data
 data routeParams =
     MarkdownCodec.withFrontmatter Data
         frontmatterDecoder
-        -- Markdown.Customized.renderer
+        Markdown.Customized.renderer
         ("content/posts/" ++ routeParams.slug ++ ".md")
 
 
