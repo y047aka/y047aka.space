@@ -1,21 +1,22 @@
-module Shared exposing (Data, Model, Msg(..), template)
+module Shared exposing (Data, Model, Msg(..), SharedMsg(..), template)
 
-import Browser.Navigation
+import BackendTask exposing (BackendTask)
 import Css exposing (..)
 import Css.Extra exposing (palette)
 import Css.Global exposing (global)
 import Css.Media as Media exposing (only, screen, withMedia)
 import Css.Palette as Palette
 import Css.Reset exposing (ress)
-import DataSource
+import Effect exposing (Effect)
+import FatalError exposing (FatalError)
 import Html
-import Html.Styled exposing (..)
+import Html.Styled exposing (Html, a, footer, h1, header, main_, p, text, toUnstyled)
 import Html.Styled.Attributes exposing (css, href)
 import Pages.Flags
 import Pages.PageUrl exposing (PageUrl)
-import Path exposing (Path)
 import Route exposing (Route)
 import SharedTemplate exposing (SharedTemplate)
+import UrlPath exposing (UrlPath)
 import View exposing (View)
 
 
@@ -26,74 +27,72 @@ template =
     , view = view
     , data = data
     , subscriptions = subscriptions
-    , onPageChange = Just OnPageChange
+    , onPageChange = Nothing
     }
 
 
 type Msg
-    = OnPageChange
-        { path : Path
-        , query : Maybe String
-        , fragment : Maybe String
-        }
+    = SharedMsg SharedMsg
 
 
 type alias Data =
     ()
 
 
+type SharedMsg
+    = NoOp
+
+
 type alias Model =
-    { showMobileMenu : Bool
-    }
+    {}
 
 
 init :
-    Maybe Browser.Navigation.Key
-    -> Pages.Flags.Flags
+    Pages.Flags.Flags
     ->
         Maybe
             { path :
-                { path : Path
+                { path : UrlPath
                 , query : Maybe String
                 , fragment : Maybe String
                 }
             , metadata : route
             , pageUrl : Maybe PageUrl
             }
-    -> ( Model, Cmd Msg )
-init navigationKey flags maybePagePath =
-    ( { showMobileMenu = False }
-    , Cmd.none
+    -> ( Model, Effect Msg )
+init flags maybePagePath =
+    ( {}
+    , Effect.none
     )
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+update : Msg -> Model -> ( Model, Effect Msg )
 update msg model =
     case msg of
-        OnPageChange _ ->
-            ( { model | showMobileMenu = False }, Cmd.none )
+        SharedMsg globalMsg ->
+            ( model, Effect.none )
 
 
-subscriptions : Path -> Model -> Sub Msg
+subscriptions : UrlPath -> Model -> Sub Msg
 subscriptions _ _ =
     Sub.none
 
 
-data : DataSource.DataSource Data
+data : BackendTask FatalError Data
 data =
-    DataSource.succeed ()
+    BackendTask.succeed ()
 
 
 view :
     Data
     ->
-        { path : Path
+        { path : UrlPath
         , route : Maybe Route
         }
     -> Model
     -> (Msg -> msg)
     -> View msg
-    -> { body : Html.Html msg, title : String }
+    -> { body : List (Html.Html msg), title : String }
 view sharedData page model toMsg pageView =
     let
         globalCustomStyles =
@@ -111,8 +110,7 @@ view sharedData page model toMsg pageView =
         , main_ [] pageView.body
         , siteFooter
         ]
-            |> div []
-            |> toUnstyled
+            |> List.map toUnstyled
     }
 
 

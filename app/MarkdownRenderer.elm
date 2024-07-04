@@ -1,52 +1,53 @@
-module Markdown.Customized exposing (markdownStyles, markdownToHtml, renderer)
+module MarkdownRenderer exposing (markdownStyles, renderer)
 
 import Css exposing (..)
 import Css.Extra exposing (palette)
-import Css.Global exposing (adjacentSiblings, blockquote, children, code, descendants, details, dl, each, ol, p, selector, td, th, tr, ul)
+import Css.Global exposing (adjacentSiblings, children,blockquote, code, descendants, details, dl, each, ol, p, selector, td, th, tr, ul)
 import Css.Palette exposing (textLink, textLinkVisited)
-import Html.Styled as Html exposing (Attribute, Html, a, h1, h2, h3, h4, h5, h6, hr, text)
+import Html.Styled as Html exposing ( Html, a, h1, h2, h3, h4, h5, h6, hr)
 import Html.Styled.Attributes as Attr exposing (css, rel)
-import Markdown.Block as Block exposing (Alignment(..), HeadingLevel, ListItem(..), Task(..))
+import Markdown.Block as Block exposing (HeadingLevel, ListItem)
 import Markdown.Html exposing (withAttribute)
-import Markdown.Parser exposing (deadEndToString)
 import Markdown.Renderer exposing (Renderer)
 import Svg.Styled as Svg
 import Svg.Styled.Attributes
+import SyntaxHighlight
 
 
-markdownToHtml : List (Attribute msg) -> String -> Html msg
-markdownToHtml attributes markdown =
-    case
-        markdown
-            |> Markdown.Parser.parse
-            |> Result.mapError (\error -> error |> List.map deadEndToString |> String.join "\n")
-            |> Result.andThen (\ast -> Markdown.Renderer.render renderer ast)
-    of
-        Ok rendered ->
-            Html.div (css markdownStyles :: attributes) rendered
+-- markdownToHtml : List (Attribute msg) -> String -> Html msg
+-- markdownToHtml attributes markdown =
+--     case
+--         markdown
+--             |> Markdown.Parser.parse
+--             |> Result.mapError (\error -> error |> List.map deadEndToString |> String.join "\n")
+--             |> Result.andThen (\ast -> Markdown.Renderer.render renderer ast)
+--     of
+--         Ok rendered ->
+--             Html.div (css markdownStyles :: attributes) rendered
 
-        Err errors ->
-            text errors
+--         Err errors ->
+--             text errors
+
 
 
 renderer : Renderer (Html msg)
 renderer =
     { heading = headingRenderer
     , paragraph = Html.p []
-    , hardLineBreak = Html.br [] []
-    , blockQuote = blockQuoteRenderer
+    , thematicBreak = thematicBreakRenderer
+    , text = Html.text
     , strong = Html.strong []
     , emphasis = Html.em []
     , strikethrough = Html.del []
+    , blockQuote = blockQuoteRenderer
     , codeSpan = codeSpanRenderer
     , link = linkRenderer
+    , hardLineBreak = Html.br [] []
     , image = imageRenderer
-    , text = Html.text
     , unorderedList = unorderedListRenderer
     , orderedList = orderedListRenderer
     , html = htmlRenderer
     , codeBlock = codeBlockRenderer
-    , thematicBreak = thematicBreakRenderer
     , table = tableRenderer
     , tableHeader = Html.thead []
     , tableBody = Html.tbody []
@@ -54,23 +55,47 @@ renderer =
     , tableHeaderCell =
         \maybeAlignment ->
             let
-                attrs =
+                styles =
                     maybeAlignment
-                        |> Maybe.map (\alignment -> alignmentStyle alignment)
+                        |> Maybe.map
+                            (\alignment ->                               
+                                case alignment of
+                                    Block.AlignLeft ->
+                                        left
+
+                                    Block.AlignCenter ->
+                                        center
+
+                                    Block.AlignRight ->
+                                        right
+                            )
+                        |> Maybe.map textAlign
                         |> Maybe.map List.singleton
                         |> Maybe.withDefault []
             in
-            Html.th [ css attrs ]
+            Html.th [ css styles ]
     , tableCell =
         \maybeAlignment ->
             let
-                attrs =
+                styles =
                     maybeAlignment
-                        |> Maybe.map (\alignment -> alignmentStyle alignment)
+                        |> Maybe.map
+                            (\alignment ->
+                                case alignment of
+                                    Block.AlignLeft ->
+                                        left
+
+                                    Block.AlignCenter ->
+                                        center
+
+                                    Block.AlignRight ->
+                                        right
+                            )
+                        |> Maybe.map textAlign
                         |> Maybe.map List.singleton
                         |> Maybe.withDefault []
             in
-            Html.td [ css attrs ]
+             Html.th [ css styles ]
     }
 
 
@@ -142,6 +167,19 @@ headingRenderer { level, children } =
                 []
                 children
 
+
+thematicBreakRenderer : Html msg
+thematicBreakRenderer =
+    Html.styled hr
+        [ height zero
+        , padding zero
+        , margin2 (px 24) zero
+        , borderTopWidth (px 1)
+        , borderStyle solid
+        , borderColor (hex "#e1e4e8")
+        ]
+        []
+        []
 
 blockQuoteRenderer : List (Html msg) -> Html msg
 blockQuoteRenderer =
@@ -365,24 +403,27 @@ htmlRenderer =
         ]
 
 
-codeBlockRenderer : { body : String, language : Maybe String } -> Html msg
-codeBlockRenderer { body } =
-    Html.pre []
-        [ Html.code [] [ text body ] ]
+--code : String -> Element msg
+--code snippet =
+--    Element.el
+--        [ Element.Background.color
+--            (Element.rgba255 50 50 50 0.07)
+--        , Element.Border.rounded 2
+--        , Element.paddingXY 5 3
+--        , Font.family [ Font.typeface "Roboto Mono", Font.monospace ]
+--        ]
+--        (Element.text snippet)
+--
+--
 
 
-thematicBreakRenderer : Html msg
-thematicBreakRenderer =
-    Html.styled hr
-        [ height zero
-        , padding zero
-        , margin2 (px 24) zero
-        , borderTopWidth (px 1)
-        , borderStyle solid
-        , borderColor (hex "#e1e4e8")
-        ]
-        []
-        []
+codeBlockRenderer : { body : String, language : Maybe String } -> Html.Html msg
+codeBlockRenderer details =
+    SyntaxHighlight.elm details.body
+        |> Result.map (SyntaxHighlight.toBlockHtml (Just 1))
+        |> Result.map Html.fromUnstyled
+        |> Result.withDefault (Html.pre [] [ Html.code [] [ Html.text details.body ] ])
+
 
 
 tableRenderer : List (Html msg) -> Html msg
@@ -409,20 +450,6 @@ tableRenderer =
             ]
         ]
         []
-
-
-alignmentStyle : Alignment -> Style
-alignmentStyle alignment =
-    textAlign <|
-        case alignment of
-            AlignLeft ->
-                left
-
-            AlignCenter ->
-                center
-
-            AlignRight ->
-                right
 
 
 {-| Implemented with reference to [github-markdown-css](https://github.com/sindresorhus/github-markdown-css).
