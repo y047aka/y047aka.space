@@ -13,7 +13,6 @@ app.all(
         <body>
           <header>
             <a href="/">top</a> &nbsp;
-            <a href="/foo">foo</a> &nbsp;
             <a href="/posts">posts</a>
           </header>
           <main>{children}</main>
@@ -25,10 +24,6 @@ app.all(
 
 app.get('/', (c) => {
   return c.render(<h1>Hello Hono🔥</h1>)
-})
-
-app.get('/foo', (c) => {
-  return c.render(<h1>Foo</h1>)
 })
 
 type Post = {
