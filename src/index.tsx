@@ -1,6 +1,7 @@
 import { Hono } from 'hono'
 import { ssgParams } from 'hono/ssg'
 import { jsxRenderer } from 'hono/jsx-renderer'
+import { getPosts } from "./lib/post"
 
 const app = new Hono()
 
@@ -25,12 +26,7 @@ app.all(
 app.get('/', (c) => {
   return c.render(<h1>Hello Hono🔥</h1>)
 })
-
-type Post = {
-  id: string
-}
-
-const posts: Post[] = [{ id: 'hello' }, { id: 'morning' }, { id: 'night' }]
+const posts = await getPosts()
 
 app.get('/posts', (c) => {
   return c.render(
@@ -38,7 +34,7 @@ app.get('/posts', (c) => {
       {posts.map((post) => {
         return (
           <li>
-            <a href={`/posts/${post.id}`}>{post.id}</a>
+            <a href={`/posts/${post.slug}`}>{post.title}</a>
           </li>
         )
       })}
@@ -47,10 +43,21 @@ app.get('/posts', (c) => {
 })
 
 app.get(
-  '/posts/:id',
+  '/posts/:slug',
   ssgParams(() => posts),
   (c) => {
-    return c.render(<h1>{c.req.param('id')}</h1>)
+    const post = posts.find((p) => p.slug === c.req.param('slug'))
+    if (!post) {
+      return c.redirect("/404")
+    }
+    return c.render(
+      <>
+        <h1>{post.title}</h1>
+        <div>投稿日: {post.pubDate}</div>
+        <hr />
+        <div dangerouslySetInnerHTML={{ __html: post.body }}></div>
+      </>
+    )
   }
 )
 

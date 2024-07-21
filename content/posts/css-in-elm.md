@@ -2,7 +2,7 @@
 {
   "title": "Elm + CSS の検討と実践記録",
   "description": "",
-  "published": "2020-05-16",
+  "pubDate": "2020-05-16",
 }
 ---
 

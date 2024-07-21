@@ -2,7 +2,7 @@
 {
   "title": "Elm での開発用テンプレート elm-starfighter を作った",
   "description": "",
-  "published": "2019-07-06",
+  "pubDate": "2019-07-06",
   "updated": "2019-08-24",
 }
 ---
