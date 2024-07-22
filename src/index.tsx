@@ -14,7 +14,6 @@ app.all(
         <body>
           <header>
             <a href="/">top</a> &nbsp;
-            <a href="/posts">posts</a>
           </header>
           <main>{children}</main>
         </body>
@@ -24,11 +23,6 @@ app.all(
 )
 
 app.get('/', (c) => {
-  return c.render(<h1>Hello Hono🔥</h1>)
-})
-const posts = await getPosts()
-
-app.get('/posts', (c) => {
   return c.render(
     <ul>
       {posts.map((post) => {
@@ -41,6 +35,7 @@ app.get('/posts', (c) => {
     </ul>
   )
 })
+const posts = await getPosts()
 
 app.get(
   '/posts/:slug',
