@@ -1,7 +1,7 @@
 import { Hono } from 'hono'
 import { ssgParams } from 'hono/ssg'
 import { jsxRenderer } from 'hono/jsx-renderer'
-import { getPosts } from "./lib/post"
+import { getPosts } from './lib/post'
 
 const app = new Hono()
 
@@ -48,7 +48,7 @@ app.get(
   (c) => {
     const post = posts.find((p) => p.slug === c.req.param('slug'))
     if (!post) {
-      return c.redirect("/404")
+      return c.redirect('/404')
     }
     return c.render(
       <>
