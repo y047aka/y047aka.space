@@ -9,7 +9,7 @@ app.all(
   '*',
   jsxRenderer(({ children }) => {
     return (
-      <html>
+      <html lang="ja">
         <link href="/static/style.css" rel="stylesheet" />
         <body>
           <header>
@@ -50,7 +50,7 @@ app.get(
         <h1>{post.title}</h1>
         <div>投稿日: {post.pubDate}</div>
         <hr />
-        <div dangerouslySetInnerHTML={{ __html: post.body }}></div>
+        <div dangerouslySetInnerHTML={{ __html: post.body }} />
       </>
     )
   }
