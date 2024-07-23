@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
-import ssg from './src/vite-plugin'
 import devServer from '@hono/vite-dev-server'
+import ssg from '@hono/vite-ssg'
 
 const entry = 'src/index.tsx'
 
