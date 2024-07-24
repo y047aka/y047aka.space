@@ -1,38 +1,40 @@
 import { Hono } from 'hono'
 import { ssgParams } from 'hono/ssg'
+import { css } from 'hono/css'
 import { jsxRenderer } from 'hono/jsx-renderer'
+import { baseURL, siteName } from './lib/constants'
 import { getPosts } from './lib/post'
+import { Layout } from './components/Layout'
+import { LinkTile } from './components/LinkTile'
 
 const app = new Hono()
 
+type Metadata = {
+  title: string
+  url: string
+  description: string
+  ogImage?: string
+}
+
+let metadata: Metadata = {
+  title: siteName,
+  url: baseURL,
+  description: '',
+  ogImage: '/placeholder-social.jpeg'
+}
+
 app.all(
   '*',
-  jsxRenderer(({ children }) => {
-    return (
-      <html lang="ja">
-        <link href="/static/style.css" rel="stylesheet" />
-        <body>
-          <header>
-            <a href="/">top</a> &nbsp;
-          </header>
-          <main>{children}</main>
-        </body>
-      </html>
-    )
-  })
+  jsxRenderer(({ children }) => <Layout metadata={metadata}>{children}</Layout>)
 )
 
 app.get('/', (c) => {
   return c.render(
-    <ul>
+    <div class={css`display: flex; flex-direction: column; row-gap: 5px;`}>
       {posts.map((post) => {
-        return (
-          <li>
-            <a href={`/posts/${post.slug}`}>{post.title}</a>
-          </li>
-        )
+        return <LinkTile title={post.title} subTitle={post.pubDate} url={`/posts/${post.slug}`} />
       })}
-    </ul>
+    </div>
   )
 })
 const posts = await getPosts()
