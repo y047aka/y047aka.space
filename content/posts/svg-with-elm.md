@@ -53,7 +53,7 @@ SVG を構成しているのは要素と属性です。
 
 SVG として記述されたコードは…
 
-```SVG
+```html
 <svg width="120" height="120" viewBox="0 0 120 120">
     <rect x="10" y="10" width="100" height="100" rx="15" ry="15" fill="red" />
     <circle cx="50" cy="50" r="50" fill="blue" />
@@ -76,7 +76,7 @@ Ellie に同じサンプルコードを用意しました。
 
 [elm/svg sample | Ellie](https://ellie-app.com/5x8N5hXk3RFa1)
 
-```Elm
+```elm
 import Svg exposing (Svg, svg, rect, circle)
 import Svg.Attributes exposing (width, height, viewBox, x, y, rx, ry, cx, cy, r, fill)
 
@@ -112,7 +112,7 @@ main =
 
 ## モジュールのインポート
 
-```Elm
+```elm
 import Svg exposing (Svg, svg, rect, circle)
 import Svg.Attributes exposing (width, height, viewBox, x, y, rx, ry, cx, cy, r, fill)
 ```
@@ -128,7 +128,7 @@ import Svg.Attributes exposing (width, height, viewBox, x, y, rx, ry, cx, cy, r,
 
 Svg の関数は Html と同様に扱うことができます。
 
-```Elm
+```elm
 main : Svg msg
 main =
     svg
@@ -160,7 +160,7 @@ viewBox は見慣れない属性かもしれません。
 矩形は「くけい」と読みます。
 これを知っていると、次は「矩計（かなばかり）図」が読めなくなります。
 
-```Elm
+```elm
 rect
     [ x "10"
     , y "10"
@@ -187,7 +187,7 @@ rect
 
 ## 円を描く：circle
 
-```Elm
+```elm
 circle
     [ cx "50"
     , cy "50"

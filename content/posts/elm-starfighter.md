@@ -92,7 +92,7 @@ src
 
 ここに elm-starfighter のすべてがあります。webpack や Parcel の姿はなく、代わりに `npm scripts` が並んでいます。`elm make` コマンドや `elm-live` を使っていることが分かりますね。これから `scripts` を詳しく見ていきましょう。
 
-```package.json
+```json
 {
   "scripts": {
     "clean": "rimraf docs public",
