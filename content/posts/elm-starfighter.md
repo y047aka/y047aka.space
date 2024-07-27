@@ -1,10 +1,8 @@
 ---
-{
-  "title": "Elm での開発用テンプレート elm-starfighter を作った",
-  "description": "",
-  "pubDate": "2019-07-06",
-  "updated": "2019-08-24",
-}
+title: "Elm での開発用テンプレート elm-starfighter を作った"
+description: ""
+pubDate: "2019-07-06"
+updated: "2019-08-24"
 ---
 
 自作の Elm 開発用テンプレート「 [elm-starfighter](https://github.com/y047aka/elm-starfighter) 」が形になってきたので、その説明を書きます。

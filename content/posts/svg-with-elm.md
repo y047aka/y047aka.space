@@ -1,10 +1,8 @@
 ---
-{
-  "title": "elm/svgを使ってみよう（SVGの基礎知識）",
-  "description": "",
-  "pubDate": "2019-05-14",
-  "updated": "2019-05-15",
-}
+  title: "elm/svgを使ってみよう（SVGの基礎知識）"
+  description: ""
+  pubDate: "2019-05-14"
+  updated: "2019-05-15"
 ---
 
 この記事では、
