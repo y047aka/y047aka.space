@@ -1,9 +1,7 @@
 ---
-{
-  "title": "Elm + CSS の検討と実践記録",
-  "description": "",
-  "published": "2020-05-16",
-}
+title: "Elm + CSS の検討と実践記録"
+description: ""
+pubDate: "2020-05-16"
 ---
 
 Elm で CSS を扱う方法の検討と、[elm-css](https://package.elm-lang.org/packages/rtfeldman/elm-css/latest) に至るまでの記録です。

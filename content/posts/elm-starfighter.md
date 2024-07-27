@@ -1,10 +1,8 @@
 ---
-{
-  "title": "Elm での開発用テンプレート elm-starfighter を作った",
-  "description": "",
-  "published": "2019-07-06",
-  "updated": "2019-08-24",
-}
+title: "Elm での開発用テンプレート elm-starfighter を作った"
+description: ""
+pubDate: "2019-07-06"
+updated: "2019-08-24"
 ---
 
 自作の Elm 開発用テンプレート「 [elm-starfighter](https://github.com/y047aka/elm-starfighter) 」が形になってきたので、その説明を書きます。
@@ -92,7 +90,7 @@ src
 
 ここに elm-starfighter のすべてがあります。webpack や Parcel の姿はなく、代わりに `npm scripts` が並んでいます。`elm make` コマンドや `elm-live` を使っていることが分かりますね。これから `scripts` を詳しく見ていきましょう。
 
-```package.json
+```json
 {
   "scripts": {
     "clean": "rimraf docs public",
