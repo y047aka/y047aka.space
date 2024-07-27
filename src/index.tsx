@@ -7,6 +7,7 @@ import { getPosts } from './lib/post'
 import { Layout } from './components/Layout'
 import { LinkTile } from './components/LinkTile'
 import { MarkdownRenderer } from './components/MarkdownRenderer'
+import { TopSection } from './components/TopSection'
 
 const app = new Hono()
 
@@ -31,11 +32,13 @@ app.all(
 
 app.get('/', (c) => {
   return c.render(
-    <div class={css`display: flex; flex-direction: column; row-gap: 5px;`}>
-      {posts.map((post) => {
-        return <LinkTile title={post.title} subTitle={post.pubDate} url={`/posts/${post.slug}`} />
-      })}
-    </div>
+    <TopSection title="Blog Posts">
+      <div class={css`display: flex; flex-direction: column; row-gap: 5px;`}>
+        {posts.map((post) => {
+          return <LinkTile title={post.title} subTitle={post.pubDate} url={`/posts/${post.slug}`} />
+        })}
+      </div>
+    </TopSection>
   )
 })
 const posts = await getPosts()
