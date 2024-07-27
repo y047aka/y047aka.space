@@ -1,5 +1,5 @@
 import { Style, css } from 'hono/css'
-import { FC } from 'hono/jsx'
+import type { FC } from 'hono/jsx'
 import { owner, siteName } from '../lib/constants'
 
 export const Layout: FC = (props) => {

@@ -1,5 +1,5 @@
-import fs from 'fs'
-import path from 'path'
+import fs from 'node:fs'
+import path from 'node:path'
 import rehypeStringify from 'rehype-stringify'
 import { remark } from 'remark'
 import remarkExpressiveCode from 'remark-expressive-code'
@@ -29,9 +29,7 @@ export const getPosts = async () => {
       const content = fs.readFileSync(filePath, { encoding: 'utf-8' })
       const result = await remark()
         .use(remarkParse)
-        .use(remarkFrontmatter, [
-          { type: 'yaml', marker: '-', anywhere: false }
-        ])
+        .use(remarkFrontmatter, [{ type: 'yaml', marker: '-', anywhere: false }])
         .use(remarkExtractFrontmatter, {
           yaml: yaml.parse,
           name: 'frontMatter' // result.data 配下のキー名を決める

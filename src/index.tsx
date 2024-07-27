@@ -18,7 +18,7 @@ type Metadata = {
   ogImage?: string
 }
 
-let metadata: Metadata = {
+const metadata: Metadata = {
   title: siteName,
   url: baseURL,
   description: '',
