@@ -51,7 +51,7 @@ app.get(
     return c.render(
       <>
         <h1
-          class={css`font-family: "-apple-system" sans-serif; font-size: 24px; font-weight: 600;`}
+          class={css`font-family: "-apple-system", sans-serif; font-size: 24px; font-weight: 600;`}
         >
           {post.title}
         </h1>
