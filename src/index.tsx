@@ -67,8 +67,6 @@ app.get(
   }
 )
 
-app.get('/status', ssgParams(false), (c) => c.json({ ok: true }))
-
 app.get('/404', (c) => c.notFound())
 
 export default app
