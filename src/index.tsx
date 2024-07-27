@@ -6,6 +6,7 @@ import { baseURL, siteName } from './lib/constants'
 import { getPosts } from './lib/post'
 import { Layout } from './components/Layout'
 import { LinkTile } from './components/LinkTile'
+import { MarkdownRenderer } from './components/MarkdownRenderer'
 
 const app = new Hono()
 
@@ -49,10 +50,15 @@ app.get(
     }
     return c.render(
       <>
-        <h1>{post.title}</h1>
-        <div>投稿日: {post.pubDate}</div>
-        <hr />
-        <div dangerouslySetInnerHTML={{ __html: post.body }} />
+        <h1
+          class={css`font-family: "-apple-system" sans-serif; font-size: 24px; font-weight: 600;`}
+        >
+          {post.title}
+        </h1>
+        <div class={css`font-size: 14px; line-height: 1; color: hsl(210 5% 50%);`}>
+          {post.pubDate}
+        </div>
+        <MarkdownRenderer {...post} />
       </>
     )
   }
