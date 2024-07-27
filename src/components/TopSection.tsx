@@ -1,5 +1,5 @@
-import { FC } from 'hono/jsx'
 import { css } from 'hono/css'
+import { FC } from 'hono/jsx'
 
 export const TopSection: FC = (props) => {
   const topSectionCSS = css`

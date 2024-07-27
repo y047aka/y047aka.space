@@ -4,6 +4,10 @@
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
 
+  "editor.codeActionsOnSave": {
+    "source.organizeImports.biome": "explicit"
+  },
+
   "[typescript]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
