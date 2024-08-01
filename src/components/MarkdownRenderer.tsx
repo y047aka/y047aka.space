@@ -69,7 +69,7 @@ const markdownCSS = css`
     }
   }
 
-  h1 {
+  h2 {
     margin-block: 28px;
     padding-block: 17px;
     text-align: center;
@@ -79,14 +79,14 @@ const markdownCSS = css`
     border-bottom: 1px solid;
   }
 
-  h2 {
+  h3 {
     margin-top: 2px;
     margin-bottom: 31px;
     font-size: 1.25em;
     line-height: 1.25;
   }
 
-  h3, h4 {
+  h4, h5 {
     font-size: 1em;
   }
 

@@ -13,12 +13,12 @@
 
 について見ていきます。
 
-# SVG ってなんだろう？
+## SVG ってなんだろう？
 
 Scalable Vector Graphics の頭文字をとって、SVG と呼ばれています。
 解像度に制限されないベクター画像のための XML 文法として利用されています。
 
-## 仕様について
+### 仕様について
 
 SVG の仕様は W3C によって開発・勧告されています。
 ドキュメントが充実しているので、積極的に活用しましょう。
@@ -29,7 +29,7 @@ triple_underscore さんによる日本語訳を参考にするのも良いと�
 
 [SVG 1.1 仕様 （第２版） 日本語訳 | triple-underscore.github.io](https://triple-underscore.github.io/SVG11/)
 
-## SVG で何ができるのか？
+### SVG で何ができるのか？
 
 画像の形式は .jpg, .png, .gif など数多くありますが、
 
@@ -44,7 +44,7 @@ HTML 同様のスタイル指定や、アニメーションができるのも魅
 
 すでに必須技術の 1 つと化した SVG ですが、これからも新しい使い方が発見されることでしょう。
 
-## 基本的な書き方
+### 基本的な書き方
 
 SVG を構成しているのは要素と属性です。
 そのため、HTML と同じ感覚で記述することができます。
@@ -67,7 +67,7 @@ SVG として記述されたコードは…
 
 y 軸が下向きなので少しだけ違和感があるかもしれませんが、HTML の読み書きができれば SVG も問題なく扱えるはずです。
 
-# Elm で SVG を記述しよう
+## Elm で SVG を記述しよう
 
 同じことを Elm でもやってみましょう。
 Ellie に同じサンプルコードを用意しました。
@@ -108,7 +108,7 @@ main =
 記法の都合でコードが縦長になりましたが、元の SVG と対応しているのがよく分かります。
 もう少し丁寧に解説をしてみます。
 
-## モジュールのインポート
+### モジュールのインポート
 
 ```elm
 import Svg exposing (Svg, svg, rect, circle)
@@ -122,7 +122,7 @@ import Svg.Attributes exposing (width, height, viewBox, x, y, rx, ry, cx, cy, r,
 
 この記事のサンプルコードは、リンク先のサンプルコードをより分かりやすくなるように書き直したものです。
 
-## main 関数の初期化
+### main 関数の初期化
 
 Svg の関数は Html と同様に扱うことができます。
 
@@ -153,7 +153,7 @@ viewBox は見慣れない属性かもしれません。
 
 [SVG 文書片を定義する： svg 要素 | 文書構造 – SVG 1.1 （第２版）](https://triple-underscore.github.io/SVG11/struct.html#NewDocument)
 
-## 四角形（矩形）を描く：rect
+### 四角形（矩形）を描く：rect
 
 矩形は「くけい」と読みます。
 これを知っていると、次は「矩計（かなばかり）図」が読めなくなります。
@@ -183,7 +183,7 @@ rect
 
 [rect 要素 | 基本図形 – SVG 1.1 （第２版）](https://triple-underscore.github.io/SVG11/shapes.html#RectElement)
 
-## 円を描く：circle
+### 円を描く：circle
 
 ```elm
 circle
@@ -206,7 +206,7 @@ circle
 
 [circle 要素 | 基本図形 – SVG 1.1 （第２版）](https://triple-underscore.github.io/SVG11/shapes.html#CircleElement)
 
-## そのほかの図形
+### そのほかの図形
 
 パス・基本図形・テキストなどの要素と、様々なアトリビュートを組み合わせて、表現豊かな SVG を作成することができます。
 
@@ -216,13 +216,13 @@ circle
 
 [テキスト – SVG 1.1 （第２版） | https://triple-underscore.github.io](https://triple-underscore.github.io/SVG11/text.html)
 
-# 利用できる Elm のパッケージ
+## 利用できる Elm のパッケージ
 
 Elm Packages で使えそうなパッケージを探してみましょう。
 
 [Elm Packages | https://package.elm-lang.org](https://package.elm-lang.org/)
 
-## SVG の基本となるパッケージ
+### SVG の基本となるパッケージ
 
 Elm では、SVG を扱うために 2 種類のパッケージが用意されています。
 
@@ -235,7 +235,7 @@ Elm では、SVG を扱うために 2 種類のパッケージが用意されて
 好みに応じて使い分けると良いでしょう。
 データの可視化など、より複雑な SVG を扱う際には elm-community/typed-svg の使用をお薦めします。
 
-## SVG の表現力を高めるパッケージ
+### SVG の表現力を高めるパッケージ
 
 より複雑な SVG を作成するためのパッケージも用意されています。
 データの可視化（ビジュアライゼーション）や、ジェネラティブ・アートに挑戦してみるのも良いですね！
@@ -254,7 +254,7 @@ Elm では、SVG を扱うために 2 種類のパッケージが用意されて
 | folkertdev/svg-path-lowlevel        | d 属性を、SVG の記法よりも読みやすく宣言的に記述できる          |
 | folkertdev/one-true-path-experiment | 配列から path を生成するためのパッケージ                        |
 
-## 注意：廃止されたパッケージ
+### 注意：廃止されたパッケージ
 
 以下のパッケージは elm/svg よりも前に使用されていたもので、現在は廃止されています。
 ブラウザの検索結果に出ることがあるので注意してください。
@@ -264,6 +264,6 @@ Elm では、SVG を扱うために 2 種類のパッケージが用意されて
 | evancz/elm-svg | 廃止 |
 | elm-lang/svg   | 廃止 |
 
-# SVG は難しくない！
+## SVG は難しくない！
 
 でしょ？
