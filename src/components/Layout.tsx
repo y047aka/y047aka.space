@@ -4,7 +4,7 @@ import { owner, siteName } from '../lib/constants'
 
 export const Layout: FC = (props) => {
   const globalCSS = css`
-    min-height: 100vh;
+    min-height: 100dvh;
     display: grid;
     grid-template-columns: 100%;
     grid-template-rows: auto 1fr auto;
