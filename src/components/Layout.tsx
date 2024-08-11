@@ -11,7 +11,7 @@ export const Layout: FC = (props) => {
     main {
       max-width: 620px;
       margin-inline: auto;
-      padding: 40px 15px;
+      padding: 30px 15px;
     }
   `
 
@@ -64,7 +64,7 @@ const Head: FC = (props) => {
 
 const Header: FC = (props) => {
   const headerCSS = css`
-    border-bottom: 1px solid hsl(0 0% 90%);
+    border-bottom: 5px solid hsl(0 0% 90%);
 
     h2 {
       max-width: 620px;
@@ -92,7 +92,7 @@ const Header: FC = (props) => {
 
 const Footer: FC = () => {
   const footerCSS = css`
-    border-top: 1px solid hsl(0 0% 90%);
+    border-top: 5px solid hsl(0 0% 90%);
 
     div {
       max-width: 620px;
