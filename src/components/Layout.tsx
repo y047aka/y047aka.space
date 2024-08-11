@@ -4,6 +4,8 @@ import { owner, siteName } from '../lib/constants'
 
 export const Layout: FC = (props) => {
   const globalCSS = css`
+    max-width: 620px;
+    margin-inline: auto;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -18,7 +20,7 @@ export const Layout: FC = (props) => {
       <Head metadata={props.metadata} />
       <body class={globalCSS}>
         <Header {...props} />
-        <main class={css`width: 620px; margin-inline: auto;`}>{props.children}</main>
+        <main>{props.children}</main>
         <Footer />
       </body>
     </html>
@@ -63,8 +65,6 @@ const Head: FC = (props) => {
 const Header: FC = (props) => {
   const headerCSS = css`
     h2 {
-      width: 620px;
-      margin-inline: auto;
       font-family: "Saira", sans-serif;
       font-size: 18px;
       font-weight: normal;
@@ -89,8 +89,6 @@ const Footer: FC = () => {
     <footer
       class={css`
         div {
-          width: 620px;
-          margin-inline: auto;
           text-align: right;
           font-family: "Saira", sans-serif;
           font-size: 14px;
