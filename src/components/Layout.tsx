@@ -6,7 +6,7 @@ export const Layout: FC = (props) => {
   const globalCSS = css`
     max-width: 620px;
     margin-inline: auto;
-    padding: 20px;
+    padding-inline: 15px;
     display: flex;
     flex-direction: column;
     row-gap: 40px;
@@ -64,6 +64,9 @@ const Head: FC = (props) => {
 
 const Header: FC = (props) => {
   const headerCSS = css`
+    padding-block: 15px;
+    border-bottom: 1px solid;
+
     h2 {
       font-family: "Saira", sans-serif;
       font-size: 18px;
@@ -74,6 +77,7 @@ const Header: FC = (props) => {
       color: inherit;
     }
   `
+
   const path = new URL(props.metadata.url).pathname
   return (
     <header class={headerCSS}>
@@ -85,16 +89,18 @@ const Header: FC = (props) => {
 }
 
 const Footer: FC = () => {
+  const footerCSS = css`
+    padding-block: 15px;
+
+    div {
+      text-align: right;
+      font-family: "Saira", sans-serif;
+      font-size: 14px;
+    }
+  `
+
   return (
-    <footer
-      class={css`
-        div {
-          text-align: right;
-          font-family: "Saira", sans-serif;
-          font-size: 14px;
-        }
-      `}
-    >
+    <footer class={footerCSS}>
       <div>© 2024 {owner}</div>
     </footer>
   )
