@@ -6,7 +6,6 @@ export const MarkdownRenderer: FC = (props) => (
 )
 
 const markdownCSS = css`
-  padding-top: 20px;
   line-height: 1.8;
   word-wrap: break-word;
 

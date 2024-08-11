@@ -4,14 +4,23 @@ import { owner, siteName } from '../lib/constants'
 
 export const Layout: FC = (props) => {
   const globalCSS = css`
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto 1fr auto;
+
     font-family: "-apple-system", "BlinkMacSystemFont", sans-serif;
     font-feature-settings: "palt";
     color: hsl(0 0% 20%);
 
     main {
+      width: 100%;
       max-width: 620px;
       margin-inline: auto;
       padding: 30px 15px;
+      display: flex;
+      flex-direction: column;
+      row-gap: 30px;
     }
   `
 

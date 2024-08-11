@@ -53,14 +53,16 @@ app.get(
     }
     return c.render(
       <>
-        <h1
-          class={css`font-family: "-apple-system", sans-serif; font-size: 24px; font-weight: 600;`}
-        >
-          {post.title}
-        </h1>
-        <div class={css`font-size: 14px; line-height: 1; color: hsl(210 5% 50%);`}>
-          {post.pubDate}
-        </div>
+        <header>
+          <h1
+            class={css`font-family: "-apple-system", sans-serif; font-size: 24px; font-weight: 600;`}
+          >
+            {post.title}
+          </h1>
+          <div class={css`font-size: 14px; line-height: 1; color: hsl(210 5% 50%);`}>
+            {post.pubDate}
+          </div>
+        </header>
         <MarkdownRenderer {...post} />
       </>
     )
