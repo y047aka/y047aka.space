@@ -4,15 +4,15 @@ import { owner, siteName } from '../lib/constants'
 
 export const Layout: FC = (props) => {
   const globalCSS = css`
-    max-width: 620px;
-    margin-inline: auto;
-    padding-inline: 15px;
-    display: flex;
-    flex-direction: column;
-    row-gap: 40px;
     font-family: "-apple-system", "BlinkMacSystemFont", sans-serif;
     font-feature-settings: "palt";
     color: hsl(0 0% 20%);
+
+    main {
+      max-width: 620px;
+      margin-inline: auto;
+      padding: 40px 15px;
+    }
   `
 
   return (
@@ -64,10 +64,12 @@ const Head: FC = (props) => {
 
 const Header: FC = (props) => {
   const headerCSS = css`
-    padding-block: 15px;
-    border-bottom: 1px solid;
+    border-bottom: 1px solid hsl(0 0% 90%);
 
     h2 {
+      max-width: 620px;
+      margin-inline: auto;
+      padding: 15px;
       font-family: "Saira", sans-serif;
       font-size: 18px;
       font-weight: normal;
@@ -90,9 +92,12 @@ const Header: FC = (props) => {
 
 const Footer: FC = () => {
   const footerCSS = css`
-    padding-block: 15px;
+    border-top: 1px solid hsl(0 0% 90%);
 
     div {
+      max-width: 620px;
+      margin-inline: auto;
+      padding: 15px;
       text-align: right;
       font-family: "Saira", sans-serif;
       font-size: 14px;
