@@ -35,19 +35,19 @@ const Head: FC = ({ title, frontmatter }) => {
       <Style>{globalCss}</Style>
       <link rel="icon" href="/favicon.ico" />
       <link rel="sitemap" href="/sitemap.xml" />
-      <meta name="title" content={frontmatter.title} />
-      <meta name="description" content={frontmatter.description} />
+      {/* <meta name="title" content={frontmatter.title} />
+      <meta name="description" content={frontmatter.description} /> */}
       {/* Open Graph / Facebook */}
       <meta property="og:type" content="website" />
       <meta property="og:url" content={baseURL} />
-      <meta property="og:title" content={frontmatter.title} />
-      <meta property="og:description" content={frontmatter.description} />
+      {/* <meta property="og:title" content={frontmatter.title} />
+      <meta property="og:description" content={frontmatter.description} /> */}
       {/* <meta property="og:image" content={props.metadata.ogImage} /> */}
       {/* Twitter Card */}
       <meta property="twitter:card" content="summary_large_image" />
       <meta property="twitter:url" content={baseURL} />
-      <meta property="twitter:title" content={frontmatter.title} />
-      <meta property="twitter:description" content={frontmatter.description} />
+      {/* <meta property="twitter:title" content={frontmatter.title} />
+      <meta property="twitter:description" content={frontmatter.description} /> */}
       {/* <meta property="twitter:image" content={props.metadata.ogImage} /> */}
     </head>
   )
