@@ -1,13 +1,15 @@
 import { css } from 'hono/css'
+import { createRoute } from 'honox/factory'
 import { LinkTile } from '../components/LinkTile'
 import { TopSection } from '../components/TopSection'
 import type { Meta } from '../types'
 
-export default function Top() {
+export default createRoute((c) => {
   const posts = import.meta.glob<{ frontmatter: Meta }>('./posts/*.md', {
     eager: true
   })
-  return (
+
+  return c.render(
     <TopSection title="Blog Posts">
       <div class={css`display: flex; flex-direction: column; row-gap: 5px;`}>
         {Object.entries(posts).map(([id, module]) => {
@@ -24,4 +26,4 @@ export default function Top() {
       </div>
     </TopSection>
   )
-}
+})
