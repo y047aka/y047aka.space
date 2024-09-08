@@ -1,12 +1,8 @@
 import type { ErrorHandler } from 'hono'
 
 const handler: ErrorHandler = (e, c) => {
-  if ('getResponse' in e) {
-    return e.getResponse()
-  }
-  console.error(e.message)
-  c.status(500)
-  return c.render('Internal Server Error')
+  console.log(e.message)
+  return c.render(<h1>Error!</h1>)
 }
 
 export default handler
