@@ -1,40 +1,53 @@
 import { css } from 'hono/css'
+import { ssgParams } from 'hono/ssg'
 import { createRoute } from 'honox/factory'
-import { findArticleById } from '../../db'
-import { parseMarkdown } from '../../utils'
+import { getLatestPostsWithoutTargetPost, getPostByEntryName, getPosts } from '../../lib/post'
 
-export default createRoute(async (c) => {
-  const { id } = c.req.param()
-  const article = await findArticleById(c.env.DB, id)
+export default createRoute(
+  ssgParams(() => {
+    const posts = getPosts()
+    return posts.map((post) => ({
+      slug: post.entryName
+    }))
+  }),
+  async (c) => {
+    const slug = c.req.param('slug')
+    if (slug === ':slug') {
+      c.status(404)
+      return c.notFound()
+    }
 
-  if (!article) {
-    return c.notFound()
-  }
+    const post = getPostByEntryName(slug)
+    const pageTitle = post?.frontmatter.title ?? ''
+    const pubDate = post?.frontmatter.pubDate ?? ''
 
-  const parsedContent = parseMarkdown(article.content)
-
-  return c.render(
-    <div
-      class={css`
+    return c.render(
+      <div
+        class={css`
         margin-top: 2rem;
       `}
-    >
-      <article>
-        <header>
-          <h1 class={css`font-family: "-apple-system", sans-serif; font-size: 24px; font-weight: 600;`}>
-            {article.title}
-          </h1>
-          <div class={css`font-size: 14px; line-height: 1; color: hsl(210 5% 50%);`}>
-            {article.created_at}
-          </div>
-        </header>
-        <section>
-          <div id="contents" class={markdownCSS} dangerouslySetInnerHTML={{ __html: parsedContent }} />
-        </section>
-      </article>
-    </div>
-  )
-})
+      >
+        <article>
+          <header>
+            <h1
+              class={css`font-family: "-apple-system", sans-serif; font-size: 24px; font-weight: 600;`}
+            >
+              {pageTitle}
+            </h1>
+            <div class={css`font-size: 14px; line-height: 1; color: hsl(210 5% 50%);`}>
+              {pubDate}
+            </div>
+          </header>
+          <section>
+            <div id="contents" class={markdownCSS}>
+              {post?.Component({})}
+            </div>
+          </section>
+        </article>
+      </div>
+    )
+  }
+)
 
 const markdownCSS = css`
   line-height: 1.8;

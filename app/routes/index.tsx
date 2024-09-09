@@ -2,10 +2,10 @@ import { css } from 'hono/css'
 import { createRoute } from 'honox/factory'
 import { LinkTile } from '../components/LinkTile'
 import { TopSection } from '../components/TopSection'
-import type { Meta } from '../types'
+import type { MDX } from '../lib/post'
 
 export default createRoute((c) => {
-  const posts = import.meta.glob<{ frontmatter: Meta }>('./posts/*.md', {
+  const posts = import.meta.glob<MDX>('../posts/*.md', {
     eager: true
   })
 
