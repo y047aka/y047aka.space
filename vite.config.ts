@@ -2,6 +2,7 @@ import ssg from '@hono/vite-ssg'
 import mdx from '@mdx-js/rollup'
 import honox from 'honox/vite'
 import remarkFrontmatter from 'remark-frontmatter'
+import remarkGfm from 'remark-gfm'
 import remarkMdxFrontmatter from 'remark-mdx-frontmatter'
 import { defineConfig } from 'vite'
 
@@ -14,8 +15,8 @@ export default defineConfig(() => {
       ssg({ entry }),
       mdx({
         jsxImportSource: 'hono/jsx',
-        remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter],
-      }),
-    ],
+        remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter, remarkGfm]
+      })
+    ]
   }
 })
