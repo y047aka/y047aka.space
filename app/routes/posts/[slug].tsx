@@ -22,29 +22,17 @@ export default createRoute(
     const pubDate = post?.frontmatter.pubDate ?? ''
 
     return c.render(
-      <div
-        class={css`
-        margin-top: 2rem;
-      `}
-      >
-        <article>
-          <header>
-            <h1
-              class={css`font-family: "-apple-system", sans-serif; font-size: 24px; font-weight: 600;`}
-            >
-              {pageTitle}
-            </h1>
-            <div class={css`font-size: 14px; line-height: 1; color: hsl(210 5% 50%);`}>
-              {pubDate}
-            </div>
-          </header>
-          <section>
-            <div id="contents" class={markdownCSS}>
-              {post?.Component({})}
-            </div>
-          </section>
-        </article>
-      </div>
+      <>
+        <header>
+          <h1
+            class={css`font-family: "-apple-system", sans-serif; font-size: 24px; font-weight: 600;`}
+          >
+            {pageTitle}
+          </h1>
+          <div class={css`font-size: 14px; line-height: 1; color: hsl(210 5% 50%);`}>{pubDate}</div>
+        </header>
+        <div class={markdownCSS}>{post?.Component({})}</div>
+      </>
     )
   }
 )
